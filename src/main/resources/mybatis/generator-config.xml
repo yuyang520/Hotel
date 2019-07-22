@@ -32,8 +32,10 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.javaee.hotel.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
+
         <table tableName="customer" domainObjectName="Customer" >
             <property name="useActualColumnNames" value="false" />
+            <property name="rootInterface" value="com.javaee.hotel.mapper.CustomerMapperEx"/>
         </table>
         <table tableName="customer_info" domainObjectName="CustomerInfo" >
             <property name="useActualColumnNames" value="false" />

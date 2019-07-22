@@ -1,4 +1,5 @@
 package com.javaee.hotel.controller;
+import com.javaee.hotel.domain.Customer;
 import com.javaee.hotel.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,23 +26,14 @@ public class RegisterController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         boolean checkUsername = registerService.checkUsername(username);
-        int checkPassword = registerService.checkPassword(password);
-        //检验用户名是否合格
-        if( checkUsername ) {
-            model.addAttribute("tip","用户名已存在");
-            return "/register";
-        }
-        if ( checkPassword == 0 ) {
+        int checkPassword = registerService.checkStr(password,8,16);
+        int checkUsernameConflict = registerService.checkStr(username,1,30);
+        if ( checkPassword == 0 && checkUsernameConflict == 0 && !checkUsername) {
+            Customer customer = new Customer();
+            customer.setPassword(password);
+            customer.setUsername(username);
+            registerService.register(customer);
             return "/index";
-        }
-        else if( checkPassword == 1 || checkPassword == 2) {
-            model.addAttribute("tip","密码格式错误（仅为字母数字和一些常用字符）");
-            return "/register";
-        }else if (checkPassword == 3) {
-            model.addAttribute("tip","密码应不大于16个字符");
-            return "/register";
-        }else if (checkPassword == 4) {
-            model.addAttribute("tip","密码应不小于8个字符");
         }
         return "/index";
     }
@@ -54,7 +46,6 @@ public class RegisterController {
             return "用户名已存在";
         else
             return "";
-
     }
 }
 
