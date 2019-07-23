@@ -46,7 +46,7 @@ public class RegisterService {
     }
 
     public void register(Customer customer) {
-        customerMapper.insertCustomer(customer);
+        customerMapper.insert(customer);
     }
 }
 

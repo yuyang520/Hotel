@@ -43,5 +43,20 @@
         <table tableName="manager" domainObjectName="Manager" >
             <property name="useActualColumnNames" value="false" />
         </table>
+        <table tableName="hotel" domainObjectName="Hotel" >
+            <property name="useActualColumnNames" value="false" />
+            <generatedKey column="hotel_id" sqlStatement="select uuid()" identity="false"/>
+        </table>
+        <table tableName="room" domainObjectName="Room" >
+            <property name="useActualColumnNames" value="false" />
+            <generatedKey column="room_id" sqlStatement="select uuid()" identity="false"/>
+        </table>
+        <table tableName="order" domainObjectName="Order" >
+            <property name="useActualColumnNames" value="false" />
+            <generatedKey column="order_id" sqlStatement="select uuid()" identity="false"/>
+        </table>
+        <table tableName="price_change" domainObjectName="PriceChange" >
+            <property name="useActualColumnNames" value="false" />
+        </table>
     </context>
 </generatorConfiguration>

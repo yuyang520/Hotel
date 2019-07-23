@@ -33,9 +33,9 @@ public class RegisterController {
             customer.setPassword(password);
             customer.setUsername(username);
             registerService.register(customer);
-            return "/index";
+            return "register";
         }
-        return "/index";
+        return "register";
     }
     @PostMapping(value = {"/checkUsername"})
     @ResponseBody
