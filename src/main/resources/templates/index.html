@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Motel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="applijewelleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<link href="/public/css/style.css" rel='stylesheet' type='text/css' />
+<script src="/public/js/jquery-1.11.1.min.js"></script>
+<style>
+	.tab-chapter{
+		width: 800px;
+	}
+</style>
+<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!-- banner -->
+	<div class="banner">
+		<div class="header">
+			<div class="container">
+				<div class="logo">
+					<h1><a href="/welcome/">Hotel</a></h1>
+				</div>
+					<nav class="navbar navbar-default" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<!--/.navbar-header-->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav">
+								<li class="active"><a href="/welcome/">首页</a></li>
+								<li><a href="rooms.html">待定</a></li>
+								<li><a href="offers.html">待定</a></li>
+								<li><a href="shortcodes.html">待定</a></li>
+								<li><a href="/login/">登录</a></li>
+								<li><a href="contact.html">待定</a></li>
+							</ul>
+						</div>
+						<!--/.navbar-collapse-->
+					</nav>
+				<div class="search-box">
+					<div id="sb-search" class="sb-search">
+						<form>
+							<input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search">
+							<input class="sb-search-submit" type="submit" value="">
+							<span class="sb-icon-search"> </span>
+							</form>
+					</div>
+				</div>
+					<div class="clearfix"> </div>
+
+				<!-- search-scripts -->
+					<script src="/public/js/classie.js"></script>
+					<script src="/public/js/uisearch.js"></script>
+					<script>
+						new UISearch( document.getElementById( 'sb-search' ) );
+					</script>
+				<!-- //search-scripts -->
+
+			</div>
+		</div>
+		<div class="banner-info">
+			<div class="container">
+				<div class="details-1">
+					<div class="col-md-10 dropdown-buttons">   
+						<div class="col-md-3 dropdown-button">           			
+							<div class="input-group">
+								<input class="form-control has-dark-background" name="slider-name" id="slider-name" placeholder="姓名：" type="text" required="">
+							</div>
+						</div>
+						<!---strat-date-piker---->
+							<link rel="stylesheet" href="/public/css/jquery-ui.small.css" />
+							<script src="/public/js/jquery-ui.js"></script>
+							  <script>
+									  $(function() {
+										$( "#datepicker,#datepicker1" ).datepicker();
+									  });
+							  </script>
+						<!---/End-date-piker---->
+
+						<div class="col-md-3 dropdown-button">
+							<div class="book_date">
+								<form>
+									<input class="date" id="datepicker" type="text" value="Check In" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Check In';}">
+								</form>
+							</div>
+						</div>
+					  <div class="col-md-3 dropdown-button">
+							<div class="book_date">
+								<form>
+									<input class="date1" id="datepicker1" type="text" value="Check Out" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Check Out';}">
+								</form>
+							</div>
+						</div>
+						<div class="col-md-3 dropdown-button">
+						  <div class="section_1">
+							 <select id="starlevel" onChange="change_country(this.value)" class="frm-field required">
+								<option value="null">5星</option>
+								<option value="null">4星</option>
+								<option value="AX">3星</option>
+								<option value="AX">2星</option>
+							 </select>
+						  </div>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<!--search按钮-->
+					<div class="col-md-2 submit_button"> 
+						<form action="">
+							<input type="submit" value="查询">
+						</form>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>
+	</div>
+<br/>
+	<!-- hod -->
+	<table class="table-hover" align="center">
+		<tr>
+			<td class="tab-chapter" style="display:flex;flex-direction:row;justify-content: center;">
+			<div class="col-md-6 hod-left" >
+				<img src="/public/images/mbimage/14.jpg" class="img-responsive" style="width: 100%;" alt="">
+			</div>
+			</td>
+			<td class="tab-chapter">
+			<div class="col-md-6 hod-right">
+				<h2>电子科技大学宾馆</h2>
+				<p>四川省成都市成华区一环路东一段888号</p>
+				<p>星级：<img src="/public/images/star.png" style="height: 20px; width: 20px;">
+					<img src="/public/images/star.png" style="height: 20px; width: 20px;">
+					<img src="/public/images/star.png" style="height: 20px; width: 20px;"></p>
+				<a class="hvr-shutter-in-horizontal" href="/welcome/details">Book Now</a>
+			</div>
+			</td>
+		</tr>
+	</table>
+<br/>
+<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="col-md-2 deco">
+				<h4>Navigation</h4>
+				<li><a href="welcome">首页</a></li>
+				<li><a href="shortcodes.html">暂定</a></li>
+				<li><a href="/register/">注册</a></li>
+				<li><a href="contact.html">暂定</a></li>
+			</div>
+			<div class="col-md-2 deco">
+				<h4>Links</h4> 
+				<li><a href="#">Qui Sommes-Nous ?</a></li>
+				<li><a href="#">Mentions Légales </a></li>
+				<li><a href="#">Conditions D'Utilisation </a></li>
+			</div>
+			<div class="col-md-2 deco">
+				<h4>Social</h4>
+				<div class="soci">
+					<li><a href="#"><i class="f-1"> </i></a></li>
+					<li><a href="#"><i class="t-1"> </i></a></li>
+					<li><a href="#"><i class="g-1"> </i></a></li>
+				</div>
+			</div>
+			<div class="col-md-3 cardss">
+				<h4>Payment Sécure</h4>
+				<li><i class="visa"></i></li>
+				<li><i class="ma"></i></li>
+				<li><i class="paypal"></i></li>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="col-md-3 pos">
+			<h4>NewsLetter</h4>
+					   <form method="post">
+						 <input type="text" class="textbox" value="Email" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Email';}">
+						 <div class="smt">
+							<input type="submit" value="Subscribe">
+						 </div>
+					   </form>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	<div class="footer-bottom">
+			<div class="container">
+				<p>Copyright &copy; 2015.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+</p>
+			</div>
+		</div>
+	<!-- footer -->
+</body>
+</html>
