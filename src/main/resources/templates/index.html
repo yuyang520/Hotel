@@ -72,54 +72,47 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="banner-info">
 			<div class="container">
 				<div class="details-1">
-					<div class="col-md-10 dropdown-buttons">   
+                    <form method="post" action="">
+					<div class="col-md-10 dropdown-buttons">
 						<div class="col-md-3 dropdown-button">           			
 							<div class="input-group">
-								<input class="form-control has-dark-background" name="slider-name" id="slider-name" placeholder="姓名：" type="text" required="">
+								<input autocomplete="off" class="form-control has-dark-background" name="hotelname" id="hotelname" placeholder="酒店名称：" type="text" required="">
 							</div>
 						</div>
-						<!---strat-date-piker---->
 							<link rel="stylesheet" href="/public/css/jquery-ui.small.css" />
 							<script src="/public/js/jquery-ui.js"></script>
 							  <script>
 									  $(function() {
-										$( "#datepicker,#datepicker1" ).datepicker();
+										$( "#checkindate,#checkoutdate" ).datepicker();
 									  });
 							  </script>
-						<!---/End-date-piker---->
-
 						<div class="col-md-3 dropdown-button">
 							<div class="book_date">
-								<form>
-									<input class="date" id="datepicker" type="text" value="Check In" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Check In';}">
-								</form>
+									<input class="date" readonly="readonly" autocomplete="off" id="checkindate" name="checkindate" type="text" value="Check In" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Check In';}">
 							</div>
 						</div>
 					  <div class="col-md-3 dropdown-button">
 							<div class="book_date">
-								<form>
-									<input class="date1" id="datepicker1" type="text" value="Check Out" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Check Out';}">
-								</form>
+									<input class="date1" readonly="readonly" autocomplete="off" id="checkoutdate" name="checkoutdate" type="text" value="Check Out" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Check Out';}">
 							</div>
 						</div>
 						<div class="col-md-3 dropdown-button">
-						  <div class="section_1">
-							 <select id="starlevel" onChange="change_country(this.value)" class="frm-field required">
-								<option value="null">5星</option>
-								<option value="null">4星</option>
-								<option value="AX">3星</option>
-								<option value="AX">2星</option>
-							 </select>
-						  </div>
+							 <select id="starlevel" name="starlevel"  class="frm-field required">
+                                 <option value="1">全部</option>
+								 <option value="2">5星</option>
+								 <option value="3">4星</option>
+								 <option value="4">3星</option>
+								 <option value="5">2星</option>
+                                 <option value="6">1星</option>
+                                 <option value="0">无星级</option>
+						  	</select>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
-					<!--search按钮-->
-					<div class="col-md-2 submit_button"> 
-						<form action="">
+					<div class="col-md-2 submit_button">
 							<input type="submit" value="查询">
-						</form>
 					</div>
+                    </form>
 					<div class="clearfix"> </div>
 				</div>
 			</div>

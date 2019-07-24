@@ -242,7 +242,7 @@ nav.navbar.navbar-default {
     width: 100%;
      color:#555;
 }
-select#country {
+select#starlevel {
     color:#9C9C9C;
 }
 .submit_button input[type="submit"] {
@@ -259,7 +259,7 @@ select#country {
 .submit_button input[type="submit"]:hover{
 	background:#6cbc35;
 }
-input#datepicker, input#datepicker1 {
+input#checkoutdate, input#checkindate {
     padding: 10px 9px 10px 9px;
     border: none;
     box-shadow: none;
@@ -1578,7 +1578,7 @@ nav.navbar.navbar-default {
     padding: 0em 0;
     width: 45%;
 }
-input#datepicker, input#datepicker1 {
+input#checkoutdate, input#checkindate {
     padding: 10px 9px 10px 9px;
     width: 100%;
 }
@@ -1947,7 +1947,7 @@ nav.navbar.navbar-default {
 .banner {
     min-height: 324px;
 }
-input#datepicker, input#datepicker1 {
+input#checkoutdate, input#checkindate {
     padding: 6px 9px 6px 9px;
     width: 100%;
 }
