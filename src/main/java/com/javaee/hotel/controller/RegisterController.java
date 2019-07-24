@@ -18,10 +18,10 @@ public class RegisterController {
     RegisterService registerService;
     @GetMapping(value = {""})
     public String registerHtml() {
-        return "register";
+        return "/register";
     }
     @PostMapping(value = {""})
-    public String register(HttpServletRequest request, Model model) {
+    public String register(HttpServletRequest request) {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -33,9 +33,9 @@ public class RegisterController {
             customer.setPassword(password);
             customer.setUsername(username);
             registerService.register(customer);
-            return "register";
+            return "/login";
         }
-        return "register";
+        return "/register";
     }
     @PostMapping(value = {"/checkUsername"})
     @ResponseBody

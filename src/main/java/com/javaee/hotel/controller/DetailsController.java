@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/welcome/details")
-public class detailsController {
+public class DetailsController {
     @GetMapping(value="")
     public String showIndex () {return "details";}
 }
