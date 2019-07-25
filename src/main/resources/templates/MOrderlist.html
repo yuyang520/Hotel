@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>酒店辅助订购系统</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="public/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="public/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="public/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="public/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect. -->
+  <link rel="stylesheet" href="public/css/_all-skins.min.css">
+
+
+
+
+</head>
+
+<body class="hold-transition skin-black sidebar-mini">
+<div class="wrapper">
+
+  <!-- Main Header -->
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="index2.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>后台</b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"> <i class =  "fa fa-i-cursor"></i> <b>酒店订购管理系统</b></span>
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          
+
+          
+          
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- The user image in the navbar-->
+              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <span class="hidden-xs">Alexander Pierce</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- The user image in the menu -->
+              <li class="user-header">
+                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                <p>
+                  Alexander Pierce - Web Developer
+                  <small>Member since Nov. 2012</small>
+                </p>
+              </li>
+              
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+      
+
+      
+      <ul class="sidebar-menu" data-widget="tree">
+        
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>功能模块1</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-1</a></li>
+            <li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-2</a></li>
+          </ul>
+        </li>
+
+
+
+        <li class="treeview active">
+          <a href="#"><i class="fa fa-link"></i> <span>功能模块2</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>
+            <li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="row">
+
+      
+            <div class="col-md-6">
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li class="active">酒店订购</li>
+                    <li class="active">酒店列表</li>
+                  </ol>
+            </div>
+          </div>
+    </section>
+
+    <!-- Main content -->
+    <!-- <section class="content container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+
+          <table class="tablelist" >
+                  <tr>
+                      <th>订单号</th>
+                      <th>客户id</th>
+                      <th>酒店id</th>
+                      <th>房间id</th>
+                      <th>客户身份证</th>
+                      <th>客户姓名</th>
+                      <th>入住时间</th>
+                      <th>退房时间</th>
+                      <th>订单生成时间</th>
+                      <th>订单总价</th>
+                      <th>联系电话</th>
+                      <th>订单状态</th>
+                      <th>房间数量</th>
+                      <th>付款流水号</th>
+                      <th>更新</th>
+                      <th>删除</th>
+                  </tr>
+                  <tr th:each="order : ${order}">
+                    <td th:text="${order.order_id}"></td>
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${order.hotel_id}"></td>
+                    <td th:text="${order.room_id}"></td>
+                    <td th:text="${order.identify}"></td>
+                    <td th:text="${order.name}"></td>
+                    <td th:text="${order.check_in}"></td>
+                    <td th:text="${order.check_out}"></td>
+                    <td th:text="${order.register_time}"></td>
+                    <td th:text="${order.price}"></td>
+                    <td th:text="${order.connect_phone}"></td>
+                    <td th:text="${order.status}"></td>
+                    <td th:text="${order.room_number}"></td>
+                    <td th:text="${order.serial_number}"></td>
+                    <td ><button btn_update_hot="onclick='updateOrder(this,\''+${order.order_id}+'\'">更新</button></td>
+                    <td ><button data-th-attr="onclick='deleteOrder(this,\''+${order.order_id}+'\'">删除</button> </td>
+                
+
+  </div>
+  </tr>
+  </table>
+</div>
+</div>
+</section> -->
+<!-- /.content -->
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- Default to the left -->
+    <strong>酒店辅助订购系统</strong>
+  </footer>
+
+  
+  
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 3 -->
+<script src="public/js/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="public/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="public/js/adminlte.min.js"></script>
+
+
+
+
+<script src="public/js/layer.js"></script>
+
+<script>
+
+
+ $(function(){
+  
+  //给删除按钮添加事件
+  $(".content").on("click",".btn_del_hot",function(){
+    ///normalRowIndex = $(this).rowindex(); 
+    var $tr = $(this).parents("tr");
+    var name = $tr.find("td:eq(1)").html();
+    layer.confirm('是否删除：'+name,{icon: 3, title:'提示'},function(index){
+      //alert(index);  
+      //$tr.remove();
+      $tr.remove();
+      //table.row(index).remove.draw();
+      //$(".table").row(index).remove().draw();
+      layer.close(index);
+      
+      
+    })
+  });
+  
+  //更新按钮
+  $(".content").on("click",".btn_update_hot",function(){
+    layer.open({
+      type: 1,
+      title: '酒店信息更新',
+      shadeClose: true,
+      shade: 0.5,
+      area: ['380px','650px'],
+      content: $("#layer_update_hot")
+    });
+  });
+  
+  //取消按钮
+  $("#btn_layer_cancel").click(function(){
+    layer.closeAll();
+  });
+
+  //提交按钮
+  $("#btn_layer_submit").click(function(){
+    
+    layer.msg('操作成功',{time:700},function(){
+      layer.closeAll();
+    });
+    
+  });
+  
+
+  var table = null;
+function initTable() {
+    table = $("#tableList").DataTable({
+        ajax:{
+            url:'/MOrderlist/orderlist.json',
+            type: "GET",
+            dataType: "JSON",
+            dataSrc: ''
+        },
+        columns:[
+            {data: '订单号'},
+            {data: '客户id'},
+            {data: '酒店id'},
+            {data: '房间id'},
+            {data: '客户身份证号'},
+            {data: '客户姓名'},
+            {data: '入住时间'},
+            {data: '退房时间'},
+            {data: '订单生成时间'},
+            {data: '订单总价'},
+            {data: '联系电话'},
+            {data: '订单状态'},
+            {data: '房间数量'},
+            {data: '付款流水号'},
+            {data: '房间号'},
+
+        ]
+    })
+}
+function freshTable() {
+    table.ajax.reload();
+    console.info('fresh');
+    info_prompt("刷新成功",1000);
+}
+$(document).ready(function() {
+    initTable();
+})
+var prompt = function (message, style, time)
+{
+    style = (style === undefined) ? 'alert-success' : style;
+    time = (time === undefined) ? 1200 : time;
+    $('<div>')
+        .appendTo('body')
+        .addClass('alert ' + style)
+        .html(message)
+        .show()
+        .delay(time)
+        .fadeOut();
+};
+
+// 成功提示
+var success_prompt = function(message, time)
+{
+    prompt(message, 'alert-success', time);
+    console.info("alert");
+};
+
+// 失败提示
+var fail_prompt = function(message, time)
+{
+    prompt(message, 'alert-danger', time);
+};
+
+// 提醒
+var warning_prompt = function(message, time)
+{
+    prompt(message, 'alert-warning', time);
+};
+
+// 信息提示
+var info_prompt = function(message, time)
+{
+    prompt(message, 'alert-info', time);
+};
+
+
+    
+ })
+
+
+   
+</script>
+
+<!--修改学院弹出-->
+<div class="box box-info" id="layer_update_hot" style="display: none">
+    <div class="box-header with-border">
+      <h3 class="box-title">修改酒店信息</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form class="form-horizontal">
+      <div class="box-body">
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> Remember me
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <button type="button" class="btn btn-default" id="btn_layer_cancel">取消</button>
+        <button type="button" class="btn btn-info pull-right" id="btn_layer_submit">提交</button>
+      </div>
+      <!-- /.box-footer -->
+    </form>
+  </div>
+
+</body>
+</html>
