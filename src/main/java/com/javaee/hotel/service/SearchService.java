@@ -18,7 +18,7 @@ public class SearchService {
 
     public List<Hotel> searchh(String keyword){
         HotelExample example=new HotelExample();
-        example.createCriteria().andHotelChineseNameLike(keyword);
+        example.createCriteria().andHotelChineseNameLike("%"+keyword+"%");
         return hotelMapper.selectByExample(example);
     }
 
