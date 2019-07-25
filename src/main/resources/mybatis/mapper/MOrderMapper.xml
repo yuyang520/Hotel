@@ -3,6 +3,6 @@
 <mapper namespace="com.javaee.hotel.mapper.OrderMapper">
 
     <select id="selectAll">
-        select * from "order";
+        select * from orderlist;
     </select>
 </mapper>
