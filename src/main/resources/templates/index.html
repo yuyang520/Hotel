@@ -15,6 +15,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	.tab-chapter{
 		width: 800px;
 	}
+	.largetext{
+		 font-size: 20px;
+		 color: #a1a1a1;
+	 }
 </style>
 <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
 </head>
@@ -98,12 +102,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="col-md-3 dropdown-button">
 							 <select id="starlevel" name="starlevel"  class="frm-field required">
-                                 <option value="6">全部</option>
-								 <option value="5">5星</option>
-								 <option value="4">4星</option>
-								 <option value="3">3星</option>
-								 <option value="2">2星</option>
-                                 <option value="1">1星</option>
+                                 <option value="1">全部</option>
+								 <option value="2">5星</option>
+								 <option value="3">4星</option>
+								 <option value="4">3星</option>
+								 <option value="5">2星</option>
+                                 <option value="6">1星</option>
                                  <option value="0">无星级</option>
 						  	</select>
 						</div>
@@ -121,20 +125,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <br/>
 	<!-- hod -->
 	<table class="table-hover" align="center">
-		<tr>
+		<tr th:each="hotel : ${hotels}">
 			<td class="tab-chapter" style="display:flex;flex-direction:row;justify-content: center;">
-			<div class="col-md-6 hod-left" >
+			<div style="max-width: 500px;" >
 				<img src="/public/images/mbimage/14.jpg" class="img-responsive" style="width: 100%;" alt="">
+				<br/>
 			</div>
 			</td>
 			<td class="tab-chapter">
-			<div class="col-md-6 hod-right">
-				<h2>电子科技大学宾馆</h2>
-				<p>四川省成都市成华区一环路东一段888号</p>
-				<p>星级：<img src="/public/images/star.png" style="height: 20px; width: 20px;">
-					<img src="/public/images/star.png" style="height: 20px; width: 20px;">
-					<img src="/public/images/star.png" style="height: 20px; width: 20px;"></p>
-				<a class="hvr-shutter-in-horizontal" href="/welcome/details">Book Now</a>
+			<div style="max-width: 500px;">
+				<h2 th:text="${hotel.hotelChineseName}"></h2><br/>
+				<span class="largetext">地址：</span><span class="largetext" th:text="${hotel.hotelAddress}"></span><br/>
+				<span class="largetext">星级:<img src="/public/images/star.png" style="height: 20px; width: 20px;"></span><br/>
+				<span class="largetext">联系方式：</span><span class="largetext" th:text="${hotel.hotelContact}"></span><br/>
+				<br/><a class="hvr-shutter-in-horizontal" href="/welcome/details">预订</a>
 			</div>
 			</td>
 		</tr>
@@ -185,8 +189,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<div class="footer-bottom">
 			<div class="container">
-				<p>Copyright &copy; 2015.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
-</p>
+				<p>Copyright &copy; 2019.Company name All rights reserved.More Templates </p>
 			</div>
 		</div>
 	<!-- footer -->
