@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
+
+
 <html>
 <head>
   <meta charset="utf-8">
@@ -59,14 +57,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="public/images/Admin/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="public/images/Admin/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -144,7 +142,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
      <section class="content container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <table class="tableList" id="tableList" >
+          <table  id="tableList" >
             <thead>
             <tr>
                       <th>订单号</th>
@@ -176,10 +174,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.content-wrapper -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- Default to the left -->
-    <strong>酒店辅助订购系统</strong>
-  </footer>
+  <!--<footer class="main-footer">-->
+    <!--&lt;!&ndash; Default to the left &ndash;&gt;-->
+    <!--<strong>酒店辅助订购系统</strong>-->
+  <!--</footer>-->
 
   
   
@@ -240,6 +238,9 @@ function freshTable() {
 $(document).ready(function() {
     initTable();
 })
+
+
+
 var prompt = function (message, style, time)
 {
     style = (style === undefined) ? 'alert-success' : style;
