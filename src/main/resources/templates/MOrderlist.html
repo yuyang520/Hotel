@@ -156,6 +156,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <table class="tablelist" >
                   <tr>
+                  <thead>
                       <th>订单号</th>
                       <th>客户id</th>
                       <th>酒店id</th>
@@ -173,6 +174,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <th>更新</th>
                       <th>删除</th>
                   </tr>
+                  </thead>
                   <tr th:each="order : ${order}">
                     <td th:text="${order.order_id}"></td>
                     <td th:text="${order.id}"></td>
@@ -285,7 +287,7 @@ function initTable() {
             dataSrc: ''
         },
         columns:[
-            {data: '订单号'},
+            {data: "orderId"},
             {data: '客户id'},
             {data: '酒店id'},
             {data: '房间id'},
