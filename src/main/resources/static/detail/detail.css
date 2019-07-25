@@ -1,0 +1,24 @@
+.item-all{
+
+}
+.items-group-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.item {
+    width: fit-content;
+    display: inline-block;
+    padding: 1px 2px 3px 4px;
+}
+.item-text {
+    color: lightgray;
+    font-size: 18px;
+}
+.item .icon {
+    color: gray;
+    font-size: 18px;
+}
+.items-group-header {
+    display:block;
+}

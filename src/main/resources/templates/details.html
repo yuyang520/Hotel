@@ -10,6 +10,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
 <link href="/public/css/style.css" rel='stylesheet' type='text/css' />
+<link href="/public/font/iconfont.css" rel='stylesheet' type='text/css'/>
+<link href="/detail/detail.css"  rel='stylesheet'/>
 <script src="/public/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
 </head>
@@ -67,27 +69,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>		
 		<!-- banner -->
 <!-- details -->
-	<div class="details">
-		<div class="container" th:each="room:${roomList}" >
+	<!--<div class="details">-->
+<div class="details">
+		<div class="container" th:each="roomDetail:${roomDetailList}" >
 			<div style="margin-top: 10px;margin-bottom: 10px">
-				<div class="col-md-7 details-left">
-					<img th:src="${room.photo}" class="img-responsive" alt="">
+				<div class="col-md-5 details-left">
+					<img th:src="${roomDetail.room.photo}" class="img-responsive" alt="">
 				</div>
-				<div class="col-md-5 details-right">
+				<div class="col-md-7 details-right">
 					<span>
-						<strong th:text="${room.chineseName}"></strong>
+						<strong th:text="${roomDetail.room.chineseName}"></strong>
 						每人￥
-						<Strong th:text="${room.price}"/></Strong>
+						<Strong th:text="${roomDetail.room.price}"/></Strong>
 					</span>
-					<li>单人床一个</li>
-					<li>有窗户</li>
-					<li>提供独卫、电视、空调</li>
-					<p> 详细信息</p>
+                    <div class="item-all" >
+                        <div class="items-group" th:each="roomItemGroup:${roomDetail.roomItemContent.roomItemGroupList}">
+                            <div class="items-group-header" th:text="${roomItemGroup.header}"></div>
+                            <div class="items-group-content">
+                                <div class="item" th:each="roomItem:${roomItemGroup.roomItemList}">
+                                    <span th:class="|icon iconfont ${roomItem.icon}|" ></span>
+                                    <span class="item-text" th:text="${roomItem.text}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>
-	</div>
-
+	<!--</div>-->
+</div>
 <!-- details -->
 <!-- footer -->
 	<div class="footer">
