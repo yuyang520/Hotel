@@ -22,13 +22,10 @@ public class RoomService {
     }
     public List<Hotel> getHotelList() {
         HotelExample example = new HotelExample();
-        HotelExample.Criteria criteris = example.createCriteria();
         return hotelMapper.selectByExample(example);
     }
     public List<Room> getRoomList() {
         RoomExample example = new RoomExample();
-        RoomExample.Criteria criteris =  example.createCriteria();
-        criteris.andHotelIdIsNotNull();
         return roomMapper.selectByExample(example);
     }
 }

@@ -18,11 +18,14 @@ public class RoomController {
     @GetMapping("/roomManage")
     public String roomManageHtml(Model model) {
         model.addAttribute("hotelidList",roomService.getHotelList());
-        return "roomManage";
+        model.addAttribute("roomList",roomService.getRoomList());
+        return "/roomManage";
     }
     @PostMapping("/roomManage")
     public String roomManageInsert(Model model, Room room) {
         roomService.addRoom(room);
+        System.out.println(room.getChineseName());
+        model.addAttribute("hotelidList",roomService.getHotelList());
         model.addAttribute("roomList",roomService.getRoomList());
         return "/roomManage";
     }

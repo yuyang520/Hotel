@@ -15,6 +15,7 @@
     </tr>
     </thead>
 </table>
+<table>
     <thead>
     <tr>
         <th>room_id</th>
@@ -27,9 +28,27 @@
         <th>english</th>
         <th>roomNo</th>
     </tr>
-    <tr >
-        <th></th>
-        <th></th>
+    <tr th:each="room:${roomList}">
+        <th th:text="${room.roomId}"></th>
+        <th th:text="${room.hotelId}"></th>
+        <th th:text="${room.leftNumber}"></th>
+        <th th:text="${room.photo}"></th>
+        <th th:text="${room.price}"></th>
+        <th th:text="${room.chineseName}"></th>
+        <th th:text="${room.englishName}"></th>
+        <th th:text="${room.roomNo}"></th>
     </tr>
+    </thead>
+</table>
+<form action="/roomManage" method="post">
+    hotelId:<input type="text" th:name="hotelId"></br>
+   leftNumber:<input type="text" th:name="leftNumber"></br>
+    photo:<input type="text" th:name="photo"></br>
+    price:<input type="text" th:name="price"></br>
+    chineseName:<input type="text" th:name="chineseName"></br>
+    englishName:<input type="text" th:name="englishName"></br>
+    roomNo:<input type="text" th:name="roomNo"></br>
+    <button type="submit">添加房间</button>
+</form>
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.javaee.hotel.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSON;
 import com.javaee.hotel.domain.Order;
+import com.javaee.hotel.domain.OrderList;
 import com.javaee.hotel.service.MOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -26,7 +27,9 @@ public class MOrderController {
         return "/MOrderlist";
     }
     @GetMapping(value = "/orderlist.json",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Order> getOrderListJson() {
+    @ResponseBody
+    public List<OrderList> getOrderListJson() {
+        System.out.println(mOrderService.orderlistRespond());
         System.out.println(mOrderService.orderlistRespond());
         return mOrderService.orderlistRespond();
     }
