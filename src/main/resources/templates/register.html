@@ -39,11 +39,13 @@
     <div class="logo"></div>
     <form action="/register" method="post" onsubmit="return check()">
         <div class="form-item">
-            <input id="username" onblur="checkUsername()" name="username" type="text" maxlength="30" minlength="1" autocomplete="off" placeholder="用户名">
+            <input id="username" onblur="checkUsername()" name="username"
+                   type="text" maxlength="30" minlength="1" autocomplete="off" placeholder="用户名">
             <p class="tip" id="tipUsername"></p>
         </div>
         <div class="form-item">
-            <input class="password" id="password" onblur="checkPassword()" name="password" type="password" maxlength="16" autocomplete="off" placeholder="密码">
+            <input class="password" id="password" onblur="checkPassword()"
+                   name="password" type="password" maxlength="16" autocomplete="off" placeholder="密码">
         </div>
         <div class="form-item">
             <input class="password" id="confirmPassword" onblur="checkPassword()" name="confirmPassword" type="password" maxlength="16" autocomplete="off" placeholder="确认密码">

@@ -15,8 +15,10 @@ import java.util.List;
 public class RoomService {
     @Autowired
     private RoomMapper roomMapper;
+
     @Autowired
     private HotelMapper hotelMapper;
+
     public void addRoom(Room room) {
         roomMapper.insertSelective(room);
     }
