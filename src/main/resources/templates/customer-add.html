@@ -1,0 +1,23 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户管理</title>
+</head>
+<body>
+
+<form action="/customerList/add" method="post" th:object="${customerInfo}">
+    id: <input type="text" name="id" th:field="*{id}"><br/>
+    用户名：<input type="text" name="username"  th:field="*{username}"><br/>
+    联系电话：<input type="text" name="telephone" th:field="*{telephone}"><br/>
+    邮箱：<input type="text" name="email" th:field="*{email}"><br/>
+    昵称：<input type="text" name="nickName" th:field="*{nickName}"><br/>
+    身份证号：<input type="text" name="personId" th:field="*{personId}"><br/>
+    身份证姓名：<input type="text" name="name" th:field="*{name}"><br/>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
