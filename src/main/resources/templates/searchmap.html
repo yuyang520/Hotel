@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -10,16 +11,124 @@
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=
 PFgBspYSe1HEwdM7pd8z0jEA1gG1pYG5"></script>
     <title>城市名定位</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Motel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="applijewelleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="/public/css/style.css" rel='stylesheet' type='text/css' />
+    <script src="/public/js/jquery-1.11.1.min.js"></script>
+    <style>
+        .tab-chapter{
+            width: 800px;
+        }
+        .largetext{
+            font-size: 20px;
+            color: #a1a1a1;
+        }
+    </style>
+    <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div id="allmap"></div>
-<div id="r-result">
-    经度: <input id="longitude" type="text" style="width:100px; margin-right:10px;" />
-    纬度: <input id="latitude" type="text" style="width:100px; margin-right:10px;" />
-    <input type="button" value="查询" onclick="theLocation()" />
-</div>
+<!--<div id="r-result">-->
+<!--    经度: <input id="longitude" type="text" style="width:100px; margin-right:10px;" />-->
+<!--    纬度: <input id="latitude" type="text" style="width:100px; margin-right:10px;" />-->
+<!--    <input type="button" value="查询" onclick="theLocation()" />-->
+<!--</div>-->
 <a href="/circlesearch/"><input type="button" value="周边2Km查询" /></a>
-
+<div class="banner-info">
+    <div class="container">
+        <div class="details-1">
+            <form method="post" action="">
+                <div class="col-md-10 dropdown-buttons">
+                    <div class="col-md-3 dropdown-button">
+                        <div class="input-group">
+                            <input autocomplete="off" class="form-control has-dark-background" name="hotelname" id="hotelname" placeholder="酒店名称：" type="text" required="">
+                        </div>
+                    </div>
+                    <link rel="stylesheet" href="/public/css/jquery-ui.small.css" />
+                    <script src="/public/js/jquery-ui.js"></script>
+                    <script>
+                        $(function() {
+                            $( "#checkindate,#checkoutdate" ).datepicker();
+                        });
+                    </script>
+                    <div class="col-md-3 dropdown-button">
+                        <div class="book_date">
+                            <input class="date" readonly="readonly" autocomplete="off" id="checkindate" name="checkindate" type="text" value="Check In" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Check In';}">
+                        </div>
+                    </div>
+                    <div class="col-md-3 dropdown-button">
+                        <div class="book_date">
+                            <input class="date1" readonly="readonly" autocomplete="off" id="checkoutdate" name="checkoutdate" type="text" value="Check Out" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Check Out';}">
+                        </div>
+                    </div>
+                    <div class="col-md-3 dropdown-button">
+                        <select id="starlevel" name="starlevel"  class="frm-field required">
+                            <option value="1">星级</option>
+                            <option value="2">5星</option>
+                            <option value="3">4星</option>
+                            <option value="4">3星</option>
+                            <option value="5">2星</option>
+                            <option value="6">1星</option>
+                            <option value="0">无星级</option>
+                        </select>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="col-md-2 submit_button">
+                    <input type="submit" value="查询" onclick="theLocation()" >
+                </div>
+            </form>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="container">
+        <div class="col-md-2 deco">
+            <h4>Navigation</h4>
+            <li><a href="welcome">首页</a></li>
+            <li><a href="shortcodes.html">暂定</a></li>
+            <li><a href="/register/">注册</a></li>
+            <li><a href="contact.html">暂定</a></li>
+        </div>
+        <div class="col-md-2 deco">
+            <h4>Links</h4>
+            <li><a href="#">Qui Sommes-Nous ?</a></li>
+            <li><a href="#">Mentions Légales </a></li>
+            <li><a href="#">Conditions D'Utilisation </a></li>
+        </div>
+        <div class="col-md-2 deco">
+            <h4>Social</h4>
+            <div class="soci">
+                <li><a href="#"><i class="f-1"> </i></a></li>
+                <li><a href="#"><i class="t-1"> </i></a></li>
+                <li><a href="#"><i class="g-1"> </i></a></li>
+            </div>
+        </div>
+        <div class="col-md-3 cardss">
+            <h4>Payment Sécure</h4>
+            <li><i class="visa"></i></li>
+            <li><i class="ma"></i></li>
+            <li><i class="paypal"></i></li>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="col-md-3 pos">
+            <h4>NewsLetter</h4>
+            <form method="post">
+                <input type="text" class="textbox" value="Email" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Email';}">
+                <div class="smt">
+                    <input type="submit" value="Subscribe">
+                </div>
+            </form>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<button> th:text= "${hotel.hotelAddress}"</button>
 </body>
 </html>
 <script type="text/javascript">
@@ -30,14 +139,12 @@ PFgBspYSe1HEwdM7pd8z0jEA1gG1pYG5"></script>
 
     // 用经纬度设置地图中心点
     function theLocation(){
-        if(document.getElementById("longitude").value != ""
-            && document.getElementById("latitude").value != ""){
             map.clearOverlays();
             var new_point = new BMap.Point(document.getElementById("longitude").value,
                 document.getElementById("latitude").value);
             var marker = new BMap.Marker(new_point);  // 创建标注
             map.addOverlay(marker);              // 将标注添加到地图中
             map.panTo(new_point);
-        }
+
     }
 </script>
