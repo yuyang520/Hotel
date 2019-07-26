@@ -80,7 +80,7 @@ public class RoomItemStaticData {
                         break;
                     }
                     case 4: {
-                        group.getRoomItemList().add(new RoomItem("icon-tower","毛巾"));
+                        group.getRoomItemList().add(new RoomItem("icon-towel","毛巾"));
                         break;
                     }
                     case 5: {

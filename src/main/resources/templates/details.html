@@ -72,26 +72,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- details -->
 	<!--<div class="details">-->
 <div class="details">
-		<div class="container" th:each="roomDetail:${roomDetailList}" >
+		<div class="container border" style="margin:0px 30px"  th:each="roomDetail:${roomDetailList}" >
 			<div style="margin-top: 10px;margin-bottom: 10px">
 				<div class="col-md-5 details-left">
-					<img th:src="${roomDetail.room.photo}" class="img-responsive" alt="">
+					<img th:src="${roomDetail.room.photo}" class="img-responsive" style="height: 300px;width: 460px; margin-top: 20px" alt="">
 				</div>
 				<div class="col-md-7 details-right">
 					<span>
-						<strong th:text="${roomDetail.room.chineseName}"></strong>
-						每人￥
-						<Strong th:text="${roomDetail.room.price}"/></Strong>
+						<strong class="roomName"th:text="|${roomDetail.room.chineseName} (${roomDetail.room.englishName}) |"></strong>
+                        <div class="price-item-flex">
+                            <strong style="color:goldenrod" th:text="今日房价"></strong>
+                            <strong class="price" style="margin-left: 30px">¥</strong>
+                            <Strong class="price" th:text="${roomDetail.room.price}"/></Strong>
+                        </div>
 					</span>
-                    <div class="item-all" >
-                        <div class="items-group" th:each="roomItemGroup:${roomDetail.roomItemContent.roomItemGroupList}">
-                            <div class="items-group-header" th:text="${roomItemGroup.header}"></div>
-                            <div class="items-group-content">
-                                <div class="item" th:each="roomItem:${roomItemGroup.roomItemList}">
-                                    <span th:class="|icon iconfont ${roomItem.icon}|" ></span>
-                                    <span class="item-text" th:text="${roomItem.text}"></span>
+                    <div>
+                        <div class="col-md-8 item-all" >
+                            <div class="items-group" th:each="roomItemGroup:${roomDetail.roomItemContent.roomItemGroupList}">
+                                <strong class="items-group-header" th:text="${roomItemGroup.header}"></strong>
+                                <div class="items-group-content">
+                                    <div class="item" th:each="roomItem:${roomItemGroup.roomItemList}">
+                                        <span th:class="|icon iconfont ${roomItem.icon}|" ></span>
+                                        <span class="item-text" th:text="${roomItem.text}"></span>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-4 orderMethod">
+                            <button>order</button>
                         </div>
                     </div>
 				</div>

@@ -1,5 +1,30 @@
+.border {
+    border-top: 1px solid gray;
+}
+.border:last-child {
+    border-bottom: 1px solid gray;
+}
+.roomName {
+    font-size: 30px;
+}
+.price {
+    font-size: 30px;
+    color: red;
+}
+.price-item-flex{
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+}
 .item-all{
-
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 290px;
+}
+.items-group {
+    width: 50%;
 }
 .items-group-content {
     display: flex;
@@ -7,18 +32,22 @@
     flex-wrap: wrap;
 }
 .item {
-    width: fit-content;
+    width: 50%;
     display: inline-block;
-    padding: 1px 2px 3px 4px;
 }
 .item-text {
-    color: lightgray;
-    font-size: 18px;
+    color: dimgray;
+    font-size: 12px;
 }
 .item .icon {
     color: gray;
-    font-size: 18px;
+    font-size: 14px;
 }
 .items-group-header {
     display:block;
+    padding: 5px 0px;
+}
+.orderMethod {
+    display: flex;
+    flex-direction: column;
 }
