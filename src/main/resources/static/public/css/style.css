@@ -43,8 +43,8 @@ label {
     width: 100% ! important;
 }
 .navbar-default {
-    background-color:#6cbc35! important;
-    border-color:#6cbc35 ! important;
+    background-color:#92B8B1! important;
+    border-color:#92B8B1 ! important;
 }
 .navbar {
     border-radius: 0px ! important;
@@ -63,12 +63,12 @@ label {
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
     color: #fff;
-    background-color:#6CBC35;
+    background-color:#92B8B1;
 	border-bottom:2px solid #fff;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     color: #fff;
-    background-color:#6CBC35;
+    background-color:#92B8B1;
 	border-bottom:2px solid #fff;
 }
 .glyphicon {
@@ -212,7 +212,7 @@ nav.navbar.navbar-default {
 }
 /*--*/
 .header {
-    background-color:#6cbc35;
+    background-color:#92B8B1;
     padding: 1.5em 0;
 }
 .details-1 {
@@ -257,7 +257,7 @@ select#starlevel {
     outline: none;
 }
 .submit_button input[type="submit"]:hover{
-	background:#6cbc35;
+	background:#92B8B1;
 }
 input#checkoutdate, input#checkindate {
     padding: 10px 9px 10px 9px;
@@ -274,7 +274,7 @@ input#checkoutdate, input#checkindate {
     background: url(/public/images/mbimage/box1.png) no-repeat 94% 50% #FFF;
 }
 .banner {
-  background: url(/public/images/mbimage/6.jpg) no-repeat;
+  background: url(/public/images/hotalBackground.jpg) no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -311,7 +311,7 @@ input#checkoutdate, input#checkindate {
     margin: 1em 0;
 }
 span {
-    color: #6cbc35;
+    color: #92B8B1;
 }
 .special {
     background: url(/public/images/mbimage/16.jpg) center fixed;
@@ -330,7 +330,7 @@ span {
 }
 .special h3 {
     font-size: 2em;
-    color:#6cbc35;
+    color:#92B8B1;
     margin: 0;
 }
 .special p {
@@ -368,7 +368,7 @@ span {
 }
 .n-rgt a {
     padding-left: 13px;
-    color: #6cbc35;
+    color: #92B8B1;
 }
 .quick h5 {
     font-size: 2.2em;
@@ -376,7 +376,7 @@ span {
 }
 .quick h6 {
     font-size: 2em;
-    color: #6cbc35;
+    color: #92B8B1;
 }
 .new {
     padding: 0 0 1em;
@@ -391,7 +391,7 @@ span {
     font-size: 1em;
     font-weight: 300;
     color: #A0A0A0;
-    border:1px solid #6cbc35;
+    border:1px solid #92B8B1;
     margin-bottom: 1em;
 }
 .quick input[type="submit"] {
@@ -403,7 +403,7 @@ span {
     background:#553a99;
 }
 .quick input[type="submit"]:hover {
-    background: #6cbc35;
+    background: #92B8B1;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -o-transition: 0.5s all;
@@ -418,7 +418,7 @@ span {
     outline: none;
     background: none;
     color: #A0A0A0;
-    border: 1px solid #6cbc35;
+    border: 1px solid #92B8B1;
     display: block;resize: none;
     width: 100%;
     min-height: 100px;
@@ -429,7 +429,7 @@ span {
     line-height: 2.5em;
 }
 .quick li a:hover{
-    color:#6cbc35;
+    color:#92B8B1;
 }
 /* Shutter In Horizontal */
 .hvr-shutter-in-horizontal {
@@ -442,7 +442,7 @@ span {
     backface-visibility: hidden;
     -moz-osx-font-smoothing: grayscale;
     position: relative;
-    background: #6cbc35;
+    background: #92B8B1;
     -webkit-transition-property: color;
     transition-property: color;
     -webkit-transition-duration: 0.3s;
@@ -481,8 +481,8 @@ span {
   transform: scaleX(0);
 }
 .footer {
-  background:#553A99;
-  padding: 3em 0;
+  background:#92B8B1;
+  padding: 1.5em 0;
 }
 .footer h4 {
     color: #ffffff;
@@ -496,23 +496,23 @@ span {
   line-height: 2em;
 }
 .footer li a {
-  color: #BBA6F1;
+  color: #FFF;
   font-size: 1em;
   text-decoration: none;
 }
 .footer li a:hover{
-	color:#6cbc35;
+	color:#00CCFF;
 }
 .footer p {
   color: #a1a1a1;
   font-size: 1em;
-  line-height: 1.8em;
+  line-height: 1em;
 }
 .footer span {
   color: #3498db;
 }
 .footer-bottom a {
-  color: #6cbc35;
+  color: #92B8B1;
   font-size: 1em;
   line-height: 1.8em;
   text-decoration:none;
@@ -566,7 +566,7 @@ i.paypal {
     font-size: 1em;
     font-weight: 300;
     color: #C0F59C;
-    background: #6cbc35;
+    background: #92B8B1;
     border: none;
     margin-bottom: 1em;
 }
@@ -587,41 +587,7 @@ i.paypal {
 }
 .footer input[type="submit"]:hover{
  color: #fff;
-  background: #6cbc35;
-}
-.soci li{
-	display:inline-block;
-	margin:0 0.2em;
-}
-i.f-1 {
-    width: 30px;
-    height: 30px;
-    background: url(/public/images/mbimage/soci.png)no-repeat -10px -8px;
-    float: left;
-    vertical-align: middle;
-}
-i.f-1:hover{
-	opacity:0.5;
-}
-i.t-1 {
-     width: 30px;
-    height: 30px;
-    background: url(/public/images/mbimage/soci.png)no-repeat -44px -8px;
-    float: left;
-    vertical-align: middle;
-}
-i.t-1:hover{
-	opacity:0.5;
-}
-i.g-1{
-   width: 30px;
-    height: 30px;
-    background: url(/public/images/mbimage/soci.png)no-repeat -80px -8px;
-    float: left;
-    vertical-align: middle;
-}
-i.g-1:hover{
-	opacity:0.5;
+  background: #92B8B1;
 }
 .smt {
   text-align: left;
@@ -658,7 +624,7 @@ i.g-1:hover{
 	text-transform: uppercase;
 }
 .acount-btn:hover, .login-right input[type="submit"]:hover{
-	background:#6cbc35;
+	background:#92B8B1;
 	text-decoration:none;
 	color:#fff;
 }
@@ -677,21 +643,21 @@ i.g-1:hover{
 }
 .login-right input[type="text"] {
 	border: 1px solid #EEE;
-	outline-color:#6cbc35;
+	outline-color:#92B8B1;
 	width: 96%;
 	font-size:1em;
 	padding: 0.5em;
 }
 .login-right input[type="password"] {
 	border: 1px solid #EEE;
-	outline-color:#6cbc35;
+	outline-color:#92B8B1;
 	width: 96%;
 	font-size:1em;
 	padding: 0.5em;
 }
 .register-top-grid input[type="password"], .register-bottom-grid input[type="password"] {
   border: 1px solid #EEE;
-  outline-color: #6cbc35;
+  outline-color: #92B8B1;
   width: 96%;
   font-size: 1em;
   padding: 0.5em;
@@ -742,7 +708,7 @@ a.forgot {
 }
 .register-top-grid input[type="text"], .register-bottom-grid input[type="text"] {
 	border: 1px solid #EEE;
-	outline-color:#6cbc35;
+	outline-color:#92B8B1;
 	width: 96%;
 	font-size: 1em;
 	padding: 0.5em;
@@ -784,7 +750,7 @@ a.forgot {
 	width:20px;
 	height:20px;
 	outline: none;
-	border: 2px solid #6cbc35;
+	border: 2px solid #92B8B1;
 }
 .checkbox input + i:after {
 	content: '';
@@ -833,13 +799,13 @@ a.forgot {
   outline: none;
 }
 .register-but input[type="submit"]:hover {
-	background:#6cbc35;
+	background:#92B8B1;
 }
 div.register-bottom-grid {
 	margin-top:3em;
 }
 .banner1 {
-  background: url(/public/images/mbimage/6.jpg) no-repeat;
+  background: url(/public/images/hotalBackground.jpg) no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -880,7 +846,7 @@ div.register-bottom-grid {
 }
 .details-top h6 {
     color: #B5F589;
-    background: #6cbc35;
+    background: #92B8B1;
     font-size: 1em;
     font-weight: 400;
     padding: 0.5em 1em;
@@ -920,7 +886,7 @@ a.more:hover{
   font-family: 'Montserrat', sans-serif;
 }
 .single h3 a:hover{
-	color:#6cbc35;
+	color:#92B8B1;
 }
 .single p {
   font-size: 1em;
@@ -938,7 +904,7 @@ a.more:hover{
 .single h6 {
     font-size: 1.1em;
     color: #fff;
-    background: #6cbc35;
+    background: #92B8B1;
     padding: 0.5em 1em;
     width: 66%;
 }
@@ -1004,7 +970,7 @@ select.arrival{
 	-webkit-appearance: none;
 }
 .booking-form input[type="text"]:hover,.booking-form textarea:hover {
-	border: 1px solid #6cbc35;
+	border: 1px solid #92B8B1;
 	-webkit-transition: all 0.3s ease-in-out;
 	-moz-transition: all 0.3s ease-in-out;
 	-o-transition: all 0.3s ease-in-out;
@@ -1017,8 +983,8 @@ select.arrival{
 	margin-top: 25px;
 	font-family: 'Open Sans', sans-serif;
 	cursor: pointer;
-	background: #6cbc35;
-	border: 1px solid #6cbc35;
+	background: #92B8B1;
+	border: 1px solid #92B8B1;
 	padding: 10px 24px;
 	outline: none;
 	color: #ffffff;
@@ -1065,7 +1031,7 @@ select.arrival{
 }
 .offers h4 {
     font-size: 1.2em;
-    color: #6cbc35;
+    color: #92B8B1;
     line-height: 1.2em;
     margin: 1em 0 0;
 }
@@ -1147,8 +1113,8 @@ address {
 }
 .submit-btn input[type=submit]:hover {
 	color:#fff;
-	background: #6cbc35;
-	border:1px solid #6cbc35;
+	background: #92B8B1;
+	border:1px solid #92B8B1;
 	transition: 0.5s all;
 	-webkit-transition: 0.5s all;
 	-moz-transition: 0.5s all;
@@ -1162,13 +1128,13 @@ address {
 }
 .contact h4 {
     font-size: 1.5em;
-    color: #6cbc35;
+    color: #92B8B1;
     margin: 0 0 1em;
 }
 /*--map-end--*/
 /*--Typography--*/
 h3.title {
-    color: #6cbc35;
+    color: #92B8B1;
     font-size: 2em;
 }
 .show-grid [class^=col-] {
@@ -1657,7 +1623,7 @@ nav.navbar.navbar-default {
   background-color: #fff;
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-  background-color:#6cbc35;
+  background-color:#92B8B1;
 }
 .navbar-nav {
     margin: 7.5px 0px;
@@ -1668,7 +1634,7 @@ nav.navbar.navbar-default {
     border-color: #fff;
 }
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
-    border-color: #6cbc35;
+    border-color: #92B8B1;
     background: #553A99;
 }
 .navigation {
@@ -1684,7 +1650,7 @@ nav.navbar.navbar-default {
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     color: #fff;
-    background-color:#6CBC35;
+    background-color:#92B8B1;
 }
 .navbar-default .navbar-nav > li > a {
     color: #fff;

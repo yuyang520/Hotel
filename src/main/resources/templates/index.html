@@ -78,9 +78,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="details-1">
                     <form method="post" action="">
 					<div class="col-md-10 dropdown-buttons">
-						<div class="col-md-3 dropdown-button">           			
+						<div class="col-md-3 dropdown-button">
 							<div class="input-group">
-								<input autocomplete="off" class="form-control has-dark-background" name="hotelname" id="hotelname" placeholder="酒店名称：" type="text" required="">
+								<input autocomplete="off" class="form-control has-dark-background" name="hotelname" id="hotelname" placeholder="酒店名称：" type="text">
 							</div>
 						</div>
 							<link rel="stylesheet" href="/public/css/jquery-ui.small.css" />
@@ -90,32 +90,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										$( "#checkindate,#checkoutdate" ).datepicker();
 									  });
 							  </script>
-						<div class="col-md-3 dropdown-button">
-							<div class="book_date">
-									<input class="date" readonly="readonly" autocomplete="off" id="checkindate" name="checkindate" type="text" value="Check In" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Check In';}">
+						<div class="col-md-3 dropdown-button" >
+							<div class="input-group">
+									<input autocomplete="off" class="form-control has-dark-background" id="minPrice" name="minPrice" type="text" placeholder="最低价格：" >
 							</div>
 						</div>
-					  <div class="col-md-3 dropdown-button">
-							<div class="book_date">
-									<input class="date1" readonly="readonly" autocomplete="off" id="checkoutdate" name="checkoutdate" type="text" value="Check Out" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Check Out';}">
+					    <div class="col-md-3 dropdown-button">
+							<div class="input-group">
+									<input autocomplete="off" class="form-control has-dark-background" id="city" name="city" type="text" placeholder="城市：">
 							</div>
 						</div>
-						<div class="col-md-3 dropdown-button">
+						<div class="col-md-3 dropdown-button" >
+							<div class="select_1">
 							 <select id="starlevel" name="starlevel"  class="frm-field required">
-                                 <option value="1">星级</option>
-								 <option value="2">5星</option>
-								 <option value="3">4星</option>
-								 <option value="4">3星</option>
-								 <option value="5">2星</option>
-                                 <option value="6">1星</option>
+                                 <option value="6">全部</option>
+								 <option value="5">5星</option>
+								 <option value="4">4星</option>
+								 <option value="3">3星</option>
+								 <option value="2">2星</option>
+                                 <option value="1">1星</option>
                                  <option value="0">无星级</option>
 						  	</select>
+							</div>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
-					<div class="col-md-2 submit_button">
+						<div class="col-md-2 submit_button">
 							<input type="submit" value="查询">
-					</div>
+						</div>
                     </form>
 					<div class="clearfix"> </div>
 				</div>
@@ -123,6 +125,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 <br/>
+<p align="center" th:text="${notFoundMessage}" style="font-size: large;"></p>
 	<!-- hod -->
 	<table class="table-hover" align="center">
 		<tr th:each="hotel : ${hotels}">
@@ -138,7 +141,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<span class="largetext">地址：</span><span class="largetext" th:text="${hotel.hotelAddress}"></span><br/>
 				<span class="largetext">星级:<img src="/public/images/star.png" style="height: 20px; width: 20px;"></span><br/>
 				<span class="largetext">联系方式：</span><span class="largetext" th:text="${hotel.hotelContact}"></span><br/>
-				<br/><a class="hvr-shutter-in-horizontal" href="/welcome/details">预订</a>
+				<br/><a class="hvr-shutter-in-horizontal" th:href="|/welcome/details?hotelId=${hotel.hotelId}|">预订</a>
 			</div>
 			</td>
 		</tr>
@@ -147,42 +150,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- footer -->
 	<div class="footer">
 		<div class="container">
-			<div class="col-md-2 deco">
-				<h4>Navigation</h4>
+			<div class="col-md-2 deco" style="width:20%;">
+				<h4>导航</h4>
 				<li><a href="welcome">首页</a></li>
-				<li><a href="shortcodes.html">暂定</a></li>
-				<li><a href="/register/">注册</a></li>
-				<li><a href="contact.html">暂定</a></li>
+				<li><a href="shortcodes.html">注册</a></li>
+				<li><a href="/register/">订单查询</a></li>
+				<li><a href="contact.html">待定</a></li>
 			</div>
-			<div class="col-md-2 deco">
-				<h4>Links</h4>
-				<li><a href="#">Qui Sommes-Nous ?</a></li>
-				<li><a href="#">Mentions Légales </a></li>
-				<li><a href="#">Conditions D'Utilisation </a></li>
+			<div class="col-md-2 deco" style="width:20%;">
+				<h4>帮助</h4>
+				<li><a href="#">联系我们</a></li>
+				<li><a href="#">常见问题与解答</a></li>
+				<li><a href="#">隐私政策</a></li>
+				<li><a href="#">服务条款</a></li>
 			</div>
-			<div class="col-md-2 deco">
-				<h4>Social</h4>
-				<div class="soci">
-					<li><a href="#"><i class="f-1"> </i></a></li>
-					<li><a href="#"><i class="t-1"> </i></a></li>
-					<li><a href="#"><i class="g-1"> </i></a></li>
-				</div>
+			<div class="col-md-2 deco" style="width:20%;">
+				<h4>附近</h4>
+				<li><a href="#">附近酒店</a></li>
+				<li><a href="#">约车</a></li>
+				<li><a href="#">饮食服务</a></li>
 			</div>
-			<div class="col-md-3 cardss">
-				<h4>Payment Sécure</h4>
-				<li><i class="visa"></i></li>
-				<li><i class="ma"></i></li>
-				<li><i class="paypal"></i></li>
-				<div class="clearfix"> </div>
+			<div class="col-md-2 deco" style="width:20%;">
+				<h4>目的地</h4>
+				<li><a href="#">国家/地区</a></li>
+				<li><a href="#">热门城市</a></li>
 			</div>
-			<div class="col-md-3 pos">
-			<h4>NewsLetter</h4>
-					   <form method="post">
-						 <input type="text" class="textbox" value="Email" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Email';}">
-						 <div class="smt">
-							<input type="submit" value="Subscribe">
-						 </div>
-					   </form>
+			<div class="col-md-2 deco" style="width:20%;">
+			<h4>商业合作</h4>
+				<li><a href="#">酒店加盟</a></li>
+				<li><a href="#">联合营销</a></li>
 			</div>
 			<div class="clearfix"> </div>
 		</div>
@@ -193,6 +189,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 	</div>
 	<!-- footer -->
-
 </body>
 </html>
