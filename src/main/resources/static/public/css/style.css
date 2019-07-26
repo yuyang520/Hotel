@@ -847,12 +847,7 @@ div.register-bottom-grid {
   -ms-background-size: cover;
   min-height: 250px;
 }
-.details span {
-  color: #6cbc35;
-  font-size: 2em;
-  font-weight: 400;
-  margin-bottom: 1em;
-}
+
 .details li {
     font-size: 1em;
     font-weight: 300;
