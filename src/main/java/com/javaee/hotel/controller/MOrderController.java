@@ -22,8 +22,11 @@ public class MOrderController {
 
     @GetMapping("")
     public String MOrderHtml(){
+
         return "/MOrderlist";
     }
+
+
     @GetMapping(value = "/orderlist.json",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<OrderList> getOrderListJson() {
