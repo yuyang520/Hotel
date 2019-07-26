@@ -80,7 +80,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="col-md-10 dropdown-buttons">
 						<div class="col-md-3 dropdown-button">           			
 							<div class="input-group">
-								<input autocomplete="off" class="form-control has-dark-background" name="hotelname" id="hotelname" placeholder="酒店名称：" type="text" required="">
+								<input autocomplete="off" class="form-control has-dark-background" name="hotelname" id="hotelname" placeholder="酒店名称：" type="text">
 							</div>
 						</div>
 							<link rel="stylesheet" href="/public/css/jquery-ui.small.css" />
@@ -91,23 +91,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									  });
 							  </script>
 						<div class="col-md-3 dropdown-button">
-							<div class="book_date">
-									<input class="date" readonly="readonly" autocomplete="off" id="checkindate" name="checkindate" type="text" value="Check In" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Check In';}">
+							<div class="input-group">
+									<input autocomplete="off" class="form-control has-dark-background" id="minPrice" name="minPrice" type="text" placeholder="最低价格：" >
 							</div>
 						</div>
-					  <div class="col-md-3 dropdown-button">
-							<div class="book_date">
-									<input class="date1" readonly="readonly" autocomplete="off" id="checkoutdate" name="checkoutdate" type="text" value="Check Out" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Check Out';}">
+					    <div class="col-md-3 dropdown-button">
+							<div class="input-group">
+									<input autocomplete="off" class="form-control has-dark-background" id="city" name="city" type="text" placeholder="城市：">
 							</div>
 						</div>
 						<div class="col-md-3 dropdown-button">
 							 <select id="starlevel" name="starlevel"  class="frm-field required">
-                                 <option value="1">星级</option>
-								 <option value="2">5星</option>
-								 <option value="3">4星</option>
-								 <option value="4">3星</option>
-								 <option value="5">2星</option>
-                                 <option value="6">1星</option>
+                                 <option value="6">全部</option>
+								 <option value="5">5星</option>
+								 <option value="4">4星</option>
+								 <option value="3">3星</option>
+								 <option value="2">2星</option>
+                                 <option value="1">1星</option>
                                  <option value="0">无星级</option>
 						  	</select>
 						</div>
@@ -123,6 +123,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 <br/>
+<p align="center" th:text="${notFoundMessage}" style="font-size: large;"></p>
 	<!-- hod -->
 	<table class="table-hover" align="center">
 		<tr th:each="hotel : ${hotels}">
@@ -193,6 +194,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 	</div>
 	<!-- footer -->
-
 </body>
 </html>
