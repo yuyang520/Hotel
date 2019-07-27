@@ -17,6 +17,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 
 <body>
+<script src="/detail/detail.js"></script>
 <!-- banner -->
 	<div class="banner1">
 		<div class="header">
@@ -99,7 +100,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                         <div class="col-md-4 orderMethod">
-                            <button>order</button>
+                            <button onclick="showLayer()">order</button>
                         </div>
                     </div>
 				</div>
@@ -158,9 +159,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 		</div>
 	<!-- footer -->
-<script th:inline="javascript">
-	var roomNo = [[${roomList}]];
-</script>
-<script src="/detail/detail.js"></script>
+<!--hideform-->
+<div id="layer">
+	<form class="form">
+        <div class="form-input-item">
+            <input id="identify">
+        </div>
+	</form>
+</div>
+<!--hideForm-->
 </body>
 </html>

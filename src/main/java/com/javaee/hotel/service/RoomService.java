@@ -26,8 +26,13 @@ public class RoomService {
         HotelExample example = new HotelExample();
         return hotelMapper.selectByExample(example);
     }
-    public List<Room> getRoomList() {
+    public List<Room> getRoomList(String hotelId) {
         RoomExample example = new RoomExample();
+        if (hotelId == null) {
+            return roomMapper.selectByExample(example);
+        }
+        RoomExample.Criteria criteria = example.createCriteria();
+        criteria.andHotelIdEqualTo(hotelId);
         return roomMapper.selectByExample(example);
     }
 }

@@ -18,7 +18,7 @@ public class RoomController {
     @GetMapping("/roomManage")
     public String roomManageHtml(Model model) {
         model.addAttribute("hotelidList",roomService.getHotelList());
-        model.addAttribute("roomList",roomService.getRoomList());
+        model.addAttribute("roomList",roomService.getRoomList(null));
         return "/roomManage";
     }
     @PostMapping("/roomManage")
@@ -26,7 +26,7 @@ public class RoomController {
         roomService.addRoom(room);
         System.out.println(room.getChineseName());
         model.addAttribute("hotelidList",roomService.getHotelList());
-        model.addAttribute("roomList",roomService.getRoomList());
+        model.addAttribute("roomList",roomService.getRoomList(null));
         return "/roomManage";
     }
 }
