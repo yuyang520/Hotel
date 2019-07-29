@@ -21,7 +21,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: 290px;
+    height: 300px;
 }
 .items-group {
     width: 50%;
@@ -51,7 +51,85 @@
     display: flex;
     flex-direction: column;
 }
-#layer {
-    display: none;
-    position: absolute;
+.flex-body {
+    display:flex;
+    flex-direction: column;
+}
+.form-label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+.form-item {
+    display: flex;
+    flex-direction: row;
+    align-content:center;
+}
+.form-icon {
+    width: 38px;
+    height: 34px;
+    padding: 7px 10px ;
+    font-size: 18px;
+    color: gray;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+.form-input {
+    width: 300px;
+    height:34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: black;
+    border: 1px solid #ccc;
+    border-left: 0px;
+}
+.form-input-datepicker {
+    width: 131px;
+    height:34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: black;
+    border: 1px solid #ccc;
+    border-left: 0px;
+}
+.form-selecter-type {
+    display: block;
+    border: 1px solid #ccc;
+    height: 25px;
+    width: 250px;
+}
+.form-selecter-number {
+    display: block;
+    border: 1px solid #ccc;
+    height: 25px;
+    width: 68px;
+}
+.form-tip {
+    color: gray;
+    padding: 5px 0px;
+    margin-left: 50px;
+}
+
+.day {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+}
+.new {
+    color:gray;
+    border:0px;
+}
+.old {
+
+}
+.today {
+    background-color: lightgray;
+}
+.active {
+    background-color: lightblue;
 }

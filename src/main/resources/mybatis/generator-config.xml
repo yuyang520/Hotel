@@ -51,7 +51,7 @@
             <property name="useActualColumnNames" value="false" />
             <generatedKey column="room_id" sqlStatement="select uuid()" identity="false"/>
         </table>
-        <table tableName="orderlist" domainObjectName="OrderList" >
+        <table tableName="order_list" domainObjectName="OrderList" >
             <property name="useActualColumnNames" value="false" />
             <generatedKey column="order_id" sqlStatement="select uuid()" identity="false"/>
         </table>
