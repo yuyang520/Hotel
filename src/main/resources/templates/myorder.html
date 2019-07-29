@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -103,6 +103,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </form>
 <br/>
 </div>
+<table class="table table-hover" align="center" style="width:80%;">
+    <tr>
+        <td>订单编号</td>
+        <td>创建日期</td>
+        <td>酒店名称</td>
+        <td>房型</td>
+        <td>房间数</td>
+        <td>客户姓名</td>
+        <td>入住时间</td>
+        <td>总金额</td>
+        <td>状态</td>
+    </tr>
+    <tr th:each="orderListInfo:${orderListInfos}">
+        <td th:text="${orderListInfo.orderList.orderId}"></td>
+        <td th:text="${orderListInfo.createTime}"></td>
+        <td th:text="${orderListInfo.hotelChineseName}"></td>
+        <td th:text="${orderListInfo.roomName}"></td>
+        <td th:text="${orderListInfo.orderList.roomNumber}"></td>
+        <td th:text="${orderListInfo.orderList.name}"></td>
+        <td>
+            <p th:text="${orderListInfo.checkInTime}"></p>
+            <p th:text="${orderListInfo.checkOutTime}"></p>
+        </td>
+        <td th:text="${orderListInfo.orderList.price}"></td>
+        <td th:text="${orderListInfo.orderList.status}"></td>
+        <td th:if="${orderListInfo.orderList.status}">
+            <button style="background-color: #bcddff;color:#fff;">退订</button>
+        </td>
+    </tr>
+</table>
+
 <!-- footer -->
 <div class="footer" style="bottom:3.7em; position:absolute; width:100%">
     <div class="container">
