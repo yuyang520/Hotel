@@ -2,6 +2,36 @@
 
 
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+
+
+<style type="text/css">
+    table.hovertable {
+        font-family: verdana,arial,sans-serif;
+        font-size:11px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #999999;
+        border-collapse: collapse;
+    }
+    table.hovertable th {
+        background-color:#c3dde0;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+    table.hovertable tr {
+        background-color:#d4e3e5;
+    }
+    table.hovertable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+</style>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -142,7 +172,7 @@
      <section class="content container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <table  id="tableList" border="1">
+          <table  id="tableList" class="hovertable">
             <thead>
             <tr>
                       <th>订单号</th>
