@@ -55,10 +55,11 @@ public class MOrderController {
     }
 
 
-//    @GetMapping()
-//    public String deleteOrer(@RequestParam("orderId") String orderId){
-//        mOrderService.deleteOrderById(orderId);
-//        return "redirect:/MOrderlist";
-//    }
+    @PostMapping("/deleteOrder")
+    @ResponseBody
+    public boolean deleteOrer(@RequestParam("orderId") String orderId){
+        mOrderService.deleteOrderById(orderId);
+        return true;
+    }
 
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 
-<html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -142,7 +142,7 @@
      <section class="content container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <table  id="tableList" >
+          <table  id="tableList" border="1">
             <thead>
             <tr>
                       <th>订单号</th>
@@ -160,6 +160,7 @@
                       <th>房间数量</th>
                       <th>付款流水号</th>
                       <th>房间号</th>
+                      <th>删除</th>
 
                   </tr>
                   </thead>
@@ -181,7 +182,7 @@
   <!--</footer>-->
 
   
-  
+  </div>
 </div>
 <!-- ./wrapper -->
 
@@ -199,10 +200,40 @@
 <script src="public/js/layer.js"></script>
 
 <script>
+    var table = null;
+    function freshTable() {
+        table.ajax.reload();
+    }
+    function deleteOrder(orderId) {
+        $.ajax({
+            url:'/MOrderlist/deleteOrder?orderId='+orderId,
+            type:'Post',
+            success:function (data) {
+                console.info($(".btn_delete").length);
+                var length =$(".btn_delete").length;
+                for( var i = 0 ; i < length ; i ++ ) {
+                    var st = $($($(".btn_delete")[i]).parent()).parent();
+                    var st1 = $($($($($(".btn_delete")[i]).parent()).parent()).children()[0]).html();
+                    console.info(st);
+                    console.info(st1);
+                    if(st1== orderId){
+                        $($($($(".btn_delete")[i]).parent()).parent()).remove();
+                        freshTable();
+                    }
 
+                }
 
+                //$("#btn_delete").parent().parent().remove();
+
+            },
+            fail:function (data) {
+                console.log('fail');
+            }
+
+        })
+    }
  $(function(){
-  var table = null;
+
 function initTable() {
     table = $("#tableList").DataTable({
         ajax:{
@@ -227,60 +258,25 @@ function initTable() {
             {data: 'roomNumber'},
             {data: 'serialNumber'},
             {data: 'roomNo'},
+            {data:null,"render":function(data){
+                var html= '<button class="btn_delete" onclick="deleteOrder('+data.orderId+')" >删除</button>'
+                    //var $tr = $(this).parents("tr");
+
+                    return html;
+                }}
         ]
+
     })
 }
-function freshTable() {
-    table.ajax.reload();
-    console.info('fresh');
-    info_prompt("刷新成功",1000);
-}
+
+
+
+
+
+
 $(document).ready(function() {
     initTable();
 })
-
-
-
-var prompt = function (message, style, time)
-{
-    style = (style === undefined) ? 'alert-success' : style;
-    time = (time === undefined) ? 1200 : time;
-    $('<div>')
-        .appendTo('body')
-        .addClass('alert ' + style)
-        .html(message)
-        .show()
-        .delay(time)
-        .fadeOut();
-};
-
-// 成功提示
-var success_prompt = function(message, time)
-{
-    prompt(message, 'alert-success', time);
-    console.info("alert");
-};
-
-// 失败提示
-var fail_prompt = function(message, time)
-{
-    prompt(message, 'alert-danger', time);
-};
-
-// 提醒
-var warning_prompt = function(message, time)
-{
-    prompt(message, 'alert-warning', time);
-};
-
-// 信息提示
-var info_prompt = function(message, time)
-{
-    prompt(message, 'alert-info', time);
-};
-
-
-    
  })
 
 
