@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 
-<html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -142,7 +142,7 @@
         <section class="content container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <table  id="tableList" >
+                    <table  id="tableList"  border="1">
                         <thead>
                         <tr>
                             <th>用户id</th>
@@ -152,6 +152,7 @@
                             <th>用户昵称</th>
                             <th>身份证号</th>
                             <th>身份证姓名</th>
+                            <th>删除</th>
 
                         </tr>
                         </thead>
@@ -173,7 +174,7 @@
         <!--</footer>-->
 
 
-
+    </div>
     </div>
     <!-- ./wrapper -->
 
@@ -189,12 +190,38 @@
 
     <!--<script src="public/js/dataTables.bootstrap.min.js"></script>-->
     <script src="public/js/layer.js"></script>
+<script>
+    var table = null;
 
-    <script>
+    function freshTable() {
+        table.ajax.reload();
+    }
 
+    function deleteCustomer(id) {
+        $.ajax({
+            url:'/customerList/deleteCustomer?id='+id,
+            type:'Post',
+            success:function (data) {
+                var length =$(".btn_delete_customer").length;
+                for( var i = 0 ; i < length ; i ++ ) {
+                    var st = $($($(".btn_delete_customer")[i]).parent()).parent();
+                    var st1 = $($($($($(".btn_delete_customer")[i]).parent()).parent()).children()[0]).html();
+                    //console.info(st);
+                    //console.info(st1);
+                    if(st1 == id){
+                        $($($($(".btn_delete_customer")[i]).parent()).parent()).remove();
+                        freshTable();
+                    }
+                }
+            },
+            fail:function (data) {
+                console.log('fail');
+            }
+        })
+    }
 
         $(function(){
-            var table = null;
+
             function initTable() {
                 table = $("#tableList").DataTable({
                     ajax:{
@@ -211,6 +238,10 @@
                         {data: 'nickName'},
                         {data: 'personId'},
                         {data: 'name'},
+                        {data:null,"render":function (data) {
+                                var html= '<button class="btn_delete_customer" onclick="deleteCustomer('+data.id+')" >删除</button>'
+                                return html;
+                            }}
 
                     ]
                 })
@@ -237,25 +268,6 @@
                     .show()
                     .delay(time)
                     .fadeOut();
-            };
-
-// 成功提示
-            var success_prompt = function(message, time)
-            {
-                prompt(message, 'alert-success', time);
-                console.info("alert");
-            };
-
-// 失败提示
-            var fail_prompt = function(message, time)
-            {
-                prompt(message, 'alert-danger', time);
-            };
-
-// 提醒
-            var warning_prompt = function(message, time)
-            {
-                prompt(message, 'alert-warning', time);
             };
 
 // 信息提示

@@ -47,4 +47,12 @@ public class CustomerListService {
         }
 
     }
+
+    public void deleteCustomer(int id){
+        CustomerInfoExample example = new CustomerInfoExample();
+        CustomerInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andIdEqualTo(id);
+        List<CustomerInfo> customerInfoList = customerInfoMapper.selectByExample(example);
+        customerInfoMapper.deleteByExample(example);
+    }
 }

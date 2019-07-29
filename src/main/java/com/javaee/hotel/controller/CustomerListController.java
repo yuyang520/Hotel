@@ -60,6 +60,19 @@ public class CustomerListController {
         else{
             return null;
         }
-
     }
+
+    @PostMapping("/deleteCustomer")
+    @ResponseBody
+    public boolean deleteCustomer(@RequestParam("id") int id){
+        CustomerInfo customerInfo = customerListService.getCustomerInfo(id);
+        if(customerInfo != null){
+            customerListService.deleteCustomer(id);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 }

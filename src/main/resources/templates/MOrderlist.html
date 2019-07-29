@@ -201,35 +201,32 @@
 
 <script>
     var table = null;
+
     function freshTable() {
         table.ajax.reload();
     }
+
     function deleteOrder(orderId) {
         $.ajax({
             url:'/MOrderlist/deleteOrder?orderId='+orderId,
             type:'Post',
             success:function (data) {
-                console.info($(".btn_delete").length);
+                //console.info($(".btn_delete").length);
                 var length =$(".btn_delete").length;
                 for( var i = 0 ; i < length ; i ++ ) {
                     var st = $($($(".btn_delete")[i]).parent()).parent();
                     var st1 = $($($($($(".btn_delete")[i]).parent()).parent()).children()[0]).html();
-                    console.info(st);
-                    console.info(st1);
-                    if(st1== orderId){
+                    //console.info(st);
+                    //console.info(st1);
+                    if(st1 == orderId){
                         $($($($(".btn_delete")[i]).parent()).parent()).remove();
                         freshTable();
                     }
-
                 }
-
-                //$("#btn_delete").parent().parent().remove();
-
             },
             fail:function (data) {
                 console.log('fail');
             }
-
         })
     }
  $(function(){
@@ -260,8 +257,6 @@ function initTable() {
             {data: 'roomNo'},
             {data:null,"render":function(data){
                 var html= '<button class="btn_delete" onclick="deleteOrder('+data.orderId+')" >删除</button>'
-                    //var $tr = $(this).parents("tr");
-
                     return html;
                 }}
         ]
