@@ -256,7 +256,8 @@ function initTable() {
             {data: 'serialNumber'},
             {data: 'roomNo'},
             {data:null,"render":function(data){
-                var html= '<button class="btn_delete" onclick="deleteOrder('+data.orderId+')" >删除</button>'
+                var html= '<button class="btn_delete" onclick="deleteOrder(\''+data.orderId+'\')" >删除</button>'
+                   // var html= "<button class='btn_delete' onclick='deleteOrder('+data.orderId+')' >删除</button>"
                     return html;
                 }}
         ]
