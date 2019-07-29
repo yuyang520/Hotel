@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Motel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <title>我的订单</title>
+    <link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="/public/css/style.css" rel='stylesheet' type='text/css' />
+    <script src="/public/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+    <style>
+        .orderSearch{
+            float:left;
+            margin-left: 30px;
+        }
+        .form-control-s {
+            height: 41px;
+            min-width: 100px;
+            max-width: 200px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        }
+    </style>
+</head>
+<body>
+<!-- banner -->
+<div class="banner1">
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><a href="/welcome/">Hotel</a></h1>
+            </div>
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!--/.navbar-header-->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/welcome/">首页</a></li>
+                        <li><a href="/searchmap/">地图查询</a></li>
+                        <li><a href="offers.html">待定</a></li>
+                        <li><a href="shortcodes.html">待定</a></li>
+                        <li><a href="/login/">登录</a></li>
+                        <li><a href="contact.html">待定</a></li>
+                    </ul>
+                </div>
+                <!--/.navbar-collapse-->
+            </nav>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<div style="display:flex;flex-direction:row;justify-content: center;background-color: #bcddff;height:61px;">
+
+<form action="" style="margin-top: 10px;">
+    <div class="orderSearch">
+    <span>酒店名称：<input class="form-control-s" name="orderHotelName"></span>
+    </div>
+    <div class=" orderSearch">
+        <div style="float:left;">
+        <span>预定日期：<input class="form-control-s" name="checkInTime"></span>
+        </div>
+        <div style="float:left;">
+        <span>至<input class="form-control-s" name="checkOutTime"></span>
+        </div>
+    </div>
+    <div class="orderSearch">
+        <span>订单状态：
+        <select  class="form-control-s" style="width: 40%;height: 34px;">
+            <option value="3">全部</option>
+            <option value="0">未支付</option>
+            <option value="1">已支付</option>
+            <option value="2">已入住</option>
+        </select>
+        </span>
+    </div>
+    <div class="orderSearch">
+        <input  type="submit" style=" border:none;background-color:#fff;height:38px; width: 80px;border-radius: 4px;" value="查询">
+    </div>
+</form>
+<br/>
+</div>
+<!-- footer -->
+<div class="footer" style="bottom:3.7em; position:absolute; width:100%">
+    <div class="container">
+        <div class="col-md-2 deco" style="width:20%;">
+            <h4>导航</h4>
+            <li><a href="/welcome/">首页</a></li>
+            <li><a href="/register/">注册</a></li>
+            <li><a href="/myorder/">订单查询</a></li>
+            <li><a href="contact.html">待定</a></li>
+        </div>
+        <div class="col-md-2 deco" style="width:20%;">
+            <h4>帮助</h4>
+            <li><a href="#">联系我们</a></li>
+            <li><a href="#">常见问题与解答</a></li>
+            <li><a href="#">隐私政策</a></li>
+            <li><a href="#">服务条款</a></li>
+        </div>
+        <div class="col-md-2 deco" style="width:20%;">
+            <h4>附近</h4>
+            <li><a href="#">附近酒店</a></li>
+            <li><a href="#">约车</a></li>
+            <li><a href="#">饮食服务</a></li>
+        </div>
+        <div class="col-md-2 deco" style="width:20%;">
+            <h4>目的地</h4>
+            <li><a href="#">国家/地区</a></li>
+            <li><a href="#">热门城市</a></li>
+        </div>
+        <div class="col-md-2 deco" style="width:20%;">
+            <h4>商业合作</h4>
+            <li><a href="#">酒店加盟</a></li>
+            <li><a href="#">联合营销</a></li>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<div class="footer-bottom" style="bottom: 0px; position:absolute; width:100%">
+    <div class="container">
+        <p>Copyright &copy; 2019.Company name All rights reserved.More Templates </p>
+    </div>
+</div>
+<!-- footer -->
+</body>
+</html>
