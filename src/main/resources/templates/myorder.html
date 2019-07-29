@@ -9,7 +9,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <!-- Custom Theme files -->
     <link href="/public/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="/detail/detail.css" rel='stylesheet' type='text/css'/>
     <script src="/public/js/jquery-1.11.1.min.js"></script>
+    <script src="/public/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
     <style>
         .orderSearch{
@@ -39,7 +41,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         }
     </style>
 </head>
-<body>
+<body style="height: 100%">
+<script>
+    $(function () {
+        $(".datepicker").datepicker({
+            autoclose:true,
+            orientation:"top",
+            todayHighlight:"true"
+        })
+    })
+</script>
 <!-- banner -->
 <div class="banner1">
     <div class="header">
@@ -59,7 +70,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!--/.navbar-header-->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/welcome/">首页</a></li>
+                        <li class="active" style="background-color: #92b8b1;"><a href="/welcome/">首页</a></li>
                         <li><a href="/searchmap/">地图查询</a></li>
                         <li><a href="offers.html">待定</a></li>
                         <li><a href="shortcodes.html">待定</a></li>
@@ -77,23 +88,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <form action="" style="margin-top: 10px;">
     <div class="orderSearch">
-    <span>酒店名称：<input class="form-control-s" name="orderHotelName"></span>
+    <span>酒店名称：<input  autocomplete="off" value="" class="form-control-s" name="orderHotelName"></span>
     </div>
     <div class=" orderSearch">
         <div style="float:left;">
-        <span>预定日期：<input class="form-control-s" name="checkInTime"></span>
+        <span>预定日期：<input autocomplete="off" value="" class="form-control-s datepicker" name="checkInTime"></span>
         </div>
         <div style="float:left;">
-        <span>至<input class="form-control-s" name="checkOutTime"></span>
+        <span>至<input autocomplete="off" value="" class="form-control-s datepicker" name="checkOutTime"></span>
         </div>
     </div>
     <div class="orderSearch">
         <span>订单状态：
-        <select  class="form-control-s" style="width: 40%;height: 34px;">
-            <option value="3">全部</option>
-            <option value="0">未支付</option>
-            <option value="1">已支付</option>
-            <option value="2">已入住</option>
+        <select name="orderStatus" class="form-control-s" style="width: 40%;height: 34px;">
+            <option value="0">全部</option>
+            <option value="1">未支付</option>
+            <option value="2">已完成</option>
+            <option value="3">已过期</option>
+            <option value="4">已取消</option>
         </select>
         </span>
     </div>
@@ -127,16 +139,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <p th:text="${orderListInfo.checkOutTime}"></p>
         </td>
         <td th:text="${orderListInfo.orderList.price}"></td>
-        <td th:text="${orderListInfo.orderList.status}"></td>
-        <td th:if="${orderListInfo.orderList.status}">
-            <button style="background-color: #bcddff;color:#fff;">退订</button>
+        <td>
+            <div th:if="${orderListInfo.orderList.status}==1">未支付</div>
+            <div th:if="${orderListInfo.orderList.status}==2">已支付</div>
+            <div th:if="${orderListInfo.orderList.status}==3">已过期</div>
+            <div th:if="${orderListInfo.orderList.status}==4">已取消</div>
+        </td>
+        <td>
+            <div th:if="${orderListInfo.orderList.status}==1">
+                <button style="background-color: #bcddff;color:#fff;">取消</button>
+            </div>
+            <div th:if="${orderListInfo.orderList.status}==2">
+                <button style="background-color: #bcddff;color:#fff;">退订</button>
+            </div>
+            <div th:if="${orderListInfo.orderList.status}==3">
+                <button style="background-color: red;color:#fff;">删除</button>
+            </div>
+            <div th:if="${orderListInfo.orderList.status}==4">
+                <button style="background-color: red;color:#fff;">删除</button>
+            </div>
         </td>
     </tr>
 </table>
-
+<div th:if="${orderListInfos.size()}!=0">
+    <div style="height: 90px;"></div>
+</div>
+<div th:if="${orderListInfos.size()}==0">
+    <img align="center" src="/public/images/noorder.png">
+</div>
 <!-- footer -->
-<div class="footer" style="bottom:3.7em; position:absolute; width:100%">
-    <div class="container">
+<div class="footer">
+    <div class="container" >
         <div class="col-md-2 deco" style="width:20%;">
             <h4>导航</h4>
             <li><a href="/welcome/">首页</a></li>
@@ -170,7 +203,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"> </div>
     </div>
 </div>
-<div class="footer-bottom" style="bottom: 0px; position:absolute; width:100%">
+<div class="footer-bottom" >
     <div class="container">
         <p>Copyright &copy; 2019.Company name All rights reserved.More Templates </p>
     </div>
