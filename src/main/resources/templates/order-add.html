@@ -24,8 +24,19 @@
     订单状态：<input type="text" name="status" th:field="*{status}"><br/>
     预定房间数：<input type="text" name="roomNumber" th:field="*{roomNumber}"><br/>
     支付流水号：<input type="text" name="serialNumber" th:field="*{serialNumber}"><br/>
-    房间号：<input type="text" name="roomNo" th:field="*{roomNo}"><br/>
-    <input type="submit" value="提交">
+    房间号：<input type="text" name="roomNo" th:field="*{roomNumber}"><br/>
+    <div class="box-footer">
+        <input type="submit" value="提交" class="pull-left">
+        <button type="button"   onclick="cancel()">取消</button>
+    </div>
 </form>
 </body>
 </html>
+
+
+
+ <script>
+     function cancel(){
+         window.location.href = "/MOrderlist";
+     }
+ </script>

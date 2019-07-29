@@ -27,7 +27,19 @@ public class CustomerListService {
 
 
     public Integer saveCustomerList(CustomerInfo customerInfo){
-        return customerInfoMapper.insert(customerInfo);
+
+        //return customerInfoMapper.insert(customerInfo);
+        CustomerInfoExample example = new CustomerInfoExample();
+        CustomerInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andIdEqualTo(customerInfo.getId());
+        List<CustomerInfo> customerInfoList = customerInfoMapper.selectByExample(example);
+        if (example.isDistinct() == false){
+            return customerInfoMapper.updateByExample(customerInfo,example);
+        }
+        else {
+            return customerInfoMapper.insert(customerInfo);
+        }
+
     }
 
     public Customer findCustomerInfoByPrimaryKey(int id){
