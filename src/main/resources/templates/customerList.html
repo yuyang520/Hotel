@@ -271,6 +271,26 @@
 
             function initTable() {
                 table = $("#tableList").DataTable({
+
+                    'paging'      : true,
+                    'lengthChange': true,
+                    'searching'   : true,
+                    'ordering'    : true,
+                    'info'        : true,
+                    'autoWidth'   : true,
+                    'stateSave'   :true,
+                    "language": {
+                        "paginate": {
+                            "next": "下一页",
+                            "previous":"上一页"
+
+                        },
+                        "search":"快速搜索",
+                        "info": "第_PAGE_页(共_PAGES_页)",
+                        "emptyTable":"无可用数据",
+                        "lengthMenu": "_MENU_ 条/页"
+                    },
+
                     ajax:{
                         url:'/customerList/customerList.json',
                         type: "GET",
