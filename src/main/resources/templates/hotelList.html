@@ -251,8 +251,8 @@
                 for( var i = 0 ; i < length ; i ++ ) {
                     //var st = $($($(".btn_delete")[i]).parent()).parent();
                     var st1 = $($($($($(".btn_delete")[i]).parent()).parent()).children()[0]).html();
-                    console.info(st1);
-                    console.info(hotelId);
+                    //console.info(st1);
+                    //console.info(hotelId);
                     if(st1 == hotelId){
                         $($($($(".btn_delete")[i]).parent()).parent()).remove();
                         freshTable();

@@ -1,16 +1,21 @@
 package com.javaee.hotel.controller;
 
 import com.javaee.hotel.domain.Hotel;
+import com.javaee.hotel.domain.OrderList;
 import com.javaee.hotel.domain.Room;
 import com.javaee.hotel.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class RoomController {
@@ -29,5 +34,59 @@ public class RoomController {
         model.addAttribute("hotelidList",roomService.getHotelList());
         model.addAttribute("roomList",roomService.getRoomList(null));
         return "/roomManage";
+    }
+
+
+
+
+
+
+
+
+
+
+    @GetMapping("/roomList")
+    public String MOrderHtml(){
+
+        return "/roomList";
+    }
+
+
+    @GetMapping(value = "/roomList/roomList.json",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Room> getRoomJson() {
+//        System.out.println(mOrderService.orderlistRespond());
+//        System.out.println(mOrderService.orderlistRespond());
+        return roomService.roomRespond();
+    }
+
+    @GetMapping("/roomList/add")
+    public String goRoomPage(Model model){
+        model.addAttribute("room",new Room());
+        return "room-add";
+    }
+
+
+
+    @PostMapping("/roomList/add")
+    public String saveRoom(Room room){
+        roomService.saveRoom(room);
+
+        return "redirect:/roomList";
+    }
+
+    @GetMapping("/roomList/edit")
+    public String goRoomEditPage(@RequestParam("roomId") String roomId, Model model){
+        Room room = roomService.findRoomByPrimaryKey(roomId);
+        model.addAttribute("room",room);
+        return "room-add";
+    }
+
+
+    @PostMapping("/roomList/deleteRoom")
+    @ResponseBody
+    public boolean deleteRoom(@RequestParam("roomId") String roomId){
+        roomService.deleteRoomById(roomId);
+        return true;
     }
 }

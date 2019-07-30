@@ -105,7 +105,7 @@
 <body>
 
 <form action="/hotelList/add" method="post" th:object="${hotel}" class="smart-green">
-    <h3 class="box-title center-block" >修改酒店信息</h3>
+    <h3 class="box-title center-block" style="display: flex; flex-direction: row;justify-content: center">修改酒店信息</h3>
     酒店id: <input type="text" name="id" th:field="*{hotelId}"><br/>
     酒店名称：<input type="text" name="telephone" th:field="*{hotelChineseName}"><br/>
     酒店地址：<input type="text" name="email" th:field="*{hotelAddress}"><br/>

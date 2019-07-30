@@ -109,7 +109,7 @@
 <body>
 
 <form action="/customerList/add" method="post" th:object="${customerInfo}" class="smart-green">
-    <h3 class="box-title center-block" >修改用户信息</h3>
+    <h3 class="box-title center-block" style="display: flex; flex-direction: row;justify-content: center">修改用户信息</h3>
     id: <input type="text" name="id" th:field="*{id}"><br/>
     <!--用户名：<input type="text" name="username"  th:field="*{username}"><br/>-->
     联系电话：<input type="text" name="telephone" th:field="*{telephone}"><br/>

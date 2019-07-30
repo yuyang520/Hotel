@@ -92,7 +92,7 @@
 <form action="/MOrderlist/add" method="post" th:object="${orderList}" class="smart-green">
 
     <input type="hidden" name="orderId" th:field="*{orderId}"><br/>
-    <h3 class="box-title center-block" >修改订单信息</h3>
+    <h3 class="box-title center-block" style="display: flex; flex-direction: row;justify-content: center">修改订单信息</h3>
     客户id：<input type="number" name="id" th:field="*{id}"><br/>
     酒店id：<input type="text" name="hotelId" th:field="*{hotelId}"h><br/>
     房间id：<input type="text" name="roomId" th:field="*{roomId}"><br/>
