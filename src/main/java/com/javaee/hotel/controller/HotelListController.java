@@ -25,7 +25,6 @@ public class HotelListController {
         return "/hotelList";
     }
 
-
     @GetMapping(value = "/hotel.json",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<Hotel> getOrderListJson() {
@@ -43,6 +42,7 @@ public class HotelListController {
     @PostMapping("/add")
     public String saveHotel(Hotel hotel){
         hotelListService.saveHotel(hotel);
+
         return "redirect:/hotelList";
     }
 

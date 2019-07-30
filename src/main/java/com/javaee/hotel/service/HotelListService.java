@@ -25,11 +25,18 @@ public class HotelListService {
         return hotelMapper.selectByExample(example);
     }
 
-
+//||hotel.getHotelId()==""
     public Integer saveHotel(Hotel hotel){
+        System.out.println(hotel.getHotelChineseName());
+        System.out.println(hotel.getHotelId());
         if(hotel.getHotelId() == null){
+            System.out.println("inter");
             return  hotelMapper.insert(hotel);
+
         }else {
+            if(hotelMapper.selectByPrimaryKey(hotel.getHotelId()) == null ) {
+                return -1;
+            }
             return hotelMapper.updateByPrimaryKey(hotel);
         }
     }
