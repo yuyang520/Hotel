@@ -35,7 +35,6 @@ public class IndexController {
         if(minPriceString!=""){
             minPriceFloat = Float.parseFloat(minPriceString);
         }
-        System.out.println(hotelname+"-"+minPriceFloat+"-"+city+"-"+starlevel);
         List<Hotel> hotelList=searchService.searchh(hotelname,minPriceFloat,city,starlevel);
         if(hotelList.isEmpty()){
             model.addAttribute("notFoundMessage","未查找到结果");
