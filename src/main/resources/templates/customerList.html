@@ -88,46 +88,46 @@
                 <span class="sr-only">Toggle navigation</span>
             </a>
             <!-- Navbar Right Menu -->
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
+            <!--<div class="navbar-custom-menu">-->
+                <!--<ul class="nav navbar-nav">-->
 
 
 
 
-                    <!-- User Account Menu -->
-                    <li class="dropdown user user-menu">
-                        <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <!-- The user image in the navbar-->
-                            <img src="public/images/Admin/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">Alexander Pierce</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- The user image in the menu -->
-                            <li class="user-header">
-                                <img src="public/images/Admin/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <!--&lt;!&ndash; User Account Menu &ndash;&gt;-->
+                    <!--<li class="dropdown user user-menu">-->
+                        <!--&lt;!&ndash; Menu Toggle Button &ndash;&gt;-->
+                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+                            <!--&lt;!&ndash; The user image in the navbar&ndash;&gt;-->
+                            <!--<img src="public/images/Admin/user2-160x160.jpg" class="user-image" alt="User Image">-->
+                            <!--&lt;!&ndash; hidden-xs hides the username on small devices so only the image appears. &ndash;&gt;-->
+                            <!--<span class="hidden-xs">Alexander Pierce</span>-->
+                        <!--</a>-->
+                        <!--<ul class="dropdown-menu">-->
+                            <!--&lt;!&ndash; The user image in the menu &ndash;&gt;-->
+                            <!--<li class="user-header">-->
+                                <!--<img src="public/images/Admin/user2-160x160.jpg" class="img-circle" alt="User Image">-->
 
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
-                                </p>
-                            </li>
+                                <!--<p>-->
+                                    <!--Alexander Pierce - Web Developer-->
+                                    <!--<small>Member since Nov. 2012</small>-->
+                                <!--</p>-->
+                            <!--</li>-->
 
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
+                            <!--&lt;!&ndash; Menu Footer&ndash;&gt;-->
+                            <!--<li class="user-footer">-->
+                                <!--<div class="pull-left">-->
+                                    <!--<a href="#" class="btn btn-default btn-flat">Profile</a>-->
+                                <!--</div>-->
+                                <!--<div class="pull-right">-->
+                                    <!--<a href="#" class="btn btn-default btn-flat">Sign out</a>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
 
-                </ul>
-            </div>
+                <!--</ul>-->
+            <!--</div>-->
         </nav>
     </header>
     <!-- Left side column. contains the logo and sidebar -->
@@ -138,26 +138,48 @@
             <ul class="sidebar-menu" data-widget="tree">
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>功能模块1</span>
+                    <a href="#"  onclick="turnToMOrderList()"><i class="fa fa-link"></i> <span >订单浏览</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-1</a></li>
-                        <li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-2</a></li>
-                    </ul>
+                    <!--<ul class="treeview-menu">-->
+                        <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-1</a></li>-->
+                        <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-2</a></li>-->
+                    <!--</ul>-->
                 </li>
                 <li class="treeview active">
-                    <a href="#"><i class="fa fa-link"></i> <span>功能模块2</span>
+                    <a href="#" onclick="turnToCustomerList()"><i class="fa fa-link"></i> <span >客户列表</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>
-                        <li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>
-                    </ul>
+                    <!--<ul class="treeview-menu">-->
+                        <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>-->
+                        <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>-->
+                    <!--</ul>-->
+                </li>
+                <li class="treeview active">
+                    <a href="#" onclick="turnToHotelList()"><i class="fa fa-link"></i> <span >酒店列表</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <!--<ul class="treeview-menu">-->
+                        <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>&ndash;&gt;-->
+                    <!--</ul>-->
+                </li>
+                <li class="treeview active">
+                    <a href="#" onclick="turnToRoomList()"><i class="fa fa-link"></i> <span >房间列表</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <!--<ul class="treeview-menu">-->
+                        <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>-->
+                        <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>-->
+                    <!--</ul>-->
                 </li>
             </ul>
             <!-- /.sidebar-menu -->
@@ -236,6 +258,22 @@
     <script src="public/js/layer.js"></script>
 <script>
     var table = null;
+
+    function turnToMOrderList() {
+        window.location.href = "/MOrderlist";
+    }
+    
+    function turnToRoomList() {
+        window.location.href = "/roomList";
+    }
+    
+    function turnToHotelList() {
+        window.location.href = "/hotelList";
+    }
+
+    function turnToCustomerList() {
+        window.location.href = "/customerList";
+    }
 
     function updateCustomer(id) {
         window.location.href = "/customerList/edit?id="+id;

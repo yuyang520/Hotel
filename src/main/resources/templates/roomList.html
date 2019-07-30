@@ -180,17 +180,15 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="row">
+            <h3 style="display: flex; flex-direction: row;justify-content: center"><div>订单浏览</div></h3>
             <!--<div class="col-md-6">-->
                 <!--<ol class="breadcrumb">-->
-                    <h3 style="display: flex; flex-direction: row;justify-content: center"><div>酒店浏览</div></h3>
-
-
                     <!--<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>-->
                     <!--<li class="active">酒店订购</li>-->
                     <!--<li class="active">酒店列表</li>-->
                   <!--</ol>-->
-            </div>
-          <!--</div>-->
+            <!--</div>-->
+          </div>
     </section>
 
     <!-- Main content -->
@@ -200,18 +198,15 @@
           <table  id="tableList" class="hovertable">
             <thead>
             <tr>
+                      <th>房间型号id</th>
                       <th>酒店id</th>
-                      <th>酒店名称</th>
-                      <th>酒店地址</th>
-                      <th>酒店星级</th>
-                      <th>酒店经度</th>
-                      <th>酒店纬度</th>
-                      <th>酒店评分</th>
-                      <th>酒店最低价房间</th>
-                      <th>酒店剩余房间数</th>
-                      <th>联系电话</th>
-                      <th>酒店停车位</th>
-                      <th>酒店英文名</th>
+                      <th>细节描述</th>
+                      <th>剩余数量</th>
+                      <th>价格</th>
+                      <th>房间名称</th>
+                      <th>房间英文名</th>
+                      <th>房间号</th>
+
 
                       <th>更新</th>
                       <th>删除</th>
@@ -273,27 +268,24 @@
     }
 
 
-
     function freshTable() {
         table.ajax.reload();
     }
 
-    function updateHotel(hotelId) {
-        window.location.href = "/hotelList/edit?hotelId="+hotelId;
+    function updateRoom(roomId) {
+        window.location.href = "/roomList/edit?roomId="+roomId;
     }
 
-    function deleteHotel(hotelId) {
+    function deleteRoom(roomId) {
         $.ajax({
-            url:'/hotelList/delete?hotelId='+hotelId,
+            url:'/roomList/deleteRoom?roomId='+roomId,
             type:'Post',
             success:function (data) {
                 var length =$(".btn_delete").length;
                 for( var i = 0 ; i < length ; i ++ ) {
-                    //var st = $($($(".btn_delete")[i]).parent()).parent();
+                    var st = $($($(".btn_delete")[i]).parent()).parent();
                     var st1 = $($($($($(".btn_delete")[i]).parent()).parent()).children()[0]).html();
-                    //console.info(st1);
-                    //console.info(hotelId);
-                    if(st1 == hotelId){
+                    if(st1 == roomId){
                         $($($($(".btn_delete")[i]).parent()).parent()).remove();
                         freshTable();
                     }
@@ -329,32 +321,26 @@ function initTable() {
             "lengthMenu": "_MENU_ 条/页"
         },
         ajax:{
-            url:'/hotelList/hotel.json',
+            url:'/roomList/roomList.json',
             type: "GET",
             dataType: "JSON",
-            dataSrc: "",
-            //
+            dataSrc: ""
         },
         columns:[
+            {data: 'roomId'},
             {data: 'hotelId'},
-            {data: 'hotelChineseName'},
-            {data: 'hotelAddress'},
-            {data: 'hotelStars'},
-            {data: 'hotelLongitude'},
-            {data: 'hotelLatitude'},
-            {data: 'hotelRating'},
-            {data: 'minHotelPrice'},
-            {data: 'hotelRestRoom'},
-            {data: 'hotelContact'},
-            {data: 'parking'},
-            {data: 'hotalEnglishName'},
-
+            {data: 'detail'},
+            {data: 'leftNumber'},
+            {data: 'price'},
+            {data: 'chineseName'},
+            {data: 'englishName'},
+            {data: 'roomNo'},
             {data:null,"render":function (data) {
-                    var html= '<button class="btn_update" onclick="updateHotel(\''+data.hotelId+'\')" >更新</button>'
+                    var html= '<button class="btn_update" onclick="updateRoom(\''+data.roomId+'\')" >更新</button>'
                     return html;
                 }},
             {data:null,"render":function(data){
-                var html= '<button class="btn_delete" onclick="deleteHotel(\''+data.hotelId+'\')" >删除</button>'
+                var html= '<button class="btn_delete" onclick="deleteRoom(\''+data.roomId+'\')" >删除</button>'
                     return html;
                 }}
         ]
