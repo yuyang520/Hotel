@@ -2,6 +2,48 @@
 
 
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+
+
+
+
+
+
+<style type="text/css">
+    table.hovertable {
+        font-family: verdana,arial,sans-serif;
+        font-size:11px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #999999;
+        border-collapse: collapse;
+    }
+    table.hovertable th {
+        background-color:#c3dde0;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+    table.hovertable tr {
+        background-color:#d4e3e5;
+    }
+    table.hovertable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+</style>
+
+
+
+
+
+
+
+
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -142,16 +184,17 @@
         <section class="content container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <table  id="tableList"  border="1">
+                    <table  id="tableList"  class="hovertable">
                         <thead>
                         <tr>
                             <th>用户id</th>
-                            <th>用户名</th>
+                            <!--<th>用户名</th>-->
                             <th>联系电话</th>
                             <th>用户邮箱</th>
                             <th>用户昵称</th>
                             <th>身份证号</th>
                             <th>身份证姓名</th>
+                            <th>更改</th>
                             <th>删除</th>
 
                         </tr>
@@ -193,6 +236,10 @@
 <script>
     var table = null;
 
+    function updateCustomer(id) {
+        window.location.href = "/customerList/edit?id="+id;
+    }
+
     function freshTable() {
         table.ajax.reload();
     }
@@ -224,6 +271,26 @@
 
             function initTable() {
                 table = $("#tableList").DataTable({
+
+                    'paging'      : true,
+                    'lengthChange': true,
+                    'searching'   : true,
+                    'ordering'    : true,
+                    'info'        : true,
+                    'autoWidth'   : true,
+                    'stateSave'   :true,
+                    "language": {
+                        "paginate": {
+                            "next": "下一页",
+                            "previous":"上一页"
+
+                        },
+                        "search":"快速搜索",
+                        "info": "第_PAGE_页(共_PAGES_页)",
+                        "emptyTable":"无可用数据",
+                        "lengthMenu": "_MENU_ 条/页"
+                    },
+
                     ajax:{
                         url:'/customerList/customerList.json',
                         type: "GET",
@@ -232,12 +299,16 @@
                     },
                     columns:[
                         {data: 'id'},
-                        {data: 'username'},
+                        // {data: 'username'},
                         {data: 'telephone'},
                         {data: 'email'},
                         {data: 'nickName'},
                         {data: 'personId'},
                         {data: 'name'},
+                        {data:null,"render":function (data) {
+                                var html= '<button class="btn_update_customer" onclick="updateCustomer(\''+data.id+'\')" >更新</button>'
+                                return html;
+                            }},
                         {data:null,"render":function (data) {
                                 var html= '<button class="btn_delete_customer" onclick="deleteCustomer(\''+data.id+'\')" >删除</button>'
                                 return html;

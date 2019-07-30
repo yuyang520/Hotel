@@ -2,6 +2,36 @@
 
 
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+
+
+<style type="text/css">
+    table.hovertable {
+        font-family: verdana,arial,sans-serif;
+        font-size:11px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #999999;
+        border-collapse: collapse;
+    }
+    table.hovertable th {
+        background-color:#c3dde0;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+    table.hovertable tr {
+        background-color:#d4e3e5;
+    }
+    table.hovertable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+</style>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -142,7 +172,7 @@
      <section class="content container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <table  id="tableList" border="1">
+          <table  id="tableList" class="hovertable">
             <thead>
             <tr>
                       <th>订单号</th>
@@ -160,6 +190,7 @@
                       <th>房间数量</th>
                       <th>付款流水号</th>
                       <th>房间号</th>
+                      <th>更新</th>
                       <th>删除</th>
 
                   </tr>
@@ -206,18 +237,19 @@
         table.ajax.reload();
     }
 
+    function updateOrder(orderId) {
+        window.location.href = "/MOrderlist/edit?orderId="+orderId;
+    }
+
     function deleteOrder(orderId) {
         $.ajax({
             url:'/MOrderlist/deleteOrder?orderId='+orderId,
             type:'Post',
             success:function (data) {
-                //console.info($(".btn_delete").length);
                 var length =$(".btn_delete").length;
                 for( var i = 0 ; i < length ; i ++ ) {
                     var st = $($($(".btn_delete")[i]).parent()).parent();
                     var st1 = $($($($($(".btn_delete")[i]).parent()).parent()).children()[0]).html();
-                    //console.info(st);
-                    //console.info(st1);
                     if(st1 == orderId){
                         $($($($(".btn_delete")[i]).parent()).parent()).remove();
                         freshTable();
@@ -231,8 +263,28 @@
     }
  $(function(){
 
+
 function initTable() {
     table = $("#tableList").DataTable({
+
+        'paging'      : true,
+        'lengthChange': true,
+        'searching'   : true,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : true,
+        'stateSave'   :true,
+        "language": {
+            "paginate": {
+                "next": "下一页",
+                "previous":"上一页"
+
+            },
+            "search":"快速搜索",
+            "info": "第_PAGE_页(共_PAGES_页)",
+            "emptyTable":"无可用数据",
+            "lengthMenu": "_MENU_ 条/页"
+        },
         ajax:{
             url:'/MOrderlist/orderlist.json',
             type: "GET",
@@ -254,30 +306,23 @@ function initTable() {
             {data: 'status'},
             {data: 'roomNumber'},
             {data: 'serialNumber'},
-            {data: 'roomNo'},
+            {data: 'roomNumber'},
+            {data:null,"render":function (data) {
+                    var html= '<button class="btn_update" onclick="updateOrder(\''+data.orderId+'\')" >更新</button>'
+                    return html;
+                }},
             {data:null,"render":function(data){
                 var html= '<button class="btn_delete" onclick="deleteOrder(\''+data.orderId+'\')" >删除</button>'
-                   // var html= "<button class='btn_delete' onclick='deleteOrder('+data.orderId+')' >删除</button>"
                     return html;
                 }}
         ]
-
     })
 }
-
-
-
-
-
-
+//初始化表格
 $(document).ready(function() {
     initTable();
 })
  })
-
-
-   
 </script>
-
 </body>
 </html>

@@ -25,7 +25,6 @@ public class MOrderService {
         }else {
             return orderListMapper.updateByPrimaryKey(orderList);
         }
-
     }
 
     public OrderList findOrderListByPrimaryKey(String orderId){
