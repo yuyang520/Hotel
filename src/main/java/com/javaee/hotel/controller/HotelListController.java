@@ -51,7 +51,7 @@ public class HotelListController {
         Hotel hotel = hotelListService.findHotelByPrimaryKey(hotelId);
         System.out.println(hotelId);
         model.addAttribute("hotel",hotel);
-        return "hotel-add";
+        return "hotel-edit";
     }
 
 

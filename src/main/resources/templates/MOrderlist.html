@@ -62,7 +62,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a  class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>后台</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -120,6 +120,60 @@
   </header>
   <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <ul class="sidebar-menu" data-widget="tree">
+
+                <li class="treeview">
+                    <a href="#"  onclick="turnToMOrderList()"><i class="fa fa-link"></i> <span >订单浏览</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-1</a></li>-->
+                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-2</a></li>-->
+                    <!--</ul>-->
+                </li>
+                <li class="treeview active">
+                    <a href="#" onclick="turnToCustomerList()"><i class="fa fa-link"></i> <span >客户列表</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>-->
+                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>-->
+                    <!--</ul>-->
+                </li>
+                <li class="treeview active">
+                    <a href="#" ><i class="fa fa-link"></i> <span >酒店列表</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="turnToHotelList()"><i class = "fa fa-certificate"></i> 浏览酒店</a></li>
+                        <li><a href="#" onclick="turnToHotelAdd()"><i class = "fa fa-certificate"></i> 添加酒店</a></li>
+                    </ul>
+                </li>
+                <li class="treeview active">
+                    <a href="#" ><i class="fa fa-link"></i> <span >房间列表</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="turnToRoomList()"><i class = "fa fa-certificate"></i> 浏览房间</a></li>
+                        <li><a href="#" onclick="turnToRoomAdd()"><i class = "fa fa-certificate"></i> 添加房间</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
 
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -272,6 +326,13 @@
         window.location.href = "/customerList";
     }
 
+    function  turnToRoomAdd(){
+        window.location.href = "/roomList/add";
+    }
+
+    function turnToHotelAdd() {
+        window.location.href = "/hotelList/add";
+    }
 
     function freshTable() {
         table.ajax.reload();
@@ -312,7 +373,7 @@ function initTable() {
         'searching'   : true,
         'ordering'    : true,
         'info'        : true,
-        'autoWidth'   : true,
+        'autoWidth'   : false,
         'stateSave'   :true,
         "language": {
             "paginate": {
