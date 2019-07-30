@@ -89,18 +89,18 @@
     <title>订单管理</title>
 </head>
 <body>
-<form action="/roomList/add" method="post"  class="smart-green">
+<form action="/roomList/add" method="post" th:object="${room}" class="smart-green">
 
     <!--<input type="tel" name="orderId" th:field="*{roomId}"><br/>-->
     <h3 class="box-title center-block"  style="display: flex; flex-direction: row;justify-content: center">房间信息采集</h3>
-    <!--房间型号id：<input type="number" name="roomId" ><br/>-->
-    酒店id：<input type="text" name="hotelId" ><br/>
-    细节描述：<input type="text" name="detail" ><br/>
-    剩余数量：<input type="text" name="leftNumber" ><br/>
-    价格：<input type="text" name="price" ><br/>
-    房间名称：<input type="text" name="chineseName" ><br/>
-    房间英文名：<input type="text" name="englishName" ><br/>
-    房间号：<input type="text" name="roomNo" ><br/>
+    房间型号id：<input type="number" name="id" th:field="*{roomId}"><br/>
+    酒店id：<input type="text" name="hotelId" th:field="*{hotelId}"h><br/>
+    细节描述：<input type="text" name="roomId" th:field="*{detail}"><br/>
+    剩余数量：<input type="text" name="identify" th:field="*{leftNumber}"><br/>
+    价格：<input type="text" name="name" th:field="*{price}"><br/>
+    房间名称：<input type="text" name="checkIn" th:field="*{chineseName}"><br/>
+    房间英文名：<input type="text" name="checkOut" th:field="*{englishName}"><br/>
+    房间号：<input type="text" name="registerTime" th:field="*{roomNo}"><br/>
 
     <div class="box-footer">
         <input type="submit" value="提交" class="pull-left">

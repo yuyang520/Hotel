@@ -79,7 +79,7 @@ public class RoomController {
     public String goRoomEditPage(@RequestParam("roomId") String roomId, Model model){
         Room room = roomService.findRoomByPrimaryKey(roomId);
         model.addAttribute("room",room);
-        return "room-add";
+        return "room-edit";
     }
 
 

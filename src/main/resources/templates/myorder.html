@@ -122,6 +122,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <td style="white-space: nowrap;">创建日期</td>
         <td style="white-space: nowrap;">酒店名称</td>
         <td style="white-space: nowrap;">房型</td>
+        <td style="white-space: nowrap;">房间号</td>
         <td style="white-space: nowrap;">房间数</td>
         <td style="white-space: nowrap;">客户姓名</td>
         <td style="white-space: nowrap;">入住时间</td>
@@ -134,6 +135,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <td th:text="${orderListInfo.createTime}" style="white-space: nowrap;"></td>
         <td th:text="${orderListInfo.hotelChineseName}" style="white-space: nowrap;"></td>
         <td th:text="${orderListInfo.roomName}" style="white-space: nowrap;"></td>
+        <td th:text="${orderListInfo.orderList.roomNo}" style="white-space: nowrap;"></td>
         <td th:text="${orderListInfo.orderList.roomNumber}" style="white-space: nowrap;"></td>
         <td th:text="${orderListInfo.orderList.name}" style="white-space: nowrap;"></td>
         <td>
@@ -150,7 +152,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <td>
             <div th:if="${orderListInfo.orderList.status}==1">
                 <a class="btn" style="background-color: #bcddff;color:#fff;"
-                   data-th-attr="onclick='deleteOrder(this, \''+${orderListInfo.orderList.orderId}+'\')'">取消</a>
+                   data-th-attr="onclick='unOrder(this, \''+${orderListInfo.orderList.orderId}+'\')'">取消</a>
             </div>
             <div th:if="${orderListInfo.orderList.status}==2">
                 <a class="btn" style="background-color: #bcddff;color:#fff;"
@@ -171,7 +173,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div th:if="${orderListInfos.size()}!=0">
     <div style="height: 90px;"></div>
 </div>
-<div th:if="${orderListInfos.size()}==0">
+<div align="center" th:if="${orderListInfos.size()}==0">
     <img align="center" src="/public/images/noorder.png">
 </div>
 <!-- footer -->

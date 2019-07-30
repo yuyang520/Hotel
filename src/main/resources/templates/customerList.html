@@ -74,7 +74,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a  class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>后台</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -90,10 +90,6 @@
             <!-- Navbar Right Menu -->
             <!--<div class="navbar-custom-menu">-->
                 <!--<ul class="nav navbar-nav">-->
-
-
-
-
                     <!--&lt;!&ndash; User Account Menu &ndash;&gt;-->
                     <!--<li class="dropdown user user-menu">-->
                         <!--&lt;!&ndash; Menu Toggle Button &ndash;&gt;-->
@@ -144,8 +140,8 @@
               </span>
                     </a>
                     <!--<ul class="treeview-menu">-->
-                        <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-1</a></li>-->
-                        <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-2</a></li>-->
+                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-1</a></li>-->
+                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-2</a></li>-->
                     <!--</ul>-->
                 </li>
                 <li class="treeview active">
@@ -155,31 +151,31 @@
               </span>
                     </a>
                     <!--<ul class="treeview-menu">-->
-                        <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>-->
-                        <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>-->
+                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>-->
+                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>-->
                     <!--</ul>-->
                 </li>
                 <li class="treeview active">
-                    <a href="#" onclick="turnToHotelList()"><i class="fa fa-link"></i> <span >酒店列表</span>
+                    <a href="#" ><i class="fa fa-link"></i> <span >酒店列表</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                     </a>
-                    <!--<ul class="treeview-menu">-->
-                        <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>&ndash;&gt;-->
-                    <!--</ul>-->
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="turnToHotelList()"><i class = "fa fa-certificate"></i> 浏览酒店</a></li>
+                        <li><a href="#" onclick="turnToHotelAdd()"><i class = "fa fa-certificate"></i> 添加酒店</a></li>
+                    </ul>
                 </li>
                 <li class="treeview active">
-                    <a href="#" onclick="turnToRoomList()"><i class="fa fa-link"></i> <span >房间列表</span>
+                    <a href="#" ><i class="fa fa-link"></i> <span >房间列表</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                     </a>
-                    <!--<ul class="treeview-menu">-->
-                        <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>-->
-                        <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>-->
-                    <!--</ul>-->
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="turnToRoomList()"><i class = "fa fa-certificate"></i> 浏览房间</a></li>
+                        <li><a href="#" onclick="turnToRoomAdd()"><i class = "fa fa-certificate"></i> 添加房间</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.sidebar-menu -->
@@ -275,9 +271,18 @@
         window.location.href = "/customerList";
     }
 
+    function  turnToRoomAdd(){
+        window.location.href = "/roomList/add";
+    }
+
+    function turnToHotelAdd() {
+        window.location.href = "/hotelList/add";
+    }
+
     function updateCustomer(id) {
         window.location.href = "/customerList/edit?id="+id;
     }
+
 
     function freshTable() {
         table.ajax.reload();
@@ -316,7 +321,7 @@
                     'searching'   : true,
                     'ordering'    : true,
                     'info'        : true,
-                    'autoWidth'   : true,
+                    'autoWidth'   : false,
                     'stateSave'   :true,
                     "language": {
                         "paginate": {

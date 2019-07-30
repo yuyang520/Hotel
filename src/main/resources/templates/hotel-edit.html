@@ -104,23 +104,20 @@
 </head>
 <body>
 
-<form action="/hotelList/add" method="post"  class="smart-green">
+<form action="/hotelList/add" method="post" th:object="${hotel}" class="smart-green">
     <h3 class="box-title center-block" style="display: flex; flex-direction: row;justify-content: center">酒店信息采集</h3>
-    <!--酒店id: <input type="text" name="hotelId"  ><br/>-->
-    酒店名称：<input type="text" name="hotelChineseName" ><br/>
-    酒店地址：<input type="text" name="hotelAddress" ><br/>
-    酒店星级：<input type="text" name="hotelStars" ><br/>
-    酒店经度：<input type="text" name="hotelLongitude" ><br/>
-    酒店纬度：<input type="text" name="hotelLatitude" ><br/>
-    酒店评分：<input type="text" name="hotelRating" ><br/>
-    酒店最低价房间：<input type="text" name="minHotelPrice" ><br/>
-    酒店剩余房间数：<input type="text" name="hotelRestRoom" ><br/>
-    联系电话：<input type="text" name="hotelContact" ><br/>
-    酒店停车位：<input type="text" name="parking" ><br/>
-    酒店英文名：<input type="text" name="hotalEnglishName" ><br/>
-    酒店描述：<input type="text" name="hotelProfile"><br/>
-
-
+    酒店id: <input type="text" name="id" th:field="*{hotelId}"><br/>
+    酒店名称：<input type="text" name="telephone" th:field="*{hotelChineseName}"><br/>
+    酒店地址：<input type="text" name="email" th:field="*{hotelAddress}"><br/>
+    酒店星级：<input type="text" name="nickName" th:field="*{hotelStars}"><br/>
+    酒店经度：<input type="text" name="personId" th:field="*{hotelLongitude}"><br/>
+    酒店纬度：<input type="text" name="name" th:field="*{hotelLatitude}"><br/>
+    酒店评分：<input type="text" name="name" th:field="*{hotelRating}"><br/>
+    酒店最低价房间：<input type="text" name="name" th:field="*{minHotelPrice}"><br/>
+    酒店剩余房间数：<input type="text" name="name" th:field="*{hotelRestRoom}"><br/>
+    联系电话：<input type="text" name="name" th:field="*{hotelContact}"><br/>
+    酒店停车位：<input type="text" name="name" th:field="*{parking}"><br/>
+    酒店英文名：<input type="text" name="name" th:field="*{hotalEnglishName}"><br/>
 
 
     <div class="box-footer ">
