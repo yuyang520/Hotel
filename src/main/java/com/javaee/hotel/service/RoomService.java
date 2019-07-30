@@ -80,7 +80,9 @@ public class RoomService {
         }
         return result;
     }
-
+    private boolean roomNumberCheck(int roomNumber) {
+        return false;
+    }
     public Date getDateByString(String dateString) throws ParseException {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date checkDate = dateFormat.parse(dateString);

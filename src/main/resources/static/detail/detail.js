@@ -69,6 +69,8 @@ function check() {
                 if(data) {
                     $('#order').modal('hide');
                     setTimeout("alert(\"提交成功\")",1000);
+                }else {
+                    alert("请登录");
                 }
             }
         })

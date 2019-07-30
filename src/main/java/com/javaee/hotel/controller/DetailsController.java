@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +49,13 @@ public class DetailsController {
     }
     @PostMapping(value="/postOrder")
     @ResponseBody
-    public boolean postOrder(HttpServletRequest request) {
+    public boolean postOrder(HttpServletRequest request, HttpSession session) {
         OrderList orderList = new OrderList();
+        if(session.getAttribute("id") == null) {
+            return false;
+        }else {
+            orderList.setId(Integer.parseInt(session.getAttribute("id").toString()));
+        }
         orderList.setName(request.getParameter("name"));
         orderList.setRoomId(request.getParameter("roomId"));
         orderList.setRoomNumber(Byte.parseByte(request.getParameter("roomNumber")));
@@ -63,10 +69,12 @@ public class DetailsController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        roomService.addOrderList(orderList);
-//
-        return true;
+        if(roomService.orderCheck(orderList)) {
+            roomService.addOrderList(orderList);
+            return true;
+        }else {
+            return true;
+        }
     }
 
 
