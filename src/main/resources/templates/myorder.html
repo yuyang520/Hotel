@@ -118,33 +118,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div>
 <table class="table table-hover" align="center" style="width:80%;">
     <tr>
-        <td>订单编号</td>
-        <td>创建日期</td>
-        <td>酒店名称</td>
-        <td>房型</td>
-        <td>房间数</td>
-        <td>客户姓名</td>
-        <td>入住时间</td>
-        <td>总金额</td>
-        <td>状态</td>
+        <td style="white-space: nowrap;">订单编号</td>
+        <td style="white-space: nowrap;">创建日期</td>
+        <td style="white-space: nowrap;">酒店名称</td>
+        <td style="white-space: nowrap;">房型</td>
+        <td style="white-space: nowrap;">房间数</td>
+        <td style="white-space: nowrap;">客户姓名</td>
+        <td style="white-space: nowrap;">入住时间</td>
+        <td style="white-space: nowrap;">总金额</td>
+        <td style="white-space: nowrap;">状态</td>
     </tr>
     <tr th:each="orderListInfo:${orderListInfos}">
-        <td th:text="${orderListInfo.orderList.orderId}"></td>
-        <td th:text="${orderListInfo.createTime}"></td>
-        <td th:text="${orderListInfo.hotelChineseName}"></td>
-        <td th:text="${orderListInfo.roomName}"></td>
-        <td th:text="${orderListInfo.orderList.roomNumber}"></td>
-        <td th:text="${orderListInfo.orderList.name}"></td>
+        <td th:title="${orderListInfo.orderList.orderId}"><p style="overflow: hidden;display:block;
+         text-overflow: ellipsis; white-space: nowrap; cursor:pointer; max-width: 150px" th:text="${orderListInfo.orderList.orderId}"></p></td>
+        <td th:text="${orderListInfo.createTime}" style="white-space: nowrap;"></td>
+        <td th:text="${orderListInfo.hotelChineseName}" style="white-space: nowrap;"></td>
+        <td th:text="${orderListInfo.roomName}" style="white-space: nowrap;"></td>
+        <td th:text="${orderListInfo.orderList.roomNumber}" style="white-space: nowrap;"></td>
+        <td th:text="${orderListInfo.orderList.name}" style="white-space: nowrap;"></td>
         <td>
-            <p th:text="${orderListInfo.checkInTime}"></p>
-            <p th:text="${orderListInfo.checkOutTime}"></p>
+            <p th:text="${orderListInfo.checkInTime}" style="white-space: nowrap;"></p>
+            <p th:text="${orderListInfo.checkOutTime}" style="white-space: nowrap;"></p>
         </td>
-        <td th:text="${orderListInfo.orderList.price}"></td>
+        <td th:text="${orderListInfo.orderList.price}" style="white-space: nowrap;"></td>
         <td>
-            <div th:if="${orderListInfo.orderList.status}==1">未支付</div>
-            <div th:if="${orderListInfo.orderList.status}==2">已支付</div>
-            <div th:if="${orderListInfo.orderList.status}==3">已过期</div>
-            <div th:if="${orderListInfo.orderList.status}==4">已取消</div>
+            <div th:if="${orderListInfo.orderList.status}==1" style="white-space: nowrap;">未支付</div>
+            <div th:if="${orderListInfo.orderList.status}==2" style="white-space: nowrap;">已支付</div>
+            <div th:if="${orderListInfo.orderList.status}==3" style="white-space: nowrap;">已过期</div>
+            <div th:if="${orderListInfo.orderList.status}==4" style="white-space: nowrap;">已取消</div>
         </td>
         <td>
             <div th:if="${orderListInfo.orderList.status}==1">
