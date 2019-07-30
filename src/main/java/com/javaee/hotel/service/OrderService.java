@@ -30,6 +30,7 @@ public class OrderService {
         criteria.andIdEqualTo(userId);
         List<OrderList> orderLists = orderListMapper.selectByExample(orderListExample);
         List<OrderListInfo> orderListInfos = new ArrayList<OrderListInfo>();
+        System.out.println(compareFormat.format(orderLists.get(0).getCheckIn()));
         int length = orderLists.size();
         for (int i = 0; i < length; i++) {
             OrderListInfo orderListInfo = new OrderListInfo();
@@ -39,8 +40,8 @@ public class OrderService {
             orderListInfo.setRoomName(roomMapper.selectByPrimaryKey(orderLists.get(i).getRoomId())
                     .getChineseName());
             orderListInfo.setCreateTime(format.format(orderLists.get(i).getRegisterTime()));
-            orderListInfo.setCheckInTime(format.format(orderLists.get(i).getCheckIn()));
-            orderListInfo.setCheckOutTime(format.format(orderLists.get(i).getCheckOut()));
+            orderListInfo.setCheckInTime(compareFormat.format(orderLists.get(i).getCheckIn()));
+            orderListInfo.setCheckOutTime(compareFormat.format(orderLists.get(i).getCheckOut()));
             orderListInfo.setOrderList(orderLists.get(i));
             if (hotelName==null||hotelName.equals("") || orderHotelName.contains(hotelName)) {
                 if(checkInTime==null||checkInTime.equals("") || compareFormat.format(orderLists.get(i).getCheckIn()).compareTo(checkInTime)>=0) {

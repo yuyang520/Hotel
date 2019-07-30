@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -47,13 +48,16 @@ public class DetailsController {
         model.addAttribute("roomDetailList",roomDetailList);
         return "details";
     }
-    @PostMapping(value="/postOrder")
+    @PostMapping(value="/postOrder",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public boolean postOrder(HttpServletRequest request, HttpSession session) {
+    public HashMap postOrder(HttpServletRequest request, HttpSession session) {
+        HashMap hashMap = new HashMap();
         OrderList orderList = new OrderList();
         if(session.getAttribute("id") == null) {
-            return false;
+            hashMap.put("isLogin",false);
+            return hashMap;
         }else {
+            hashMap.put("isLogin",true);
             orderList.setId(Integer.parseInt(session.getAttribute("id").toString()));
         }
         orderList.setName(request.getParameter("name"));
@@ -61,7 +65,6 @@ public class DetailsController {
         orderList.setRoomNumber(Byte.parseByte(request.getParameter("roomNumber")));
         orderList.setIdentify(request.getParameter("identify"));
         orderList.setConnectPhone(request.getParameter("connectPhone"));
-        orderList.setId(Integer.parseInt(request.getParameter("id")));
         orderList.setHotelId(request.getParameter("hotelId"));
         try {
             orderList.setCheckIn(roomService.getDateByString(request.getParameter("checkIn")));
@@ -69,11 +72,21 @@ public class DetailsController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if(roomService.orderCheck(orderList)) {
+        String[] roomNoReceive = new String[1];
+        roomNoReceive[0] = "";
+        String[] erro = new String[1];
+        erro[0] = "";
+        int checkNumber = roomService.orderCheck(orderList,roomNoReceive,erro);
+        System.out.println("checkNumber:"+checkNumber);
+        System.out.println("roomNoReceive:"+roomNoReceive[0]);
+        if( checkNumber == 0) {
             roomService.addOrderList(orderList);
-            return true;
+            hashMap.put("roomNoReceive",roomNoReceive[0]);
+            return hashMap;
         }else {
-            return true;
+            hashMap.put("roomNoReceive","");
+            hashMap.put("error",erro[0]);
+            return hashMap;
         }
     }
 

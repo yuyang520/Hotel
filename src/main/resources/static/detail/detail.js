@@ -52,7 +52,6 @@ function check() {
     }
     if (identifyCheck && connectPhoneCheck) {
         var Url = "/welcome/details/postOrder?"
-            + "id=" + 1
             + "&&name=" + name
             + "&&hotelId=" + hotelId
             + "&&identify=" + identify
@@ -66,11 +65,16 @@ function check() {
             url: Url,
             type: "post",
             success:function (data) {
-                if(data) {
-                    $('#order').modal('hide');
-                    setTimeout("alert(\"提交成功\")",1000);
-                }else {
+                console.info(data);
+                if(!data.isLogin) {
                     alert("请登录");
+                }else if (data.roomNoReceive.length == 0) {
+                    alert(data.error);
+                } else {
+                    console.info(data);
+                    $('#order').modal('hide');
+                    var info = "预定成功，房间号为" + data.roomNoReceive;
+                    setTimeout("alert(\'"+info+"\')", 1000);
                 }
             }
         })
