@@ -39,8 +39,8 @@ public class OrderService {
             orderListInfo.setRoomName(roomMapper.selectByPrimaryKey(orderLists.get(i).getRoomId())
                     .getChineseName());
             orderListInfo.setCreateTime(format.format(orderLists.get(i).getRegisterTime()));
-            orderListInfo.setCheckInTime(format.format(orderLists.get(i).getCheckIn()));
-            orderListInfo.setCheckOutTime(format.format(orderLists.get(i).getCheckOut()));
+            orderListInfo.setCheckInTime(compareFormat.format(orderLists.get(i).getCheckIn()));
+            orderListInfo.setCheckOutTime(compareFormat.format(orderLists.get(i).getCheckOut()));
             orderListInfo.setOrderList(orderLists.get(i));
             if (hotelName==null||hotelName.equals("") || orderHotelName.contains(hotelName)) {
                 if(checkInTime==null||checkInTime.equals("") || compareFormat.format(orderLists.get(i).getCheckIn()).compareTo(checkInTime)>=0) {
