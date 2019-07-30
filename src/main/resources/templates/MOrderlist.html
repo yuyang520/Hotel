@@ -343,6 +343,8 @@
     }
 
     function deleteOrder(orderId) {
+
+        layer.confirm('是否删除：'+name,{icon: 3, title:'提示'},function(index){
         $.ajax({
             url:'/MOrderlist/deleteOrder?orderId='+orderId,
             type:'Post',
@@ -360,7 +362,9 @@
             fail:function (data) {
                 console.log('fail');
             }
-        })
+        });
+            layer.close(index);
+    });
     }
  $(function(){
 

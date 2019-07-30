@@ -135,9 +135,9 @@
 
                 <li class="treeview">
                     <a href="#"  onclick="turnToMOrderList()"><i class="fa fa-link"></i> <span >订单浏览</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+                        <!--<span class="pull-right-container">-->
+                <!--<i class="fa fa-angle-left pull-right"></i>-->
+              <!--</span>-->
                     </a>
                     <!--<ul class="treeview-menu">-->
                     <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-1</a></li>-->
@@ -289,26 +289,31 @@
     }
 
     function deleteCustomer(id) {
+
+        layer.confirm('是否删除：'+name,{icon: 3, title:'提示'},function(index) {
         $.ajax({
-            url:'/customerList/deleteCustomer?id='+id,
-            type:'Post',
-            success:function (data) {
-                var length =$(".btn_delete_customer").length;
-                for( var i = 0 ; i < length ; i ++ ) {
+            url: '/customerList/deleteCustomer?id=' + id,
+            type: 'Post',
+            success: function (data) {
+                var length = $(".btn_delete_customer").length;
+                for (var i = 0; i < length; i++) {
                     var st = $($($(".btn_delete_customer")[i]).parent()).parent();
                     var st1 = $($($($($(".btn_delete_customer")[i]).parent()).parent()).children()[0]).html();
                     //console.info(st);
                     //console.info(st1);
-                    if(st1 == id){
+                    if (st1 == id) {
                         $($($($(".btn_delete_customer")[i]).parent()).parent()).remove();
                         freshTable();
                     }
                 }
             },
-            fail:function (data) {
+            fail: function (data) {
                 console.log('fail');
             }
-        })
+        });
+
+        layer.close(index);
+    });
     }
 
         $(function(){

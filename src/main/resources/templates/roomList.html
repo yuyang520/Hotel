@@ -154,8 +154,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                    <li><a href="#" onclick="turnToHotelList()"><i class = "fa fa-certificate"></i> 浏览酒店</a></li>
-                    <li><a href="#" onclick="turnToHotelAdd()"><i class = "fa fa-certificate"></i> 添加酒店</a></li>
+                        <li><a href="#" onclick="turnToHotelList()"><i class = "fa fa-certificate"></i> 浏览酒店</a></li>
+                        <li><a href="#" onclick="turnToHotelAdd()"><i class = "fa fa-certificate"></i> 添加酒店</a></li>
                     </ul>
                 </li>
                 <li class="treeview active">
@@ -165,8 +165,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                    <li><a href="#" onclick="turnToRoomList()"><i class = "fa fa-certificate"></i> 浏览房间</a></li>
-                    <li><a href="#" onclick="turnToRoomAdd()"><i class = "fa fa-certificate"></i> 添加房间</a></li>
+                        <li><a href="#" onclick="turnToRoomList()"><i class = "fa fa-certificate"></i> 浏览房间</a></li>
+                        <li><a href="#" onclick="turnToRoomAdd()"><i class = "fa fa-certificate"></i> 添加房间</a></li>
                     </ul>
                 </li>
             </ul>
@@ -207,8 +207,6 @@
                       <th>房间名称</th>
                       <th>房间英文名</th>
                       <th>房间号</th>
-
-
                       <th>更新</th>
                       <th>删除</th>
 
@@ -286,24 +284,31 @@
     }
 
     function deleteRoom(roomId) {
-        $.ajax({
-            url:'/roomList/deleteRoom?roomId='+roomId,
-            type:'Post',
-            success:function (data) {
-                var length =$(".btn_delete").length;
-                for( var i = 0 ; i < length ; i ++ ) {
-                    var st = $($($(".btn_delete")[i]).parent()).parent();
-                    var st1 = $($($($($(".btn_delete")[i]).parent()).parent()).children()[0]).html();
-                    if(st1 == roomId){
-                        $($($($(".btn_delete")[i]).parent()).parent()).remove();
-                        freshTable();
+        layer.confirm('是否删除：'+name,{icon: 3, title:'提示'},function(index){
+        // $tr.remove();
+        // layer.close(index);asd
+            $.ajax({
+                url:'/roomList/deleteRoom?roomId='+roomId,
+                type:'Post',
+                success:function (data) {
+                    var length =$(".btn_delete").length;
+                    for( var i = 0 ; i < length ; i ++ ) {
+                        var st = $($($(".btn_delete")[i]).parent()).parent();
+                        var st1 = $($($($($(".btn_delete")[i]).parent()).parent()).children()[0]).html();
+                        if(st1 == roomId){
+                            $($($($(".btn_delete")[i]).parent()).parent()).remove();
+                            freshTable();
+                        }
                     }
+                },
+                fail:function (data) {
+                    console.log('fail');
                 }
-            },
-            fail:function (data) {
-                console.log('fail');
-            }
-        })
+            })
+            layer.close(index);
+
+        });
+
     }
  $(function(){
 
@@ -349,7 +354,7 @@ function initTable() {
                     return html;
                 }},
             {data:null,"render":function(data){
-                var html= '<button class="btn_delete" onclick="deleteRoom(\''+data.roomId+'\')" >删除</button>'
+                var html= '<button class="btn_delete " onclick="deleteRoom(\''+data.roomId+'\')" >删除</button>'
                     return html;
                 }}
         ]
