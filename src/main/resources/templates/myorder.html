@@ -70,7 +70,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!--/.navbar-header-->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active" style="background-color: #92b8b1;"><a href="/welcome/">首页</a></li>
+                        <li class="active" style="background-color: #92b8b1;" ><a href="/welcome/">首页</a></li>
                         <li><a href="/searchmap/">地图查询</a></li>
                         <li><a href="offers.html">待定</a></li>
                         <li><a href="shortcodes.html">待定</a></li>
@@ -148,16 +148,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </td>
         <td>
             <div th:if="${orderListInfo.orderList.status}==1">
-                <button style="background-color: #bcddff;color:#fff;">取消</button>
+                <a class="btn" style="background-color: #bcddff;color:#fff;"
+                   data-th-attr="onclick='deleteOrder(this, \''+${orderListInfo.orderList.orderId}+'\')'">取消</a>
             </div>
             <div th:if="${orderListInfo.orderList.status}==2">
-                <button style="background-color: #bcddff;color:#fff;">退订</button>
+                <a class="btn" style="background-color: #bcddff;color:#fff;"
+                   data-th-attr="onclick='unOrder(this, \''+${orderListInfo.orderList.orderId}+'\')'">退订</a>
             </div>
             <div th:if="${orderListInfo.orderList.status}==3">
-                <button style="background-color: red;color:#fff;">删除</button>
+                <a class="btn" style="background-color: red;color:#fff;"
+                   data-th-attr="onclick='deleteOrder(this, \''+${orderListInfo.orderList.orderId}+'\')'">删除</a>
             </div>
             <div th:if="${orderListInfo.orderList.status}==4">
-                <button style="background-color: red;color:#fff;">删除</button>
+                <a class="btn" style="background-color: red;color:#fff;"
+                   data-th-attr="onclick='deleteOrder(this, \''+${orderListInfo.orderList.orderId}+'\')'">删除</a>
             </div>
         </td>
     </tr>
@@ -212,4 +216,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- footer -->
 </body>
+<script>
+    function deleteOrder(elem, id) {
+        $.ajax({
+            url: '/myorder/delete?orderId=' + id,
+            type: 'get',
+            success: function (data) {
+                $(elem).parent().parent().parent().remove();
+                location.reload();
+            },
+            fail: function (data) {
+                console.log('fail')
+            }
+        })
+    }
+    function unOrder(elem,id) {
+        $.ajax({
+            url: '/myorder/unorder?orderId=' + id,
+            type: 'put',
+            success: function (elem,data) {
+                location.reload();
+            },
+            fail: function (data) {
+                console.log('fail')
+            }
+        })
+    }
+</script>
 </html>

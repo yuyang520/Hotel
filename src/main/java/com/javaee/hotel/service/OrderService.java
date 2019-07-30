@@ -24,10 +24,10 @@ public class OrderService {
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     SimpleDateFormat compareFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    public List<OrderListInfo> searchOrderListInfo(String hotelName,String checkInTime,String checkOutTime,int status) {
+    public List<OrderListInfo> searchOrderListInfo( int userId,String hotelName,String checkInTime,String checkOutTime,int status) {
         OrderListExample orderListExample = new OrderListExample();
         OrderListExample.Criteria criteria = orderListExample.createCriteria();
-        criteria.andIdEqualTo(22);
+        criteria.andIdEqualTo(userId);
         List<OrderList> orderLists = orderListMapper.selectByExample(orderListExample);
         List<OrderListInfo> orderListInfos = new ArrayList<OrderListInfo>();
         int length = orderLists.size();
