@@ -21,6 +21,7 @@
 <script th:inline="javascript">
 	var roomDetailList = [[${roomDetailList}]];
 	var hotelId = [[${hotelId}]];
+	console.info(roomDetailList);
 </script>
 <script src="/detail/detail.js" type="text/javascript"></script>
 <!-- banner -->
@@ -95,18 +96,20 @@
                     <div>
                         <div class="col-md-8 item-all" >
                             <div class="items-group" th:each="roomItemGroup:${roomDetail.roomItemContent.roomItemGroupList}">
-                                <strong class="items-group-header" th:text="${roomItemGroup.header}"></strong>
-                                <div class="items-group-content">
-                                    <div class="item" th:each="roomItem:${roomItemGroup.roomItemList}">
-                                        <span th:class="|icon iconfont ${roomItem.icon}|" ></span>
-                                        <span class="item-text" th:text="${roomItem.text}"></span>
+                                <div th:if="${not #strings.isEmpty(roomItemGroup.roomItemList)}">
+                                    <strong class="items-group-header" th:text="${roomItemGroup.header}"></strong>
+                                    <div class="items-group-content">
+                                        <div class="item" th:each="roomItem:${roomItemGroup.roomItemList}">
+                                            <span th:class="|icon iconfont ${roomItem.icon}|" ></span>
+                                            <span class="item-text" th:text="${roomItem.text}"></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 orderMethod">
 							<strong th:text="|剩余房数:${roomDetail.room.leftNumber}|"></strong>
-                            <button th:if="${roomDetail.room.leftNumber} gt 0" data-toggle="modal" data-target="#order">预定</button>
+                            <button th:if="${roomDetail.room.leftNumber} gt 0" data-toggle="modal" data-target="#order">预订</button>
                         </div>
                     </div>
 				</div>

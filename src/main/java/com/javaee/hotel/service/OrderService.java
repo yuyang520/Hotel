@@ -30,7 +30,6 @@ public class OrderService {
         criteria.andIdEqualTo(userId);
         List<OrderList> orderLists = orderListMapper.selectByExample(orderListExample);
         List<OrderListInfo> orderListInfos = new ArrayList<OrderListInfo>();
-        System.out.println(compareFormat.format(orderLists.get(0).getCheckIn()));
         int length = orderLists.size();
         for (int i = 0; i < length; i++) {
             OrderListInfo orderListInfo = new OrderListInfo();

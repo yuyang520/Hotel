@@ -80,30 +80,276 @@
          margin-top: 10px;
          margin-bottom: 10px;
      }
+     .font-group {
+         display: flex;
+         flex-direction: column;
+     }
+     .group-header {
+         font-size: 12px;
+     }
+     .group-content {
+         display: flex;
+         flex-direction: row;
+         align-content: center;
+     }
+     .font-item {
+         margin: 10px;
+         font-size: 12px;
+         color: gray;
+     }
  </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/public/font/iconfont.css" rel='stylesheet' type='text/css'/>
     <title>订单管理</title>
+    <script src="/public/js/jquery.min.js"></script>
 </head>
 <body>
-<form action="/roomList/add" method="post"  class="smart-green">
+<script>
+            function inputDetail() {
+                var detail = {};
+                detail.a = [];
+                detail.b = [];
+                detail.c = [];
+                detail.d = [];
+                detail.e = [];
+                detail.f = [];
+                detail.g = [];
+                var groupa = $(".group-a")
+                for (let i = 0; i < groupa.length; i++) {
+                    console.info('a');
+                    if (groupa[i].checked) {
+                        detail.a.push(i + 1);
+                    }
+                }
+                var groupb = $(".group-b")
+                for (let i = 0; i < groupb.length; i++) {
+                    if (groupb[i].checked) {
+                        detail.b.push(i + 1);
+                    }
+                }
+                var groupc = $(".group-c")
+                for (let i = 0; i < groupc.length; i++) {
+                    if (groupc[i].checked) {
+                        detail.c.push(i + 1);
+                    }
+                }
+                var groupd = $(".group-d")
+                for (let i = 0; i < groupd.length; i++) {
+                    if (groupd[i].checked) {
+                        detail.d.push(i + 1);
+                    }
+                }
+                var groupe = $(".group-e")
+                for (let i = 0; i < groupe.length; i++) {
+                    if (groupe[i].checked) {
+                        detail.e.push(i + 1);
+                    }
+                }
+                var groupf = $(".group-f")
+                for (let i = 0; i < groupf.length; i++) {
+                    if (groupf[i].checked) {
+                        detail.f.push(i + 1);
+                    }
+                }
+                var groupg = $(".group-g")
+                for (let i = 0; i < groupg.length; i++) {
+                    if (groupg[i].checked) {
+                        detail.g.push(i + 1);
+                    }
+                }
+                var str = "";
+                $("#detail").val(JSON.stringify(detail));
+                $("form[name='addRoom']").submit();
+            }
+</script>
+<form name="addRoom" action="/roomList/add" method="post"  class="smart-green">
 
     <!--<input type="tel" name="orderId" th:field="*{roomId}"><br/>-->
     <h3 class="box-title center-block"  style="display: flex; flex-direction: row;justify-content: center">房间信息采集</h3>
     <!--房间型号id：<input type="number" name="roomId" ><br/>-->
     酒店id：<input type="text" name="hotelId" ><br/>
-    细节描述：<input type="text" name="detail" ><br/>
+    <!--隐藏标签，值由js赋予-->
+    <input type="hidden" name="detail" id="detail" ><br/>
+    <!--隐藏-->
     剩余数量：<input type="text" name="leftNumber" ><br/>
     价格：<input type="text" name="price" ><br/>
     房间名称：<input type="text" name="chineseName" ><br/>
     房间英文名：<input type="text" name="englishName" ><br/>
     房间号：<input type="text" name="roomNo" ><br/>
-
+    房间描述：
+    <div style="border-top:1px solid gray;border-bottom: 1px solid gray;margin:5px">
+        <div class="font-group">
+            <div class="group-header">卫浴间</div>
+            <div class="group-content" id="group-a">
+                <div class="font-item">
+                    <div class="icon iconfont icon-bath" style="font-size: 20px"></div>
+                    <div class="tip">浴缸</div>
+                    <div><input type="checkbox" class="group-a"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-hairdryer" style="font-size: 20px"></div>
+                    <div class="tip">吹风机</div>
+                    <div><input type="checkbox" class="group-a"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-slippers" style="font-size: 20px"></div>
+                    <div class="tip">拖鞋</div>
+                    <div><input type="checkbox" class="group-a"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-towel" style="font-size: 20px"></div>
+                    <div class="tip">毛巾</div>
+                    <div><input type="checkbox" class="group-a"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-mirror" style="font-size: 20px"></div>
+                    <div class="tip">镜子</div>
+                    <div><input type="checkbox" class="group-a"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-bathrobe" style="font-size: 20px"></div>
+                    <div class="tip">浴袍</div>
+                    <div><input type="checkbox" class="group-a"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-shampoo" style="font-size: 20px"></div>
+                    <div class="tip">洗浴用品</div>
+                    <div><input type="checkbox" class="group-a"/></div>
+                </div>
+            </div>
+        </div>
+        <div class="font-group">
+            <div class="group-header">娱乐设施</div>
+            <div class="group-content" id="group-b">
+                <div class="font-item">
+                    <div class="icon iconfont icon-telephone" style="font-size: 20px"></div>
+                    <div class="tip">电话</div>
+                    <div><input type="checkbox" class="group-b"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-wifi" style="font-size: 20px"></div>
+                    <div class="tip">wifi</div>
+                    <div><input type="checkbox" class="group-b"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-television" style="font-size: 20px"></div>
+                    <div class="tip">电视</div>
+                    <div><input type="checkbox" class="group-c"/></div>
+                </div>
+            </div>
+        </div>
+        <div class="font-group">
+            <div class="group-header">舒适设施服务</div>
+            <div class="group-content" id="group-c">
+                <div class="font-item">
+                    <div class="icon iconfont icon-aircondition" style="font-size: 20px"></div>
+                    <div class="tip">空调</div>
+                    <div><input type="checkbox" class="group-c"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-alarm" style="font-size: 20px"></div>
+                    <div class="tip">闹钟</div>
+                    <div><input type="checkbox" class="group-c"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-heating" style="font-size: 20px"></div>
+                    <div class="tip">暖气</div>
+                    <div><input type="checkbox" class="group-c"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-deaden" style="font-size: 20px"></div>
+                    <div class="tip">隔音降噪</div>
+                    <div><input type="checkbox" class="group-c"/></div>
+                </div>
+            </div>
+        </div>
+        <div class="font-group">
+            <div class="group-header">餐饮服务设施</div>
+            <div class="group-content" id="group-d">
+                <div class="font-item">
+                    <div class="icon iconfont icon-fridge" style="font-size: 20px"></div>
+                    <div class="tip">冰箱</div>
+                    <div><input type="checkbox" class="group-d"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-coffee" style="font-size: 20px"></div>
+                    <div class="tip">咖啡</div>
+                    <div><input type="checkbox" class="group-d"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-bar" style="font-size: 20px"></div>
+                    <div class="tip">迷你吧</div>
+                    <div><input type="checkbox" class="group-d"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-water" style="font-size: 20px"></div>
+                    <div class="tip">免费瓶装水</div>
+                    <div><input type="checkbox" class="group-d"/></div>
+                </div>
+            </div>
+        </div>
+        <div class="font-group">
+            <div class="group-header">家具</div>
+            <div class="group-content" id="group-e">
+                <div class="font-item">
+                    <div class="icon iconfont icon-desk" style="font-size: 20px"></div>
+                    <div class="tip">书桌</div>
+                    <div><input type="checkbox" class="group-e"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-sofa" style="font-size: 20px"></div>
+                    <div class="tip">沙发</div>
+                    <div><input type="checkbox" class="group-e"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-dining" style="font-size: 20px"></div>
+                    <div class="tip">独立用餐区</div>
+                    <div><input type="checkbox" class="group-e"/></div>
+                </div>
+            </div>
+        </div>
+        <div class="font-group">
+            <div class="group-header">洗衣服务</div>
+            <div class="group-content" id="group-f">
+                <div class="font-item">
+                    <div class="icon iconfont icon-wardrobe" style="font-size: 20px"></div>
+                    <div class="tip">衣柜</div>
+                    <div><input type="checkbox" class="group-f"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-hanger" style="font-size: 20px"></div>
+                    <div class="tip">衣架</div>
+                    <div><input type="checkbox" class="group-f"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-iron" style="font-size: 20px"></div>
+                    <div class="tip">熨斗</div>
+                    <div><input type="checkbox" class="group-f"/></div>
+                </div>
+            </div>
+        </div>
+        <div class="font-group">
+            <div class="group-header">安保设施</div>
+            <div class="group-content" id="group-g">
+                <div class="font-item">
+                    <div class="icon iconfont icon-safe" style="font-size: 20px"></div>
+                    <div class="tip">保险箱</div>
+                    <div><input type="checkbox" class="group-g"/></div>
+                </div>
+                <div class="font-item">
+                    <div class="icon iconfont icon-smoke" style="font-size: 20px"></div>
+                    <div class="tip">烟雾报警器</div>
+                    <div><input type="checkbox" class="group-g"/></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="box-footer">
-        <input type="submit" value="提交" class="pull-left">
+        <input type="button" value="提交" class="pull-left" onclick="inputDetail()">
         <button type="button"   onclick="cancel()">取消</button>
     </div>
 </form>
