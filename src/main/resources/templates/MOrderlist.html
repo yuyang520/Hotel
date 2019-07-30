@@ -263,6 +263,7 @@
     }
  $(function(){
 
+
 function initTable() {
     table = $("#tableList").DataTable({
 
@@ -284,14 +285,12 @@ function initTable() {
             "emptyTable":"无可用数据",
             "lengthMenu": "_MENU_ 条/页"
         },
-
         ajax:{
             url:'/MOrderlist/orderlist.json',
             type: "GET",
             dataType: "JSON",
             dataSrc: ""
         },
-
         columns:[
             {data: 'orderId'},
             {data: 'id'},
@@ -317,21 +316,13 @@ function initTable() {
                     return html;
                 }}
         ]
-
-
     })
 }
-
 //初始化表格
 $(document).ready(function() {
     initTable();
 })
  })
-
-
-
-   
 </script>
-
 </body>
 </html>
