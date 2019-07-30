@@ -20,25 +20,24 @@ import java.util.List;
 public class SearchmapController {
     @Autowired
     private MapseachService mapseachService;
-    @Autowired
-    private RoomService roomService;
+
     @GetMapping(value = {""})
-    public String showIndex (Model model) {
-        model.addAttribute("hotels", roomService.getHotelList());
+    public String showIndex (HttpServletRequest request, Model model) {
+        String hotelname = request.getParameter("hotelname");
         return "searchmap";
     }
 
     @PostMapping(value = "/map.json",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<Hotel> searchHotel(HttpServletRequest request){
+    public List<Hotel> searchHotel(HttpServletRequest request, Model model){
+
         String hotelname = request.getParameter("hotelname");
-        String indate = request.getParameter("checkindate");
-        String outdate = request.getParameter("checkoutdate");
-        String starlevel = request.getParameter("starlevel");
-        //System.out.println(hotelname+"-"+indate+"-"+outdate+"-"+starlevel);
-        //model.addAttribute("hotels",mapseachService.search(hotelname));
-//        List<Hotel>  list = mapseachService.search(hotelname);
-//        System.out.println();
+        List<Hotel> hotelList=mapseachService.search(hotelname);
+        if(hotelList.isEmpty()){
+            model.addAttribute("notFoundMessage","未查找到结果");
+        }
+        model.addAttribute("hotels", hotelList);
+
         return mapseachService.search(hotelname);
     }
 }

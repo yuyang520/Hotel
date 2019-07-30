@@ -5,8 +5,6 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <style type="text/css">
         body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
-        #allmap{height:500px;width:100%;}
-        #r-result{width:100%; font-size:14px;}
     </style>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=
 PFgBspYSe1HEwdM7pd8z0jEA1gG1pYG5"></script>
@@ -30,16 +28,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         #allmap{
             float:left; width:60%; height:320px;
         }
-        .details-1 {
 
-        }
     </style>
     <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div >
-    <div id="allmap" ></div>
-    <div class="banner-info">
+<script th:inline="javascript">
+    var hotel = [[${hotels}]];
+    console.info(hotel);
+</script>
+
+    <div >
+        <div id="allmap" ></div>
+        <div class="banner-info">
             <div class="details-1">
                 <div>
                     <div class="col-md-10 dropdown-buttons">
@@ -81,35 +82,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="clearfix"> </div>
                     </div>
                     <div class="col-md-2 submit_button">
-                        <input value="查询" onclick="theLocation()">
+                        <input  type="submit" value="查询" onclick="submitClicked()">
                     </div>
                 </div>
                 <div class="clearfix"> </div>
             </div>
+        </div>
     </div>
-</div>
-
 <a href="/circlesearch/"><input type="button" value="周边2Km查询" /></a>
-<table class="table-hover" align="center">
-    <tr th:each="hotel : ${hotels}">
-        <td class="tab-chapter" style="display:flex;flex-direction:row;justify-content: center;">
-            <div style="max-width: 500px;" >
-                <img src="/public/images/mbimage/14.jpg" class="img-responsive"
-                     style="width: 100%;" alt="">
-                <br/>
-            </div>
-        </td>
-        <td class="tab-chapter">
-            <div style="max-width: 500px;">
-                <h2 th:text="${hotel.hotelChineseName}"></h2><br/>
-                <span class="largetext">地址：</span><span class="largetext" th:text="${hotel.hotelAddress}"></span><br/>
-                <span class="largetext">星级:<img src="/public/images/star.png" style="height: 20px; width: 20px;"></span><br/>
-                <span class="largetext">联系方式：</span><span class="largetext" th:text="${hotel.hotelContact}"></span><br/>
-                <br/><a class="hvr-shutter-in-horizontal" href="/welcome/details">预订</a>
-            </div>
-        </td>
-    </tr>
-</table>
 <div class="footer">
     <div class="container">
         <div class="col-md-2 deco" style="width:20%;">
@@ -145,7 +125,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"> </div>
     </div>
 </div>
-
+<table id="demo" style="display:none" class="table-hover" align="center">
+    <tr th:each="hotel : ${hotels}">
+        <td class="tab-chapter" style="display:flex;flex-direction:row;justify-content: center;">
+            <div style="max-width: 500px;" >
+                <img src="/public/images/mbimage/14.jpg" class="img-responsive"
+                     style="width: 100%;" alt="">
+                <br/>
+            </div>
+        </td>
+        <td class="tab-chapter">
+            <div style="max-width: 500px;">
+                <h2 th:text="${hotel.hotelChineseName}"></h2><br/>
+                <span class="largetext">地址：</span><span class="largetext" th:text="${hotel.hotelAddress}"></span><br/>
+                <span class="largetext">星级:<img src="/public/images/star.png" style="height: 20px; width: 20px;"></span><br/>
+                <span class="largetext">联系方式：</span><span class="largetext" th:text="${hotel.hotelContact}"></span><br/>
+                <br/><a class="hvr-shutter-in-horizontal" href="/welcome/details">预订</a>
+            </div>
+        </td>
+    </tr>
+</table>
 
 </body>
 </html>
@@ -155,13 +154,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     var map = new BMap.Map("allmap");
     map.centerAndZoom(new BMap.Point(116.331398,39.897445),11);
     map.enableScrollWheelZoom(true);
+    var opts = {
+        width : 200,     // 信息窗口宽度
+        height: 100,     // 信息窗口高度
+        title : "酒店信息" , // 信息窗口标题
+        enableMessage:true,//设置允许信息窗发送短息
+    }
     // 用经纬度设置地图中心点
     function theLocation(){
         Url="/searchmap/map.json?"
-            +"hotelname="+$("#hotelname").val()
-            +"&&checkindate="+$("#checkindate").val()
-            +"&&checkoutdate="+$("#checkoutdate").val()
-            +"&&starlevel="+$("#starlevel").val();
+            +"hotelname="+$("#hotelname").val();
             $.ajax({
                 url:Url,
                 type:"post",
@@ -173,13 +175,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         var new_point = new BMap.Point( data[i].hotelLongitude,
                             data[i].hotelLatitude);
                         var marker = new BMap.Marker(new_point);  // 创建标注
+                        var content = "酒店名："+ data[i].hotelChineseName + "<br>地址：" +data[i].hotelAddress
+                            +"<br>描述:" +data[i].hotelProfile;
                         map.addOverlay(marker);              // 将标注添加到地图中
+
                         map.panTo(new_point);
+                        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+
+
+                        marker.addEventListener("click",
+                            function(e){
+                                var p = e.target;
+                                var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+                                var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象
+                                map.openInfoWindow(infoWindow,point); //开启信息窗口
+
+                            });
                     }
                 }
             })
-
     }
-
-
+    function showAG(ag){
+        document.getElementById("pa").innerHTML=ag;
+    }
+    function submitClicked() {
+        theLocation();
+        $("#demo").css("display",'block');
+    }
 </script>

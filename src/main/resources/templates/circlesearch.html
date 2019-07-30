@@ -20,78 +20,73 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="/public/css/style.css" rel='stylesheet' type='text/css' />
     <script src="/public/js/jquery-1.11.1.min.js"></script>
     <style>
-        .tab-chapter{
-            width: 800px;
+        #allmap{
+            width:60%; height:320px;
         }
-        .largetext{
-            font-size: 20px;
-            color: #a1a1a1;
+        .bot{
+            width:20%; height:30px;
         }
     </style>
     <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div id="allmap"></div>
-    <div id="r-result">
+    <div><div id="allmap"></div>
+        <div id="r-result" class="bot">
             查询内容: <input id="uservalue" type="text" style="width:100px; margin-right:10px;" />
             <input type="button" value="查询" onclick="thecircle()" />
         </div>
+    </div>
+
     <div class="footer">
-    <div class="container">
-        <div class="col-md-2 deco">
-            <h4>Navigation</h4>
-            <li><a href="welcome">首页</a></li>
-            <li><a href="shortcodes.html">暂定</a></li>
-            <li><a href="/register/">注册</a></li>
-            <li><a href="contact.html">暂定</a></li>
-        </div>
-        <div class="col-md-2 deco">
-            <h4>Links</h4>
-            <li><a href="#">Qui Sommes-Nous ?</a></li>
-            <li><a href="#">Mentions Légales </a></li>
-            <li><a href="#">Conditions D'Utilisation </a></li>
-        </div>
-        <div class="col-md-2 deco">
-            <h4>Social</h4>
-            <div class="soci">
-                <li><a href="#"><i class="f-1"> </i></a></li>
-                <li><a href="#"><i class="t-1"> </i></a></li>
-                <li><a href="#"><i class="g-1"> </i></a></li>
+        <div class="container">
+            <div class="col-md-2 deco" style="width:20%;">
+                <h4>导航</h4>
+                <li><a href="w">首页</a></li>
+                <li><a href="/register/">注册</a></li>
+                <li><a href="/myorder/">订单查询</a></li>
+                <li><a href="contact.html">待定</a></li>
             </div>
-        </div>
-        <div class="col-md-3 cardss">
-            <h4>Payment Sécure</h4>
-            <li><i class="visa"></i></li>
-            <li><i class="ma"></i></li>
-            <li><i class="paypal"></i></li>
+            <div class="col-md-2 deco" style="width:20%;">
+                <h4>帮助</h4>
+                <li><a href="#">联系我们</a></li>
+                <li><a href="#">常见问题与解答</a></li>
+                <li><a href="#">隐私政策</a></li>
+                <li><a href="#">服务条款</a></li>
+            </div>
+            <div class="col-md-2 deco" style="width:20%;">
+                <h4>附近</h4>
+                <li><a href="#">附近酒店</a></li>
+                <li><a href="#">约车</a></li>
+                <li><a href="#">饮食服务</a></li>
+            </div>
+            <div class="col-md-2 deco" style="width:20%;">
+                <h4>目的地</h4>
+                <li><a href="#">国家/地区</a></li>
+                <li><a href="#">热门城市</a></li>
+            </div>
+            <div class="col-md-2 deco" style="width:20%;">
+                <h4>商业合作</h4>
+                <li><a href="#">酒店加盟</a></li>
+                <li><a href="#">联合营销</a></li>
+            </div>
             <div class="clearfix"> </div>
         </div>
-        <div class="col-md-3 pos">
-            <h4>NewsLetter</h4>
-            <form method="post">
-                <input type="text" class="textbox" value="Email" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Email';}">
-                <div class="smt">
-                    <input type="submit" value="Subscribe">
-                </div>
-            </form>
-        </div>
-        <div class="clearfix"> </div>
     </div>
-</div>
+
 </body>
 </html>
 <script type="text/javascript">
     // 百度地图API功能
+
     var map = new BMap.Map("allmap");            // 创建Map实例
     var mPoint = new BMap.Point(116.404, 39.915);
-    //var uservalues = document.getElementById("uservalue").value;
+
     map.enableScrollWheelZoom();
     map.centerAndZoom(mPoint,15);               //修改参数
     var circle = new BMap.Circle(mPoint,2000,{fillColor:"blue",
         strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
     map.addOverlay(circle);
     function thecircle(){
-
         var local =  new BMap.LocalSearch(map, {renderOptions: {map: map, autoViewport: false}});
         local.searchNearby(document.getElementById("uservalue").value, mPoint,2000);//参数为酒店，电影院，
     }
