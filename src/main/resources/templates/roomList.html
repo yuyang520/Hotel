@@ -198,21 +198,16 @@
           <table  id="tableList" class="hovertable">
             <thead>
             <tr>
-                      <th>订单号</th>
-                      <th>客户id</th>
+                      <th>房间型号id</th>
                       <th>酒店id</th>
-                      <th>房间id</th>
-                      <th>客户身份证</th>
-                      <th>客户姓名</th>
-                      <th>入住时间</th>
-                      <th>退房时间</th>
-                      <th>订单生成时间</th>
-                      <th>订单总价</th>
-                      <th>联系电话</th>
-                      <th>订单状态</th>
-                      <th>房间数量</th>
-                      <th>付款流水号</th>
+                      <th>细节描述</th>
+                      <th>剩余数量</th>
+                      <th>价格</th>
+                      <th>房间名称</th>
+                      <th>房间英文名</th>
                       <th>房间号</th>
+
+
                       <th>更新</th>
                       <th>删除</th>
 
@@ -277,20 +272,20 @@
         table.ajax.reload();
     }
 
-    function updateOrder(orderId) {
-        window.location.href = "/MOrderlist/edit?orderId="+orderId;
+    function updateRoom(roomId) {
+        window.location.href = "/roomList/edit?roomId="+roomId;
     }
 
-    function deleteOrder(orderId) {
+    function deleteRoom(roomId) {
         $.ajax({
-            url:'/MOrderlist/deleteOrder?orderId='+orderId,
+            url:'/roomList/deleteRoom?roomId='+roomId,
             type:'Post',
             success:function (data) {
                 var length =$(".btn_delete").length;
                 for( var i = 0 ; i < length ; i ++ ) {
                     var st = $($($(".btn_delete")[i]).parent()).parent();
                     var st1 = $($($($($(".btn_delete")[i]).parent()).parent()).children()[0]).html();
-                    if(st1 == orderId){
+                    if(st1 == roomId){
                         $($($($(".btn_delete")[i]).parent()).parent()).remove();
                         freshTable();
                     }
@@ -326,33 +321,26 @@ function initTable() {
             "lengthMenu": "_MENU_ 条/页"
         },
         ajax:{
-            url:'/MOrderlist/orderlist.json',
+            url:'/roomList/roomList.json',
             type: "GET",
             dataType: "JSON",
             dataSrc: ""
         },
         columns:[
-            {data: 'orderId'},
-            {data: 'id'},
-            {data: 'hotelId'},
             {data: 'roomId'},
-            {data: 'identify'},
-            {data: 'name'},
-            {data: 'checkIn'},
-            {data: 'checkOut'},
-            {data: 'registerTime'},
+            {data: 'hotelId'},
+            {data: 'detail'},
+            {data: 'leftNumber'},
             {data: 'price'},
-            {data: 'connectPhone'},
-            {data: 'status'},
-            {data: 'roomNumber'},
-            {data: 'serialNumber'},
-            {data: 'roomNumber'},
+            {data: 'chineseName'},
+            {data: 'englishName'},
+            {data: 'roomNo'},
             {data:null,"render":function (data) {
-                    var html= '<button class="btn_update" onclick="updateOrder(\''+data.orderId+'\')" >更新</button>'
+                    var html= '<button class="btn_update" onclick="updateRoom(\''+data.roomId+'\')" >更新</button>'
                     return html;
                 }},
             {data:null,"render":function(data){
-                var html= '<button class="btn_delete" onclick="deleteOrder(\''+data.orderId+'\')" >删除</button>'
+                var html= '<button class="btn_delete" onclick="deleteRoom(\''+data.roomId+'\')" >删除</button>'
                     return html;
                 }}
         ]

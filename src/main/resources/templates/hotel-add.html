@@ -95,28 +95,31 @@
     }
 </style>
 
-
-
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>用户管理</title>
+    <title>酒店管理</title>
 </head>
 <body>
 
-<form action="/customerList/add" method="post" th:object="${customerInfo}" class="smart-green">
-    <h3 class="box-title center-block" style="display: flex; flex-direction: row;justify-content: center">修改用户信息</h3>
-    id: <input type="text" name="id" th:field="*{id}"><br/>
-    <!--用户名：<input type="text" name="username"  th:field="*{username}"><br/>-->
-    联系电话：<input type="text" name="telephone" th:field="*{telephone}"><br/>
-    邮箱：<input type="text" name="email" th:field="*{email}"><br/>
-    昵称：<input type="text" name="nickName" th:field="*{nickName}"><br/>
-    身份证号：<input type="text" name="personId" th:field="*{personId}"><br/>
-    身份证姓名：<input type="text" name="name" th:field="*{name}"><br/>
+<form action="/hotelList/add" method="post" th:object="${hotel}" class="smart-green">
+    <h3 class="box-title center-block" style="display: flex; flex-direction: row;justify-content: center">修改酒店信息</h3>
+    酒店id: <input type="text" name="id" th:field="*{hotelId}"><br/>
+    酒店名称：<input type="text" name="telephone" th:field="*{hotelChineseName}"><br/>
+    酒店地址：<input type="text" name="email" th:field="*{hotelAddress}"><br/>
+    酒店星级：<input type="text" name="nickName" th:field="*{hotelStars}"><br/>
+    酒店经度：<input type="text" name="personId" th:field="*{hotelLongitude}"><br/>
+    酒店纬度：<input type="text" name="name" th:field="*{hotelLatitude}"><br/>
+    酒店评分：<input type="text" name="name" th:field="*{hotelRating}"><br/>
+    酒店最低价房间：<input type="text" name="name" th:field="*{minHotelPrice}"><br/>
+    酒店剩余房间数：<input type="text" name="name" th:field="*{hotelRestRoom}"><br/>
+    联系电话：<input type="text" name="name" th:field="*{hotelContact}"><br/>
+    酒店停车位：<input type="text" name="name" th:field="*{parking}"><br/>
+    酒店英文名：<input type="text" name="name" th:field="*{hotalEnglishName}"><br/>
+
+
     <div class="box-footer ">
         <input type="submit" value="提交" class="pull-left col-sm-6">
         <button type="button"   onclick="cancel()"  class="pull-right col-sm-6">取消</button>
@@ -127,6 +130,6 @@
 
 <script>
     function cancel(){
-        window.location.href = "/customerList";
+        window.location.href = "/hotelList";
     }
 </script>

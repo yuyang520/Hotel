@@ -163,4 +163,38 @@ public class RoomService {
     public boolean addOrderList(OrderList orderList) {
         return (orderListMapper.insertSelective(orderList)>0);
     }
+
+
+
+
+
+
+
+
+    public List<Room> roomRespond(){
+        RoomExample example = new RoomExample();
+        return roomMapper.selectByExample(example);
+    }
+
+
+    public Integer saveRoom(Room room){
+        if(room.getRoomId() == null){
+            return  roomMapper.insert(room);
+        }else {
+            return roomMapper.updateByPrimaryKey(room);
+        }
+    }
+
+    public Room findRoomByPrimaryKey(String roomId){
+
+        return roomMapper.selectByPrimaryKey(roomId);
+    }
+
+    public void deleteRoomById(String roomId) {
+
+        roomMapper.deleteByPrimaryKey(roomId);
+    }
 }
+
+
+

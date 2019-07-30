@@ -180,15 +180,17 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="row">
-            <h3 style="display: flex; flex-direction: row;justify-content: center"><div>订单浏览</div></h3>
             <!--<div class="col-md-6">-->
                 <!--<ol class="breadcrumb">-->
+                    <h3 style="display: flex; flex-direction: row;justify-content: center"><div>酒店浏览</div></h3>
+
+
                     <!--<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>-->
                     <!--<li class="active">酒店订购</li>-->
                     <!--<li class="active">酒店列表</li>-->
                   <!--</ol>-->
-            <!--</div>-->
-          </div>
+            </div>
+          <!--</div>-->
     </section>
 
     <!-- Main content -->
@@ -198,21 +200,19 @@
           <table  id="tableList" class="hovertable">
             <thead>
             <tr>
-                      <th>订单号</th>
-                      <th>客户id</th>
                       <th>酒店id</th>
-                      <th>房间id</th>
-                      <th>客户身份证</th>
-                      <th>客户姓名</th>
-                      <th>入住时间</th>
-                      <th>退房时间</th>
-                      <th>订单生成时间</th>
-                      <th>订单总价</th>
+                      <th>酒店名称</th>
+                      <th>酒店地址</th>
+                      <th>酒店星级</th>
+                      <th>酒店经度</th>
+                      <th>酒店纬度</th>
+                      <th>酒店评分</th>
+                      <th>酒店最低价房间</th>
+                      <th>酒店剩余房间数</th>
                       <th>联系电话</th>
-                      <th>订单状态</th>
-                      <th>房间数量</th>
-                      <th>付款流水号</th>
-                      <th>房间号</th>
+                      <th>酒店停车位</th>
+                      <th>酒店英文名</th>
+
                       <th>更新</th>
                       <th>删除</th>
 
@@ -273,24 +273,27 @@
     }
 
 
+
     function freshTable() {
         table.ajax.reload();
     }
 
-    function updateOrder(orderId) {
-        window.location.href = "/MOrderlist/edit?orderId="+orderId;
+    function updateHotel(hotelId) {
+        window.location.href = "/hotelList/edit?hotelId="+hotelId;
     }
 
-    function deleteOrder(orderId) {
+    function deleteHotel(hotelId) {
         $.ajax({
-            url:'/MOrderlist/deleteOrder?orderId='+orderId,
+            url:'/hotelList/delete?hotelId='+hotelId,
             type:'Post',
             success:function (data) {
                 var length =$(".btn_delete").length;
                 for( var i = 0 ; i < length ; i ++ ) {
-                    var st = $($($(".btn_delete")[i]).parent()).parent();
+                    //var st = $($($(".btn_delete")[i]).parent()).parent();
                     var st1 = $($($($($(".btn_delete")[i]).parent()).parent()).children()[0]).html();
-                    if(st1 == orderId){
+                    //console.info(st1);
+                    //console.info(hotelId);
+                    if(st1 == hotelId){
                         $($($($(".btn_delete")[i]).parent()).parent()).remove();
                         freshTable();
                     }
@@ -326,33 +329,32 @@ function initTable() {
             "lengthMenu": "_MENU_ 条/页"
         },
         ajax:{
-            url:'/MOrderlist/orderlist.json',
+            url:'/hotelList/hotel.json',
             type: "GET",
             dataType: "JSON",
-            dataSrc: ""
+            dataSrc: "",
+            //
         },
         columns:[
-            {data: 'orderId'},
-            {data: 'id'},
             {data: 'hotelId'},
-            {data: 'roomId'},
-            {data: 'identify'},
-            {data: 'name'},
-            {data: 'checkIn'},
-            {data: 'checkOut'},
-            {data: 'registerTime'},
-            {data: 'price'},
-            {data: 'connectPhone'},
-            {data: 'status'},
-            {data: 'roomNumber'},
-            {data: 'serialNumber'},
-            {data: 'roomNumber'},
+            {data: 'hotelChineseName'},
+            {data: 'hotelAddress'},
+            {data: 'hotelStars'},
+            {data: 'hotelLongitude'},
+            {data: 'hotelLatitude'},
+            {data: 'hotelRating'},
+            {data: 'minHotelPrice'},
+            {data: 'hotelRestRoom'},
+            {data: 'hotelContact'},
+            {data: 'parking'},
+            {data: 'hotalEnglishName'},
+
             {data:null,"render":function (data) {
-                    var html= '<button class="btn_update" onclick="updateOrder(\''+data.orderId+'\')" >更新</button>'
+                    var html= '<button class="btn_update" onclick="updateHotel(\''+data.hotelId+'\')" >更新</button>'
                     return html;
                 }},
             {data:null,"render":function(data){
-                var html= '<button class="btn_delete" onclick="deleteOrder(\''+data.orderId+'\')" >删除</button>'
+                var html= '<button class="btn_delete" onclick="deleteHotel(\''+data.hotelId+'\')" >删除</button>'
                     return html;
                 }}
         ]
