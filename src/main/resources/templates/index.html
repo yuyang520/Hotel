@@ -114,7 +114,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div>
 			<img src="/public/images/mbimage/14.jpg" class="img-responsive" style="width: 300px;margin-right: 50px;" alt="">
 		</div>
-		<div style="width: 400px;">
+		<div style="width: 300px;">
 		<h2 th:text="${hotel.hotelChineseName}" style="color: #92B8B1;"></h2><br/>
 		<span class="largetext">地址：</span><span class="largetext" th:text="${hotel.hotelAddress}"></span><br/>
 		<span class="largetext">星级：</span><span class="largetext" th:each="i:${#numbers.sequence(1,hotel.hotelStars)}"><img src="/public/images/star.png" style="height: 20px; width: 20px;"></span><br/>

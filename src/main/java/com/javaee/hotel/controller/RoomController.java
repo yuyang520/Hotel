@@ -3,7 +3,9 @@ package com.javaee.hotel.controller;
 import com.javaee.hotel.domain.Hotel;
 import com.javaee.hotel.domain.OrderList;
 import com.javaee.hotel.domain.Room;
+import com.javaee.hotel.mapper.IconMapper;
 import com.javaee.hotel.service.RoomService;
+import com.javaee.hotel.tool.RoomItemStaticData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -63,6 +65,8 @@ public class RoomController {
     @GetMapping("/roomList/add")
     public String goRoomPage(Model model){
         model.addAttribute("room",new Room());
+        RoomItemStaticData roomItemStaticData = new RoomItemStaticData();
+        model.addAttribute("iconList",roomItemStaticData.getDatabaseRoomItemContent());
         return "room-add";
     }
 

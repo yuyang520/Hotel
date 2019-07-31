@@ -194,6 +194,9 @@ public class RoomService {
 
         roomMapper.deleteByPrimaryKey(roomId);
     }
+    public void getIconList() {
+
+    }
 }
 
 

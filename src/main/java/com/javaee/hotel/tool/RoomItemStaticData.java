@@ -2,241 +2,106 @@ package com.javaee.hotel.tool;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.javaee.hotel.domain.Icon;
+import com.javaee.hotel.domain.IconExample;
+import com.javaee.hotel.mapper.IconMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.util.*;
+
+@Component
 public class RoomItemStaticData {
+
+    private Set<String> keys;
+    private static RoomItemStaticData roomItemStaticData;
+    @Autowired
+    private IconMapper iconMapper;
+    private List<Icon> iconGrouper;
+    private HashMap iconGrouperMap;
+
+    @PostConstruct
+    public void init() {
+        roomItemStaticData = this;
+        roomItemStaticData.iconMapper = this.iconMapper;
+    }
+
+    public void initDate() {
+        IconExample example = new IconExample();
+        IconExample.Criteria criteria = example.createCriteria();
+        criteria.andIconIdLessThan(0);
+        iconGrouper = roomItemStaticData.iconMapper.selectByExample(example);
+        iconGrouperMap = new HashMap();
+        int size = iconGrouper.size();
+        for( int i = 0 ; i < size ; i ++ ) {
+            iconGrouperMap.put(iconGrouper.get(i).getGroupType(),iconGrouper.get(i).getIconText());
+        }
+    }
+
+    public RoomItemStaticData () {
+
+    }
     public RoomItemContent analyseItemContent(JSONObject jsonObject) {
+        keys = jsonObject.keySet();
+        List list = new ArrayList(keys);
+        int length = list.size();
         RoomItemContent roomItemContent = new RoomItemContent();
-        roomItemContent.getRoomItemGroupList().add(analyseItemGroup(jsonObject,"a"));
-        roomItemContent.getRoomItemGroupList().add(analyseItemGroup(jsonObject,"b"));
-        roomItemContent.getRoomItemGroupList().add(analyseItemGroup(jsonObject,"c"));
-        roomItemContent.getRoomItemGroupList().add(analyseItemGroup(jsonObject,"d"));
-        roomItemContent.getRoomItemGroupList().add(analyseItemGroup(jsonObject,"e"));
-        roomItemContent.getRoomItemGroupList().add(analyseItemGroup(jsonObject,"f"));
-        roomItemContent.getRoomItemGroupList().add(analyseItemGroup(jsonObject,"g"));
+        for ( int i = 0 ; i < length ; i ++ ) {
+            roomItemContent.getRoomItemGroupList().add(analyseItemGroup(jsonObject,list.get(i).toString()));
+        }
         return roomItemContent;
     }
     public RoomItemGroup analyseItemGroup(JSONObject jsonObject,String key) {
+        initDate();
         RoomItemGroup roomItemGroup = new RoomItemGroup();
-        switch (key) {
-            case "a": {
-                roomItemGroup.setHeader("卫浴间");
-                break;
-            }
-            case "b": {
-                roomItemGroup.setHeader("娱乐设施");
-                break;
-            }
-            case "c": {
-                roomItemGroup.setHeader("舒适设施服务");
-                break;
-            }
-            case "d": {
-                roomItemGroup.setHeader("餐饮服务设施");
-                break;
-            }
-            case "e": {
-                roomItemGroup.setHeader("家具");
-                break;
-            }
-            case "f": {
-                roomItemGroup.setHeader("洗衣服务");
-                break;
-            }
-            case "g": {
-                roomItemGroup.setHeader("安保设施");
-                break;
-            }
-            default:{
-                break;
-            }
-        }
+        roomItemGroup.setHeader(iconGrouperMap.get(key).toString());
+        roomItemGroup.setType(key);
         JSONArray jsonArray = jsonObject.getJSONArray(key);
         int itemNum = jsonArray.size();
         if (itemNum == 0) {
             roomItemGroup.setRoomItemList(null);
         }else {
-            for (int i = 1; i <= itemNum; i++) {
-                analyseItem(roomItemGroup, i, key);
+            for (int i = 0; i < itemNum; i++) {
+                analyseItem(roomItemGroup, jsonArray.getIntValue(i));
             }
         }
         return roomItemGroup;
 
-
     }
-    public void analyseItem(RoomItemGroup group,int value,String key) {
-        switch (key) {
-            case "a": {
-                switch (value) {
-                    case 1: {
-                        group.getRoomItemList().add(new RoomItem("icon-bath","浴缸"));
-                        break;
-                    }
-                    case 2: {
-                        group.getRoomItemList().add(new RoomItem("icon-hairdryer","吹风机"));
-                        break;
-                    }
-                    case 3: {
-                        group.getRoomItemList().add(new RoomItem("icon-slippers","拖鞋"));
-                        break;
-                    }
-                    case 4: {
-                        group.getRoomItemList().add(new RoomItem("icon-towel","毛巾"));
-                        break;
-                    }
-                    case 5: {
-                        group.getRoomItemList().add(new RoomItem("icon-mirror","镜子"));
-                        break;
-                    }
-                    case 6: {
-                        group.getRoomItemList().add(new RoomItem("icon-bathrobe","浴袍"));
-                        break;
-                    }
-                    case 7: {
-                        group.getRoomItemList().add(new RoomItem("icon-shampoo","洗浴用品"));
-                        break;
-                    }
-                    default:{
-                        break;
-                    }
-                }
-                break;
-            }
-            case "b" : {
-                switch (value) {
-                    case 1: {
-                        group.getRoomItemList().add(new RoomItem("icon-telephone","电话"));
-                        break;
-                    }
-                    case 2: {
-                        group.getRoomItemList().add(new RoomItem("icon-wifi","wifi"));
-                        break;
-                    }
-                    case 3: {
-                        group.getRoomItemList().add(new RoomItem("icon-television","电视"));
-                        break;
-                    }
-                    default:{
-                        break;
-                    }
+    public void analyseItem(RoomItemGroup group,int value) {
+        Icon icon = roomItemStaticData.iconMapper.selectByPrimaryKey(value);
+        group.getRoomItemList().add(new RoomItem(icon.getIconClass(),icon.getIconText()));
+    }
 
-                }
-                break;
-            }
-            case "c": {
-                switch (value) {
-                    case 1: {
-                        group.getRoomItemList().add(new RoomItem("icon-aircondition","空调"));
-                        break;
-                    }
-                    case 2: {
-                        group.getRoomItemList().add(new RoomItem("icon-alarm","闹钟"));
-                        break;
-                    }
-                    case 3: {
-                        group.getRoomItemList().add(new RoomItem("icon-heating","暖气"));
-                        break;
-                    }
-                    case 4: {
-                        group.getRoomItemList().add(new RoomItem("icon-deaden","隔音降噪"));
-                        break;
-                    }
-                    case 5: {
-                        group.getRoomItemList().add(new RoomItem("aircondition","空调"));
-                        break;
-                    }
-                    case 6: {
-                        group.getRoomItemList().add(new RoomItem("aircondition","空调"));
-                        break;
-                    }
-                    default:{
-                        break;
-                    }
-                }
-                break;
-            }
-            case "d": {
-                switch (value) {
-                    case 1: {
-                        group.getRoomItemList().add(new RoomItem("icon-fridge","冰箱"));
-                        break;
-                    }
-                    case 2: {
-                        group.getRoomItemList().add(new RoomItem("icon-coffee","咖啡"));
-                        break;
-                    }
-                    case 3: {
-                        group.getRoomItemList().add(new RoomItem("icon-bar","迷你吧"));
-                        break;
-                    }
-                    case 4: {
-                        group.getRoomItemList().add(new RoomItem("icon-water","免费瓶装水"));
-                        break;
-                    }
-                    default:{
-                        break;
-                    }
-                }
-                break;
-            }
-            case "e": {
-                switch (value) {
-                    case 1: {
-                        group.getRoomItemList().add(new RoomItem("icon-desk","书桌"));
-                        break;
-                    }
-                    case 2: {
-                        group.getRoomItemList().add(new RoomItem("icon-sofa","沙发"));
-                        break;
-                    }
-                    case 3: {
-                        group.getRoomItemList().add(new RoomItem("icon-dining","独立用餐区"));
-                        break;
-                    }
-                    default:{
-                        break;
-                    }
-                }
-                break;
-            }
-            case "f": {
-                switch (value) {
-                    case 1: {
-                        group.getRoomItemList().add(new RoomItem("icon-wardrobe","衣柜"));
-                        break;
-                    }
-                    case 2: {
-                        group.getRoomItemList().add(new RoomItem("icon-hanger","衣架"));
-                        break;
-                    }
-                    case 3: {
-                        group.getRoomItemList().add(new RoomItem("icon-iron","熨斗"));
-                        break;
-                    }
-                    default:{
-                        break;
-                    }
-                }
-                break;
-            }
-            case "g": {
-                switch (value) {
-                    case 1: {
-                        group.getRoomItemList().add(new RoomItem("icon-safe","保险箱"));
-                        break;
-                    }
-                    case 2: {
-                        group.getRoomItemList().add(new RoomItem("icon-smoke","烟雾报警器"));
-                        break;
-                    }
-                    default:{
-                        break;
-                    }
-                }
-                break;
-            }
-            default:{
-                break;
-            }
+    public RoomItemContent getDatabaseRoomItemContent() {
+        initDate();
+        RoomItemContent roomItemContent= new RoomItemContent();
+        int grouperNumber = iconGrouper.size();
+        HashMap typeMap = new HashMap();
+        for ( int i = grouperNumber - 1 ; i >= 0 ; i -- ) {
+            String header = iconGrouper.get(i).getIconText();
+            RoomItemGroup roomItemGroup = new RoomItemGroup();
+            roomItemGroup.setHeader(header);
+            roomItemGroup.setType(iconGrouper.get(i).getGroupType());
+            roomItemContent.getRoomItemGroupList().add(roomItemGroup);
+            typeMap.put(iconGrouper.get(i).getGroupType(),grouperNumber-1-i);
         }
+        IconExample example = new IconExample();
+        IconExample.Criteria criteria = example.createCriteria();
+        criteria.andIconIdGreaterThan(0);
+        List<Icon> AllIcon = roomItemStaticData.iconMapper.selectByExample(example);
+        int AllIconLength = AllIcon.size();
+        for( int i = 0 ; i < AllIconLength ; i ++ ) {
+            String type = AllIcon.get(i).getGroupType();
+            int index =(Integer) typeMap.get(type);
+            RoomItem roomItem = new RoomItemExtend();
+            roomItem.setIcon(AllIcon.get(i).getIconClass());
+            roomItem.setText(AllIcon.get(i).getIconText());
+            ((RoomItemExtend) roomItem).setIconId(AllIcon.get(i).getIconId());
+            roomItemContent.getRoomItemGroupList().get(index).getRoomItemList().add(roomItem);
+        }
+        return roomItemContent;
+
     }
 }

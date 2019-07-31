@@ -58,5 +58,8 @@
         <table tableName="price_change" domainObjectName="PriceChange" >
             <property name="useActualColumnNames" value="false" />
         </table>
+        <table tableName="icon_table" domainObjectName="Icon">
+            <property name="useActualColumnNames" value="false" />
+        </table>
     </context>
 </generatorConfiguration>

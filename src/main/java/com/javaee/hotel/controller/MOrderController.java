@@ -20,9 +20,10 @@ import java.util.List;
 public class MOrderController {
     @Autowired
     private MOrderService mOrderService;
-
     @GetMapping("")
     public String MOrderHtml(){
+
+//        HttpServletRequest
         return "/MOrderlist";
     }
 
@@ -38,6 +39,8 @@ public class MOrderController {
     @GetMapping(value = "/orderlist.json",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<OrderList> getOrderListJson() {
+//        System.out.println(mOrderService.orderlistRespond());
+//        System.out.println(mOrderService.orderlistRespond());
         return mOrderService.orderlistRespond();
     }
 
@@ -46,9 +49,13 @@ public class MOrderController {
         model.addAttribute("orderList",new OrderList());
         return "order-add";
     }
+
+
+
     @PostMapping("/add")
     public String saveorder(OrderList orderList){
         mOrderService.saveorder(orderList);
+
         return "redirect:/MOrderlist";
     }
 

@@ -66,6 +66,7 @@ public class DetailsController {
         orderList.setIdentify(request.getParameter("identify"));
         orderList.setConnectPhone(request.getParameter("connectPhone"));
         orderList.setHotelId(request.getParameter("hotelId"));
+        orderList.setStatus((byte)1);
         try {
             orderList.setCheckIn(roomService.getDateByString(request.getParameter("checkIn")));
             orderList.setCheckOut(roomService.getDateByString(request.getParameter("checkOut")));
