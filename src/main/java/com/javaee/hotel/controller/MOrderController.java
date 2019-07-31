@@ -3,24 +3,36 @@ package com.javaee.hotel.controller;
 import com.javaee.hotel.domain.OrderList;
 import com.javaee.hotel.service.MOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-
 
 @Controller
 @RequestMapping("/MOrderlist")
 public class MOrderController {
     @Autowired
     private MOrderService mOrderService;
-
     @GetMapping("")
     public String MOrderHtml(){
 
+//        HttpServletRequest
         return "/MOrderlist";
+    }
+
+
+    @InitBinder
+    protected void init( HttpServletRequest request, ServletRequestDataBinder binder ) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd hh:mm:ss" );
+        dateFormat.setLenient( false );
+        binder.registerCustomEditor( Date.class, new CustomDateEditor( dateFormat, false ) );
     }
 
 
@@ -61,5 +73,4 @@ public class MOrderController {
         mOrderService.deleteOrderById(orderId);
         return true;
     }
-
 }

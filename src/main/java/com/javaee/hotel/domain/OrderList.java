@@ -1,5 +1,7 @@
 package com.javaee.hotel.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class OrderList {
@@ -64,6 +66,7 @@ public class OrderList {
      *
      * @mbg.generated Tue Jul 30 11:36:49 CST 2019
      */
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date checkIn;
 
     /**
@@ -73,6 +76,7 @@ public class OrderList {
      *
      * @mbg.generated Tue Jul 30 11:36:49 CST 2019
      */
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date checkOut;
 
     /**
@@ -82,6 +86,7 @@ public class OrderList {
      *
      * @mbg.generated Tue Jul 30 11:36:49 CST 2019
      */
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registerTime;
 
     /**

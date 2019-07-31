@@ -6,6 +6,33 @@
 
 
 <style type="text/css">
+
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+
+    .button5 {
+        background-color: white;
+        color: black;
+        border: 2px solid #555555;
+    }
+
+    .button5:hover {
+        background-color: #555555;
+        color: white;
+    }
+
     table.hovertable {
         font-family: verdana,arial,sans-serif;
         font-size:11px;
@@ -73,8 +100,14 @@
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
+        <!---->
+          <span class="button5"></span>
+          <!--<button class="button button5"></button>-->
+        <!--&lt;!&ndash;<span class="sr-only">Toggle navigation</span>&ndash;&gt;-->
       </a>
+
+
+
       <!-- Navbar Right Menu -->
       <!--<div class="navbar-custom-menu">-->
         <!--<ul class="nav navbar-nav">-->
@@ -120,32 +153,19 @@
   </header>
   <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
-
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
             <ul class="sidebar-menu" data-widget="tree">
 
                 <li class="treeview">
                     <a href="#"  onclick="turnToMOrderList()"><i class="fa fa-link"></i> <span >订单浏览</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
                     </a>
-                    <!--<ul class="treeview-menu">-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-1</a></li>-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-2</a></li>-->
-                    <!--</ul>-->
                 </li>
+
                 <li class="treeview active">
                     <a href="#" onclick="turnToCustomerList()"><i class="fa fa-link"></i> <span >客户列表</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
                     </a>
-                    <!--<ul class="treeview-menu">-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>-->
-                    <!--</ul>-->
+
                 </li>
                 <li class="treeview active">
                     <a href="#" ><i class="fa fa-link"></i> <span >酒店列表</span>
@@ -176,58 +196,58 @@
     </aside>
 
         <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-            <ul class="sidebar-menu" data-widget="tree">
+        <!--<section class="sidebar">-->
+            <!--<ul class="sidebar-menu" data-widget="tree">-->
 
-                <li class="treeview">
-                    <a href="#"  onclick="turnToMOrderList()"><i class="fa fa-link"></i> <span >订单浏览</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-                    </a>
-                    <!--<ul class="treeview-menu">-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-1</a></li>-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-2</a></li>-->
-                    <!--</ul>-->
-                </li>
-                <li class="treeview active">
-                    <a href="#" onclick="turnToCustomerList()"><i class="fa fa-link"></i> <span >客户列表</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-                    </a>
-                    <!--<ul class="treeview-menu">-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>-->
-                    <!--</ul>-->
-                </li>
-                <li class="treeview active">
-                    <a href="#" onclick="turnToHotelList()"><i class="fa fa-link"></i> <span >酒店列表</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-                    </a>
-                    <!--<ul class="treeview-menu">-->
+                <!--<li class="treeview">-->
+                    <!--<a href="#"  onclick="turnToMOrderList()"><i class="fa fa-link"></i> <span >订单浏览</span>-->
+                        <!--<span class="pull-right-container">-->
+                <!--<i class="fa fa-angle-left pull-right"></i>-->
+              <!--</span>-->
+                    <!--</a>-->
+                    <!--&lt;!&ndash;<ul class="treeview-menu">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-1</a></li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-2</a></li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                <!--</li>-->
+                <!--<li class="treeview active">-->
+                    <!--<a href="#" onclick="turnToCustomerList()"><i class="fa fa-link"></i> <span >客户列表</span>-->
+                        <!--<span class="pull-right-container">-->
+                <!--<i class="fa fa-angle-left pull-right"></i>-->
+              <!--</span>-->
+                    <!--</a>-->
+                    <!--&lt;!&ndash;<ul class="treeview-menu">&ndash;&gt;-->
                     <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>&ndash;&gt;-->
                     <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>&ndash;&gt;-->
-                    <!--</ul>-->
-                </li>
-                <li class="treeview active">
-                    <a href="#" onclick="turnToRoomList()"><i class="fa fa-link"></i> <span >房间列表</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-                    </a>
-                    <!--<ul class="treeview-menu">-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>-->
-                    <!--</ul>-->
-                </li>
-            </ul>
-            <!-- /.sidebar-menu -->
-        </section>
+                    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                <!--</li>-->
+                <!--<li class="treeview active">-->
+                    <!--<a href="#" onclick="turnToHotelList()"><i class="fa fa-link"></i> <span >酒店列表</span>-->
+                        <!--<span class="pull-right-container">-->
+                <!--<i class="fa fa-angle-left pull-right"></i>-->
+              <!--</span>-->
+                    <!--</a>-->
+                    <!--&lt;!&ndash;<ul class="treeview-menu">&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                <!--</li>-->
+                <!--<li class="treeview active">-->
+                    <!--<a href="#" onclick="turnToRoomList()"><i class="fa fa-link"></i> <span >房间列表</span>-->
+                        <!--<span class="pull-right-container">-->
+                <!--<i class="fa fa-angle-left pull-right"></i>-->
+              <!--</span>-->
+                    <!--</a>-->
+                    <!--&lt;!&ndash;<ul class="treeview-menu">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                <!--</li>-->
+            <!--</ul>-->
+            <!--&lt;!&ndash; /.sidebar-menu &ndash;&gt;-->
+        <!--</section>-->
         <!-- /.sidebar -->
-    </aside>
+    <!--</aside>-->
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -403,9 +423,21 @@ function initTable() {
             {data: 'roomId'},
             {data: 'identify'},
             {data: 'name'},
-            {data: 'checkIn'},
-            {data: 'checkOut'},
-            {data: 'registerTime'},
+            {data:null,"render":function(data){
+                var tdCheckIn = data.checkIn.substring(0,10);
+                var html ='<td>'+tdCheckIn+'</td>';
+                    return html;
+            }},
+            {data:null,"render":function(data){
+                    var tdCheckOut = data.checkOut.substring(0,10);
+                    var html ='<td>'+tdCheckOut+'</td>';
+                    return html;
+                }},
+            {data:null,"render":function(data){
+                    var tdRegisterTime = data.registerTime.substring(0,19);
+                    var html ='<td>'+tdRegisterTime+'</td>';
+                    return html;
+                }},
             {data: 'price'},
             {data: 'connectPhone'},
             {data: 'status'},
