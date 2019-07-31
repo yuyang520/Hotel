@@ -12,11 +12,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="/public/css/style.css" rel='stylesheet' type='text/css' />
 <script src="/public/js/jquery-1.11.1.min.js"></script>
 <style>
-	.tab-chapter{
-		width: 800px;
+	.hotelTable{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		flex-wrap: wrap;
 	}
 	.largetext{
-		 font-size: 20px;
+		 font-size: 16px;
 		 color: #a1a1a1;
 	 }
 </style>
@@ -24,7 +27,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <!-- banner -->
-	<div class="banner">
+	<div class="banner" style="min-height: 500px;">
 		<div class="header">
 			<div class="container">
 				<div class="logo">
@@ -52,17 +55,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<!--/.navbar-collapse-->
 					</nav>
-				<div class="search-box">
-					<div id="sb-search" class="sb-search">
-						<form>
-							<input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search">
-							<input class="sb-search-submit" type="submit" value="">
-							<span class="sb-icon-search"> </span>
-							</form>
+					<div class="search-box">
+						<div id="sb-search" class="sb-search">
+							<form>
+								<input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search">
+								<input class="sb-search-submit" type="submit" value="">
+								<span class="sb-icon-search"> </span>
+								</form>
+						</div>
 					</div>
-				</div>
 					<div class="clearfix"> </div>
-
 				<!-- search-scripts -->
 					<script src="/public/js/classie.js"></script>
 					<script src="/public/js/uisearch.js"></script>
@@ -70,12 +72,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						new UISearch( document.getElementById( 'sb-search' ) );
 					</script>
 				<!-- //search-scripts -->
-
 			</div>
 		</div>
-		<div class="banner-info">
+		<div>
 			<div class="container">
-				<div class="details-1">
+				<div class="details-1" style="margin-top: 170px;background-color: #ccc;">
                     <form method="post" action="">
 					<div class="col-md-10 dropdown-buttons">
 						<div class="col-md-3 dropdown-button">
@@ -121,31 +122,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 <br/>
 <br/>
-	<!-- hod -->
-	<table class="table-hover" align="center">
-		<tr th:each="hotel : ${hotels}">
-			<td class="tab-chapter" style="display:flex;flex-direction:row;justify-content: center;">
-			<div style="max-width: 500px;" >
-				<img src="/public/images/mbimage/14.jpg" class="img-responsive" style="width: 100%;" alt="">
-				<br/>
-			</div>
-			</td>
-			<td class="tab-chapter">
-			<div style="max-width: 500px;">
-				<h2 th:text="${hotel.hotelChineseName}" style="color: #92B8B1;"></h2><br/>
-				<span class="largetext">地址：</span><span class="largetext"
-														th:text="${hotel.hotelAddress}"></span><br/>
-				<span class="largetext">星级：</span><span class="largetext"
-														th:each="i:${#numbers.sequence(1,hotel.hotelStars)}"><img src="/public/images/star.png" style="height: 20px; width: 20px;"></span><br/>
-				<span class="largetext">联系方式：</span><span class="largetext" th:text="${hotel.hotelContact}"></span><br/>
-				<br/><a class="hvr-shutter-in-horizontal"
-														th:href="|/welcome/details?hotelId=${hotel.hotelId}|">预订</a>
-			</div>
-			</td>
-		</tr>
-	</table>
+
+<div  class="hotelTable">
+	<div th:each="hotel : ${hotels}" style="display:flex; flex-direction:row;flex-wrap:wrap;padding-bottom:25px;margin-bottom:25px;border-bottom: 1px solid #ccc;">
+		<div>
+			<img src="/public/images/mbimage/14.jpg" class="img-responsive" style="width: 300px;margin-right: 50px;" alt="">
+		</div>
+		<div style="width: 400px;">
+		<h2 th:text="${hotel.hotelChineseName}" style="color: #92B8B1;"></h2><br/>
+		<span class="largetext">地址：</span><span class="largetext" th:text="${hotel.hotelAddress}"></span><br/>
+		<span class="largetext">星级：</span><span class="largetext" th:each="i:${#numbers.sequence(1,hotel.hotelStars)}"><img src="/public/images/star.png" style="height: 20px; width: 20px;"></span><br/>
+		<span class="largetext">联系方式：</span><span class="largetext" th:text="${hotel.hotelContact}"></span><br/>
+		<br/><a class="hvr-shutter-in-horizontal" th:href="|/welcome/details?hotelId=${hotel.hotelId}|">预订</a>
+		</div>
+	</div>
+</div>
 <div align="center" th:if="${hotels.size()} == 0"><img align="center" src="/public/images/nohotel.png"></div>
-<br/>
 <!-- footer -->
 	<div class="footer">
 		<div class="container">
