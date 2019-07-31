@@ -12,9 +12,21 @@ public class MapseachService {
     @Autowired
     private HotelMapper hotelMapper;
 
-    public List<Hotel> search(String keyword){
+    public List<Hotel> search(String keyword,float minPrice,String city,Integer star){
         HotelExample example=new HotelExample();
-        example.createCriteria().andHotelChineseNameLike("%"+keyword+"%");
+        HotelExample.Criteria criteria=example.createCriteria();
+        if(keyword!="") {
+            criteria.andHotelChineseNameLike("%" + keyword + "%");
+        }
+        if(minPrice!=0){
+            criteria.andMinHotelPriceLessThanOrEqualTo(minPrice);
+        }
+        if(city!=""){
+            criteria.andHotelAddressLike("%"+city+"%");
+        }
+        if(star!=6) {
+            criteria.andHotelStarsEqualTo(star);
+        }
         return hotelMapper.selectByExample(example);
     }
 
