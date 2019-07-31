@@ -27,10 +27,10 @@ public class HotelListService {
 
 //||hotel.getHotelId()==""
     public Integer saveHotel(Hotel hotel){
-        System.out.println(hotel.getHotelChineseName());
-        System.out.println(hotel.getHotelId());
+//        System.out.println(hotel.getHotelChineseName());
+//        System.out.println(hotel.getHotelId());
         if(hotel.getHotelId() == null){
-            System.out.println("inter");
+            //System.out.println("inter");
             return  hotelMapper.insert(hotel);
 
         }else {

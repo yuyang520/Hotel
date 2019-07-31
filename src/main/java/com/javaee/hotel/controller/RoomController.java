@@ -71,7 +71,6 @@ public class RoomController {
     @PostMapping("/roomList/add")
     public String saveRoom(Room room){
         roomService.saveRoom(room);
-
         return "redirect:/roomList";
     }
 

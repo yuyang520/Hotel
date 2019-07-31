@@ -1,10 +1,404 @@
 <!DOCTYPE html>
-<html lang="en">
+
+
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+
+
+<style type="text/css">
+
+    .backgroundClass { background: url(/public/images/background1.jpg) no-repeat;
+        background-size: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        -ms-background-size: cover;
+        min-height:750px ;}
+
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+
+    .button5 {
+        background-color: white;
+        color: black;
+        border: 2px solid #555555;
+    }
+
+    .button5:hover {
+        background-color: #555555;
+        color: white;
+    }
+
+    table.hovertable {
+        font-family: verdana,arial,sans-serif;
+        font-size:11px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #999999;
+        border-collapse: collapse;
+    }
+    table.hovertable th {
+        background-color:#c3dde0;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+    table.hovertable tr {
+        background-color:#d4e3e5;
+    }
+    table.hovertable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+</style>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>酒店辅助订购系统</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="public/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="public/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="public/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect. -->
+    <link rel="stylesheet" href="public/css/_all-skins.min.css">
+
+
+
+
 </head>
-<body>
-    manager
+
+<body class="hold-transition skin-black sidebar-mini " >
+<div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a  class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>后台</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"> <i class =  "fa fa-i-cursor"></i> <b>酒店订购管理系统</b></span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <!---->
+                <!--<span class="button5"></span>-->
+                <!--<button class="button button5"></button>-->
+                <!--&lt;!&ndash;<span class="sr-only">Toggle navigation</span>&ndash;&gt;-->
+            </a>
+            <!-- Navbar Right Menu -->
+            <!--<div class="navbar-custom-menu">-->
+            <!--<ul class="nav navbar-nav">-->
+            <!---->
+            <!---->
+            <!---->
+            <!--&lt;!&ndash; User Account Menu &ndash;&gt;-->
+            <!--<li class="dropdown user user-menu">-->
+            <!--&lt;!&ndash; Menu Toggle Button &ndash;&gt;-->
+            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+            <!--&lt;!&ndash; The user image in the navbar&ndash;&gt;-->
+            <!--<img src="public/images/Admin/user2-160x160.jpg" class="user-image" alt="User Image">-->
+            <!--&lt;!&ndash; hidden-xs hides the username on small devices so only the image appears. &ndash;&gt;-->
+            <!--<span class="hidden-xs">Alexander Pierce</span>-->
+            <!--</a>-->
+            <!--<ul class="dropdown-menu">-->
+            <!--&lt;!&ndash; The user image in the menu &ndash;&gt;-->
+            <!--<li class="user-header">-->
+            <!--<img src="public/images/Admin/user2-160x160.jpg" class="img-circle" alt="User Image">-->
+            <!--<p>-->
+            <!--Alexander Pierce - Web Developer-->
+            <!--<small>Member since Nov. 2012</small>-->
+            <!--</p>-->
+            <!--</li>-->
+            <!---->
+            <!--&lt;!&ndash; Menu Footer&ndash;&gt;-->
+            <!--<li class="user-footer">-->
+            <!--<div class="pull-left">-->
+            <!--<a href="#" class="btn btn-default btn-flat">Profile</a>-->
+            <!--</div>-->
+            <!--<div class="pull-right">-->
+            <!--<a href="#" class="btn btn-default btn-flat">Sign out</a>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</li>-->
+            <!---->
+            <!--</ul>-->
+            <!--</div>-->
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="treeview">
+                    <a href="#"  onclick="turnToMOrderList()"><i class="fa fa-link"></i> <span >订单浏览</span>
+                    </a>
+                </li>
+                <li class="treeview active">
+                    <a href="#" onclick="turnToCustomerList()"><i class="fa fa-link"></i> <span >客户列表</span>
+                    </a>
+                </li>
+                <li class="treeview active">
+                    <a href="#" ><i class="fa fa-link"></i> <span >酒店列表</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="turnToHotelList()"><i class = "fa fa-certificate"></i> 浏览酒店</a></li>
+                        <li><a href="#" onclick="turnToHotelAdd()"><i class = "fa fa-certificate"></i> 添加酒店</a></li>
+                    </ul>
+                </li>
+                <li class="treeview active">
+                    <a href="#" ><i class="fa fa-link"></i> <span >房间列表</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="turnToRoomList()"><i class = "fa fa-certificate"></i> 浏览房间</a></li>
+                        <li><a href="#" onclick="turnToRoomAdd()"><i class = "fa fa-certificate"></i> 添加房间</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- sidebar: style can be found in sidebar.less -->
+    <!--<section class="sidebar">-->
+    <!--<ul class="sidebar-menu" data-widget="tree">-->
+    <!--<li class="treeview">-->
+    <!--<a href="#"  onclick="turnToMOrderList()"><i class="fa fa-link"></i> <span >订单浏览</span>-->
+    <!--<span class="pull-right-container">-->
+    <!--<i class="fa fa-angle-left pull-right"></i>-->
+    <!--</span>-->
+    <!--</a>-->
+    <!--&lt;!&ndash;<ul class="treeview-menu">&ndash;&gt;-->
+    <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-1</a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-2</a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+    <!--</li>-->
+    <!--<li class="treeview active">-->
+    <!--<a href="#" onclick="turnToCustomerList()"><i class="fa fa-link"></i> <span >客户列表</span>-->
+    <!--<span class="pull-right-container">-->
+    <!--<i class="fa fa-angle-left pull-right"></i>-->
+    <!--</span>-->
+    <!--</a>-->
+    <!--&lt;!&ndash;<ul class="treeview-menu">&ndash;&gt;-->
+    <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+    <!--</li>-->
+    <!--<li class="treeview active">-->
+    <!--<a href="#" onclick="turnToHotelList()"><i class="fa fa-link"></i> <span >酒店列表</span>-->
+    <!--<span class="pull-right-container">-->
+    <!--<i class="fa fa-angle-left pull-right"></i>-->
+    <!--</span>-->
+    <!--</a>-->
+    <!--&lt;!&ndash;<ul class="treeview-menu">&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+    <!--</li>-->
+    <!--<li class="treeview active">-->
+    <!--<a href="#" onclick="turnToRoomList()"><i class="fa fa-link"></i> <span >房间列表</span>-->
+    <!--<span class="pull-right-container">-->
+    <!--<i class="fa fa-angle-left pull-right"></i>-->
+    <!--</span>-->
+    <!--</a>-->
+    <!--&lt;!&ndash;<ul class="treeview-menu">&ndash;&gt;-->
+    <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--&lt;!&ndash; /.sidebar-menu &ndash;&gt;-->
+    <!--</section>-->
+    <!-- /.sidebar -->
+    <!--</aside>-->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper backgroundClass">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="row">
+                <h3 style="display: flex; flex-direction: row;justify-content: center"><div>管理员浏览</div></h3>
+                <!--<div class="col-md-6">-->
+                <!--<ol class="breadcrumb">-->
+                <!--<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>-->
+                <!--<li class="active">酒店订购</li>-->
+                <!--<li class="active">酒店列表</li>-->
+                <!--</ol>-->
+                <!--</div>-->
+            </div>
+        </section>
+        <!-- Main content -->
+        <section class="content container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <table  id="tableList" class="hovertable">
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>密码</th>
+                            <th>权限等级</th>
+                            <th>更新</th>
+                            <th>删除</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <!--<footer class="main-footer">-->
+        <!--&lt;!&ndash; Default to the left &ndash;&gt;-->
+        <!--<strong>酒店辅助订购系统</strong>-->
+        <!--</footer>-->
+    </div>
+</div>
+<!-- ./wrapper -->
+<!-- REQUIRED JS SCRIPTS -->
+<!-- jQuery 3 -->
+<script src="public/js/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="public/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="public/js/adminlte.min.js"></script>
+<script src="public/js/jquery.dataTables.min.js"  ></script>
+<!--<script src="public/js/dataTables.bootstrap.min.js"></script>-->
+<script src="public/js/layer.js"></script>
+<script>
+    var table = null;
+    function turnToMOrderList() {
+        window.location.href = "/MOrderlist";
+    }
+    function turnToRoomList() {
+        window.location.href = "/roomList";
+    }
+    function turnToHotelList() {
+        window.location.href = "/hotelList";
+    }
+    function turnToCustomerList() {
+        window.location.href = "/customerList";
+    }
+    function  turnToRoomAdd(){
+        window.location.href = "/roomList/add";
+    }
+    function turnToHotelAdd() {
+        window.location.href = "/hotelList/add";
+    }
+    function freshTable() {
+        table.ajax.reload();
+    }
+
+
+    function updateManager(username) {
+        window.location.href = "/manager/edit?username="+username;
+    }
+    function deleteManager(username) {
+        layer.confirm('是否删除：'+name,{icon: 3, title:'提示'},function(index){
+            $.ajax({
+                url:'/manager/deleteManager?username='+username,
+                type:'Post',
+                success:function (data) {
+                    var length =$(".btn_delete").length;
+                    for( var i = 0 ; i < length ; i ++ ) {
+                        var st = $($($(".btn_delete")[i]).parent()).parent();
+                        var st1 = $($($($($(".btn_delete")[i]).parent()).parent()).children()[0]).html();
+                        if(st1 == username){
+                            $($($($(".btn_delete")[i]).parent()).parent()).remove();
+                            freshTable();
+                            break;
+                        }
+                    }
+                },
+                fail:function (data) {
+                    console.log('fail');
+                }
+            });
+            layer.close(index);
+        });
+    }
+    $(function(){
+        function initTable() {
+            table = $("#tableList").DataTable({
+                'paging'      : true,
+                'lengthChange': true,
+                'searching'   : true,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false,
+                'stateSave'   :true,
+                "language": {
+                    "paginate": {
+                        "next": "下一页",
+                        "previous":"上一页"
+                    },
+                    "search":"快速搜索",
+                    "info": "第_PAGE_页(共_PAGES_页)",
+                    "emptyTable":"无可用数据",
+                    "lengthMenu": "_MENU_ 条/页"
+                },
+                ajax:{
+                    url:'/manager/managerList.json',
+                    type: "GET",
+                    dataType: "JSON",
+                    dataSrc: ""
+                },
+                columns:[
+                    {data: 'username'},
+                    {data: 'password'},
+                    {data: 'privilege'},
+                    {data:null,"render":function (data) {
+                            var html= '<button class="btn_update" onclick="updateManager(\''+data.username+'\')" >更新</button>'
+                            return html;
+                        }},
+                    {data:null,"render":function(data){
+                            var html= '<button class="btn_delete" onclick="deleteManager(\''+data.username+'\')" >删除</button>'
+                            return html;
+                        }}
+                ]
+            })
+        }
+//初始化表格
+        $(document).ready(function() {
+            initTable();
+        })
+    })
+</script>
 </body>
 </html>
