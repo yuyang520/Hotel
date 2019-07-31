@@ -46,10 +46,16 @@ public class MyOrderController {
     @PutMapping(value = "/unorder")
     @ResponseBody
     public boolean unOrder(@RequestParam("orderId") String orderId){
-        System.out.println(orderId);
         OrderList orderList = orderListMapper.selectByPrimaryKey(orderId);
-        Byte status=4;
-        orderList.setStatus(status);
+        orderList.setStatus((byte)4);
+        orderListMapper.updateByPrimaryKey(orderList);
+        return true;
+    }
+    @PutMapping(value = "/pay")
+    @ResponseBody
+    public boolean pay(@RequestParam("orderId") String orderId){
+        OrderList orderList = orderListMapper.selectByPrimaryKey(orderId);
+        orderList.setStatus((byte)2);
         orderListMapper.updateByPrimaryKey(orderList);
         return true;
     }

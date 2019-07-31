@@ -41,6 +41,9 @@ public class OrderService {
             orderListInfo.setCreateTime(format.format(orderLists.get(i).getRegisterTime()));
             orderListInfo.setCheckInTime(compareFormat.format(orderLists.get(i).getCheckIn()));
             orderListInfo.setCheckOutTime(compareFormat.format(orderLists.get(i).getCheckOut()));
+            if(orderLists.get(i).getStatus()==(byte)2){
+                changeStatus(orderLists.get(i));
+            }
             orderListInfo.setOrderList(orderLists.get(i));
             if (hotelName==null||hotelName.equals("") || orderHotelName.contains(hotelName)) {
                 if(checkInTime==null||checkInTime.equals("") || compareFormat.format(orderLists.get(i).getCheckIn()).compareTo(checkInTime)>=0) {
@@ -55,5 +58,14 @@ public class OrderService {
         }
         return orderListInfos;
     }
-
+    public boolean changeStatus(OrderList orderList){
+        Date now = new Date();
+        String nows = compareFormat.format(now);
+        String orderDate = compareFormat.format(orderList.getCheckOut());
+        if(nows.compareTo(orderDate)>=0) {
+            orderList.setStatus((byte)3);
+            orderListMapper.updateByPrimaryKey(orderList);
+        }
+        return true;
+    }
 }

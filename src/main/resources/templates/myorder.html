@@ -39,6 +39,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
             transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
         }
+        .orderListItem {
+            border-top: 1px solid #ccc;
+        }
     </style>
 </head>
 <body style="height: 100%">
@@ -70,9 +73,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!--/.navbar-header-->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active" style="background-color: #92b8b1;" ><a href="/welcome/">首页</a></li>
+                        <li><a href="/welcome/">首页</a></li>
                         <li><a href="/searchmap/">地图查询</a></li>
-                        <li><a href="offers.html">待定</a></li>
+                        <li  class="active" style="background-color: #92b8b1;" ><a href="/myorder/">订单查询</a></li>
                         <li><a href="shortcodes.html">待定</a></li>
                         <li><a href="/login/">登录</a></li>
                         <li><a href="contact.html">待定</a></li>
@@ -103,7 +106,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <select name="orderStatus" class="form-control-s" style="width: 40%;height: 34px;">
             <option value="0">全部</option>
             <option value="1">未支付</option>
-            <option value="2">已完成</option>
+            <option value="2">已支付</option>
             <option value="3">已过期</option>
             <option value="4">已取消</option>
         </select>
@@ -129,7 +132,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <td style="white-space: nowrap;">总金额</td>
         <td style="white-space: nowrap;">状态</td>
     </tr>
-    <tr th:each="orderListInfo:${orderListInfos}">
+    <tr class="orderListItem" th:each="orderListInfo:${orderListInfos}">
         <td th:title="${orderListInfo.orderList.orderId}"><p style="overflow: hidden;display:block;
          text-overflow: ellipsis; white-space: nowrap; cursor:pointer; max-width: 150px" th:text="${orderListInfo.orderList.orderId}"></p></td>
         <td th:text="${orderListInfo.createTime}" style="white-space: nowrap;"></td>
@@ -150,9 +153,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div th:if="${orderListInfo.orderList.status}==4" style="white-space: nowrap;">已取消</div>
         </td>
         <td>
-            <div th:if="${orderListInfo.orderList.status}==1">
+            <div  th:if="${orderListInfo.orderList.status}==1">
                 <a class="btn" style="background-color: #bcddff;color:#fff;"
-                   data-th-attr="onclick='unOrder(this, \''+${orderListInfo.orderList.orderId}+'\')'">取消</a>
+                   data-th-attr="onclick='pay(this, \''+${orderListInfo.orderList.orderId}+'\')'">支付</a>
             </div>
             <div th:if="${orderListInfo.orderList.status}==2">
                 <a class="btn" style="background-color: #bcddff;color:#fff;"
@@ -165,6 +168,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div th:if="${orderListInfo.orderList.status}==4">
                 <a class="btn" style="background-color: red;color:#fff;"
                    data-th-attr="onclick='deleteOrder(this, \''+${orderListInfo.orderList.orderId}+'\')'">删除</a>
+            </div>
+        </td>
+        <td>
+            <div th:if="${orderListInfo.orderList.status}==1">
+                <a class="btn" style="background-color: red;color:#fff;"
+                   data-th-attr="onclick='unOrder(this, \''+${orderListInfo.orderList.orderId}+'\')'">取消</a>
             </div>
         </td>
     </tr>
@@ -236,6 +245,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     function unOrder(elem,id) {
         $.ajax({
             url: '/myorder/unorder?orderId=' + id,
+            type: 'put',
+            success: function (elem,data) {
+                location.reload();
+            },
+            fail: function (data) {
+                console.log('fail')
+            }
+        })
+    }
+    function pay(elem,id) {
+        $.ajax({
+            url: '/myorder/pay?orderId=' + id,
             type: 'put',
             success: function (elem,data) {
                 location.reload();
