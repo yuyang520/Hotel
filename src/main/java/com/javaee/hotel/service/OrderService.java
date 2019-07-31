@@ -41,14 +41,18 @@ public class OrderService {
             orderListInfo.setCreateTime(format.format(orderLists.get(i).getRegisterTime()));
             orderListInfo.setCheckInTime(compareFormat.format(orderLists.get(i).getCheckIn()));
             orderListInfo.setCheckOutTime(compareFormat.format(orderLists.get(i).getCheckOut()));
-            if(orderLists.get(i).getStatus()==(byte)2){
+            int statusInDB = 0;
+            if(orderLists.get(i).getStatus()!=null) {
+                statusInDB = orderLists.get(i).getStatus();
+            }
+            if(statusInDB==(byte)2){
                 changeStatus(orderLists.get(i));
             }
             orderListInfo.setOrderList(orderLists.get(i));
             if (hotelName==null||hotelName.equals("") || orderHotelName.contains(hotelName)) {
                 if(checkInTime==null||checkInTime.equals("") || compareFormat.format(orderLists.get(i).getCheckIn()).compareTo(checkInTime)>=0) {
                     if(checkOutTime==null||checkOutTime.equals("") || compareFormat.format(orderLists.get(i).getCheckOut()).compareTo(checkOutTime)<=0) {
-                        if(status==0||status==orderLists.get(i).getStatus()){
+                        if((statusInDB >= 1) && (statusInDB <= 4) && ((status == 0) || (status == statusInDB))){
                             orderListInfos.add(orderListInfo);
                         }
                     }

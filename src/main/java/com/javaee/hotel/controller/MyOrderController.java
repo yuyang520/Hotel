@@ -40,7 +40,9 @@ public class MyOrderController {
     @GetMapping(value = "/delete")
     @ResponseBody
     public boolean deleteOrder(@RequestParam("orderId") String orderId){
-        orderListMapper.deleteByPrimaryKey(orderId);
+        OrderList orderList = orderListMapper.selectByPrimaryKey(orderId);
+        orderList.setStatus((byte)5);
+        orderListMapper.updateByPrimaryKey(orderList);
         return true;
     }
     @PutMapping(value = "/unorder")
