@@ -291,8 +291,8 @@
         window.location.href = "/roomList/edit?roomId="+roomId;
     }
 
-    function deleteRoom(roomId) {
-        layer.confirm('是否删除：'+name,{icon: 3, title:'提示'},function(index){
+    function deleteRoom(roomChineseName,roomId) {
+        layer.confirm('是否删除：'+roomChineseName,{icon: 3, title:'提示'},function(index){
         // $tr.remove();
         // layer.close(index);asd
             $.ajax({
@@ -362,7 +362,7 @@ function initTable() {
                     return html;
                 }},
             {data:null,"render":function(data){
-                var html= '<button class="btn_delete " onclick="deleteRoom(\''+data.roomId+'\')" >删除</button>'
+                var html= '<button class="btn_delete " onclick="deleteRoom(\''+data.chineseName+'\',\''+data.roomId+'\')" >删除</button>'
                     return html;
                 }}
         ]
