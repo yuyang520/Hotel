@@ -372,7 +372,7 @@
 
     function deleteOrder(orderId) {
 
-        layer.confirm('是否删除：'+name,{icon: 3, title:'提示'},function(index){
+        layer.confirm('是否删除订单号为：'+orderId+'的订单',{icon: 3, title:'提示'},function(index){
         $.ajax({
             url:'/MOrderlist/deleteOrder?orderId='+orderId,
             type:'Post',

@@ -300,7 +300,7 @@
 
     function deleteHotel(hotelId) {
 
-        layer.confirm('是否删除：'+name,{icon: 3, title:'提示'},function(index) {
+        layer.confirm('是否删除酒店ID为'+hotelId+'的酒店',{icon: 3, title:'提示'},function(index) {
             $.ajax({
                 url: '/hotelList/delete?hotelId=' + hotelId,
                 type: 'Post',

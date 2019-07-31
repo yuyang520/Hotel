@@ -299,7 +299,7 @@
 
     function deleteCustomer(id) {
 
-        layer.confirm('是否删除：'+name,{icon: 3, title:'提示'},function(index) {
+        layer.confirm('是否删除用户ID为'+id+'的用户',{icon: 3, title:'提示'},function(index) {
         $.ajax({
             url: '/customerList/deleteCustomer?id=' + id,
             type: 'Post',

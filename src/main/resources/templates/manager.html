@@ -330,7 +330,7 @@
         window.location.href = "/manager/edit?username="+username;
     }
     function deleteManager(username) {
-        layer.confirm('是否删除：'+name,{icon: 3, title:'提示'},function(index){
+        layer.confirm('是否删除用户名为'+username+'的管理员',{icon: 3, title:'提示'},function(index){
             $.ajax({
                 url:'/manager/deleteManager?username='+username,
                 type:'Post',

@@ -292,7 +292,7 @@
     }
 
     function deleteRoom(roomChineseName,roomId) {
-        layer.confirm('是否删除：'+roomChineseName,{icon: 3, title:'提示'},function(index){
+        layer.confirm('是否删除房间名称为'+roomChineseName+'的房间',{icon: 3, title:'提示'},function(index){
         // $tr.remove();
         // layer.close(index);asd
             $.ajax({
