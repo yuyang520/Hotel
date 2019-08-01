@@ -96,7 +96,7 @@
                     <div>
                         <div class="col-md-8 item-all" >
                             <div class="items-group" th:each="roomItemGroup:${roomDetail.roomItemContent.roomItemGroupList}">
-                                <div th:if="${not #strings.isEmpty(roomItemGroup.roomItemList)}">
+                                <div th:if="${roomItemGroup.roomItemList.size() ne 0 }">
                                     <strong class="items-group-header" th:text="${roomItemGroup.header}"></strong>
                                     <div class="items-group-content">
                                         <div class="item" th:each="roomItem:${roomItemGroup.roomItemList}">

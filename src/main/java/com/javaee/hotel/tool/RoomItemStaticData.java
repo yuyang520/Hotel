@@ -60,7 +60,7 @@ public class RoomItemStaticData {
         JSONArray jsonArray = jsonObject.getJSONArray(key);
         int itemNum = jsonArray.size();
         if (itemNum == 0) {
-            roomItemGroup.setRoomItemList(null);
+//            roomItemGroup.setRoomItemList(null);
         }else {
             for (int i = 0; i < itemNum; i++) {
                 analyseItem(roomItemGroup, jsonArray.getIntValue(i));
