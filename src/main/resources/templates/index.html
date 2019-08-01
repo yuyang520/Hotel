@@ -28,12 +28,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <!-- banner -->
 	<div class="banner" style="min-height: 500px;">
-		<div class="header">
-			<div class="container">
+		<div class="header" style="max-height: 119.72px;">
+			<div class="container" style="display: flex;flex-direction: row;justify-content: center;min-width: 1200px">
 				<div class="logo">
 					<h1><a href="/welcome/">Hotel</a></h1>
 				</div>
-					<nav class="navbar navbar-default" role="navigation">
+					<nav class="navbar navbar-default" role="navigation"  style="max-width: 600px;">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 								<span class="sr-only">Toggle navigation</span>
@@ -55,11 +55,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<!--/.navbar-collapse-->
 					</nav>
-
-
 					<div class="clearfix"> </div>
+				<div style="margin-right: 10%;max-width:200px;height:50px;margin-left: 100px;margin-right:0;white-space: nowrap;overflow: hidden" >
+					<!-- User Account: style can be found in dropdown.less -->
+					<li class="dropdown user user-menu" onclick="showInfoCard()" onmouseout="hiddenInfoCard()">
+						<a  class="dropdown-toggle" data-toggle="dropdown">
+							<img src="/Path/523.jpg" class="user-image img-circle" alt="User Image" style="height: 50px;width: 50px;">
+							<span class="hidden-xs" style="color: #fff">马里奥</span>
+						</a>
+					</li>
+				</div>
+				<div id="hide" style="max-width: 400px;display: none;">
+					<a>我的信息</a>
+					<a>jklsjf </a>
+				</div>
 			</div>
-		</div>
 		<div>
 			<div class="container">
 				<div class="details-1" style="margin-top: 170px;background-color: #ccc;">
@@ -104,6 +114,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="clearfix"> </div>
 				</div>
 			</div>
+		</div>
 		</div>
     </div>
 <br/>
@@ -167,4 +178,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<!-- footer -->
 </body>
+<script>
+	function showInfoCard(){
+		$(document.getElementById("hide")).css("display","block");
+	}
+	function hiddenInfoCard() {
+		setTimeout('$(document.getElementById("hide")).css("display","none")',3000);
+	}
+</script>
 </html>
