@@ -112,7 +112,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div  class="hotelTable">
 	<div th:each="hotel : ${hotels}" style="display:flex; flex-direction:row;flex-wrap:wrap;padding-bottom:25px;margin-bottom:25px;border-bottom: 1px solid #ccc;">
 		<div>
-			<img src="/public/images/mbimage/14.jpg" class="img-responsive" style="width: 300px;margin-right: 50px;" alt="">
+			<img th:src="${hotel.picture}" class="img-responsive" style="width: 300px;margin-right: 50px;" alt="">
 		</div>
 		<div style="width: 300px;">
 		<h2 th:text="${hotel.hotelChineseName}" style="color: #92B8B1;"></h2><br/>

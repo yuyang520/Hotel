@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>图片测试</title>
+</head>
+<body>
+<form action="" method="post">
+    <input name="hotelIDP">
+    <input type="file" name="file">
+    <input type="submit" value="上传">
+    <span th:text = "${path}"></span>
+    <img th:src="${path}">
+</form>
+</body>
+</html>
