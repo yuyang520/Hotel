@@ -5,6 +5,7 @@ import com.javaee.hotel.domain.OrderList;
 import com.javaee.hotel.domain.Room;
 import com.javaee.hotel.mapper.IconMapper;
 import com.javaee.hotel.service.RoomService;
+import com.javaee.hotel.tool.PictureTool;
 import com.javaee.hotel.tool.RoomItemStaticData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -73,7 +74,10 @@ public class RoomController {
 
 
     @PostMapping("/roomList/add")
-    public String saveRoom(Room room){
+    public String saveRoom(Room room,HttpServletRequest request){
+        String path = request.getParameter("photo");
+        PictureTool pictureTool = new PictureTool();
+        room.setPhoto(pictureTool.getFilePath(path));
         roomService.saveRoom(room);
         return "redirect:/roomList";
     }

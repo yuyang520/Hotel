@@ -21,9 +21,9 @@ public class MOrderController {
     @Autowired
     private MOrderService mOrderService;
     @GetMapping("")
-    public String MOrderHtml(){
-
+    public String MOrderHtml(Model model){
 //        HttpServletRequest
+        model.addAttribute("isLogIn",true);
         return "/MOrderlist";
     }
 
@@ -46,6 +46,7 @@ public class MOrderController {
 
     @GetMapping("/add")
     public String goOrderPage(Model model){
+
         model.addAttribute("orderList",new OrderList());
         return "order-add";
     }

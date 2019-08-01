@@ -1,6 +1,6 @@
 package com.javaee.hotel.service;
 
-import com.javaee.hotel.domain.Customer;
+    import com.javaee.hotel.domain.Customer;
 import com.javaee.hotel.domain.CustomerExample;
 import com.javaee.hotel.mapper.CustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,14 +3,17 @@ package com.javaee.hotel.controller;
 
 import com.javaee.hotel.domain.Hotel;
 import com.javaee.hotel.domain.OrderList;
+import com.javaee.hotel.mapper.HotelMapper;
 import com.javaee.hotel.service.HotelListService;
 import com.javaee.hotel.service.MOrderService;
+import com.javaee.hotel.tool.PictureTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -18,6 +21,8 @@ import java.util.List;
 public class HotelListController {
     @Autowired
     private HotelListService hotelListService;
+    @Autowired
+    private HotelMapper hotelMapper;
 
     @GetMapping("")
     public String hotelHtml(){
@@ -40,9 +45,11 @@ public class HotelListController {
     }
 
     @PostMapping("/add")
-    public String saveHotel(Hotel hotel){
+    public String saveHotel(Hotel hotel, HttpServletRequest request){
+        String path = request.getParameter("picture");
+        PictureTool pictureTool = new PictureTool();
+        hotel.setPicture(pictureTool.getFilePath(path));
         hotelListService.saveHotel(hotel);
-
         return "redirect:/hotelList";
     }
 
