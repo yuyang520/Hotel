@@ -1,182 +1,213 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Home</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Motel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+	<title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Motel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="applijewelleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<!-- Custom Theme files -->
-<link href="/public/css/style.css" rel='stylesheet' type='text/css' />
-<script src="/public/js/jquery-1.11.1.min.js"></script>
-<style>
-	.hotelTable{
-		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-		flex-wrap: wrap;
-	}
-	.largetext{
-		 font-size: 16px;
-		 color: #a1a1a1;
-	 }
-</style>
-<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+	<script type="applijewelleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+	<!-- Custom Theme files -->
+	<link href="/public/css/style.css" rel='stylesheet' type='text/css' />
+	<script src="/public/js/jquery-1.11.1.min.js"></script>
+	<style>
+		.hotelTable{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			flex-wrap: wrap;
+		}
+		.largetext{
+			font-size: 16px;
+			color: #a1a1a1;
+		}
+		.search_part_fix {
+			position: fixed;
+			top: 0;
+			z-index: 3;
+			width: 1148px;
+			border-bottom: 1px solid #d9e8ff;
+		}
+		.search_part {
+			height: 24px;
+			padding: 10px 15px;
+			background: #fffcd8;
+			font-size: 14px;
+			border-top: 2px solid #5E9FFB;
+			border-left: 1px solid #d9e8ff;
+			border-right: 1px solid #d9e8ff;
+		}
+		.orderSearch{
+			float:left;
+			margin-left: 30px;
+		}
+		.form-control-s {
+			height: 40px;
+			min-width: 100px;
+			max-width: 200px;
+			padding: 6px 12px;
+			font-size: 14px;
+			line-height: 1.42857143;
+			color: #555555;
+			background-color: #fff;
+			background-image: none;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+			-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+			-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+			-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+			transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+			transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+			transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+		}
+		.orderListItem {
+			border-top: 1px solid #ccc;
+		}
+	</style>
+	<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
 </head>
 <body>
 <!-- banner -->
-	<div class="banner" style="min-height: 500px;">
-		<div class="header" style="max-height: 119.72px;">
-			<div class="container" style="display: flex;flex-direction: row;justify-content: center;min-width: 1200px">
-				<div class="logo">
-					<h1><a href="/welcome/">Hotel</a></h1>
-				</div>
-					<nav class="navbar navbar-default" role="navigation"  style="max-width: 600px;">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-						</div>
-						<!--/.navbar-header-->
-						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							<ul class="nav navbar-nav">
-								<li class="active"><a href="/welcome/">首页</a></li>
-								<li><a href="/searchmap/">地图查询</a></li>
-								<li><a href="/myorder/">订单查询</a></li>
-								<li><a href="shortcodes.html">待定</a></li>
-								<li><a href="/login/">登录</a></li>
-								<li><a href="contact.html">待定</a></li>
-							</ul>
-						</div>
-						<!--/.navbar-collapse-->
-					</nav>
-					<div class="clearfix"> </div>
-				<div style="margin-right: 10%;max-width:200px;height:50px;margin-left: 100px;margin-right:0;white-space: nowrap;overflow: hidden" >
-					<!-- User Account: style can be found in dropdown.less -->
-					<li class="dropdown user user-menu" onclick="showInfoCard()" onmouseout="hiddenInfoCard()">
-						<a  class="dropdown-toggle" data-toggle="dropdown">
-							<img src="/Path/523.jpg" class="user-image img-circle" alt="User Image" style="height: 50px;width: 50px;">
-							<span class="hidden-xs" style="color: #fff">马里奥</span>
-						</a>
-					</li>
-				</div>
-				<div id="hide" style="max-width: 400px;display: none;">
-					<a>我的信息</a>
-					<a>jklsjf </a>
-				</div>
+<div class="banner1" >
+	<div class="header" style="max-height: 90px;">
+		<div class="container" style="display: flex;flex-direction: row;justify-content: center;min-width: 1200px">
+			<div class="logo">
+				<h1><a href="/welcome/">Hotel</a></h1>
 			</div>
-		<div>
-			<div class="container">
-				<div class="details-1" style="margin-top: 170px;background-color: #ccc;">
-                    <form method="post" action="">
-					<div class="col-md-10 dropdown-buttons">
-						<div class="col-md-3 dropdown-button">
-							<div class="input-group">
-								<input autocomplete="off" class="form-control has-dark-background" name="hotelname" id="hotelname" placeholder="酒店名称：" type="text">
-							</div>
-						</div>
-							<link rel="stylesheet" href="/public/css/jquery-ui.small.css" />
-							<script src="/public/js/jquery-ui.js"></script>
-						<div class="col-md-3 dropdown-button" >
-							<div class="input-group">
-									<input autocomplete="off" class="form-control has-dark-background" id="minPrice" name="minPrice" type="text" placeholder="最低价格：" >
-							</div>
-						</div>
-					    <div class="col-md-3 dropdown-button">
-							<div class="input-group">
-									<input autocomplete="off" class="form-control has-dark-background" id="city" name="city" type="text" placeholder="城市：">
-							</div>
-						</div>
-						<div class="col-md-3 dropdown-button" >
-							<div class="select_1">
-							 <select id="starlevel" name="starlevel"  class="frm-field required">
-                                 <option value="6">全部</option>
-								 <option value="5">5星</option>
-								 <option value="4">4星</option>
-								 <option value="3">3星</option>
-								 <option value="2">2星</option>
-                                 <option value="1">1星</option>
-                                 <option value="0">无星级</option>
-						  	</select>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-						<div class="col-md-2 submit_button">
-							<input type="submit" value="查询">
-						</div>
-                    </form>
-					<div class="clearfix"> </div>
+			<nav class="navbar navbar-default" role="navigation"  style="max-width: 600px;">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
 				</div>
+				<!--/.navbar-header-->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="/welcome/">首页</a></li>
+						<li><a href="/searchmap/">地图查询</a></li>
+						<li><a href="/myorder/">订单查询</a></li>
+						<li><a href="shortcodes.html">待定</a></li>
+						<li><a href="/login/">登录</a></li>
+						<li><a href="contact.html">待定</a></li>
+					</ul>
+				</div>
+				<!--/.navbar-collapse-->
+			</nav>
+			<div class="clearfix"> </div>
+			<div style="margin-right: 10%;max-width:200px;height:50px;margin-left: 100px;margin-right:0;white-space: nowrap;overflow: hidden" >
+				<!-- User Account: style can be found in dropdown.less -->
+				<li class="dropdown user user-menu" onclick="showInfoCard()" onmouseout="hiddenInfoCard()">
+					<a  class="dropdown-toggle" data-toggle="dropdown">
+						<img src="/Path/523.jpg" class="user-image img-circle" alt="User Image" style="height: 50px;width: 50px;">
+						<span class="hidden-xs" style="color: #fff">马里奥</span>
+					</a>
+				</li>
+			</div>
+			<div id="hide" style="max-width: 400px;display: none;">
+				<a>我的信息</a>
+				<a>jklsjf </a>
 			</div>
 		</div>
-		</div>
-    </div>
-<br/>
-<br/>
+	</div>
+</div>
+<div>
+	<div style="display:flex;flex-direction:row;justify-content: space-around;background-color: #bcddff;min-height:60px;">
 
+		<form action="" style="margin-top: 10px;">
+			<div class="orderSearch">
+				<span>酒店名称：<input  autocomplete="off" value="" class="form-control-s" name="orderHotelName"></span>
+			</div>
+			<div class=" orderSearch">
+				<div style="float:left;">
+					<span>预定日期：<input autocomplete="off" value="" class="form-control-s datepicker" name="checkInTime"></span>
+				</div>
+				<div style="float:left;">
+					<span>至<input autocomplete="off" value="" class="form-control-s datepicker" name="checkOutTime"></span>
+				</div>
+			</div>
+			<div class="orderSearch">
+        <span>订单状态：
+        <select name="orderStatus" class="form-control-s" style="width: 40%;height: 34px;">
+            <option value="0">全部</option>
+            <option value="1">未支付</option>
+            <option value="2">已支付</option>
+            <option value="3">已过期</option>
+            <option value="4">已取消</option>
+        </select>
+        </span>
+			</div>
+			<div class="orderSearch">
+				<input  type="submit" style=" border:none;background-color:#fff;height:38px; width: 80px;border-radius: 4px;" value="查询">
+			</div>
+		</form>
+		<br/>
+	</div>
+</div>
+<br/>
+<br/>
 <div  class="hotelTable">
 	<div th:each="hotel : ${hotels}" style="display:flex; flex-direction:row;flex-wrap:wrap;padding-bottom:25px;margin-bottom:25px;border-bottom: 1px solid #ccc;">
 		<div>
 			<img th:src="${hotel.picture}" class="img-responsive" style="width: 300px;margin-right: 50px;" alt="">
 		</div>
 		<div style="width: 300px;">
-		<h2 th:text="${hotel.hotelChineseName}" style="color: #92B8B1;"></h2><br/>
-		<span class="largetext">地址：</span><span class="largetext" th:text="${hotel.hotelAddress}"></span><br/>
-		<span class="largetext">星级：</span><span class="largetext" th:each="i:${#numbers.sequence(1,hotel.hotelStars)}"><img src="/public/images/star.png" style="height: 20px; width: 20px;"></span><br/>
-		<span class="largetext">联系方式：</span><span class="largetext" th:text="${hotel.hotelContact}"></span><br/>
-		<br/><a class="hvr-shutter-in-horizontal" th:href="|/welcome/details?hotelId=${hotel.hotelId}|">预订</a>
+			<h2 th:text="${hotel.hotelChineseName}" style="color: #92B8B1;"></h2><br/>
+			<span class="largetext">地址：</span><span class="largetext" th:text="${hotel.hotelAddress}"></span><br/>
+			<span class="largetext">星级：</span><span class="largetext" th:each="i:${#numbers.sequence(1,hotel.hotelStars)}"><img src="/public/images/star.png" style="height: 20px; width: 20px;"></span><br/>
+			<span class="largetext">联系方式：</span><span class="largetext" th:text="${hotel.hotelContact}"></span><br/>
+			<br/><a class="hvr-shutter-in-horizontal" th:href="|/welcome/details?hotelId=${hotel.hotelId}|">预订</a>
 		</div>
 	</div>
 </div>
 <div align="center" th:if="${hotels.size()} == 0"><img align="center" src="/public/images/nohotel.png"></div>
 <!-- footer -->
-	<div class="footer">
-		<div class="container">
-			<div class="col-md-2 deco" style="width:20%;">
-				<h4>导航</h4>
-				<li><a href="w">首页</a></li>
-				<li><a href="/register/">注册</a></li>
-				<li><a href="/myorder/">订单查询</a></li>
-				<li><a href="contact.html">待定</a></li>
-			</div>
-			<div class="col-md-2 deco" style="width:20%;">
-				<h4>帮助</h4>
-				<li><a href="#">联系我们</a></li>
-				<li><a href="#">常见问题与解答</a></li>
-				<li><a href="#">隐私政策</a></li>
-				<li><a href="#">服务条款</a></li>
-			</div>
-			<div class="col-md-2 deco" style="width:20%;">
-				<h4>附近</h4>
-				<li><a href="#">附近酒店</a></li>
-				<li><a href="#">约车</a></li>
-				<li><a href="#">饮食服务</a></li>
-			</div>
-			<div class="col-md-2 deco" style="width:20%;">
-				<h4>目的地</h4>
-				<li><a href="#">国家/地区</a></li>
-				<li><a href="#">热门城市</a></li>
-			</div>
-			<div class="col-md-2 deco" style="width:20%;">
-			<h4>商业合作</h4>
-				<li><a href="#">酒店加盟</a></li>
-				<li><a href="#">联合营销</a></li>
-			</div>
-			<div class="clearfix"> </div>
+<div class="footer">
+	<div class="container">
+		<div class="col-md-2 deco" style="width:20%;">
+			<h4>导航</h4>
+			<li><a href="w">首页</a></li>
+			<li><a href="/register/">注册</a></li>
+			<li><a href="/myorder/">订单查询</a></li>
+			<li><a href="contact.html">待定</a></li>
 		</div>
+		<div class="col-md-2 deco" style="width:20%;">
+			<h4>帮助</h4>
+			<li><a href="#">联系我们</a></li>
+			<li><a href="#">常见问题与解答</a></li>
+			<li><a href="#">隐私政策</a></li>
+			<li><a href="#">服务条款</a></li>
+		</div>
+		<div class="col-md-2 deco" style="width:20%;">
+			<h4>附近</h4>
+			<li><a href="#">附近酒店</a></li>
+			<li><a href="#">约车</a></li>
+			<li><a href="#">饮食服务</a></li>
+		</div>
+		<div class="col-md-2 deco" style="width:20%;">
+			<h4>目的地</h4>
+			<li><a href="#">国家/地区</a></li>
+			<li><a href="#">热门城市</a></li>
+		</div>
+		<div class="col-md-2 deco" style="width:20%;">
+			<h4>商业合作</h4>
+			<li><a href="#">酒店加盟</a></li>
+			<li><a href="#">联合营销</a></li>
+		</div>
+		<div class="clearfix"> </div>
 	</div>
-	<div class="footer-bottom">
-			<div class="container">
-				<p>Copyright &copy; 2019.Company name All rights reserved.More Templates </p>
-			</div>
+</div>
+<div class="footer-bottom">
+	<div class="container">
+		<p>Copyright &copy; 2019.Company name All rights reserved.More Templates </p>
 	</div>
-	<!-- footer -->
+</div>
+<!-- footer -->
 </body>
 <script>
 	function showInfoCard(){
