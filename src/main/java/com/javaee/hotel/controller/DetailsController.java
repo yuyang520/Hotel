@@ -8,7 +8,6 @@ import com.javaee.hotel.service.RoomService;
 import com.javaee.hotel.tool.RoomDetail;
 import com.javaee.hotel.tool.RoomItemContent;
 import com.javaee.hotel.tool.RoomItemStaticData;
-import com.javaee.hotel.tool.RoomLeftNumberDeliver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;

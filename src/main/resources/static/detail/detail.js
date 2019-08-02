@@ -44,13 +44,15 @@ function check() {
     var connectPhoneCheck = /^((13[0-9])|(14[579])|(15([0-3,5-9]))|(16[6])|(17[0135678])|(18[0-9]|19[89]))\d{8}$/.test(connectPhone);
     var identifyCheck = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(identify);
     var datePickerCheck = dateCheck();
+    var numbercheck = (numberSelecterJQ.val()!=null);
+    var typecheck = (typeSelecterJQ.val()!=null);
     if (!connectPhoneCheck) {
         connectPhoneJQ.css("color","red");
     }
     if (!identifyCheck) {
         identifyJQ.css("color","red");
     }
-    if (identifyCheck && connectPhoneCheck && datePickerCheck) {
+    if (identifyCheck && connectPhoneCheck && datePickerCheck && numbercheck && typecheck) {
         var Url = "/welcome/details/postOrder?"
             + "&&name=" + name
             + "&&hotelId=" + hotelId
@@ -171,6 +173,20 @@ function getOffsetDate(offset) {
 }
 $(
     function(){
+        $(window).scroll(function () {
+            var searchBar = $("#searchBar");
+            var map = $("#map");
+            if($(window).scrollTop()>90) {
+                searchBar.css('position','fixed');
+                searchBar.css('z-index','10');
+                searchBar.css('top','0');
+
+            }else {
+                searchBar.css('position','');
+                searchBar.css('z-index','');
+                searchBar.css('top','');
+            }
+        });
         $(".form-input-datepicker").datepicker({
             autoclose:true,
             orientation:"bottom",
