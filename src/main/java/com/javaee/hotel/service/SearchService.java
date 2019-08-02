@@ -16,13 +16,13 @@ public class SearchService {
     public List<Hotel> searchh(String keyword,float minPrice,String city,Integer star){
         HotelExample example=new HotelExample();
         HotelExample.Criteria criteria=example.createCriteria();
-        if(keyword!="") {
+        if(keyword!=""&&keyword!=null) {
             criteria.andHotelChineseNameLike("%" + keyword + "%");
         }
-        if(minPrice!=0){
+        if(minPrice!=7){
             criteria.andMinHotelPriceLessThanOrEqualTo(minPrice);
         }
-        if(city!=""){
+        if(city!="" &&keyword!=null){
             criteria.andHotelAddressLike("%"+city+"%");
         }
         if(star!=6) {

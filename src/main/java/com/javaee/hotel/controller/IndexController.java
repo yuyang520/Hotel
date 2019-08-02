@@ -28,17 +28,11 @@ public class IndexController {
     @PostMapping(value = "")
     public String searchHotel(HttpServletRequest request, Model model){
         String hotelname = request.getParameter("hotelname");
-        String minPriceString = request.getParameter("minPrice");
         String city = request.getParameter("city");
+        Integer minPrice = Integer.parseInt(request.getParameter("minPrice"));
         Integer starlevel = Integer.parseInt(request.getParameter("starlevel"));
-        float minPriceFloat=0;
-        if(minPriceString!=""){
-            minPriceFloat = Float.parseFloat(minPriceString);
-        }
-        List<Hotel> hotelList=searchService.searchh(hotelname,minPriceFloat,city,starlevel);
-        if(hotelList.isEmpty()){
-            model.addAttribute("notFoundMessage","未查找到结果");
-        }
+
+        List<Hotel> hotelList=searchService.searchh(hotelname,minPrice,city,starlevel);
         model.addAttribute("hotels",hotelList);
         return "index";
     }
