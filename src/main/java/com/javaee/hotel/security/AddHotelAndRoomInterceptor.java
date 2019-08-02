@@ -20,7 +20,6 @@ public class AddHotelAndRoomInterceptor implements HandlerInterceptor {
 
     @Autowired
     private ManagerMapper managerMapper;
-
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
@@ -29,17 +28,12 @@ public class AddHotelAndRoomInterceptor implements HandlerInterceptor {
         Object username = request.getSession().getAttribute("username");
 //        Manager manager = managerService.findManagerByPrimaryKey(username.toString());
         Manager manager = managerMapper.selectByPrimaryKey(username.toString());
-
         String privilege = manager.getPrivilege().toString();
-
         if( privilege.equals("1")){
             response.sendRedirect("/MOrderlist");
-
             return false;
         }else {
-
             return true;
-
         }
     }
 }

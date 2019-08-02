@@ -13,12 +13,10 @@ public class BossConfig implements WebMvcConfigurer {
     public HandlerInterceptor BossInterceptor(){
         return  new BossInterceptor();
     }
-
     @Override
     public void addInterceptors(InterceptorRegistry registry){
-
-        registry.addInterceptor(BossInterceptor())
-                .addPathPatterns("/manager/**");
+//        registry.addInterceptor(BossInterceptor())
+//                .addPathPatterns("/manager/**");
     }
 
 }

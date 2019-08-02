@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -19,7 +21,12 @@ public class CustomerListController {
     private CustomerListService customerListService;
 
     @GetMapping("")
-    public String customerListHtml(){
+    public String customerListHtml(HttpServletResponse response,
+                                   HttpServletRequest request,
+                                   Model model){
+
+        Boolean isLogin = request.getSession().getAttribute("username") !=null ;
+        model.addAttribute("isLogin",isLogin);
         return "/customerList";
     }
 

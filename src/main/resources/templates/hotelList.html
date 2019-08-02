@@ -85,47 +85,30 @@
         <span class="sr-only">Toggle navigation</span>
       </a>
       <!-- Navbar Right Menu -->
-      <!--<div class="navbar-custom-menu">-->
-        <!--<ul class="nav navbar-nav">-->
-          <!---->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
 
-          <!---->
-          <!---->
-          <!--&lt;!&ndash; User Account Menu &ndash;&gt;-->
-          <!--<li class="dropdown user user-menu">-->
-            <!--&lt;!&ndash; Menu Toggle Button &ndash;&gt;-->
-            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-              <!--&lt;!&ndash; The user image in the navbar&ndash;&gt;-->
-              <!--<img src="public/images/Admin/user2-160x160.jpg" class="user-image" alt="User Image">-->
-              <!--&lt;!&ndash; hidden-xs hides the username on small devices so only the image appears. &ndash;&gt;-->
-              <!--<span class="hidden-xs">Alexander Pierce</span>-->
-            <!--</a>-->
-            <!--<ul class="dropdown-menu">-->
-              <!--&lt;!&ndash; The user image in the menu &ndash;&gt;-->
-              <!--<li class="user-header">-->
-                <!--<img src="public/images/Admin/user2-160x160.jpg" class="img-circle" alt="User Image">-->
 
-                <!--<p>-->
-                  <!--Alexander Pierce - Web Developer-->
-                  <!--<small>Member since Nov. 2012</small>-->
-                <!--</p>-->
-              <!--</li>-->
-              <!---->
-              <!--&lt;!&ndash; Menu Footer&ndash;&gt;-->
-              <!--<li class="user-footer">-->
-                <!--<div class="pull-left">-->
-                  <!--<a href="#" class="btn btn-default btn-flat">Profile</a>-->
-                <!--</div>-->
-                <!--<div class="pull-right">-->
-                  <!--<a href="#" class="btn btn-default btn-flat">Sign out</a>-->
-                <!--</div>-->
-              <!--</li>-->
-            <!--</ul>-->
-          <!--</li>-->
-          <!---->
-        <!--</ul>-->
-      <!--</div>-->
+
+
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <div th:if="${isLogin}">
+                    欢迎[[${session.username}]]登陆
+                </div>
+                <div th:if="${!isLogin}" onclick="turnToManagerLogin()">
+                    <a>请登录</a>
+                </div>
+            </a>
+
+          </li>
+
+        </ul>
+      </div>
     </nav>
+
   </header>
   <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
@@ -177,6 +160,10 @@
                         <li><a href="#" onclick="turnToRoomList()"><i class = "fa fa-certificate"></i> 浏览房间</a></li>
                         <li><a href="#" onclick="turnToRoomAdd()"><i class = "fa fa-certificate"></i> 添加房间</a></li>
                     </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#"  onclick="turnToManager()"><i class="fa fa-link"></i> <span >管理员浏览</span>
+                    </a>
                 </li>
             </ul>
             <!-- /.sidebar-menu -->
@@ -288,6 +275,14 @@
 
     function turnToHotelAdd() {
         window.location.href = "/hotelList/add";
+    }
+
+    function turnToManagerLogin() {
+        window.location.href = "/ManagerLogin";
+    }
+
+    function turnToManager() {
+        window.location.href = "/manager";
     }
 
     function freshTable() {

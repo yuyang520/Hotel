@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -25,8 +26,11 @@ public class HotelListController {
     private HotelMapper hotelMapper;
 
     @GetMapping("")
-    public String hotelHtml(){
-
+    public String hotelHtml(HttpServletRequest request,
+                            HttpServletResponse response,
+                            Model model){
+        Boolean isLogin = request.getSession().getAttribute("username") !=null ;
+        model.addAttribute("isLogin",isLogin);
         return "/hotelList";
     }
 

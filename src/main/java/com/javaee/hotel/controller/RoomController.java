@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -41,7 +42,11 @@ public class RoomController {
 
 
     @GetMapping("/roomList")
-    public String MOrderHtml(){
+    public String MOrderHtml(HttpServletRequest request,
+                             HttpServletResponse response,
+                             Model model){
+        Boolean isLogin = request.getSession().getAttribute("username") !=null ;
+        model.addAttribute("isLogin",isLogin);
 
         return "/roomList";
     }

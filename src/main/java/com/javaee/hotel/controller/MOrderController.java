@@ -27,12 +27,8 @@ public class MOrderController {
     public String MOrderHtml(HttpServletRequest request,
                              HttpServletResponse response,
                              Model model){
-//        HttpServletRequest
-//        model.addAttribute("isLogin",true);
-//        System.out.println(isLogin);
+
         Boolean isLogin = request.getSession().getAttribute("username") !=null ;
-//        System.out.println(isLogin?);
-//        model.addAttribute("isLogin",isLogin);
         model.addAttribute("isLogin",isLogin);
         return "/MOrderlist";
     }

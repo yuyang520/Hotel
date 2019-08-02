@@ -29,7 +29,6 @@ public class ManagerController {
                               Model model) {
 
         Boolean isLogin = request.getSession().getAttribute("username") !=null ;
-//        System.out.println(isLogin?);
         model.addAttribute("isLogin",isLogin);
         return "/manager";
     }
