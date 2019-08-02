@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>个人信息</title>
@@ -8,7 +8,6 @@
         li{list-style: none;
         margin-top: 30px;
         margin-left: 100px;}
-
     </style>
 </head>
 <body>
@@ -41,28 +40,24 @@
         </li>
         <li class="" >
             <label class="">昵称</label>
-            <span>?????????</span>
-        </li>
-        <li class="" >
-            <label class="">用户名</label>
-            <span>?????????</span>
+            <span th:text="${userInfo.get(0).nickName}"></span>
         </li>
         <li class="" >
             <label class="">姓名</label>
-            <span>?????????</span>
+            <span th:text="${userInfo.get(0).name}"></span>
         </li>
         <li class="" >
             <label class="">身份证号</label>
-            <span>?????????</span>
+            <span th:text="${userInfo.get(0).personId}"></span>
         </li>
         <li class="" >
             <label class="">手机</label>
-            <span>?????????</span>
+            <span th:text="${userInfo.get(0).telephone}"></span>
             <a class="" href = "#" target="_self">修改</a>
         </li>
         <li class="" >
             <label class="">邮箱</label>
-            <span>?????????</span>
+            <span th:text="${userInfo.get(0).email}"></span>
             <a class="" href = "#" target="_self">修改</a>
         </li>
         <li>

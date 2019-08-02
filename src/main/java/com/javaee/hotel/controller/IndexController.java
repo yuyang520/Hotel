@@ -3,6 +3,7 @@ package com.javaee.hotel.controller;
 import com.javaee.hotel.domain.Hotel;
 import com.javaee.hotel.service.RoomService;
 import com.javaee.hotel.service.SearchService;
+import com.javaee.hotel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -19,10 +21,17 @@ public class IndexController {
     private RoomService roomService;
     @Autowired
     private SearchService searchService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping(value = "")
-    public String showIndex (Model model) {
+    public String showIndex (Model model, HttpSession session) {
         model.addAttribute("hotels", roomService.getHotelList());
+        int id = 0;
+        if(session.getAttribute("id")!=null){
+            id = Integer.parseInt(session.getAttribute("id").toString());
+        }
+        model.addAttribute("userInfo",userService.getNowUser(id));
         return "index";
     }
     @PostMapping(value = "")
