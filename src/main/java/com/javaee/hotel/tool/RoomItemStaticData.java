@@ -39,9 +39,6 @@ public class RoomItemStaticData {
         }
     }
 
-    public RoomItemStaticData () {
-
-    }
     public RoomItemContent analyseItemContent(JSONObject jsonObject) {
         keys = jsonObject.keySet();
         List list = new ArrayList(keys);

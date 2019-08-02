@@ -7,13 +7,16 @@ import com.javaee.hotel.domain.*;
 import com.javaee.hotel.mapper.HotelMapper;
 import com.javaee.hotel.mapper.OrderListMapper;
 import com.javaee.hotel.mapper.RoomMapper;
+import com.javaee.hotel.tool.RoomLeftNumberDeliver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLOutput;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,7 +51,7 @@ public class RoomService {
         return roomMapper.selectByExample(example);
     }
 
-    public int orderCheck(OrderList orderList,String[] roomNoReceive,String[] erro) {
+    public int orderCheck(OrderList orderList,String[] erro) {
         Room room = roomMapper.selectByPrimaryKey(orderList.getRoomId());
         boolean connectPhoneCheckRes = connectPhoneCheck(orderList.getConnectPhone());
         boolean identifyCheckRes = identifyCheck(orderList.getIdentify());
@@ -70,8 +73,6 @@ public class RoomService {
         }
         orderList.setPrice(getPrice(room,orderList));
         orderList.setRegisterTime(getRegisterDateTime());
-        roomNoReceive[0] = getRoomNo(room,orderList);
-        orderList.setRoomNo(roomNoReceive[0]);
         return 0;
     }
     private boolean connectPhoneCheck(String connectPhone) {
@@ -98,44 +99,35 @@ public class RoomService {
         return result;
     }
     private boolean roomCheck(Room room,OrderList orderList) {
-        int leftNumber = room.getLeftNumber();
+        int leftNumber = getRoomLeftNumberInCondition(room.getRoomId(),orderList.getCheckIn(),orderList.getCheckOut()) ;
         byte roomNumber = orderList.getRoomNumber();
         if ( room == null ) {
             return false;
-        }else if(roomNumber > leftNumber){
+        }else if(roomNumber > leftNumber ){
             return false;
         }else if(roomNumber > 5 || roomNumber <= 0 ) {
             return false;
         }
         return true;
     }
-    public String getRoomNo(Room room,OrderList orderList) {
-        JSONObject jsonObject = JSON.parseObject(room.getRoomNo());
-        JSONArray roomList = jsonObject.getJSONArray("roomList");
-        JSONArray status = jsonObject.getJSONArray("status");
-        int counter = 0 ;
-        int roomListLength = roomList.size();
-        String roomNo = "";
-        for ( int i = 0 ; i < roomListLength ; i ++ ) {
-            if( Integer.parseInt(status.get(i).toString()) == 0 ){
-                roomNo = roomNo + roomList.get(i).toString() +" ";
-                status.set(i,1);
-                counter++;
-                if(counter == orderList.getRoomNumber()) {
-                    break;
-                }
-            }
-        }
-        int leftNumber = room.getLeftNumber() - counter;
-        room.setRoomNo(jsonObject.toString());
-        room.setLeftNumber(leftNumber);
-        roomMapper.updateByPrimaryKey(room);
-        return roomNo;
-    }
+
     public Date getRegisterDateTime() {
 //        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        Date date = new Date();
         return new Date();
+    }
+    public Date getToday() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        try {
+            return getDateByString(dateFormat.format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return new Date();
+    }
+    public Date getOffsetDate(int offset) {
+        return new Date(getToday().getTime() + offset*24*3600*1000);
     }
     public float getPrice(Room room,OrderList orderList) {
         return room.getPrice()*getOrderDay(orderList);
@@ -145,15 +137,17 @@ public class RoomService {
         if( (orderList.getCheckIn().getTime()+28800000)/(3600*24*1000) < (date.getTime()+28800000)/(3600*24*1000) ) {
             return false;
         }
-        if(orderList.getCheckIn().compareTo(orderList.getCheckOut())>0) {
+        if(orderList.getCheckIn().compareTo(orderList.getCheckOut())>=0) {
+            return false;
+        }else if(( orderList.getCheckOut().getTime()+2880000)/(3600*24*1000)-(date.getTime()+28800000)/(3600*24*1000)>30){
             return false;
         }else {
             return true;
         }
     }
     private int getOrderDay(OrderList orderList) {
-        return (int) ( orderList.getCheckOut().getTime()/(3600*24) -
-                orderList.getCheckIn().getTime()/(3600*24) + 1 );
+        return (int) ( orderList.getCheckOut().getTime()/(3600*24*1000) -
+                orderList.getCheckIn().getTime()/(3600*24*1000) );
     }
     public Date getDateByString(String dateString) throws ParseException {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -163,13 +157,6 @@ public class RoomService {
     public boolean addOrderList(OrderList orderList) {
         return (orderListMapper.insertSelective(orderList)>0);
     }
-
-
-
-
-
-
-
 
     public List<Room> roomRespond(){
         RoomExample example = new RoomExample();
@@ -194,7 +181,53 @@ public class RoomService {
 
         roomMapper.deleteByPrimaryKey(roomId);
     }
-    public void getIconList() {
+    public int getRoomLeftNumberInCondition(String roomId,Date checkIn,Date checkOut) {
+        Room room = roomMapper.selectByPrimaryKey(roomId);
+        OrderListExample example = new OrderListExample();
+        OrderListExample.Criteria criteria = example.createCriteria();
+        criteria.andRoomIdEqualTo(roomId);
+        criteria.andStatusLessThanOrEqualTo((byte) 1);
+        criteria.andCheckInLessThanOrEqualTo(checkOut);
+        criteria.andCheckOutGreaterThanOrEqualTo(checkIn);
+        List<OrderList> orderLists = orderListMapper.selectByExample(example);
+        int days = (int) (checkOut.getTime()-checkIn.getTime())/(24*3600*1000);
+        int orderListNumber = orderLists.size();
+        int greatestNum = 0;
+        for ( int i = 0 ; i < days ; i ++ ) {
+            int numberTemp = 0;
+            for( int j = 0 ; j < orderListNumber ; j ++ ) {
+                long orderListTempCheckIn = orderLists.get(j).getCheckIn().getTime();
+                long orderListTempCheckOut = orderLists.get(j).getCheckOut().getTime();
+                long dayOffset = checkIn.getTime()+i*24*3600*1000;
+                if( dayOffset >= orderListTempCheckIn && dayOffset < orderListTempCheckOut ) {
+                    numberTemp +=orderLists.get(j).getRoomNumber();
+                }
+            }
+            if( greatestNum < numberTemp ) {
+                greatestNum = numberTemp;
+            }
+        }
+        return room.getRoomNumber()-greatestNum;
+    }
+    public List<RoomLeftNumberDeliver> getDeliver(List<Room> roomList) {
+        int length = roomList.size();
+        List<RoomLeftNumberDeliver> deliverList= new ArrayList<RoomLeftNumberDeliver>();
+        Calendar calendar = Calendar.getInstance();
+        Date date = getToday();
+        for (int i = 0 ; i < length ; i ++ ) {
+            RoomLeftNumberDeliver deliver =  new RoomLeftNumberDeliver();
+            deliver.setRoomId(roomList.get(i).getRoomId());
+            for( int j = 0 ; j < 30 ; j ++ ) {
+                calendar.setTime(date);
+                calendar.add(Calendar.DATE, j);
+                Date dateTemp = new Date(calendar.getTime().getTime()+24*3600*1000);
+                deliver.getRoomLeftNumberByDate()[j] =
+                        getRoomLeftNumberInCondition(
+                                deliver.getRoomId(), calendar.getTime(), dateTemp);
+            }
+            deliverList.add(deliver);
+        }
+        return deliverList;
 
     }
 }

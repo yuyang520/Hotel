@@ -1,7 +1,5 @@
 package com.javaee.hotel.service;
 
-import com.javaee.hotel.domain.Order;
-import com.javaee.hotel.domain.OrderExample;
 import com.javaee.hotel.domain.OrderList;
 import com.javaee.hotel.domain.OrderListExample;
 import com.javaee.hotel.mapper.OrderListMapper;

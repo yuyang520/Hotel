@@ -14,7 +14,7 @@ public class PathConf extends WebMvcConfigurerAdapter {
          *这是图片的物理路径  "file:/+本地图片的地址"
          * @Date： Create in 14:08 2017/12/20
          */
-        registry.addResourceHandler("/Path/**").addResourceLocations("file:/C:/Users/JOKER/Pictures/");
+        registry.addResourceHandler("/Path/**").addResourceLocations("file:/C:/Users/王亦达/Desktop/");
         super.addResourceHandlers(registry);
     }
 }

@@ -10,7 +10,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 	<!-- Custom Theme files -->
 	<link href="/public/css/style.css" rel='stylesheet' type='text/css' />
+	<link href="/public/css/IndexStyle.css"  rel='stylesheet' type='text/css' />
 	<script src="/public/js/jquery-1.11.1.min.js"></script>
+
 	<style>
 		.hotelTable{
 			display: flex;
@@ -22,50 +24,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			font-size: 16px;
 			color: #a1a1a1;
 		}
-		.search_part_fix {
-			position: fixed;
-			top: 0;
-			z-index: 3;
-			width: 1148px;
-			border-bottom: 1px solid #d9e8ff;
-		}
-		.search_part {
-			height: 24px;
-			padding: 10px 15px;
-			background: #fffcd8;
-			font-size: 14px;
-			border-top: 2px solid #5E9FFB;
-			border-left: 1px solid #d9e8ff;
-			border-right: 1px solid #d9e8ff;
-		}
-		.orderSearch{
-			float:left;
-			margin-left: 30px;
-		}
-		.form-control-s {
-			height: 40px;
-			min-width: 100px;
-			max-width: 200px;
-			padding: 6px 12px;
-			font-size: 14px;
-			line-height: 1.42857143;
-			color: #555555;
-			background-color: #fff;
-			background-image: none;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-			-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-			-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-			-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-			transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-			transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-			transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-		}
-		.orderListItem {
-			border-top: 1px solid #ccc;
-		}
+
 	</style>
 	<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
 </head>
@@ -74,10 +33,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="banner1" >
 	<div class="header" style="max-height: 90px;">
 		<div class="container" style="display: flex;flex-direction: row;justify-content: center;min-width: 1200px">
-			<div class="logo">
+			<div class="logo" >
 				<h1><a href="/welcome/">Hotel</a></h1>
 			</div>
-			<nav class="navbar navbar-default" role="navigation"  style="max-width: 600px;">
+			<nav class="navbar navbar-default" role="navigation"  style="max-width: 600px;max-height: 66px">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 						<span class="sr-only">Toggle navigation</span>
@@ -94,53 +53,75 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="/myorder/">订单查询</a></li>
 						<li><a href="shortcodes.html">待定</a></li>
 						<li><a href="/login/">登录</a></li>
-						<li><a href="contact.html">待定</a></li>
 					</ul>
 				</div>
 				<!--/.navbar-collapse-->
 			</nav>
 			<div class="clearfix"> </div>
-			<div style="margin-right: 10%;max-width:200px;height:50px;margin-left: 100px;margin-right:0;white-space: nowrap;overflow: hidden" >
+			<div class="infoList" >
 				<!-- User Account: style can be found in dropdown.less -->
-				<li class="dropdown user user-menu" onclick="showInfoCard()" onmouseout="hiddenInfoCard()">
+				<li class="dropdown user user-menu" onclick ="showInfoCard()">
 					<a  class="dropdown-toggle" data-toggle="dropdown">
 						<img src="/Path/523.jpg" class="user-image img-circle" alt="User Image" style="height: 50px;width: 50px;">
 						<span class="hidden-xs" style="color: #fff">马里奥</span>
 					</a>
 				</li>
 			</div>
-			<div id="hide" style="max-width: 400px;display: none;">
-				<a>我的信息</a>
-				<a>jklsjf </a>
+
+		</div>
+
+	</div>
+	<div id="hide" style="display: none;position: absolute;z-index: 100;margin-left: 72%;
+    background-color: #fff;width: 250px;height:300px;">
+		<div align="center">
+			<div>
+		<img src = "/Path/523.jpg" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
+		<p>马里奥</p>
+			</div>
+			<div style="line-height: 40px;font-size: 16px;">
+		<a href="/userinfo/">修改信息</a>
+			</div>
+			<div style="line-height: 40px;font-size: 16px;">
+		<a href="/myorder/">我的订单</a>
 			</div>
 		</div>
 	</div>
 </div>
 <div>
-	<div style="display:flex;flex-direction:row;justify-content: space-around;background-color: #bcddff;min-height:60px;">
+	<div style="display:flex;flex-direction:row;justify-content: center;background-color: #bcddff;min-height:60px;">
 
-		<form action="" style="margin-top: 10px;">
+		<form action="/welcome/" style="margin-top: 10px;" method="post">
 			<div class="orderSearch">
-				<span>酒店名称：<input  autocomplete="off" value="" class="form-control-s" name="orderHotelName"></span>
+				<span>酒店名称：<input  autocomplete="off" value="" class="form-control-s" name="hotelname"></span>
 			</div>
 			<div class=" orderSearch">
-				<div style="float:left;">
-					<span>预定日期：<input autocomplete="off" value="" class="form-control-s datepicker" name="checkInTime"></span>
-				</div>
-				<div style="float:left;">
-					<span>至<input autocomplete="off" value="" class="form-control-s datepicker" name="checkOutTime"></span>
-				</div>
+					<span>城市：<input autocomplete="off" value="" class="form-control-s" name="city"></span>
+			</div>
+			<div class=" orderSearch">
+				<span>价位：
+					<select name = "minPrice" class="form-control-s" style="width: 50%;">
+						<option value="7">全部</option>
+						<option value="1">100以下</option>
+						<option value="2">100-200</option>
+						<option value="3">200-300</option>
+						<option value="4">300-500</option>
+						<option value="5">500-1000</option>
+						<option value="6">1000以上</option>
+					</select>
+				</span>
 			</div>
 			<div class="orderSearch">
-        <span>订单状态：
-        <select name="orderStatus" class="form-control-s" style="width: 40%;height: 34px;">
-            <option value="0">全部</option>
-            <option value="1">未支付</option>
-            <option value="2">已支付</option>
-            <option value="3">已过期</option>
-            <option value="4">已取消</option>
-        </select>
-        </span>
+        	<span>星级
+        	<select name="starlevel" class="form-control-s" style="width: 50%;">
+				<option value="6">全部</option>
+           	 	<option value="5">5星</option>
+           		<option value="4">4星</option>
+          	 	<option value="3">3星</option>
+          	 	<option value="2">2星</option>
+				<option value="1">1星</option>
+				<option value="0">无星级</option>
+       		 </select>
+        	</span>
 			</div>
 			<div class="orderSearch">
 				<input  type="submit" style=" border:none;background-color:#fff;height:38px; width: 80px;border-radius: 4px;" value="查询">
@@ -210,11 +191,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- footer -->
 </body>
 <script>
+	//点击头像或昵称弹出个人信息框
 	function showInfoCard(){
 		$(document.getElementById("hide")).css("display","block");
 	}
-	function hiddenInfoCard() {
-		setTimeout('$(document.getElementById("hide")).css("display","none")',3000);
-	}
+
+	//点击document隐藏div
+	$(document).click(function () {
+		$(document.getElementById("hide")).css("display","none");
+	})
+	//点击div不隐藏div
+	$("#hide").click(function(event) {
+		event.stopPropagation(); //阻止事件向上冒泡
+	});
 </script>
 </html>
