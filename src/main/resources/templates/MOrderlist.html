@@ -91,6 +91,7 @@
 </head>
 
 <body class="hold-transition skin-black sidebar-mini " >
+
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -113,10 +114,12 @@
           <!--<button class="button button5"></button>-->
         <!--&lt;!&ndash;<span class="sr-only">Toggle navigation</span>&ndash;&gt;-->
       </a>
-      <div th:if="${isLogIn}">
-          欢迎登陆
-      </div>
-        <div th:if="${!isLogIn}">
+        <div th:if="${isLogin}">
+
+            欢迎[[${session.username}]]登陆
+        </div>
+
+        <div th:if="${!isLogin}">
             <a>请登录</a>
         </div>
 

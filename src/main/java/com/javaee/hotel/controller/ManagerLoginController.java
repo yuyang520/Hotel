@@ -9,23 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 @Controller
 @RequestMapping("/ManagerLogin")
 public class ManagerLoginController {
     @Autowired
     ManagerLoginService managerLoginService;
-
-
     @GetMapping("")
     public String managerLoginPage(){
         return "ManagerLogin";
     }
-
     @PostMapping("")
     public String loginCheck(@RequestParam("username") String username,
                         @RequestParam("password") String password,
@@ -39,6 +34,6 @@ public class ManagerLoginController {
             model.addAttribute("tip", "用户名或密码错误");
             return "/ManagerLogin";
         }
-
     }
 }
+

@@ -20,6 +20,11 @@ public class ManagerService {
         return managerMapper.selectByExample(example);
     }
 
+    public Manager getManger(String username){
+        Manager manager = managerMapper.selectByPrimaryKey(username);
+        return manager;
+    }
+
     public Integer saveManager(Manager manager){
 //        System.out.println(manager.getUsername());
 //        System.out.println(manager.getPassword());

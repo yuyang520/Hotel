@@ -113,6 +113,14 @@
                 <!--<button class="button button5"></button>-->
                 <!--&lt;!&ndash;<span class="sr-only">Toggle navigation</span>&ndash;&gt;-->
             </a>
+            <div th:if="${isLogin}">
+
+                欢迎[[${session.username}]]登陆
+            </div>
+
+            <div th:if="${!isLogin}">
+                <a>请登录</a>
+            </div>
             <!-- Navbar Right Menu -->
             <!--<div class="navbar-custom-menu">-->
             <!--<ul class="nav navbar-nav">-->

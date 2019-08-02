@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,7 +24,13 @@ public class ManagerController {
     private ManagerService managerService;
 
     @GetMapping("")
-    public String managerHtml() {
+    public String managerHtml(HttpServletRequest request,
+                              HttpServletResponse response,
+                              Model model) {
+
+        Boolean isLogin = request.getSession().getAttribute("username") !=null ;
+//        System.out.println(isLogin?);
+        model.addAttribute("isLogin",isLogin);
         return "/manager";
     }
 
@@ -49,6 +57,15 @@ public class ManagerController {
         Manager manager = managerService.findManagerByPrimaryKey(username);
         model.addAttribute("manager",manager);
         return "manager-edit";
+    }
+
+    @GetMapping("/ManagerLogin")
+    @ResponseBody
+    public Boolean login(@RequestParam("username") String username,
+                         @RequestParam("password") String password,
+                         HttpServletRequest request){
+        request.getSession().setAttribute("username","username");
+        return true;
     }
 
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -20,10 +21,19 @@ import java.util.List;
 public class MOrderController {
     @Autowired
     private MOrderService mOrderService;
+
+
     @GetMapping("")
-    public String MOrderHtml(Model model){
+    public String MOrderHtml(HttpServletRequest request,
+                             HttpServletResponse response,
+                             Model model){
 //        HttpServletRequest
-        model.addAttribute("isLogIn",true);
+//        model.addAttribute("isLogin",true);
+//        System.out.println(isLogin);
+        Boolean isLogin = request.getSession().getAttribute("username") !=null ;
+//        System.out.println(isLogin?);
+//        model.addAttribute("isLogin",isLogin);
+        model.addAttribute("isLogin",isLogin);
         return "/MOrderlist";
     }
 
