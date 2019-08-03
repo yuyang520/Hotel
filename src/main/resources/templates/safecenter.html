@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <link href="/public/css/IndexStyle.css"  rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="/public/css/style.css" rel='stylesheet' type='text/css' />
+    <script src="/public/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+    <style>
+        .safeTable{
+            display: flex;
+            flex-direction: row;
+            border:1px solid #ccc;
+            margin: 30px;
+        }
+        .safeitem1{
+            width: 18%;
+            line-height: 104px;
+            font-size: 18px;
+            padding-left:30px;
+        }
+        .safeitem2{
+            width: 18%;
+            line-height: 104px;
+            font-size: 14px;
+            padding-left:30px;
+        }
+        .safeitem3{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 46%;
+            height: 104px;
+            font-size: 12px;
+            vertical-align: middle;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .safeitem4{
+            padding-left:30px;
+            width: 18%;
+            line-height: 104px;
+            font-size: 14px;
+        }
+        li{list-style: none;}
+    </style>
+</head>
+<body>
+<div>
+    <div class="header" style="max-height: 90px;background-color: #6568ff;">
+        <div class="container" style="display: flex;flex-direction: row;justify-content: center;min-width: 1200px;">
+            <div class="logo" >
+                <h1><a href="/welcome/">Hotel</a></h1>
+            </div>
+            <nav class="navbar navbar-default" role="navigation"  style="max-width: 600px;max-height: 66px">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!--/.navbar-header-->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color: #6568ff;">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/welcome/">首页</a></li>
+                        <li><a href="/searchmap/">地图查询</a></li>
+                        <li><a href="/myorder/">订单查询</a></li>
+                        <li><a href="shortcodes.html">待定</a></li>
+                        <li><a href="/login/">登录</a></li>
+                    </ul>
+                </div>
+                <!--/.navbar-collapse-->
+            </nav>
+            <div class="clearfix"> </div>
+            <div class="infoList" >
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu" onclick ="showInfoCard()">
+                    <a  class="dropdown-toggle" data-toggle="dropdown">
+                        <img th:src="${userInfo.icon}" class="user-image img-circle" alt="User Image" style="height: 50px;width: 50px;">
+                        <span class="hidden-xs" style="color: #fff" th:text="${userInfo.nickName}"></span>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </div>
+    <div id="hides" style="display: none;position: absolute;z-index: 100;margin-left: 72%;
+        background-color: #fff;width: 200px;height:286px;">
+        <div align="center">
+            <div>
+                <img th:src="${userInfo.icon}" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
+                <p style="margin-top: 10px;font-size: 16px;" th:text="${userInfo.nickName}"></p>
+            </div>
+            <div style="margin-top:20px;line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
+                <a href="/userinfo/">修改信息</a>
+            </div>
+            <div style="line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
+                <a href="/myorder/">我的订单</a>
+            </div>
+            <div style="line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
+                <a href="#">退出</a>
+            </div>
+        </div>
+    </div>
+<div>
+<div style="display: flex;flex-direction: row;justify-content: center;margin-top: 10px;">
+    <div class="col-lg-1" style="background-color: #F7F5F5;border-top: 2px solid #00CCFF;margin-right: 20px;
+    border-bottom: 2px solid #00CCFF;line-height: 50px;padding:0;height: 650px;">
+        <div style="border-bottom: 1px solid #ccc;padding-left: 10px;">
+            <a href = "/userinfo/" style="height:100%;width:100%">
+                <span class="infoSpan" >我的信息</span>
+            </a>
+        </div>
+        <div style="border-bottom: 1px solid #ccc; padding-left: 10px;">
+            <a href = "/myorder/">
+                <span class="infoSpan">我的订单</span>
+            </a>
+        </div>
+        <div style="border-bottom: 1px solid #ccc;padding-left: 10px;">
+            <a href = "#">
+                <span class="infoSpan">钱包</span>
+            </a>
+        </div>
+        <div style="border-bottom: 1px solid #ccc;padding-left: 10px;">
+            <a href = "#">
+                <span class="infoSpan">我的收藏</span>
+            </a>
+        </div>
+        <div class="infoActive" style="border-bottom: 1px solid #ccc;padding-left: 10px;">
+            <a href = "/safecenter/">
+                <span class="infoSpan">账户安全</span>
+            </a>
+        </div>
+        <div style="border-bottom: 1px solid #ccc;padding-left: 10px;">
+            <a href = "#">
+                <span class="infoSpan">电子发票</span>
+            </a>
+        </div>
+        <div style="padding-left: 10px;">
+            <a href = "#">
+                <span class="infoSpan">帮助</span>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-7" >
+        <div class="safeTable">
+            <div class="safeitem1">
+                <img src="/public/images/right.png" style="height: 20px;width: 20px;">
+                登录密码</div>
+            <div class="safeitem2">建议定期更换</div>
+            <div class="safeitem3">安全性高的密码可以使账号更安全。建议您定期更换密码，且设
+                置一个包含数字和字母，并且长度超过8位以上的密码。</div>
+            <div class="safeitem4"><a href="#">修改</a></div>
+        </div>
+        <div class="safeTable">
+            <div class="safeitem1">
+                <img th:if="${userInfo.telephone!=null}" src="/public/images/right.png" style="height: 20px;width: 20px;">
+                <img th:if="${userInfo.telephone==null}" src="/public/images/warn.png" style="height: 20px;width: 20px;">
+                绑定手机</div>
+            <div class="safeitem2"  th:text="${userInfo.telephone}"></div>
+            <div class="safeitem3">绑定手机后，您即可使用手机找回密码。
+                为了帐号安全，建议您在更换手机号后第一时间更换绑定手机。</div>
+            <div class="safeitem4"><a href="#">修改</a>
+                <a href="#">解除绑定</a></div>
+        </div>
+        <div class="safeTable">
+            <div class="safeitem1">
+                <img th:if="${userInfo.email!=null}" src="/public/images/right.png" style="height: 20px;width: 20px;">
+                <img th:if="${userInfo.email==null}" src="/public/images/warn.png" style="height: 20px;width: 20px;">
+                绑定邮箱</div>
+            <div class="safeitem2" th:text="${userInfo.email}"></div>
+            <div class="safeitem3">绑定E-mail后，您即可使用E-mail找回密码。</div>
+            <div class="safeitem4"><a href="#">修改</a>
+                <a href="#">解除绑定</a></div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    //点击头像或昵称弹出个人信息框
+    function showInfoCard(){
+        console.info("clicked");
+        var jk=$(document.getElementById("hides"));
+        console.info(jk);
+        $(document.getElementById("hides")).css('display','block');
+    }
+    //点击document隐藏div
+    $(document).click(function () {
+        $(document.getElementById("hides")).css('display','none');
+    })
+    //点击div不隐藏div
+    $("#hides").click(function(event) {
+        event.stopPropagation(); //阻止事件向上冒泡
+    });
+</script>
+</html>
