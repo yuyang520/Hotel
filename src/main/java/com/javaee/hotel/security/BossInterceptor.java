@@ -18,17 +18,22 @@ public class BossInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
-                             Object handler)throws Exception{
+                             Object handler)throws Exception {
 //        System.out.println("PRE"+request.getRequestURL());
-        Object username = request.getSession().getAttribute("username");
+        try {
+            Object username = request.getSession().getAttribute("username");
 //        Manager manager = managerService.findManagerByPrimaryKey(username.toString());
-        Manager manager = managerMapper.selectByPrimaryKey(username.toString());
-        String privilege = manager.getPrivilege().toString();
-        if( privilege.equals("3")){
-            return true;
-        }else {
-            response.sendRedirect("/tip");
-            return false;
+            Manager manager = managerMapper.selectByPrimaryKey(username.toString());
+            String privilege = manager.getPrivilege().toString();
+            if (privilege.equals("3")) {
+                return true;
+            } else {
+                response.sendRedirect("/tip");
+                return false;
+            }
+        }catch(java.lang.NullPointerException e){
+            response.sendRedirect("/ManagerLogin");
         }
+        return false;
     }
 }
