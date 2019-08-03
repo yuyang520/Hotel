@@ -93,4 +93,13 @@ public class RoomController {
         roomService.deleteRoomById(roomId);
         return true;
     }
+
+    @PostMapping("/roomList/exit")
+    @ResponseBody
+    public Boolean LogOut(HttpServletResponse response,
+                          HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return true;
+    }
 }
