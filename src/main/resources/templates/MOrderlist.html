@@ -7,6 +7,13 @@
 
 <style type="text/css">
 
+    .message-box{
+        padding: 0.5rem;
+        width: 100%;
+        height: 100%;
+        overflow-x: auto;//竖直方向有滚动条，如果想要横向的，可以把y改为x
+    }
+
     .backgroundClass { background: url(/public/images/background1.jpg) no-repeat;
         background-size: cover;
         -webkit-background-size: cover;
@@ -92,7 +99,7 @@
 
 <body class="hold-transition skin-black sidebar-mini " >
 
-<div class="wrapper">
+<div class="wrapper"  >
 
   <!-- Main Header -->
   <header class="main-header">
@@ -150,7 +157,7 @@
             <ul class="sidebar-menu" data-widget="tree">
 
                 <li class="treeview">
-                    <a href="#"  onclick="turnToMOrderList()"><i class="fa fa-link"></i> <span >订单浏览</span>
+                    <a href="#"  onclick="turnToMOrderList()"><i class="fa fa-link"></i> <span >订单列表</span>
                     </a>
                 </li>
 
@@ -181,7 +188,7 @@
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#"  onclick="turnToManager()"><i class="fa fa-link"></i> <span >管理员浏览</span>
+                    <a href="#"  onclick="turnToManager()"><i class="fa fa-link"></i> <span >管理员列表</span>
                     </a>
                 </li>
             </ul>
@@ -245,7 +252,8 @@
     <!--</aside>-->
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper backgroundClass">
+  <div class="content-wrapper backgroundClass  "  style="overflow-x:scroll ">
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="row">
@@ -324,6 +332,8 @@
 
 <script>
     var table = null;
+    // var div = document.getElementById('message-box');
+    // div.scrollTop = div.scrollHeight;
     
     function logOut(){
         layer.confirm('是否退出账号[[${session.username}]]',{icon: 3, title:'提示'},function(index){
@@ -418,6 +428,7 @@ function initTable() {
         'info'        : true,
         'autoWidth'   : false,
         'stateSave'   :true,
+        'scrollbar'   :true,
         "language": {
             "paginate": {
                 "next": "下一页",
