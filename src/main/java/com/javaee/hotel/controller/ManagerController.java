@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -72,6 +73,15 @@ public class ManagerController {
     @ResponseBody
     public Boolean deleteManager(@RequestParam("username") String username){
         managerService.deleteManager(username);
+        return true;
+    }
+
+    @PostMapping("/exit")
+    @ResponseBody
+    public Boolean LogOut(HttpServletResponse response,
+                          HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
         return true;
     }
 }
