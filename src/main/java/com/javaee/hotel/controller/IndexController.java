@@ -31,7 +31,9 @@ public class IndexController {
         if(session.getAttribute("id")!=null){
             id = Integer.parseInt(session.getAttribute("id").toString());
         }
+        String bigmapUrl = "/bigmap?hotelname=&&city=&&minPrice=7&&starlevel=6";
         model.addAttribute("userInfo",userService.getNowUser(id));
+        model.addAttribute("bigmapUrl",bigmapUrl);
         return "index";
     }
     @PostMapping(value = "")
@@ -44,9 +46,11 @@ public class IndexController {
         if(session.getAttribute("id")!=null){
             id = Integer.parseInt(session.getAttribute("id").toString());
         }
+        String bigmapUrl = "/bigmap?hotelname="+hotelname+"&&city="+city+"&&minPrice="+minPrice+"&&starlevel="+starlevel;
         model.addAttribute("userInfo",userService.getNowUser(id));
         List<Hotel> hotelList=searchService.searchh(hotelname,minPrice,city,starlevel);
         model.addAttribute("hotels",hotelList);
+        model.addAttribute("bigmapUrl",bigmapUrl);
         return "index";
     }
 }
