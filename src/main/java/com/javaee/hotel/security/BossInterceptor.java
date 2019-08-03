@@ -27,7 +27,7 @@ public class BossInterceptor implements HandlerInterceptor {
         if( privilege.equals("3")){
             return true;
         }else {
-            response.sendRedirect("/MOrderlist");
+            response.sendRedirect("/tip");
             return false;
         }
     }
