@@ -11,6 +11,12 @@
 
 <style type="text/css">
 
+    .beInCenter{
+        height: 48px;
+        line-height: 48px;
+        text-align: center;
+    }
+
     .backgroundClass { background: url(/public/images/background1.jpg) no-repeat;
         background-size: cover;
         -webkit-background-size: cover;
@@ -97,18 +103,18 @@
                 <span class="sr-only">Toggle navigation</span>
             </a>
             <!-- Navbar Right Menu -->
-            <div class="navbar-custom-menu">
+            <div class="navbar-custom-menu" >
                 <ul class="nav navbar-nav">
                     <!-- User Account Menu -->
-                    <li class="dropdown user user-menu">
+                    <li class="dropdown user user-menu beInCenter">
                         <!-- Menu Toggle Button -->
                         <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
                             <div th:if="${isLogin}" style="margin-top: 5%">
                                 欢迎登陆[[${session.username}]]，
                                 <a onclick="logOut()">注销</a>
                             </div>
-                            <div th:if="${!isLogin}" onclick="turnToManagerLogin()" style="margin-top: 5%">
-                                <a>请登录</a>
+                            <div th:if="${!isLogin}" onclick="turnToManagerLogin()"   >
+                                <a >请登录</a>
                             </div>
                         <!--</a>-->
 
@@ -251,6 +257,7 @@
     <script src="public/js/layer.js"></script>
 <script>
     var table = null;
+
 
     function logOut(){
         layer.confirm('是否退出账号[[${session.username}]]',{icon: 3, title:'提示'},function(index){

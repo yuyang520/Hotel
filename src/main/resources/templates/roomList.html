@@ -2,6 +2,12 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <style type="text/css">
 
+    .beInCenter{
+        height: 48px;
+        line-height: 48px;
+        text-align: center;
+    }
+
     .backgroundClass { background: url(/public/images/background1.jpg) no-repeat;
         background-size: cover;
         -webkit-background-size: cover;
@@ -82,7 +88,7 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- User Account Menu -->
-          <li class="dropdown user user-menu">
+          <li class="dropdown user user-menu beInCenter" >
             <!-- Menu Toggle Button -->
             <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
                 <div th:if="${isLogin}" style="margin-top: 5%">
