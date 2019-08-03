@@ -73,8 +73,10 @@ public class RoomController {
     @PostMapping("/roomList/add")
     public String saveRoom(Room room,HttpServletRequest request){
         String path = request.getParameter("photo");
-        PictureTool pictureTool = new PictureTool();
-        room.setPhoto(pictureTool.getFilePath(path));
+        if(path!=null) {
+            PictureTool pictureTool = new PictureTool();
+            room.setPhoto(pictureTool.getFilePath(path));
+        }
         roomService.saveRoom(room);
         return "redirect:/roomList";
     }
@@ -82,6 +84,8 @@ public class RoomController {
     @GetMapping("/roomList/edit")
     public String goRoomEditPage(@RequestParam("roomId") String roomId, Model model){
         Room room = roomService.findRoomByPrimaryKey(roomId);
+        RoomItemStaticData roomItemStaticData = new RoomItemStaticData();
+        model.addAttribute("iconList",roomItemStaticData.getDatabaseRoomItemContent());
         model.addAttribute("room",room);
         return "room-edit";
     }

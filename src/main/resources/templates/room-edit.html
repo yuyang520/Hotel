@@ -80,30 +80,102 @@
          margin-top: 10px;
          margin-bottom: 10px;
      }
+     .font-group {
+         display: flex;
+         flex-direction: column;
+     }
+     .group-header {
+         font-size: 12px;
+     }
+     .group-content {
+         display: flex;
+         flex-direction: row;
+         align-content: center;
+         flex-wrap: wrap;
+     }
+     .font-item {
+         margin: 10px;
+         font-size: 12px;
+         color: gray;
+     }
  </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/public/font/iconfont.css" rel='stylesheet' type='text/css'/>
     <title>订单管理</title>
+    <script src="/public/js/jquery.min.js"></script>
 </head>
 <body>
-<form action="/roomList/add" method="post" th:object="${room}" class="smart-green">
+<script th:inline="javascript">
+    var iconList=[[${iconList}]];
+    console.info(iconList);
+    var roomDetail = [[${room.detail}]]
+    var detail = {};
+    function inputDetail(){
+
+        var groupLength = iconList.roomItemGroupList.length;
+
+        for (let i = 0 ; i < groupLength ; i ++ ) {
+            var type = iconList.roomItemGroupList[i].type;
+            var iconClass = "group-"+type;
+            var group = $("."+iconClass);
+            var itemNumber = group.length;
+            var valList = [];
+            for ( let i = 0 ; i < itemNumber ; i ++ ) {
+                if (group[i].checked) {
+                    valList.push($(group[i]).val())
+                }
+            }
+            detail[type]=valList;
+        }
+        var str = "";
+        $("#detail").val(JSON.stringify(detail));
+        $("form[name='editRoom']").submit();
+    }
+    $(function () {
+        var roomDetailJson = $.parseJSON( roomDetail );
+        for(let key in roomDetailJson){
+            console.info('key'+key);
+            var length = roomDetailJson[key].length;
+            console.info(length);
+            for(let i = 0 ; i < length ; i ++ ) {
+                $("#"+roomDetailJson[key][i]).prop("checked",true)
+            }
+        }
+    })
+</script>
+<form name="editRoom" action="/roomList/add" method="post" th:object="${room}" class="smart-green">
 
     <!--<input type="tel" name="orderId" th:field="*{roomId}"><br/>-->
     <h3 class="box-title center-block"  style="display: flex; flex-direction: row;justify-content: center">房间信息采集</h3>
-    <!--房间型号id：<input type="number" name="id" th:field="*{roomId}"><br/>-->
+    <input style="display: none" name="roomId" th:field="*{roomId}"><br/>
     酒店id：<input type="text" name="hotelId" th:field="*{hotelId}"h><br/>
-    细节描述：<input type="text" name="roomId" th:field="*{detail}"><br/>
+    <!--隐藏标签，值由js赋予-->
+    <input type="hidden" name="detail" id="detail" ><br/>
+    <!--隐藏-->
     房间数量：<input type="text" name="roomNumber" th:field="*{roomNumber}"><br/>
     价格：<input type="text" name="name" th:field="*{price}"><br/>
     房间名称：<input type="text" name="checkIn" th:field="*{chineseName}"><br/>
     房间英文名：<input type="text" name="checkOut" th:field="*{englishName}"><br/>
-    房间号：<input type="text" name="registerTime" th:field="*{roomNo}"><br/>
-
+    <!--房间号：<input type="text" name="roomNo" th:field="*{roomNo}"><br/>-->
+    房间描述：
+    <div style="border-top:1px solid gray;border-bottom: 1px solid gray;margin:5px">
+        <div class="font-group" th:each="roomItemGroup:${iconList.roomItemGroupList}">
+            <div class="group-header" th:text="${roomItemGroup.header}"></div>
+            <div class="group-content" th:id="|group-${roomItemGroup.type}|">
+                <div class="font-item" th:each="roomItem:${roomItemGroup.roomItemList}">
+                    <div th:class="|icon iconfont ${roomItem.icon}|" style="font-size: 20px"></div>
+                    <div class="tip" th:text="${roomItem.text}"></div>
+                    <div><input type="checkbox" th:id="${roomItem.iconId}" th:class="|group-${roomItemGroup.type}|" th:value="${roomItem.iconId}"/></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="box-footer">
-        <input type="submit" value="提交" class="pull-left">
+        <input type="button" value="提交" class="pull-left" onclick="inputDetail()">
         <button type="button"   onclick="cancel()">取消</button>
     </div>
 </form>

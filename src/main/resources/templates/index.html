@@ -60,10 +60,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="clearfix"> </div>
 			<div class="infoList" >
 				<!-- User Account: style can be found in dropdown.less -->
-				<li class="dropdown user user-menu" onclick ="showInfoCard()">
+				<li th:if="${userInfo.size()!=0}" class="dropdown user user-menu" onclick ="showInfoCard()">
 					<a  class="dropdown-toggle" data-toggle="dropdown">
-						<img src="/Path/523.jpg" class="user-image img-circle" alt="User Image" style="height: 50px;width: 50px;">
-						<span class="hidden-xs" style="color: #fff">马里奥</span>
+						<img th:src="${userInfo.get(0).icon}" class="user-image img-circle" alt="User Image" style="height: 50px;width: 50px;">
+						<span class="hidden-xs" style="color: #fff" th:text="${userInfo.get(0).nickName}"></span>
+					</a>
+				</li>
+				<li th:if="${userInfo.size()==0}">
+					<a href="/login/">
+						<span class="hidden-xs" style="color: lightgreen;">请登录</span>
 					</a>
 				</li>
 			</div>
@@ -71,12 +76,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 
 	</div>
-	<div id="hide" style="display: none;position: absolute;z-index: 100;margin-left: 72%;
+	<div th:if="${userInfo.size()!=0}" id="hide" style="display: none;position: absolute;z-index: 100;margin-left: 72%;
     background-color: #fff;width: 250px;height:300px;">
 		<div align="center">
 			<div>
-		<img src = "/Path/523.jpg" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
-		<p>马里奥</p>
+		<img th:src="${userInfo.get(0).icon}" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
+		<p th:text="${userInfo.get(0).nickName}"></p>
 			</div>
 			<div style="line-height: 40px;font-size: 16px;">
 		<a href="/userinfo/">修改信息</a>
@@ -87,9 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 </div>
-
 	<div id="searchBar" style="display:flex;flex-direction:row;justify-content: center;background-color: #fffcd8;min-height:60px;width: 100%;">
-
 		<form action="/welcome/" style="margin-top: 10px;" method="post">
 			<div class="orderSearch">
 				<span>酒店名称：<input  autocomplete="off" value="" class="form-control-s" name="hotelname"></span>
@@ -111,7 +114,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</span>
 			</div>
 			<div class="orderSearch">
-        	<span>星级
+        	<span>星级：
         	<select name="starlevel" class="form-control-s" style="width: 50%;">
 				<option value="6">全部</option>
            	 	<option value="5">5星</option>
