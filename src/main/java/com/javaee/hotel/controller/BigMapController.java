@@ -22,11 +22,15 @@ public class BigMapController {
     public String bigmapHtml() {
         return "bigmap";
     }
-//    @PostMapping(value = "")
-//    public String getallhotel(HttpServletRequest request, Model model){
-//        List<Hotel> hotelList=searchService.searchh();
-//        model.addAttribute("hotels",hotelList);
-//        return "bigmap";
-//    }
-//
+    @PostMapping(value = "")
+    public String getallhotel(HttpServletRequest request, Model model){
+        String hotelname = request.getParameter("hotelname");
+        String city = request.getParameter("city");
+        Integer minPrice = Integer.parseInt(request.getParameter("minPrice"));
+        Integer starlevel = Integer.parseInt(request.getParameter("starlevel"));
+        List<Hotel> hotelList=searchService.searchh(hotelname,minPrice,city,starlevel);
+        model.addAttribute("hotels",hotelList);
+        System.out.println("gethere");
+        return "/bigmap";
+    }
 }

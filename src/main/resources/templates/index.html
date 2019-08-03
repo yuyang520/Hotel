@@ -12,8 +12,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link href="/public/css/style.css" rel='stylesheet' type='text/css' />
 	<link href="/public/css/IndexStyle.css"  rel='stylesheet' type='text/css' />
 	<script src="/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=
+    PFgBspYSe1HEwdM7pd8z0jEA1gG1pYG5"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="Motel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+        Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+	<script type="applijewelleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
 
 	<style>
+		body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
 		.hotelTable{
 		}
 		.largetext{
@@ -24,6 +32,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			display: flex;
 			flex-direction: column;
 		}
+		.tab-chapter{
+			width: 800px;
+		}
+		.largetext{
+			font-size: 20px;
+			color: #a1a1a1;
+		}
+		#allmap{
+			width:100%; height:100%;bottom: 0px;
+		}
+		.mapback{position:fixed; width:30%; height:50%; /*background: #000000;*/
+			z-index: 5; right: 5px;top: 0px;}
+
 		li{list-style: none;}
 	</style>
 	<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
@@ -95,7 +116,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 </div>
-	<div id="searchBar" style="display:flex;flex-direction:row;justify-content: center;background-color: #fffcd8;min-height:60px;width: 100%;">
+	<div id="searchBar" style="display:flex;flex-direction:row;justify-content:
+	center;background-color: #fffcd8;min-height:60px;width: 100%;">
 		<form action="/welcome/" style="margin-top: 10px;" method="post">
 			<div class="orderSearch">
 				<span>酒店名称：<input  autocomplete="off" value="" class="form-control-s" name="hotelname"></span>
@@ -153,7 +175,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</div>
 		</div>
-		<div class="col-md-3" style="padding:0" ><div id="map" style="background-color: yellow;height: 200px;left: 66.666666%;min-width:200px"></div></div>
+		<div class="col-md-3" style="padding:0" >
+			<div id="map" style="height: 300px;left: 66.666666%;min-width:200px">
+				<div style="width: 100%; height: 10%">
+					<div style="width: 20%;height: 100%; float: left;text-align: center">
+						<button style="font-size: 12px;color:#337ab7" onclick="getBigMap()">查看大图</button>
+					</div>
+					<div style="width: 20%;height: 100%; float: right;text-align: center">
+						<button style="font-size: 12px;color:#337ab7"
+								onclick="showOrHideMap()" id="allmapButton">收起地图</button>
+					</div>
+				</div>
+				<div  style="width: 100%; top: 10%; height: 90% ;bottom: 0;">
+					<div id="allmap" ></div>
+				</div>
+			</div>
+		</div>
 		<div class="col-md-1" style="padding:0"></div>
 	</div>
 <div align="center" th:if="${hotels.size()} == 0"><img align="center" src="/public/images/nohotel.png"></div>
@@ -201,12 +238,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- footer -->
 </body>
-<script>
+<script th:inline="javascript">
 	//点击头像或昵称弹出个人信息框
 	function showInfoCard(){
 		$(document.getElementById("hide")).css("display","block");
 	}
-
+	function showOrHideMap() {
+		if(document.getElementById("allmap").style.display == "none") {
+			document.getElementById("allmap").style.display = "block";
+			$("#allmapButton").html("收起地图");
+		}else {
+			document.getElementById("allmap").style.display = "none";
+			$("#allmapButton").html("展开地图");
+		}
+	}
+	function getBigMap() {
+		console.info('hello')
+		var Url = "/bigmap?hotelname="+ $("input[name='hotelname']").val()+
+				"&&city="+$("input[name='city']").val()+
+				"&&minPrice="+$("select[name='minPrice']").val()+
+				"&&starlevel="+$("select[name='starlevel']").val();
+		console.info("url="+Url);
+		$.ajax({
+			url:Url,
+			type:"post",
+			success:function (data) {
+				document.write(data);
+			},
+			fail:function () {
+				console.info("fail")
+			}
+		})
+	}
 	//点击document隐藏div
 	$(document).click(function () {
 		$(document.getElementById("hide")).css("display","none");
@@ -215,6 +278,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	$("#hide").click(function(event) {
 		event.stopPropagation(); //阻止事件向上冒泡
 	});
+	var map = new BMap.Map("allmap");
+	var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+	var top_left_navigation = new BMap.NavigationControl(
+			{anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_SMALL}); //右上角，仅包含平移和缩放按钮
+	map.addControl(top_left_control);
+	map.addControl(top_left_navigation);
+	map.centerAndZoom(new BMap.Point(116.331398,39.897445),11);
+	map.enableScrollWheelZoom(true);
+	var data = [[${hotels}]];
+	map.clearOverlays();
+	var opts = {
+		width : 250,     // 信息窗口宽度
+		height: 200,     // 信息窗口高度
+		title : "酒店信息" , // 信息窗口标题
+		enableMessage:true,//设置允许信息窗发送短息
+	}
+	for( let i = 0 ; i < data.length ; i ++ ) {
+		var new_point = new BMap.Point( data[i].hotelLongitude,
+				data[i].hotelLatitude);
+		var marker = new BMap.Marker(new_point);  // 创建标注
+		var content = "酒店名："+ data[i].hotelChineseName + "<br>地址：" +data[i].hotelAddress
+				+"<br>描述:" +data[i].hotelProfile;
+		map.addOverlay(marker);              // 将标注添加到地图中
+
+		map.panTo(new_point);
+		marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+		marker.addEventListener("click",
+				function(e){
+					var p = e.target;
+					var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+					var infoWindow = new BMap.InfoWindow(content, opts);  // 创建信息窗口对象
+					map.openInfoWindow(infoWindow,point); //开启信息窗口
+
+				});
+	}
 	$(window).scroll(function () {
 		var searchBar = $("#searchBar");
 		var map = $("#map");
@@ -239,5 +337,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			map.css('top','');
 		}
 	})
+</script>
+<script type="text/javascript" >
+
+	// 百度地图API功能
+
 </script>
 </html>
