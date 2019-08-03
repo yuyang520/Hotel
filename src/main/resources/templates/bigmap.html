@@ -15,103 +15,114 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <!-- Custom Theme files -->
     <link href="/public/css/style.css" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="/public/css/jquery-ui.small.css" />
+    <script src="/public/js/jquery-ui.js"></script>
     <script src="/public/js/jquery-1.11.1.min.js"></script>
     <style>
         .tab-chapter{
             width: 800px;
         }
-        .largetext{
-            font-size: 20px;
-            color: #a1a1a1;
+        .hotelAttr{
+            font-size: 16px;
+            color: gray;
         }
         #allmap{
             float:left; width:100%; height:100%;
         }
         .sidebar-head {
-            position: fixed;
-            z-index: 5;
-            height: 5%;
+            font-family: Tahoma,Simsun,sans-serif;
             font-size: 16px;
             color: #1a2226;
-
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px 0px;
         }
+        .input-group {
+            margin: 5px 0px;
+        }
+        .tableItem {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .hotelName {
+            font-size: 18px;
+            font-weight:bold;
+        }
+        a:hover {text-decoration:underline;}
 
     </style>
     <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
 </head>
-<body>
-<script th:inline="javascript">
-    var hotel = [[${hotels}]];
-    console.info(hotel);
-</script>
-
-<div style="width: 100%;height: 100%">
-    <div style="width: 100%; height: 10%;top: 0px;background:#d9edf7; position: fixed;z-index: 4">
-        <div>
-            <div class="col-md-10 dropdown-buttons">
-                <div class="col-md-3 dropdown-button">
-                    <div class="input-group">
-                        <input autocomplete="off" class="form-control has-dark-background"
-                               name="hotelname" id="hotelname" placeholder="酒店名称：" type="text">
-                    </div>
+<body style="width: 100%;height: 100%;display: flex;flex-direction: column">
+    <script th:inline="javascript">
+        var hotel = [[${hotels}]];
+        console.info(hotel);
+    </script>
+    <!--查询头部-->
+    <div style="width: 100%;background:#F8F8F8;">
+        <div class="col-md-10 dropdown-buttons">
+            <div class="col-md-3 dropdown-button">
+                <div class="input-group">
+                    <input  autocomplete="off" class="form-control has-dark-background"
+                           name="hotelname" id="hotelname" placeholder="酒店名称：" type="text"
+                            style="border: 1px solid #ccc;border-radius: 5px"
+                    >
                 </div>
-                <link rel="stylesheet" href="/public/css/jquery-ui.small.css" />
-                <script src="/public/js/jquery-ui.js"></script>
-                <div class="col-md-3 dropdown-button" >
-                    <div class="input-group">
-                        <input autocomplete="off" class="form-control has-dark-background"
-                               id="minPrice" name="minPrice" type="text" placeholder="最低价格：" >
-                    </div>
-                </div>
-                <div class="col-md-3 dropdown-button">
-                    <div class="input-group">
-                        <input autocomplete="off" class="form-control has-dark-background"
-                               id="city" name="city" type="text" placeholder="城市：">
-                    </div>
-                </div>
-                <div class="col-md-3 dropdown-button" >
-                    <div class="select_1">
-                        <select id="starlevel" name="starlevel"  class="frm-field required">
-                            <option value="6">全部</option>
-                            <option value="5">5星</option>
-                            <option value="4">4星</option>
-                            <option value="3">3星</option>
-                            <option value="2">2星</option>
-                            <option value="1">1星</option>
-                            <option value="0">无星级</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="clearfix"> </div>
             </div>
-            <div class="col-md-2 submit_button">
-                <button value="查询" onclick="theLocation()">查询</button>
+            <div class="col-md-3 dropdown-button" >
+                <div class="input-group">
+                    <input autocomplete="off" class="form-control has-dark-background"
+                           id="minPrice" name="minPrice" type="text" placeholder="最低价格："
+                           style="border: 1px solid #ccc;border-radius: 5px">
+                </div>
             </div>
+            <div class="col-md-3 dropdown-button">
+                <div class="input-group">
+                    <input  autocomplete="off" class="form-control has-dark-background"
+                           id="city" name="city" type="text" placeholder="城市："
+                            style="border: 1px solid #ccc;border-radius: 5px">
+                </div>
+            </div>
+            <div class="col-md-3 dropdown-button" >
+                <div class="input-group">
+                    <select id="starlevel" name="starlevel"  class="frm-field required"
+                            style="border: 1px solid #ccc;border-radius: 5px">
+                        <option value="6">全部</option>
+                        <option value="5">5星</option>
+                        <option value="4">4星</option>
+                        <option value="3">3星</option>
+                        <option value="2">2星</option>
+                        <option value="1">1星</option>
+                        <option value="0">无星级</option>
+                    </select>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="col-md-2 submit_button" style="height:100%;display: flex;flex-direction: row;align-items: center">
+            <button style="background-color: #6568ff;color: #fff;border:1px solid #6568ff;border-radius: 5px" value="查询" onclick="theLocation()">查询</button>
         </div>
     </div>
-    <div style="width: 100%;height: 90%; top: 10%;position: fixed;">
+    <!--地图与滚动栏整体-->
+    <div style="width: 100%;flex:1">
         <div style=" width:100%;height:100%;display: flex;flex-direction: row;align-content: center">
-            <div style="flex:7">
+            <!--地图-->
+            <div style="flex:10">
                 <div id="allmap" ></div>
             </div>
-            <div style="flex:3;">
+            <!--滚动栏-->
+            <div style="flex:3;display: flex;flex-direction: column;">
                 <div class="sidebar-head">
-                    <span style="color: #1a2226;font-size: 20px">查询到酒店<span id="hotelNumber"></span>个</span>
+                    <span style="color: #1a2226;">查询到酒店<span id="hotelNumber"></span>个</span>
                 </div>
-                <div style="position:fixed;overflow: auto;top:15%;height: 85%;width:30%">
+                <div style="flex:1px;overflow: auto">
                     <table id="hotelTable" class="table-hover"  align="center"></table>
                 </div>
             </div>
         </div>
-
-        <div style="width: 30%; height: 100%; float: right;"></div>
-
     </div>
-</div>
-
-
-
-
 </body>
 </html>
 <script type="text/javascript" >
@@ -163,19 +174,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     for( let i = 0 ; i < data.length ; i ++ ) {
         htmlString +=
             "<tr>"
-            +"<td class='tab-chapter'>"
-            +"<div style='left: auto'>"
-            +"<h2 style='color: #92B8B1;'>"+data[i].hotelChineseName+"</h2><br/>"
-            +"<span class='largetext'>地址：</span><span class='largetext' "
+            +"<td class='tab-chapter' style='padding-left: 10px;padding-right: 10px'>"
+            +"<div class='tableItem'>"
+            +"<a href=\'/welcome/details?hotelId="+data[i].hotelId+"\' class='hotelName' style='color: #6568ff;'>"+data[i].hotelChineseName+"</a><br/>"
+            +"<span class='hotelAttr'>地址：</span><span class='hotelAttr' "
             +">"+data[i].hotelAddress+"</span><br/>"
-            +"<span class='largetext'>星级：</span><span class='largetext'>";
+            +"<span class='hotelAttr'>星级：</span><span class='hotelAttr'>";
         for( let j = 0 ; j < data[i].hotelStars ; j ++ ) {
             htmlString+="<img src='/public/images/star.png' style='height: 20px; width: 20px;'>";
         }
         htmlString += "</span><br/>"
-            +"<span class='largetext'>联系方式：</span><span class='largetext' >"+data[i].hotelContact+"</span><br/>"
-            +"<br/><a class='hvr-shutter-in-horizontal'"
-            +"href=\'/welcome/details?hotelId="+data[i].hotelId+"\'>预订</a>"
+            +"<span class='hotelAttr'>联系方式：</span><span class='hotelAttr' >"+data[i].hotelContact+"</span><br/>"
             +"</div> </td> </tr>";
 
     }
@@ -224,20 +233,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 var htmlString = "";
                 for( let i = 0 ; i < data.length ; i ++ ) {
                     htmlString +=
-                         "<tr>"
-                        +"<td class='tab-chapter'>"
-                        +"<div style='left: auto'>"
-                        +"<h2 style='color: #92B8B1;'>"+data[i].hotelChineseName+"</h2><br/>"
-                        +"<span class='largetext'>地址：</span><span class='largetext' "
+                        "<tr>"
+                        +"<td class='tab-chapter' style='padding-left: 10px;padding-right: 10px'>"
+                        +"<div class='tableItem'>"
+                        +"<a href=\'/welcome/details?hotelId="+data[i].hotelId+"\' class='hotelName' style='color: #6568ff;'>"+data[i].hotelChineseName+"</a><br/>"
+                        +"<span class='hotelAttr'>地址：</span><span class='hotelAttr' "
                         +">"+data[i].hotelAddress+"</span><br/>"
-                        +"<span class='largetext'>星级：</span><span class='largetext'>";
+                        +"<span class='hotelAttr'>星级：</span><span class='hotelAttr'>";
                     for( let j = 0 ; j < data[i].hotelStars ; j ++ ) {
                         htmlString+="<img src='/public/images/star.png' style='height: 20px; width: 20px;'>";
                     }
                     htmlString += "</span><br/>"
-                        +"<span class='largetext'>联系方式：</span><span class='largetext' >"+data[i].hotelContact+"</span><br/>"
-                        +"<br/><a class='hvr-shutter-in-horizontal'"
-                        +"href=\'/welcome/details?hotelId="+data[i].hotelId+"\'>预订</a>"
+                        +"<span class='hotelAttr'>联系方式：</span><span class='hotelAttr' >"+data[i].hotelContact+"</span><br/>"
                         +"</div> </td> </tr>";
 
                 }
