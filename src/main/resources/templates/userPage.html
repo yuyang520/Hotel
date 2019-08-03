@@ -74,9 +74,10 @@
         <form action="" method="post">
             <li class="">
                 <div id="fileImgs1">
-                    <input type="file"  name="icon">
-                    <img class="img-circle" style="height: 200px;width:200px" th:src="${userInfo.get(0).icon}">
-                    <img class="img-circle" style="height: 200px;width:200px" src="">
+                    <input type="file"  name="icon" onmouseover="showthis()" onmouseout="hidethis()">
+                    <img class="img-circle" style="height: 200px;width:200px;position: relative;" th:src="${userInfo.get(0).icon}">
+                    <img id="iconEdit" class="img-circle" style="display:none;height: 200px;width:200px;position:absolute;z-index:10;left:115px;"
+                         src="/public/images/iconEdit.png" >
                 </div>
             </li>
             <li class="" style="display: flex;flex-direction: row;">
@@ -133,7 +134,7 @@
         //设置input 大小和图片一致
         cdfile.css({'width':cdimg.css('width'),'height':cdimg.css('height')});
         //input透明度为0,定位，优先级比图片高
-        cdfile.css({'opacity':0,'position':'absolute','z-index':10});
+        cdfile.css({'opacity':0,'position':'absolute','z-index':11});
         //判断input的图片文件改变则img的图片也替换为input选择的图片
         cdfile.change(function() {
             if (this.files && this.files[0]) {
@@ -144,5 +145,11 @@
             }
         });
     })
+    function showthis() {
+        $("#iconEdit").css('display','')
+    }
+    function hidethis() {
+        $("#iconEdit").css('display','none')
+    }
 </script>
 </html>

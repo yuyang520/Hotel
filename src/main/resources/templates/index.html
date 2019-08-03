@@ -77,17 +77,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	</div>
 	<div th:if="${userInfo.size()!=0}" id="hide" style="display: none;position: absolute;z-index: 100;margin-left: 72%;
-    background-color: #fff;width: 250px;height:300px;">
+    background-color: #fff;width: 200px;height:286px;">
 		<div align="center">
 			<div>
 		<img th:src="${userInfo.get(0).icon}" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
-		<p th:text="${userInfo.get(0).nickName}"></p>
+		<p style="margin-top: 10px;font-size: 16px;" th:text="${userInfo.get(0).nickName}"></p>
 			</div>
-			<div style="line-height: 40px;font-size: 16px;">
-		<a href="/userinfo/">修改信息</a>
+			<div style="margin-top:20px;line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
+				<a href="/userinfo/">修改信息</a>
 			</div>
-			<div style="line-height: 40px;font-size: 16px;">
-		<a href="/myorder/">我的订单</a>
+			<div style="line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
+				<a href="/myorder/">我的订单</a>
+			</div>
+			<div style="line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
+				<a href="#">退出</a>
 			</div>
 		</div>
 	</div>
