@@ -30,7 +30,7 @@ public class AddHotelAndRoomInterceptor implements HandlerInterceptor {
         Manager manager = managerMapper.selectByPrimaryKey(username.toString());
         String privilege = manager.getPrivilege().toString();
         if( privilege.equals("1")){
-            response.sendRedirect("/MOrderlist");
+            response.sendRedirect("/tip");
             return false;
         }else {
             return true;

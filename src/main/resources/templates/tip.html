@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+</head>
+<body>
+<div id="test">权限不足，</div>
+<a onclick="turnToMOrderList()">点击返回订单页面</a>
+<script>
+    // $(document).ready(function(){        //页面加载完之后，自动执行该方法
+    //     setTimeout(function(){
+    //         $("#test").hide();
+    //         window.location.href = "/MOrderlist";
+    //     },2000);        //2秒后执行该方法
+    // });
+
+    function turnToMOrderList() {
+        window.location.href = "/MOrderlist";
+    }
+</script>
+</body>
+</html>
+

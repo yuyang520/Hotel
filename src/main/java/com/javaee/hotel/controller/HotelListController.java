@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+
 @Controller
 @RequestMapping("/hotelList")
 public class HotelListController {
@@ -82,5 +83,7 @@ public class HotelListController {
         session.invalidate();
         return true;
     }
+
+
 
 }
