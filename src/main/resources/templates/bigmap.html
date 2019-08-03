@@ -120,12 +120,67 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     var map = new BMap.Map("allmap");
     var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
     var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+    var data = hotel;
     map.addControl(top_left_control);
     map.addControl(top_left_navigation);
+    if(data.length!=0) {
+        map.centerAndZoom(new BMap.Point(data[0].hotelLongitude,data[0].hotelLatitude),11);
+    }else{
+        map.centerAndZoom(new BMap.Point(116.331398,39.897445),11);
+    }
 
-    map.centerAndZoom(new BMap.Point(116.331398,39.897445),11);
     map.enableScrollWheelZoom(true);
 
+    map.clearOverlays();
+    var opts = {
+        width : 250,     // 信息窗口宽度
+        height: 200,     // 信息窗口高度
+        title : "酒店信息" , // 信息窗口标题
+        enableMessage:true,//设置允许信息窗发送短息
+    }
+    for( let i = 0 ; i < data.length ; i ++ ) {
+        var new_point = new BMap.Point( data[i].hotelLongitude,
+            data[i].hotelLatitude);
+        var marker = new BMap.Marker(new_point);  // 创建标注
+        var content = "酒店名："+ data[i].hotelChineseName + "<br>地址：" +data[i].hotelAddress
+            +"<br>描述:" +data[i].hotelProfile;
+        map.addOverlay(marker);              // 将标注添加到地图中
+
+        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+        marker.addEventListener("click",
+            function(e){
+                var p = e.target;
+                var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+                var infoWindow = new BMap.InfoWindow(content, opts);  // 创建信息窗口对象
+                map.openInfoWindow(infoWindow,point); //开启信息窗口
+
+            });
+    }
+
+    var hotelTab = $("#hotelTable");
+    hotelTab.empty();
+    var htmlString = "";
+    for( let i = 0 ; i < data.length ; i ++ ) {
+        htmlString +=
+            "<tr>"
+            +"<td class='tab-chapter'>"
+            +"<div style='left: auto'>"
+            +"<h2 style='color: #92B8B1;'>"+data[i].hotelChineseName+"</h2><br/>"
+            +"<span class='largetext'>地址：</span><span class='largetext' "
+            +">"+data[i].hotelAddress+"</span><br/>"
+            +"<span class='largetext'>星级：</span><span class='largetext'>";
+        for( let j = 0 ; j < data[i].hotelStars ; j ++ ) {
+            htmlString+="<img src='/public/images/star.png' style='height: 20px; width: 20px;'>";
+        }
+        htmlString += "</span><br/>"
+            +"<span class='largetext'>联系方式：</span><span class='largetext' >"+data[i].hotelContact+"</span><br/>"
+            +"<br/><a class='hvr-shutter-in-horizontal'"
+            +"href=\'/welcome/details?hotelId="+data[i].hotelId+"\'>预订</a>"
+            +"</div> </td> </tr>";
+
+    }
+    hotelTab.append(htmlString);
+    $("#hotelNumber").html(data.length);
     function theLocation(){
         Url="/searchmap/map.json?"
             +"hotelname="+$("#hotelname").val()
@@ -190,7 +245,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 $("#hotelNumber").html(data.length);
             }
         })
-
     }
-
 </script>

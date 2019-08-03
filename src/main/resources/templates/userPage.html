@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <title>个人信息</title>
     <link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <script src="/public/js/jquery-1.11.1.min.js"></script>
     <style>
-        li{list-style: none;
-        margin-top: 30px;
-        margin-left: 100px;}
+        li{
+            list-style: none;
+            margin-top: 30px;
+            margin-left: 100px;
+        }
+        label{
+            width:80px;
+        }
     </style>
 </head>
 <body>
@@ -34,9 +40,9 @@
             </a>
         </div>
     </div>
-    <div class="col-md-5" style="border: 2px solid #00CCFF;height: 650px;">
+    <div id="information" class="col-md-5" style="border: 2px solid #00CCFF;height: 650px;">
         <li class="">
-            <img class="img-circle" style="height: 200px;width:200px" src="/Path/523.jpg">
+            <img class="img-circle" style="height: 200px;width:200px" th:src="${userInfo.get(0).icon}">
         </li>
         <li class="" >
             <label class="">昵称</label>
@@ -61,9 +67,89 @@
             <a class="" href = "#" target="_self">修改</a>
         </li>
         <li>
-            <button>编辑</button>
+            <button onclick="showEdit()">编辑</button>
         </li>
+    </div>
+    <div id="edit" class="col-md-5" style="border: 2px solid #00CCFF;height: 650px;display: none">
+        <form action="" method="post">
+            <li class="">
+                <div id="fileImgs1">
+                    <input type="file"  name="icon" onmouseover="showthis()" onmouseout="hidethis()">
+                    <img class="img-circle" style="height: 200px;width:200px;position: relative;" th:src="${userInfo.get(0).icon}">
+                    <img id="iconEdit" class="img-circle" style="display:none;height: 200px;width:200px;position:absolute;z-index:10;left:115px;"
+                         src="/public/images/iconEdit.png" >
+                </div>
+            </li>
+            <li class="" style="display: flex;flex-direction: row;">
+                <label class="">昵称</label>
+                <input class="form-control" style="width:200px;" name="nickName" >
+            </li>
+            <li class="" style="display: flex;flex-direction: row;">
+                <label class="">姓名</label>
+                <input class="form-control" style="width:200px;" name="realName">
+            </li>
+            <li class="" style="display: flex;flex-direction: row;">
+                <label class="">身份证号</label>
+                <input class="form-control" style="width:200px;" name="personId">
+            </li>
+            <li class="" >
+                <label class="">手机</label>
+                <span th:text="${userInfo.get(0).telephone}"></span>
+                <a class="" href = "#" target="_self">修改</a>
+            </li>
+            <li >
+                <label >邮箱</label>
+                <span th:text="${userInfo.get(0).email}"></span>
+                <a class="" href = "#" target="_self">修改</a>
+            </li>
+            <li>
+                <input class="btn" type="submit">
+            </li>
+        </form>
     </div>
 </div>
 </body>
+<script>
+    function showEdit(){
+        $("#information").css('display','none');
+        $("#edit").css('display','');
+    }
+    $(function() {
+        //建立一個可存取到該file的url
+        function getObjectURL(file) {
+            var url = null;
+            if (window.createObjectURL != undefined) { // basic
+                url = window.createObjectURL(file);
+            } else if (window.URL != undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file);
+            } else if (window.webkitURL != undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file);
+            }
+            return url;
+        }
+        //获取点击的图片元素
+        var cdimg  = $('#fileImgs1').children('img');
+        //获取上传图片的 input 标签元素
+        var cdfile = $('#fileImgs1').children('input[type="file"]');
+        //设置input 大小和图片一致
+        cdfile.css({'width':cdimg.css('width'),'height':cdimg.css('height')});
+        //input透明度为0,定位，优先级比图片高
+        cdfile.css({'opacity':0,'position':'absolute','z-index':11});
+        //判断input的图片文件改变则img的图片也替换为input选择的图片
+        cdfile.change(function() {
+            if (this.files && this.files[0]) {
+                var objUrl = getObjectURL(this.files[0]);
+                if (objUrl) {
+                    $(this).siblings('img').attr("src", objUrl);
+                }
+            }
+        });
+    })
+    function showthis() {
+        $("#iconEdit").css('display','')
+    }
+    function hidethis() {
+        $("#iconEdit").css('display','none')
+    }
+</script>
 </html>

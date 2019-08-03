@@ -33,4 +33,11 @@ public class LoginController {
             return "/login";
         }
     }
+    @PostMapping(value = "/logout")
+    public String logOut(HttpSession session) {
+        if( session.getAttribute("id")!=null) {
+            session.removeAttribute("id");
+        }
+        return "redirect:/welcome";
+    }
 }
