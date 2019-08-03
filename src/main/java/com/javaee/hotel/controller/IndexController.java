@@ -35,12 +35,16 @@ public class IndexController {
         return "index";
     }
     @PostMapping(value = "")
-    public String searchHotel(HttpServletRequest request, Model model){
+    public String searchHotel(HttpServletRequest request, Model model,HttpSession session){
         String hotelname = request.getParameter("hotelname");
         String city = request.getParameter("city");
         Integer minPrice = Integer.parseInt(request.getParameter("minPrice"));
         Integer starlevel = Integer.parseInt(request.getParameter("starlevel"));
-
+        int id = 0;
+        if(session.getAttribute("id")!=null){
+            id = Integer.parseInt(session.getAttribute("id").toString());
+        }
+        model.addAttribute("userInfo",userService.getNowUser(id));
         List<Hotel> hotelList=searchService.searchh(hotelname,minPrice,city,starlevel);
         model.addAttribute("hotels",hotelList);
         return "index";
