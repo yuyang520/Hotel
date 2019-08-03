@@ -10,6 +10,7 @@ public class  LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler)throws Exception{
+        try{
 //        System.out.println("PRE"+request.getRequestURL());
         Object username = request.getSession().getAttribute("username");
         if(username != null){
@@ -18,11 +19,19 @@ public class  LoginInterceptor implements HandlerInterceptor {
             response.sendRedirect("/ManagerLogin");
             return false;
         }
+    }catch(java.lang.NullPointerException e){
+            response.sendRedirect("/ManagerLogin");
+        }
+        return false;
     }
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)throws Exception{
+
+
+
+
+//    @Override
+//    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)throws Exception{
 //        System.out.println("POST"+request.getRequestURL());
-    }
+//    }
 //    @Override
 //    public void afterCompletion(HttpServletRequest request,HttpServletResponse response,Object handler ,Exception ex)throws Exception{
 ////        System.out.println("AFTER"+request.getRequestURL());
