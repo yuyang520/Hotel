@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" style="height: 100%;width: 100%;">
 <head>
     <title>Details</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
     <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
 </head>
 
-<body>
+<body style="height:100%;display:flex;flex-direction: column">
 <script th:inline="javascript">
 	var roomDetailList = [[${roomDetailList}]];
 	var hotelId = [[${hotelId}]];
@@ -87,7 +87,7 @@
 </div>
 <!-- banner -->
 <!-- details -->
-<div class="details">
+<div class="details" style="flex: 1;padding:10px 0px;">
 		<div class="container border" style="margin:0px 30px"  th:each="roomDetail:${roomDetailList}" >
 			<div style="margin-top: 10px;margin-bottom: 10px">
 				<div class="col-md-5 details-left">

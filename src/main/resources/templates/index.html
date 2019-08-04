@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" style="height: 100%">
 <head>
 	<title>Home</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,6 +19,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 	<script type="applijewelleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+	<script src="/public/js/map.js"></script>
 
 	<style>
 		body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
@@ -31,6 +32,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		.body {
 			display: flex;
 			flex-direction: column;
+			height: 100%;
 		}
 		.tab-chapter{
 			width: 800px;
@@ -42,9 +44,58 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		#allmap{
 			width:100%; height:100%;bottom: 0px;
 		}
-		.mapback{position:fixed; width:30%; height:50%; /*background: #000000;*/
-			z-index: 5; right: 5px;top: 0px;}
-
+		.marker {
+			background:url(/public/images/marker.png);
+			background-repeat:no-repeat;
+			height:43px;
+			width:33px;
+			color:#fff;
+            font-size: 16px;
+            text-align: center;
+            line-height: 32px;
+            font-weight: bold;
+		}
+        .marker:hover {
+            background:url(/public/images/marker.png) no-repeat 0px -45px;
+            height:43px;
+            width:33px;
+            color:#fff;
+            font-size: 16px;
+            text-align: center;
+            line-height: 32px;
+            font-weight: bold;
+        }
+        .hotelMarkerBlue {
+            display: inline-block;
+            width: 20px;
+            height: 23px;
+            background: url(/public/images/marker.png) no-repeat 0 -363px;
+            font-family: tahoma;
+            font-weight: bold;
+            font-size: 12px;
+            color: #fff;
+            line-height: 20px;
+            text-align: center;
+            vertical-align: 2px;
+        }
+        .hotelMarkerBlue:hover {
+            display: inline-block;
+            width: 20px;
+            height: 23px;
+            background: url(/public/images/marker.png) no-repeat 0 -387px;
+            font-family: tahoma;
+            font-weight: bold;
+            font-size: 12px;
+            color: #fff;
+            line-height: 20px;
+            text-align: center;
+            vertical-align: 2px;
+        }
+        .hotelName {
+            font-size: 20px;
+            font-weight: bold;
+            color: #6568ff;
+        }
 		li{list-style: none;}
 	</style>
 	<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
@@ -117,7 +168,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 	<div id="searchBar" style="display:flex;flex-direction:row;justify-content:
-	center;background-color: #fffcd8;min-height:60px;width: 100%;">
+	center;background-color: #F8F8F8;min-height:60px;width: 100%;">
 		<form action="/welcome/" style="margin-top: 10px;" method="post">
 			<div class="orderSearch">
 				<span>酒店名称：<input  autocomplete="off" value="" class="form-control-s" name="hotelname"></span>
@@ -152,22 +203,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         	</span>
 			</div>
 			<div class="orderSearch">
-				<input  type="submit" style=" border:none;background-color:#fff;height:38px; width: 80px;border-radius: 4px;" value="查询">
+				<input  type="submit" style=" border:none;background-color:#6568ff;color:#fff;height:38px; width: 80px;border-radius: 4px;" value="查询">
 			</div>
 		</form>
 		<div style="position: relative"></div>
 	</div>
 <!--body-->
-<div style="width:100%;">
+<div style="width:100%;flex: 1">
 	<div style="display: flex;flex-direction: row">
 		<div class="col-md-1 " style="background-color: white;padding:0;"></div>
 		<div  class="hotelTable col-md-7" style="padding:0;padding-right: 10px;">
+			<div align="center" th:if="${hotels.size()} == 0"><img style="max-width: 100%" src="/public/images/nohotel.png"></div>
 			<div th:each="hotel : ${hotels}" style="display:flex; flex-direction:row;flex-wrap:wrap;padding-bottom:25px;margin-bottom:25px;border-bottom: 1px solid #ccc;">
 				<div>
 					<img th:src="${hotel.picture}" class="img-responsive" style="width: 300px;margin-right: 50px;" alt="">
 				</div>
 				<div style="width: 300px;">
-					<h2 th:text="${hotel.hotelChineseName}" style="color: #92B8B1;"></h2><br/>
+                    <div>
+                        <span class="hotelMarkerBlue" th:text="${hotelStat.index+1}"></span>
+                        <span th:text="${hotel.hotelChineseName}" class="hotelName"></span>
+                    </div>
 					<span class="largetext">地址：</span><span class="largetext" th:text="${hotel.hotelAddress}"></span><br/>
 					<span class="largetext">星级：</span><span class="largetext" th:each="i:${#numbers.sequence(1,hotel.hotelStars)}"><img src="/public/images/star.png" style="height: 20px; width: 20px;"></span><br/>
 					<span class="largetext">联系方式：</span><span class="largetext" th:text="${hotel.hotelContact}"></span><br/>
@@ -177,11 +232,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="col-md-3" style="padding:0" >
 			<div id="map" style="height: 300px;left: 66.666666%;min-width:200px">
-				<div style="width: 100%; height: 10%">
-					<div style="width: 20%;height: 100%; float: left;text-align: center">
+				<div style="width: 100%; height: 10%;display: flex;flex-direction: row;">
+					<div style="width: 20%;height: 100%;text-align: center">
 						<a th:href="${bigmapUrl}"><button style="font-size: 12px;color:#337ab7">查看大图</button></a>
 					</div>
-					<div style="width: 20%;height: 100%; float: right;text-align: center">
+					<div style="width: 60%;padding-left: 30%;display: flex;flex-direction: row;align-items: center">
+						<input id="mapFollower" checked="true" style="margin: 0" type="checkbox" onclick="mapFollow(this)">
+						<span style="font-size: 14px;color: black"  >跟随浮动</span>
+					</div>
+					<div style="width: 20%;height: 100%;text-align: center">
 						<button style="font-size: 12px;color:#337ab7"
 								onclick="showOrHideMap()" id="allmapButton">收起地图</button>
 					</div>
@@ -193,7 +252,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="col-md-1" style="padding:0"></div>
 	</div>
-<div align="center" th:if="${hotels.size()} == 0"><img align="center" src="/public/images/nohotel.png"></div>
 </div>
 <!-- footer -->
 <div class="footer">
@@ -252,6 +310,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			$("#allmapButton").html("展开地图");
 		}
 	}
+	function mapFollow(follower) {
+		if(!follower.checked) {
+			var map = $("#map");
+			if($(window).scrollTop()>90){
+				map.css('width','');
+				map.css('position','');
+				map.css('z-index','');
+				map.css('top','');
+			}
+		}
+
+	}
 	//点击document隐藏div
 	$(document).click(function () {
 		$(document.getElementById("hide")).css("display","none");
@@ -279,13 +349,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	for( let i = 0 ; i < data.length ; i ++ ) {
 		var new_point = new BMap.Point( data[i].hotelLongitude,
 				data[i].hotelLatitude);
-		var marker = new BMap.Marker(new_point);  // 创建标注
+        var marker = addIntoMap(map,new_point,i+1,"marker");
 		var content = "酒店名："+ data[i].hotelChineseName + "<br>地址：" +data[i].hotelAddress
 				+"<br>描述:" +data[i].hotelProfile;
-		map.addOverlay(marker);              // 将标注添加到地图中
-
 		map.panTo(new_point);
-		marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+		// marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
 		marker.addEventListener("click",
 				function(e){
 					var p = e.target;
@@ -298,17 +366,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	$(window).scroll(function () {
 		var searchBar = $("#searchBar");
 		var map = $("#map");
+		var follower = $("#mapFollower");
 		if($(window).scrollTop()>90) {
-
 			searchBar.css('position','fixed');
 			searchBar.css('z-index','10');
 			searchBar.css('top','0');
-
-			map.css('position','fixed');
-			map.css('z-index','10');
-			map.css('top','60px');
-			map.css('width','25%');
-
+			if(follower.prop("checked")) {
+				map.css('position','fixed');
+				map.css('z-index','10');
+				map.css('top','60px');
+				map.css('width','25%');
+			}
 		}else {
 			searchBar.css('position','');
 			searchBar.css('z-index','');
