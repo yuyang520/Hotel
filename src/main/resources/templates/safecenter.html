@@ -26,7 +26,6 @@
             width: 18%;
             line-height: 104px;
             font-size: 14px;
-            padding-left:30px;
         }
         .safeitem3{
             display: flex;
@@ -171,10 +170,10 @@
             <div class="safeitem2"  th:text="${userInfo.telephone}"></div>
             <div class="safeitem3">绑定手机后，您即可使用手机找回密码。
                 为了帐号安全，建议您在更换手机号后第一时间更换绑定手机。</div>
-            <div th:if="${userInfo.telephone!=null}" class="safeitem4"><a href="#">修改</a>
-                <a href="#">解除绑定</a></div>
+            <div th:if="${userInfo.telephone!=null}" class="safeitem4"><a href="/safecenter/modifytel">修改</a>
+                <a href="/safecenter/unsettel">解除绑定</a></div>
             <div th:if="${userInfo.telephone==null}" class="safeitem4">
-                <button class="thisBtn" href="#">设置绑定手机</button>
+                <a class="btn thisBtn" href="/safecenter/settel">设置绑定手机</a>
             </div>
         </div>
         <div class="safeTable">
@@ -184,10 +183,10 @@
                 绑定邮箱</div>
             <div class="safeitem2" th:text="${userInfo.email}"></div>
             <div class="safeitem3">绑定E-mail后，您即可使用E-mail找回密码。</div>
-            <div th:if="${userInfo.email!=null}" class="safeitem4"><a href="#">修改</a>
-                <a href="#">解除绑定</a></div>
+            <div th:if="${userInfo.email!=null}" class="safeitem4"><a href="/safecenter/modifyemail">修改</a>
+                <a href="/safecenter/unsetemail">解除绑定</a></div>
             <div th:if="${userInfo.email==null}" class="safeitem4">
-                <button class="thisBtn" href="#">设置绑定邮箱</button>
+                <a class="btn thisBtn" href="/safecenter/setemail">设置绑定邮箱</a>
             </div>
         </div>
     </div>
