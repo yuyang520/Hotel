@@ -15,8 +15,8 @@ spring:
   mail:
     protocol: smtp
     host: smtp.qq.com
-    username: 1970024754@qq.com
-    password: cpfrxixglvehbdfh
+    username: 2240369235@qq.com
+    password: rxujblljokcbdijb
     default-encoding: utf-8
     properties:
       mail:
@@ -26,3 +26,7 @@ spring:
             enable: true
             required: true
 
+
+  lance:
+    mail:
+      sender: 2240369235@qq.com

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <link href="/public/css/IndexStyle.css"  rel='stylesheet' type='text/css' />
+    <title>绑定邮箱</title>
+    <style>
+        input::-webkit-input-placeholder{
+            color: #cac6cd;
+        }
+    </style>
+    <script src="/public/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+
+<div align="center" class="col-md-8 safeOutDiv" >
+    <div class="col-md-2" style="text-align: right;padding:0;">
+        <span >邮箱：</span><br/>
+        <span >验证码：</span>
+    </div>
+    <div class="col-md-5" style="text-align: left">
+        <form style="justify-content: left;">
+            <input placeholder="常用邮箱" id="email" type="email" name="email"
+                   lay-verify="required" class="form-control-x">
+            <div>
+                <input placeholder="验证码" style="width: 246px;"
+                       id="checkCode" type="text" name="checkCode"
+                       lay-verify="required" class="form-control-x" >
+                <input id ="sendto" class="btn" type="button" value="发送验证码" onclick="submitemil()"
+                       style="margin-bottom: 4px;height:40px;background-color: orange;color: white;">
+            </div>
+
+        </form>
+    </div>
+</div>
+<script>
+    function submitemil() {
+        Url = "/setemail/checkCode?"
+            +"email="+$("#email").val()
+            +"&&checkCode="+$("#checkCode").val()
+        $.ajax({
+            url : Url,
+            type:"post",
+            success:function (check) {
+                console.info(check);
+
+                if ($("#checkCode")==check){
+                    返回成功页面用户设置页面
+                }else {
+                    返回验证码错误刷新页面
+                }
+
+            }
+        })
+
+    }
+</script>
+
+</body>
+</html>
