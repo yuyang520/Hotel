@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.javaee.hotel.domain.OrderList;
 import com.javaee.hotel.domain.Room;
 import com.javaee.hotel.service.RoomService;
+import com.javaee.hotel.service.UserService;
 import com.javaee.hotel.tool.RoomDetail;
 import com.javaee.hotel.tool.RoomItemContent;
 import com.javaee.hotel.tool.RoomItemStaticData;
@@ -27,8 +28,16 @@ import java.util.List;
 public class DetailsController {
     @Autowired
     private RoomService roomService;
+    @Autowired
+    private UserService userService;
+
     @GetMapping(value="")
-    public String detailHtml (Model model, @RequestParam("hotelId") String hotelId) {
+    public String detailHtml (HttpSession session,Model model, @RequestParam("hotelId") String hotelId) {
+        int id = 0;
+        if(session.getAttribute("id")!=null){
+            id = Integer.parseInt(session.getAttribute("id").toString());
+        }
+        model.addAttribute("userInfo",userService.getNowUser(id));
         List<Room> roomList = roomService.getRoomList(hotelId);
         model.addAttribute("leftNumberDeliver",roomService.getDeliver(roomList));
         int length = roomList.size();
@@ -55,16 +64,19 @@ public class DetailsController {
     }
     @PostMapping(value="/postOrder",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public HashMap postOrder(HttpServletRequest request, HttpSession session) {
+    public HashMap postOrder(HttpServletRequest request, HttpSession session,Model model) {
         HashMap hashMap = new HashMap();
         OrderList orderList = new OrderList();
+        int id = 0;
         if(session.getAttribute("id") == null) {
             hashMap.put("isLogin",false);
             return hashMap;
         }else {
             hashMap.put("isLogin",true);
             orderList.setId(Integer.parseInt(session.getAttribute("id").toString()));
+            id = Integer.parseInt(session.getAttribute("id").toString());
         }
+        model.addAttribute("userInfo",userService.getNowUser(id));
         orderList.setName(request.getParameter("name"));
         orderList.setRoomId(request.getParameter("roomId"));
         orderList.setRoomNumber(Byte.parseByte(request.getParameter("roomNumber")));

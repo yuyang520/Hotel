@@ -95,9 +95,10 @@ public class SafeController {
 
     public String hidetel(String tel){
         char[] chartel = tel.toCharArray();
+        chartel[3] = '*';
         chartel[4] = '*';
         chartel[5] = '*';
         chartel[6] = '*';
-        return chartel.toString();
+        return new String(chartel);
     }
 }

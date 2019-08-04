@@ -61,19 +61,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"> </div>
             <div class="infoList" >
                 <!-- User Account: style can be found in dropdown.less -->
-                <li class="dropdown user user-menu" onclick ="showInfoCard()">
+                <li th:if="${userInfo.size()!=0}" class="dropdown user user-menu" onclick ="showInfoCard()">
                     <a  class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="/Path/523.jpg" class="user-image img-circle" alt="User Image" style="height: 50px;width: 50px;">
-                        <span class="hidden-xs" style="color: #fff">马里奥</span>
+                        <img th:src="${userInfo.get(0).icon}" class="user-image img-circle" onerror="javascript:this.src='/public/images/defaulticon.png';" style="height: 50px;width: 50px;">
+                        <span class="hidden-xs" style="color: #fff" th:text="${userInfo.get(0).nickName}"></span>
+                    </a>
+                </li>
+                <li th:if="${userInfo.size()==0}">
+                    <a href="/login/">
+                        <span class="hidden-xs" style="color: lightgreen;">请登录</span>
                     </a>
                 </li>
             </div>
         </div>
     </div>
-    <div id="hide"  style="margin-left: 72%;background-color: #fff;width: 250px;height:300px;display: none;
-										z-index: 100;position: absolute">
-        <a>我的信息</a>
-        <a>jklsjf </a>
+    <div th:if="${userInfo.size()!=0}" id="hide" style="display: none;position: absolute;z-index: 100;margin-left: 72%;
+    background-color: #fff;width: 200px;height:286px;">
+        <div align="center">
+            <div>
+                <img th:src="${userInfo.get(0).icon}" onerror="javascript:this.src='/public/images/defaulticon.png';" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
+                <p style="margin-top: 10px;font-size: 16px;" th:text="${userInfo.get(0).nickName}"></p>
+            </div>
+            <div style="margin-top:20px;line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
+                <a href="/userinfo/">修改信息</a>
+            </div>
+            <div style="line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
+                <a href="/myorder/">我的订单</a>
+            </div>
+            <div style="line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
+                <a href="#">退出</a>
+            </div>
+        </div>
     </div>
 </div>
 <div style="display:flex;flex-direction:row;justify-content: center;background-color: #bcddff;height:61px;">

@@ -17,17 +17,20 @@
             margin: 30px;
         }
         .safeitem1{
+            white-space: nowrap;
             width: 18%;
             line-height: 104px;
             font-size: 18px;
             padding-left:30px;
         }
         .safeitem2{
+            white-space: nowrap;
             width: 18%;
             line-height: 104px;
             font-size: 14px;
         }
         .safeitem3{
+            white-space: normal;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -39,6 +42,7 @@
             padding-right: 10px;
         }
         .safeitem4{
+            white-space: nowrap;
             padding-left:30px;
             width: 18%;
             line-height: 104px;
@@ -87,7 +91,7 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu" onclick ="showInfoCard()">
                     <a  class="dropdown-toggle" data-toggle="dropdown">
-                        <img th:src="${userInfo.icon}" class="user-image img-circle" alt="User Image" style="height: 50px;width: 50px;">
+                        <img th:src="${userInfo.icon}" class="user-image img-circle"  onerror="javascript:this.src='/public/images/defaulticon.png';" style="height: 50px;width: 50px;">
                         <span class="hidden-xs" style="color: #fff" th:text="${userInfo.nickName}"></span>
                     </a>
                 </li>
@@ -98,7 +102,7 @@
         background-color: #fff;width: 200px;height:286px;">
         <div align="center">
             <div>
-                <img th:src="${userInfo.icon}" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
+                <img th:src="${userInfo.icon}" onerror="javascript:this.src='/public/images/defaulticon.png';" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
                 <p style="margin-top: 10px;font-size: 16px;" th:text="${userInfo.nickName}"></p>
             </div>
             <div style="margin-top:20px;line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
@@ -152,7 +156,7 @@
             </a>
         </div>
     </div>
-    <div class="col-md-7" >
+    <div class="col-md-7" style="white-space: nowrap;">
         <div class="safeTable">
             <div class="safeitem1">
                 <img src="/public/images/right.png" style="height: 20px;width: 20px;">
