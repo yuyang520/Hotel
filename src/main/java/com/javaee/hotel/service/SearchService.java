@@ -19,8 +19,18 @@ public class SearchService {
         if(keyword!=""&&keyword!=null) {
             criteria.andHotelChineseNameLike("%" + keyword + "%");
         }
-        if(minPrice!=7){
-            criteria.andMinHotelPriceLessThanOrEqualTo(minPrice);
+        if(minPrice==6){
+            criteria.andMinHotelPriceGreaterThan((float)1000);
+        }else if(minPrice==5){
+            criteria.andMinHotelPriceBetween((float)500,(float)1000);
+        }else if(minPrice==4){
+            criteria.andMinHotelPriceBetween((float)300,(float)500);
+        }else if(minPrice==3){
+            criteria.andMinHotelPriceBetween((float)200,(float)300);
+        }else if(minPrice==2){
+            criteria.andMinHotelPriceBetween((float)100,(float)200);
+        }else if(minPrice==1){
+            criteria.andMinHotelPriceBetween((float)0,(float)100);
         }
         if(city!="" &&keyword!=null){
             criteria.andHotelAddressLike("%"+city+"%");

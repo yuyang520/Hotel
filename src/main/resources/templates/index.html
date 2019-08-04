@@ -34,9 +34,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			flex-direction: column;
 			height: 100%;
 		}
-		.tab-chapter{
-			width: 800px;
-		}
 		.largetext{
 			font-size: 20px;
 			color: #a1a1a1;
@@ -44,27 +41,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		#allmap{
 			width:100%; height:100%;bottom: 0px;
 		}
-		.marker {
-			background:url(/public/images/marker.png);
-			background-repeat:no-repeat;
-			height:43px;
-			width:33px;
-			color:#fff;
-            font-size: 16px;
-            text-align: center;
-            line-height: 32px;
-            font-weight: bold;
-		}
-        .marker:hover {
-            background:url(/public/images/marker.png) no-repeat 0px -45px;
-            height:43px;
-            width:33px;
-            color:#fff;
-            font-size: 16px;
-            text-align: center;
-            line-height: 32px;
-            font-weight: bold;
-        }
         .hotelMarkerBlue {
             display: inline-block;
             width: 20px;
@@ -134,7 +110,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- User Account: style can be found in dropdown.less -->
 				<li th:if="${userInfo.size()!=0}" class="dropdown user user-menu" onclick ="showInfoCard()">
 					<a  class="dropdown-toggle" data-toggle="dropdown">
-						<img th:src="${userInfo.get(0).icon}" class="user-image img-circle" alt="User Image" style="height: 50px;width: 50px;">
+						<img th:src="${userInfo.get(0).icon}" class="user-image img-circle" onerror="javascript:this.src='/public/images/defaulticon.png';" style="height: 50px;width: 50px;">
 						<span class="hidden-xs" style="color: #fff" th:text="${userInfo.get(0).nickName}"></span>
 					</a>
 				</li>
@@ -152,7 +128,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     background-color: #fff;width: 200px;height:286px;">
 		<div align="center">
 			<div>
-		<img th:src="${userInfo.get(0).icon}" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
+		<img th:src="${userInfo.get(0).icon}" onerror="javascript:this.src='/public/images/defaulticon.png';" class="user-image img-circle" style="height: 100px;width: 100px;">
 		<p style="margin-top: 10px;font-size: 16px;" th:text="${userInfo.get(0).nickName}"></p>
 			</div>
 			<div style="margin-top:20px;line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
@@ -297,10 +273,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- footer -->
 </body>
 <script th:inline="javascript">
-	//点击头像或昵称弹出个人信息框
-	function showInfoCard(){
-		$(document.getElementById("hide")).css("display","block");
-	}
 	function showOrHideMap() {
 		if(document.getElementById("allmap").style.display == "none") {
 			document.getElementById("allmap").style.display = "block";
@@ -321,6 +293,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			}
 		}
 
+	}
+	//点击头像或昵称弹出个人信息框
+	function showInfoCard(){
+		$(document.getElementById("hide")).css("display","block");
 	}
 	//点击document隐藏div
 	$(document).click(function () {
