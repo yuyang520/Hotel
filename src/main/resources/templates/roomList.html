@@ -200,6 +200,7 @@
                       <th>房间名称</th>
                       <th>房间英文名</th>
                       <th>房间号</th>
+                      <th>图片浏览</th>
                       <th>更新</th>
                       <th>删除</th>
 
@@ -257,48 +258,75 @@
             layer.close(index);
         });
     }
-
-
     function turnToMOrderList() {
         window.location.href = "/MOrderlist";
     }
-
     function turnToRoomList() {
         window.location.href = "/roomList";
     }
-
     function turnToHotelList() {
         window.location.href = "/hotelList";
     }
-
     function turnToCustomerList() {
         window.location.href = "/customerList";
     }
-
     function  turnToRoomAdd(){
         window.location.href = "/roomList/add";
     }
-
     function turnToHotelAdd() {
         window.location.href = "/hotelList/add";
     }
-
     function turnToManagerLogin() {
         window.location.href = "/ManagerLogin";
     }
-
     function turnToManager() {
         window.location.href = "/manager";
     }
-
-
     function freshTable() {
         table.ajax.reload();
     }
-
     function updateRoom(roomId) {
         window.location.href = "/roomList/edit?roomId="+roomId;
     }
+
+    function showRoom(photo){
+        var html = '<div  id="layer_update_hot" >\n' +
+            '        <div class="box-body">\n' +
+            '            <img src=\"'+photo+'\">\n' +
+            '        </div>\n' +
+            // '        <div class="box-footer">\n' +
+            // '            <button type="button" class="btn btn-default" onclick="layerCancel()">返回</button>\n' +
+            // '        </div>\n' +
+            '</div>'
+        var html1 = '<div >' +
+            '<div class="box-body">\n ' +
+            '   <img src=\"public/images/notFound.png\">' +
+            '</div>' +
+            '</div>'
+        if(photo == 'undefined'){
+            layer.open({
+                type: 1,
+                title: '暂时没有图片呢！！',
+                shadeClose: true,
+                shade: 0.7,
+                area: ['auto','auto'],
+                // content: photo,
+                content: html1,
+            });
+        }else {
+            layer.open({
+                type: 1,
+                title: '房间图片浏览',
+                shadeClose: true,
+                shade: 0.7,
+                area: ['auto', 'auto'],
+                // content: photo,
+                content: html,
+            });
+        }
+    }
+
+
 
     function deleteRoom(roomChineseName,roomId) {
         layer.confirm('是否删除房间名称为'+roomChineseName+'的房间',{icon: 3, title:'提示'},function(index){
@@ -366,6 +394,10 @@ function initTable() {
             {data: 'chineseName'},
             {data: 'englishName'},
             {data: 'roomNo'},
+            {data:null,"render":function (data) {
+                var html='<button class="btn_showRoomPhoto" id="btn_update_hot" onclick="showRoom(\''+data.photo+'\')">查看</button>'
+                    return html;
+                }},
             {data:null,"render":function (data) {
                     var html= '<button class="btn_update" onclick="updateRoom(\''+data.roomId+'\')" >更新</button>'
                     return html;
