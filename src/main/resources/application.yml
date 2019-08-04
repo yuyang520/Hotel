@@ -15,8 +15,8 @@ spring:
   mail:
     protocol: smtp
     host: smtp.qq.com
-    username: 2240369235@qq.com
-    password: rxujblljokcbdijb
+    username: 1970024754@qq.com
+    password: cpfrxixglvehbdfh
     default-encoding: utf-8
     properties:
       mail:
@@ -26,15 +26,3 @@ spring:
             enable: true
             required: true
 
-
-##邮箱服务器地址
-#spring.mail.protocol=smtp
-#spring.mail.host=smtp.qq.com
-#  #邮箱服务器地址
-#spring.mail.username=************@qq.com
-#  #邮箱密码
-#spring.mail.password=***********
-#spring.mail.default-encoding=UTF-8
-#spring.mail.properties.mail.smtp.auth=true
-#spring.mail.properties.mail.smtp.starttls.enable=true
-#spring.mail.properties.mail.smtp.starttls.required=true

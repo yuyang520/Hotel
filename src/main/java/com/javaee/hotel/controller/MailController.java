@@ -1,3 +1,4 @@
+/*
 package com.javaee.hotel.controller;
 
 
@@ -10,12 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Random;
 
 @Controller
-@RequestMapping("/mailtest")
+
 public class MailController {
     @Autowired
     private MailService mailService;
 
-    @RequestMapping(value = {""})
+    @RequestMapping("/safecenter/setemail")
     @ResponseBody
     public String getCheckCode(String email){
         String checkCode = String.valueOf(new Random().nextInt(899999) + 100000);
@@ -28,3 +29,4 @@ public class MailController {
         return checkCode;
     }
 }
+*/
