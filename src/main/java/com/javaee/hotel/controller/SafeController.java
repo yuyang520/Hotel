@@ -30,6 +30,13 @@ public class SafeController {
         model.addAttribute("userInfo",customerInfo);
         return "safecenter";
     }
+    @GetMapping(value = "/modifypwd")
+    public String gomPwdPage(HttpSession session){
+        if(session.getAttribute("id")==null) {
+            return "redirect:/welcome";
+        }
+        return "changepwd";
+    }
 
     public String hidetel(String tel){
         char[] chartel = tel.toCharArray();

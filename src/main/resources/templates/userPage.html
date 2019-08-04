@@ -134,15 +134,15 @@
                 <label class="infoLabel">手机</label>
                 <span th:text="${userInfo.get(0).telephone}" class="infoSpan"></span>
                 <span th:if="${userInfo.get(0).telephone}==null" class="infoSpan">未设置</span>
-                <a th:if="${userInfo.get(0).telephone}!=null" href = "#" target="_self">修改</a>
-                <a th:if="${userInfo.get(0).telephone}==null" href = "#" target="_self">验证</a>
+                <a th:if="${userInfo.get(0).telephone}!=null" href = "/safecenter/" target="_self">修改</a>
+                <a th:if="${userInfo.get(0).telephone}==null" href = "/safecenter/" target="_self">验证</a>
             </li>
             <li class="infoLi" >
                 <label class="infoLabel">邮箱</label>
                 <span th:text="${userInfo.get(0).email}" class="infoSpan"></span>
                 <span th:if="${userInfo.get(0).email}==null" class="infoSpan">未设置</span>
-                <a th:if="${userInfo.get(0).email}!=null" href = "#" target="_self">修改</a>
-                <a th:if="${userInfo.get(0).email}==null" href = "#" target="_self">验证</a>
+                <a th:if="${userInfo.get(0).email}!=null" href = "/safecenter/" target="_self">修改</a>
+                <a th:if="${userInfo.get(0).email}==null" href = "/safecenter/" target="_self">验证</a>
             </li>
             <li class="infoLi">
                 <button onclick="showEdit()">编辑</button>
@@ -179,15 +179,15 @@
                 <label class="infoLabel">手机</label>
                 <span th:text="${userInfo.get(0).telephone}" class="infoSpan"></span>
                 <span th:if="${userInfo.get(0).telephone}==null" class="infoSpan">未设置</span>
-                <a th:if="${userInfo.get(0).telephone}!=null" href = "#" target="_self">修改</a>
-                <a th:if="${userInfo.get(0).telephone}==null" href = "#" target="_self">验证</a>
+                <a th:if="${userInfo.get(0).telephone}!=null" href = "/safecenter/" target="_self">修改</a>
+                <a th:if="${userInfo.get(0).telephone}==null" href = "/safecenter/" target="_self">验证</a>
             </li>
             <li class="infoLi">
                 <label class="infoLabel">邮箱</label>
                 <span th:text="${userInfo.get(0).email}" class="infoSpan"></span>
                 <span th:if="${userInfo.get(0).email}==null" class="infoSpan">未设置</span>
-                <a th:if="${userInfo.get(0).email}!=null" href = "#" target="_self">修改</a>
-                <a th:if="${userInfo.get(0).email}==null" href = "#" target="_self">验证</a>
+                <a th:if="${userInfo.get(0).email}!=null" href = "/safecenter/" target="_self">修改</a>
+                <a th:if="${userInfo.get(0).email}==null" href = "/safecenter/" target="_self">验证</a>
             </li>
             <li class="infoLi">
                 <input class="btn" type="submit" value="保存">

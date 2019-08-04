@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <link href="/public/css/IndexStyle.css"  rel='stylesheet' type='text/css' />
+    <title>修改密码</title>
+    <style>
+        input::-webkit-input-placeholder{
+            color: #cac6cd;
+        }
+    </style>
+</head>
+<body>
+
+    <div align="center" class="col-md-8 safeOutDiv" >
+        <div class="col-md-2" style="text-align: right;padding:0;">
+            <span >当前密码：</span><br/>
+            <span >新密码：</span><br/>
+            <span >确认新密码：</span>
+        </div>
+        <div class="col-md-4" style="text-align: left" >
+            <form style="justify-content: left;">
+                <input placeholder="当前登录密码"  name="oldpwd" class="form-control-x">
+                <input placeholder="8-16位字母、数字和符号" name="newpwd" class="form-control-x">
+                <input placeholder="再次输入密码" name="connewpwd" class="form-control-x">
+                <input class="form-control-s safeBtn" type="submit" value="完成">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

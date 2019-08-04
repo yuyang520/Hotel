@@ -45,6 +45,13 @@
             line-height: 104px;
             font-size: 14px;
         }
+        .thisBtn{
+            color:white;
+            line-height:25px;
+            background-color: #27c;
+            border:1px solid #1256aa;
+            border-radius: 4px;
+        }
         li{list-style: none;}
     </style>
 </head>
@@ -154,7 +161,7 @@
             <div class="safeitem2">建议定期更换</div>
             <div class="safeitem3">安全性高的密码可以使账号更安全。建议您定期更换密码，且设
                 置一个包含数字和字母，并且长度超过8位以上的密码。</div>
-            <div class="safeitem4"><a href="#">修改</a></div>
+            <div class="safeitem4"><a href="/safecenter/modifypwd">修改</a></div>
         </div>
         <div class="safeTable">
             <div class="safeitem1">
@@ -164,8 +171,11 @@
             <div class="safeitem2"  th:text="${userInfo.telephone}"></div>
             <div class="safeitem3">绑定手机后，您即可使用手机找回密码。
                 为了帐号安全，建议您在更换手机号后第一时间更换绑定手机。</div>
-            <div class="safeitem4"><a href="#">修改</a>
+            <div th:if="${userInfo.telephone!=null}" class="safeitem4"><a href="#">修改</a>
                 <a href="#">解除绑定</a></div>
+            <div th:if="${userInfo.telephone==null}" class="safeitem4">
+                <button class="thisBtn" href="#">设置绑定手机</button>
+            </div>
         </div>
         <div class="safeTable">
             <div class="safeitem1">
@@ -174,8 +184,11 @@
                 绑定邮箱</div>
             <div class="safeitem2" th:text="${userInfo.email}"></div>
             <div class="safeitem3">绑定E-mail后，您即可使用E-mail找回密码。</div>
-            <div class="safeitem4"><a href="#">修改</a>
+            <div th:if="${userInfo.email!=null}" class="safeitem4"><a href="#">修改</a>
                 <a href="#">解除绑定</a></div>
+            <div th:if="${userInfo.email==null}" class="safeitem4">
+                <button class="thisBtn" href="#">设置绑定邮箱</button>
+            </div>
         </div>
     </div>
 </div>
