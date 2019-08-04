@@ -19,6 +19,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 	<script type="applijewelleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+	<script src="/public/js/map.js"></script>
 
 	<style>
 		body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
@@ -43,9 +44,58 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		#allmap{
 			width:100%; height:100%;bottom: 0px;
 		}
-		.mapback{position:fixed; width:30%; height:50%; /*background: #000000;*/
-			z-index: 5; right: 5px;top: 0px;}
-
+		.marker {
+			background:url(/public/images/marker.png);
+			background-repeat:no-repeat;
+			height:43px;
+			width:33px;
+			color:#fff;
+            font-size: 16px;
+            text-align: center;
+            line-height: 32px;
+            font-weight: bold;
+		}
+        .marker:hover {
+            background:url(/public/images/marker.png) no-repeat 0px -45px;
+            height:43px;
+            width:33px;
+            color:#fff;
+            font-size: 16px;
+            text-align: center;
+            line-height: 32px;
+            font-weight: bold;
+        }
+        .hotelMarkerBlue {
+            display: inline-block;
+            width: 20px;
+            height: 23px;
+            background: url(/public/images/marker.png) no-repeat 0 -363px;
+            font-family: tahoma;
+            font-weight: bold;
+            font-size: 12px;
+            color: #fff;
+            line-height: 20px;
+            text-align: center;
+            vertical-align: 2px;
+        }
+        .hotelMarkerBlue:hover {
+            display: inline-block;
+            width: 20px;
+            height: 23px;
+            background: url(/public/images/marker.png) no-repeat 0 -387px;
+            font-family: tahoma;
+            font-weight: bold;
+            font-size: 12px;
+            color: #fff;
+            line-height: 20px;
+            text-align: center;
+            vertical-align: 2px;
+        }
+        .hotelName {
+            font-size: 20px;
+            font-weight: bold;
+            color: #6568ff;
+        }
 		li{list-style: none;}
 	</style>
 	<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
@@ -169,7 +219,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<img th:src="${hotel.picture}" class="img-responsive" style="width: 300px;margin-right: 50px;" alt="">
 				</div>
 				<div style="width: 300px;">
-					<h2 th:text="${hotel.hotelChineseName}" style="color: #92B8B1;"></h2><br/>
+                    <div>
+                        <span class="hotelMarkerBlue" th:text="${hotelStat.index+1}"></span>
+                        <span th:text="${hotel.hotelChineseName}" class="hotelName"></span>
+                    </div>
 					<span class="largetext">地址：</span><span class="largetext" th:text="${hotel.hotelAddress}"></span><br/>
 					<span class="largetext">星级：</span><span class="largetext" th:each="i:${#numbers.sequence(1,hotel.hotelStars)}"><img src="/public/images/star.png" style="height: 20px; width: 20px;"></span><br/>
 					<span class="largetext">联系方式：</span><span class="largetext" th:text="${hotel.hotelContact}"></span><br/>
@@ -296,13 +349,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	for( let i = 0 ; i < data.length ; i ++ ) {
 		var new_point = new BMap.Point( data[i].hotelLongitude,
 				data[i].hotelLatitude);
-		var marker = new BMap.Marker(new_point);  // 创建标注
+        var marker = addIntoMap(map,new_point,i+1,"marker");
 		var content = "酒店名："+ data[i].hotelChineseName + "<br>地址：" +data[i].hotelAddress
 				+"<br>描述:" +data[i].hotelProfile;
-		map.addOverlay(marker);              // 将标注添加到地图中
-
 		map.panTo(new_point);
-		marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+		// marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
 		marker.addEventListener("click",
 				function(e){
 					var p = e.target;
