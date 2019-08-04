@@ -2,6 +2,52 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <style type="text/css">
 
+    body{
+        position: relative;
+    }
+    #inform{
+        position: absolute;
+        top: 20px;
+        width: 350px;
+        max-height: 250px;           /* 设置最大高度，当高度达到此值时出现滚动条 */
+        z-index: 10;
+        background-color: #E0E5E5;
+        overflow: auto;              /* 自动添加滚动条 */
+        box-shadow:0px 0px 10px #000;   /* 外阴影 */
+        display: none;   /* 默认隐藏 */
+    }
+    #informTable{
+        table-layout:fixed;         /* 用于实现表格td自动换行的部分代码*/
+        width: 325px;
+    }
+    #informTable tr td{
+        width: 325px;
+        height:30px;
+        font-size: 16px;
+        font-family: Georgia;
+        color: #555555;
+        word-wrap:break-word;   /*自动换行*/
+        padding: 0 0 0 0;
+    }
+    #informTable tr td:hover{
+        background-color: #D9D9D9;
+    }
+    #inform hr {
+        border: 1px;
+        width: 325px;
+        margin-bottom: 0px;
+    }
+
+    #Img1{
+         width:80px;
+         height: 80px;
+     }
+
+    /*#Img1:hover{*/
+        /*width: auto;*/
+        /*height: auto;*/
+    /*}*/
+
     .beInCenter{
         height: 48px;
         line-height: 48px;
@@ -207,7 +253,6 @@
                   </tr>
                   </thead>
               <tbody>
-
               </tbody>
 
   </table>
@@ -285,31 +330,39 @@
     function freshTable() {
         table.ajax.reload();
     }
+
+
     function updateRoom(roomId) {
         window.location.href = "/roomList/edit?roomId="+roomId;
     }
+    
+    function hideRoom() {
+        layer.closeAll();
+    }
 
     function showRoom(photo){
-        var html = '<div  id="layer_update_hot" >\n' +
-            '        <div class="box-body">\n' +
-            '            <img src=\"'+photo+'\">\n' +
-            '        </div>\n' +
+        var html =
+            // '<div  id="layer_update_hot" >\n' +
+            // '        <div class="box-body">\n' +
+            '            <img src=\"'+photo+'\" onclick="hideRoom()" >\n'
+            // '        </div>\n' +
             // '        <div class="box-footer">\n' +
             // '            <button type="button" class="btn btn-default" onclick="layerCancel()">返回</button>\n' +
             // '        </div>\n' +
-            '</div>'
+            // '</div>'
         var html1 = '<div >' +
             '<div class="box-body">\n ' +
-            '   <img src=\"public/images/notFound.png\">' +
+            '   <img src=\"public/images/notFound.png\" onclick="hideRoom()">' +
             '</div>' +
             '</div>'
-        if(photo == 'undefined'){
+        if(photo == 'undefined'  || photo =='/Path/'){
             layer.open({
                 type: 1,
                 title: '暂时没有图片呢！！',
                 shadeClose: true,
                 shade: 0.7,
-                area: ['auto','auto'],
+                closeBtn:1,
+                area:'auto',
                 // content: photo,
                 content: html1,
             });
@@ -319,9 +372,11 @@
                 title: '房间图片浏览',
                 shadeClose: true,
                 shade: 0.7,
-                area: ['auto', 'auto'],
+                closeBtn:1,
+                area:'auto',
                 // content: photo,
                 content: html,
+                // layui:"layui-bg-blue",
             });
         }
     }
@@ -367,6 +422,7 @@ function initTable() {
         'ordering'    : true,
         'info'        : true,
         'autoWidth'   : false,
+
         'stateSave'   :true,
         "language": {
             "paginate": {
@@ -379,6 +435,7 @@ function initTable() {
             "emptyTable":"无可用数据",
             "lengthMenu": "_MENU_ 条/页"
         },
+
         ajax:{
             url:'/roomList/roomList.json',
             type: "GET",
@@ -394,8 +451,12 @@ function initTable() {
             {data: 'chineseName'},
             {data: 'englishName'},
             {data: 'roomNo'},
+            // {data:null,"render":function (data) {
+            //     var html='<button class="btn_showRoomPhoto" id="btn_update_hot" onclick="showRoom(\''+data.photo+'\')">查看</button>'
+            //         return html;
+            //     }},
             {data:null,"render":function (data) {
-                var html='<button class="btn_showRoomPhoto" id="btn_update_hot" onclick="showRoom(\''+data.photo+'\')">查看</button>'
+                    var html ='<img src=\"'+data.photo+'\" id="Img1"  onclick="showRoom(\''+data.photo+'\')" >'
                     return html;
                 }},
             {data:null,"render":function (data) {

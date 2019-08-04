@@ -7,6 +7,11 @@
 
 <style type="text/css">
 
+    #Img1{
+        width:80px;
+        height: 80px;
+    }
+
     .beInCenter{
         height: 48px;
         line-height: 48px;
@@ -290,8 +295,6 @@
     function turnToCustomerList() {
         window.location.href = "/customerList";
     }
-
-
     function  turnToRoomAdd(){
         window.location.href = "/roomList/add";
     }
@@ -312,39 +315,54 @@
         table.ajax.reload();
     }
 
-    function showRoom(photo){
-        var html = '<div  id="layer_update_hot" >\n' +
-            '        <div class="box-body">\n' +
-            '            <img src=\"'+photo+'\">\n' +
-            '        </div>\n' +
+    function hideRoom() {
+        layer.closeAll();
+    }
+
+    function showRoom(picture){
+        var html =
+            // '<div  id="layer_update_hot" >\n' +
+            // '        <div class="box-body">\n' +
+            '            <img src=\"'+picture+'\"  onclick="hideRoom()">\n'
+            // '        </div>\n' +
             // '        <div class="box-footer">\n' +
             // '            <button type="button" class="btn btn-default" onclick="layerCancel()">返回</button>\n' +
             // '        </div>\n' +
-            '</div>'
+            // '</div>'
         var html1 = '<div >' +
             '<div class="box-body">\n ' +
-            '   <img src=\"public/images/notFound.png\">' +
+            '   <img src=\"public/images/notFound.png\" onclick="hideRoom()">' +
             '</div>' +
             '</div>'
-        if(photo == 'undefined'){
+
+        if(picture == 'undefined' || picture =='/Path/'){
+            // console.info(picture);
             layer.open({
                 type: 1,
                 title: '暂时没有图片呢！！',
                 shadeClose: true,
                 shade: 0.7,
-                area: ['auto','auto'],
+                closeBtn:1,
+                area:'auto',
                 // content: photo,
                 content: html1,
             });
         }else {
+            // console.info(picture);
             layer.open({
                 type: 1,
                 title: '房间图片浏览',
                 shadeClose: true,
                 shade: 0.7,
-                area: ['auto', 'auto'],
+                // maxWidth: '60%',
+                // maxHeight:'60%',
+                closeBtn:1,
+                area:'auto',
                 // content: photo,
                 content: html,
+
+
+                // layui:"layui-bg-blue",
             });
         }
     }
@@ -355,6 +373,10 @@
 
     function updateHotel(hotelId) {
         window.location.href = "/hotelList/edit?hotelId="+hotelId;
+    }
+    
+    function showLayer() {
+
     }
 
     function deleteHotel(hotelId) {
@@ -428,8 +450,16 @@ function initTable() {
             {data: 'hotelContact'},
             {data: 'parking'},
             {data: 'hotalEnglishName'},
+            // {data:null,"render":function (data) {
+            //         var html='<button class="btn_showRoomPhoto" id="btn_update_hot" onclick="showRoom(\''+data.photo+'\')">查看</button>'
+            //         return html;
+            //     }},
+            // {data:null,"render":function (data) {
+        //         var html ='<img src=\"'+data.photo+'\" onmouseover="showLayer()">'
+        //         return html;
+        //     }},
             {data:null,"render":function (data) {
-                    var html='<button class="btn_showRoomPhoto" id="btn_update_hot" onclick="showRoom(\''+data.photo+'\')">查看</button>'
+                    var html ='<img src=\"'+data.picture+'\" id="Img1"  onclick="showRoom(\''+data.picture+'\')" >'
                     return html;
                 }},
             {data:null,"render":function (data) {
