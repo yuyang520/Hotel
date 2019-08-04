@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
 
 @Controller
-public class MailController{
+public class MailControlleryy{
 
     @Autowired
     private JavaMailSender mailSender;
