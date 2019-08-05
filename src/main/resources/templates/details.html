@@ -58,10 +58,15 @@
 			<div class="clearfix"> </div>
 			<div class="infoList" >
 				<!-- User Account: style can be found in dropdown.less -->
-				<li class="dropdown user user-menu" onclick ="showInfoCard()" style="list-style: none;">
+				<li th:if="${userInfo.size()!=0}" class="dropdown user user-menu" onclick ="showInfoCard()">
 					<a  class="dropdown-toggle" data-toggle="dropdown">
-						<img src="/Path/523.jpg" class="user-image img-circle" alt="User Image" style="height: 50px;width: 50px;">
-						<span class="hidden-xs" style="color: #fff">马里奥</span>
+						<img th:src="${userInfo.get(0).icon}" class="user-image img-circle" onerror="javascript:this.src='/public/images/defaulticon.png';" style="height: 50px;width: 50px;">
+						<span class="hidden-xs" style="color: #fff" th:text="${userInfo.get(0).nickName}"></span>
+					</a>
+				</li>
+				<li th:if="${userInfo.size()==0}">
+					<a href="/login/">
+						<span class="hidden-xs" style="color: lightgreen;">请登录</span>
 					</a>
 				</li>
 			</div>
@@ -69,18 +74,21 @@
 		</div>
 
 	</div>
-	<div id="hide" style="display: none;position: absolute;z-index: 100;margin-left: 72%;
-    background-color: #fff;width: 250px;height:300px;">
+	<div th:if="${userInfo.size()!=0}" id="hide" style="display: none;position: absolute;z-index: 100;margin-left: 72%;
+    background-color: #fff;width: 200px;height:286px;">
 		<div align="center">
 			<div>
-				<img src = "/Path/523.jpg" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
-				<p>马里奥</p>
+				<img th:src="${userInfo.get(0).icon}" onerror="javascript:this.src='/public/images/defaulticon.png';" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
+				<p style="margin-top: 10px;font-size: 16px;" th:text="${userInfo.get(0).nickName}"></p>
 			</div>
-			<div style="line-height: 40px;font-size: 16px;">
+			<div style="margin-top:20px;line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
 				<a href="/userinfo/">修改信息</a>
 			</div>
-			<div style="line-height: 40px;font-size: 16px;">
+			<div style="line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
 				<a href="/myorder/">我的订单</a>
+			</div>
+			<div style="line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
+				<a href="#">退出</a>
 			</div>
 		</div>
 	</div>
@@ -237,4 +245,18 @@
     </div>
 </div>
 </body>
+<script>
+	//点击头像或昵称弹出个人信息框
+	function showInfoCard(){
+		$(document.getElementById("hide")).css("display","block");
+	}
+	//点击document隐藏div
+	$(document).click(function () {
+		$(document.getElementById("hide")).css("display","none");
+	})
+	//点击div不隐藏div
+	$("#hide").click(function(event) {
+		event.stopPropagation(); //阻止事件向上冒泡
+	});
+</script>
 </html>

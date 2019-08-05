@@ -17,18 +17,20 @@
             margin: 30px;
         }
         .safeitem1{
+            white-space: nowrap;
             width: 18%;
             line-height: 104px;
             font-size: 18px;
             padding-left:30px;
         }
         .safeitem2{
+            white-space: nowrap;
             width: 18%;
             line-height: 104px;
             font-size: 14px;
-            padding-left:30px;
         }
         .safeitem3{
+            white-space: normal;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -40,10 +42,18 @@
             padding-right: 10px;
         }
         .safeitem4{
+            white-space: nowrap;
             padding-left:30px;
             width: 18%;
             line-height: 104px;
             font-size: 14px;
+        }
+        .thisBtn{
+            color:white;
+            line-height:25px;
+            background-color: #27c;
+            border:1px solid #1256aa;
+            border-radius: 4px;
         }
         li{list-style: none;}
     </style>
@@ -81,7 +91,7 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu" onclick ="showInfoCard()">
                     <a  class="dropdown-toggle" data-toggle="dropdown">
-                        <img th:src="${userInfo.icon}" class="user-image img-circle" alt="User Image" style="height: 50px;width: 50px;">
+                        <img th:src="${userInfo.icon}" class="user-image img-circle"  onerror="javascript:this.src='/public/images/defaulticon.png';" style="height: 50px;width: 50px;">
                         <span class="hidden-xs" style="color: #fff" th:text="${userInfo.nickName}"></span>
                     </a>
                 </li>
@@ -92,7 +102,7 @@
         background-color: #fff;width: 200px;height:286px;">
         <div align="center">
             <div>
-                <img th:src="${userInfo.icon}" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
+                <img th:src="${userInfo.icon}" onerror="javascript:this.src='/public/images/defaulticon.png';" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
                 <p style="margin-top: 10px;font-size: 16px;" th:text="${userInfo.nickName}"></p>
             </div>
             <div style="margin-top:20px;line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
@@ -146,7 +156,7 @@
             </a>
         </div>
     </div>
-    <div class="col-md-7" >
+    <div class="col-md-7" style="white-space: nowrap;">
         <div class="safeTable">
             <div class="safeitem1">
                 <img src="/public/images/right.png" style="height: 20px;width: 20px;">
@@ -154,7 +164,7 @@
             <div class="safeitem2">建议定期更换</div>
             <div class="safeitem3">安全性高的密码可以使账号更安全。建议您定期更换密码，且设
                 置一个包含数字和字母，并且长度超过8位以上的密码。</div>
-            <div class="safeitem4"><a href="#">修改</a></div>
+            <div class="safeitem4"><a href="/safecenter/modifypwd">修改</a></div>
         </div>
         <div class="safeTable">
             <div class="safeitem1">
@@ -164,8 +174,11 @@
             <div class="safeitem2"  th:text="${userInfo.telephone}"></div>
             <div class="safeitem3">绑定手机后，您即可使用手机找回密码。
                 为了帐号安全，建议您在更换手机号后第一时间更换绑定手机。</div>
-            <div class="safeitem4"><a href="#">修改</a>
-                <a href="#">解除绑定</a></div>
+            <div th:if="${userInfo.telephone!=null}" class="safeitem4"><a href="/safecenter/modifytel">修改</a>
+                <a href="/safecenter/unsettel">解除绑定</a></div>
+            <div th:if="${userInfo.telephone==null}" class="safeitem4">
+                <a class="btn thisBtn" href="/safecenter/settel">设置绑定手机</a>
+            </div>
         </div>
         <div class="safeTable">
             <div class="safeitem1">
@@ -174,8 +187,11 @@
                 绑定邮箱</div>
             <div class="safeitem2" th:text="${userInfo.email}"></div>
             <div class="safeitem3">绑定E-mail后，您即可使用E-mail找回密码。</div>
-            <div class="safeitem4"><a href="#">修改</a>
-                <a href="#">解除绑定</a></div>
+            <div th:if="${userInfo.email!=null}" class="safeitem4"><a href="/safecenter/modifyemail">修改</a>
+                <a href="/safecenter/unsetemail">解除绑定</a></div>
+            <div th:if="${userInfo.email==null}" class="safeitem4">
+                <a class="btn thisBtn" href="/safecenter/setemail">设置绑定邮箱</a>
+            </div>
         </div>
     </div>
 </div>

@@ -39,19 +39,14 @@ public class RoomController {
         model.addAttribute("roomList",roomService.getRoomList(null));
         return "/roomManage";
     }
-
-
     @GetMapping("/roomList")
     public String MOrderHtml(HttpServletRequest request,
                              HttpServletResponse response,
                              Model model){
         Boolean isLogin = request.getSession().getAttribute("username") !=null ;
         model.addAttribute("isLogin",isLogin);
-
         return "/roomList";
     }
-
-
     @GetMapping(value = "/roomList/roomList.json",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<Room> getRoomJson() {
@@ -59,7 +54,6 @@ public class RoomController {
 //        System.out.println(mOrderService.orderlistRespond());
         return roomService.roomRespond();
     }
-
     @GetMapping("/roomList/add")
     public String goRoomPage(Model model){
         model.addAttribute("room",new Room());
@@ -67,9 +61,6 @@ public class RoomController {
         model.addAttribute("iconList",roomItemStaticData.getDatabaseRoomItemContent());
         return "room-add";
     }
-
-
-
     @PostMapping("/roomList/add")
     public String saveRoom(Room room,HttpServletRequest request){
         String path = request.getParameter("photo");

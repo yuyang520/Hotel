@@ -45,7 +45,7 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu" onclick ="showInfoCard()">
                 <a  class="dropdown-toggle" data-toggle="dropdown">
-                    <img th:src="${userInfo.get(0).icon}" class="user-image img-circle" alt="User Image" style="height: 50px;width: 50px;">
+                    <img th:src="${userInfo.get(0).icon}" class="user-image img-circle" onerror="javascript:this.src='/public/images/defaulticon.png';" style="height: 50px;width: 50px;">
                     <span class="hidden-xs" style="color: #fff" th:text="${userInfo.get(0).nickName}"></span>
                 </a>
             </li>
@@ -56,7 +56,7 @@
     background-color: #fff;width: 200px;height:286px;">
     <div align="center">
         <div>
-            <img th:src="${userInfo.get(0).icon}" class="user-image img-circle" alt="User Image" style="height: 100px;width: 100px;">
+            <img th:src="${userInfo.get(0).icon}" class="user-image img-circle" onerror="javascript:this.src='/public/images/defaulticon.png';" style="height: 100px;width: 100px;">
             <p style="margin-top: 10px;font-size: 16px;" th:text="${userInfo.get(0).nickName}"></p>
         </div>
         <div style="margin-top:20px;line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
@@ -116,7 +116,7 @@
         </div>
         <div style="border-bottom:1px solid #ccc;width:100%;height: 90%;">
             <li class="infoLi">
-                <img class="img-circle" style="height: 200px;width:200px" th:src="${userInfo.get(0).icon}">
+                <img class="img-circle" style="height: 200px;width:200px"  th:src="${userInfo.get(0).icon}" onerror="javascript:this.src='/public/images/defaulticon.png';">
             </li>
             <li class="infoLi" >
                 <label class="infoLabel">昵称</label>
@@ -134,15 +134,15 @@
                 <label class="infoLabel">手机</label>
                 <span th:text="${userInfo.get(0).telephone}" class="infoSpan"></span>
                 <span th:if="${userInfo.get(0).telephone}==null" class="infoSpan">未设置</span>
-                <a th:if="${userInfo.get(0).telephone}!=null" href = "#" target="_self">修改</a>
-                <a th:if="${userInfo.get(0).telephone}==null" href = "#" target="_self">验证</a>
+                <a th:if="${userInfo.get(0).telephone}!=null" href = "/safecenter/" target="_self">修改</a>
+                <a th:if="${userInfo.get(0).telephone}==null" href = "/safecenter/" target="_self">验证</a>
             </li>
             <li class="infoLi" >
                 <label class="infoLabel">邮箱</label>
                 <span th:text="${userInfo.get(0).email}" class="infoSpan"></span>
                 <span th:if="${userInfo.get(0).email}==null" class="infoSpan">未设置</span>
-                <a th:if="${userInfo.get(0).email}!=null" href = "#" target="_self">修改</a>
-                <a th:if="${userInfo.get(0).email}==null" href = "#" target="_self">验证</a>
+                <a th:if="${userInfo.get(0).email}!=null" href = "/safecenter/" target="_self">修改</a>
+                <a th:if="${userInfo.get(0).email}==null" href = "/safecenter/" target="_self">验证</a>
             </li>
             <li class="infoLi">
                 <button onclick="showEdit()">编辑</button>
@@ -158,7 +158,7 @@
             <li class="infoLi">
                 <div id="fileImgs1">
                     <input type="file"  name="icon" onmouseover="showthis()" onmouseout="hidethis()">
-                    <img class="img-circle" style="height: 200px;width:200px;position: relative;" th:src="${userInfo.get(0).icon}">
+                    <img class="img-circle" style="height: 200px;width:200px;position: relative;" th:src="${userInfo.get(0).icon}" onerror="javascript:this.src='/public/images/defaulticon.png';">
                     <img id="iconEdit" class="img-circle" style="display:none;height: 200px;width:200px;position:absolute;z-index:10;left:200px;"
                          src="/public/images/iconEdit.png" >
                 </div>
@@ -179,15 +179,15 @@
                 <label class="infoLabel">手机</label>
                 <span th:text="${userInfo.get(0).telephone}" class="infoSpan"></span>
                 <span th:if="${userInfo.get(0).telephone}==null" class="infoSpan">未设置</span>
-                <a th:if="${userInfo.get(0).telephone}!=null" href = "#" target="_self">修改</a>
-                <a th:if="${userInfo.get(0).telephone}==null" href = "#" target="_self">验证</a>
+                <a th:if="${userInfo.get(0).telephone}!=null" href = "/safecenter/" target="_self">修改</a>
+                <a th:if="${userInfo.get(0).telephone}==null" href = "/safecenter/" target="_self">验证</a>
             </li>
             <li class="infoLi">
                 <label class="infoLabel">邮箱</label>
                 <span th:text="${userInfo.get(0).email}" class="infoSpan"></span>
                 <span th:if="${userInfo.get(0).email}==null" class="infoSpan">未设置</span>
-                <a th:if="${userInfo.get(0).email}!=null" href = "#" target="_self">修改</a>
-                <a th:if="${userInfo.get(0).email}==null" href = "#" target="_self">验证</a>
+                <a th:if="${userInfo.get(0).email}!=null" href = "/safecenter/" target="_self">修改</a>
+                <a th:if="${userInfo.get(0).email}==null" href = "/safecenter/" target="_self">验证</a>
             </li>
             <li class="infoLi">
                 <input class="btn" type="submit" value="保存">

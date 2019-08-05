@@ -7,6 +7,11 @@
 
 <style type="text/css">
 
+    #Img1{
+        width:80px;
+        height: 80px;
+    }
+
     .beInCenter{
         height: 48px;
         line-height: 48px;
@@ -128,23 +133,19 @@
                     <a href="#"  onclick="turnToMOrderList()"><i class="fa fa-link"></i> <span >订单列表</span>
                         <!--<span class="pull-right-container">-->
                 <!--<i class="fa fa-angle-left pull-right"></i>-->
-              </span>
+              <!--</span>-->
                     </a>
                     <!--<ul class="treeview-menu">-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-1</a></li>-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单1-2</a></li>-->
+                    <!--<li><a href="#"><i class = "fa fa-list"></i> 菜单1-1</a></li>-->
+                    <!--<li><a href="#"><i class = "fa fa-list"></i> 菜单1-2</a></li>-->
                     <!--</ul>-->
                 </li>
                 <li class="treeview active">
                     <a href="#" onclick="turnToCustomerList()"><i class="fa fa-link"></i> <span >客户列表</span>
                         <!--<span class="pull-right-container">-->
                 <!--<i class="fa fa-angle-left pull-right"></i>-->
-              </span>
+              <!--</span>-->
                     </a>
-                    <!--<ul class="treeview-menu">-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-1</a></li>-->
-                    <!--<li><a href="#"><i class = "fa fa-certificate"></i> 菜单2-2</a></li>-->
-                    <!--</ul>-->
                 </li>
                 <li class="treeview active">
                     <a href="#" ><i class="fa fa-link"></i> <span >酒店列表</span>
@@ -153,8 +154,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#" onclick="turnToHotelList()"><i class = "fa fa-certificate"></i> 浏览酒店</a></li>
-                        <li><a href="#" onclick="turnToHotelAdd()"><i class = "fa fa-certificate"></i> 添加酒店</a></li>
+                        <li><a href="#" onclick="turnToHotelList()"><i class = "fa fa-list"></i> 浏览酒店</a></li>
+                        <li><a href="#" onclick="turnToHotelAdd()"><i class = "fa fa-edit "></i> 添加酒店</a></li>
                     </ul>
                 </li>
                 <li class="treeview active">
@@ -164,8 +165,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#" onclick="turnToRoomList()"><i class = "fa fa-certificate"></i> 浏览房间</a></li>
-                        <li><a href="#" onclick="turnToRoomAdd()"><i class = "fa fa-certificate"></i> 添加房间</a></li>
+                        <li><a href="#" onclick="turnToRoomList()"><i class = "fa fa-list"></i> 浏览房间</a></li>
+                        <li><a href="#" onclick="turnToRoomAdd()"><i class = "fa fa-edit "></i> 添加房间</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -215,7 +216,7 @@
                       <th>联系电话</th>
                       <th>酒店停车位</th>
                       <th>酒店英文名</th>
-
+                      <th>酒店图片</th>
                       <th>更新</th>
                       <th>删除</th>
 
@@ -290,8 +291,6 @@
     function turnToCustomerList() {
         window.location.href = "/customerList";
     }
-
-
     function  turnToRoomAdd(){
         window.location.href = "/roomList/add";
     }
@@ -312,8 +311,68 @@
         table.ajax.reload();
     }
 
+    function hideRoom() {
+        layer.closeAll();
+    }
+
+    function showRoom(picture){
+        var html =
+            // '<div  id="layer_update_hot" >\n' +
+            // '        <div class="box-body">\n' +
+            '            <img src=\"'+picture+'\"  onclick="hideRoom()">\n'
+            // '        </div>\n' +
+            // '        <div class="box-footer">\n' +
+            // '            <button type="button" class="btn btn-default" onclick="layerCancel()">返回</button>\n' +
+            // '        </div>\n' +
+            // '</div>'
+        var html1 = '<div >' +
+            '<div class="box-body">\n ' +
+            '   <img src=\"public/images/notFound.png\" onclick="hideRoom()">' +
+            '</div>' +
+            '</div>'
+
+        if(picture == 'undefined' || picture =='/Path/'){
+            // console.info(picture);
+            layer.open({
+                type: 1,
+                title: '暂时没有图片呢！！',
+                shadeClose: true,
+                shade: 0.7,
+                closeBtn:1,
+                area:'auto',
+                // content: photo,
+                content: html1,
+            });
+        }else {
+            // console.info(picture);
+            layer.open({
+                type: 1,
+                title: '房间图片浏览',
+                shadeClose: true,
+                shade: 0.7,
+                // maxWidth: '60%',
+                // maxHeight:'60%',
+                closeBtn:1,
+                area:'auto',
+                // content: photo,
+                content: html,
+
+
+                // layui:"layui-bg-blue",
+            });
+        }
+    }
+
+    function layerCancel(){
+        layer.closeAll();
+    }
+
     function updateHotel(hotelId) {
         window.location.href = "/hotelList/edit?hotelId="+hotelId;
+    }
+    
+    function showLayer() {
+
     }
 
     function deleteHotel(hotelId) {
@@ -387,7 +446,18 @@ function initTable() {
             {data: 'hotelContact'},
             {data: 'parking'},
             {data: 'hotalEnglishName'},
-
+            // {data:null,"render":function (data) {
+            //         var html='<button class="btn_showRoomPhoto" id="btn_update_hot" onclick="showRoom(\''+data.photo+'\')">查看</button>'
+            //         return html;
+            //     }},
+            // {data:null,"render":function (data) {
+        //         var html ='<img src=\"'+data.photo+'\" onmouseover="showLayer()">'
+        //         return html;
+        //     }},
+            {data:null,"render":function (data) {
+                    var html ='<img src=\"'+data.picture+'\" id="Img1"  onclick="showRoom(\''+data.picture+'\')" >'
+                    return html;
+                }},
             {data:null,"render":function (data) {
                     var html= '<button class="btn_update" onclick="updateHotel(\''+data.hotelId+'\')" >更新</button>'
                     return html;
