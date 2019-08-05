@@ -2,12 +2,12 @@ package com.javaee.hotel.controller;
 
 import com.javaee.hotel.domain.Customer;
 import com.javaee.hotel.domain.CustomerInfo;
+import com.javaee.hotel.domain.CustomerInfoExample;
+import com.javaee.hotel.mapper.CustomerInfoMapper;
 import com.javaee.hotel.mapper.CustomerMapper;
 import com.javaee.hotel.service.MailService;
 import com.javaee.hotel.service.RegisterService;
 import com.javaee.hotel.service.UserService;
-import com.sun.deploy.net.HttpRequest;
-import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping("/safecenter")
@@ -29,6 +30,8 @@ public class SafeController {
     private RegisterService registerService;
     @Autowired
     private CustomerMapper customerMapper;
+    @Autowired
+    private CustomerInfoMapper customerInfoMapper;
 
     @GetMapping(value="")
     public String goSafePage(HttpSession session, Model model){
@@ -178,6 +181,12 @@ public class SafeController {
                 if(email.equals("noemail")){
                     now.setEmail(null);
                 }else {
+                    CustomerInfoExample example = new CustomerInfoExample();
+                    example.createCriteria().andEmailEqualTo(email);
+                    List<CustomerInfo> customerInfos = customerInfoMapper.selectByExample(example);
+                    if(customerInfos.size()!=0){
+                        return "ocemail";
+                    }
                     now.setEmail(email);
                 }
                 userService.updateByPK(now, id);
@@ -198,11 +207,16 @@ public class SafeController {
             if(hashMap==null) {
                 return  "nocheckcode";
             }
-            System.out.println(checkCode);
             if(hashMap.get("checkCode").equals(checkCode)) {
                 Date date = new Date();
                 long postDate = (long) hashMap.get("time");
                 if ((date.getTime() - postDate) < 15 * 60 * 1000) {
+                    CustomerInfoExample example = new CustomerInfoExample();
+                    example.createCriteria().andEmailEqualTo(email);
+                    List<CustomerInfo> customerInfos = customerInfoMapper.selectByExample(example);
+                    if(customerInfos.size()!=0){
+                        return "ocemail";
+                    }
                     CustomerInfo now = userService.getNowUser(id).get(0);
                     now.setEmail(email);
                     userService.updateByPK(now, id);

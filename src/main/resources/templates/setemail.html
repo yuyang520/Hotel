@@ -50,7 +50,9 @@
                         if ("ok" == text) {
                             layer.alert("验证成功！");
                             setTimeout(function (){window.location.href="/safecenter"},2000);
-                        } else {
+                        } else if("ocemail"== text){
+                            layer.alert("该邮箱已被绑定！");
+                        } else{
                             layer.alert("验证输入错误！");
                         }
                     }
