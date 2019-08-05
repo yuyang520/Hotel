@@ -6,6 +6,7 @@ import com.javaee.hotel.mapper.CustomerInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,5 +23,17 @@ public class UserService {
             example.createCriteria().andIdEqualTo(id);
             return customerInfoMapper.selectByExample(example);
         }
+    }
+    public int getUserId(HttpSession session){
+        if(session.getAttribute("id")==null) {
+            return -1;
+        }else{
+            return Integer.parseInt(session.getAttribute("id").toString());
+        }
+    }
+    public void updateByPK(CustomerInfo customerInfo,int id){
+        CustomerInfoExample example = new CustomerInfoExample();
+        example.createCriteria().andIdEqualTo(id);
+        customerInfoMapper.updateByExample(customerInfo,example);
     }
 }
