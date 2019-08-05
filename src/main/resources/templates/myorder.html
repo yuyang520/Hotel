@@ -262,16 +262,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         })
     }
     function pay(elem,id) {
-        $.ajax({
-            url: '/myorder/pay?orderId=' + id,
-            type: 'put',
-            success: function (elem,data) {
-                location.reload();
-            },
-            fail: function (data) {
-                console.log('fail')
-            }
-        })
+        window.location.href = "/alipay/payout?orderId="+id;
+
+        // $.ajax({
+        //     url: '/myorder/pay?orderId=' + id,
+        //     type: 'put',
+        //     success: function (elem,data) {
+        //         location.reload();
+        //     },
+        //     fail: function (data) {
+        //         console.log('fail')
+        //     }
+        // })
     }
     //点击头像或昵称弹出个人信息框
     function showInfoCard(){

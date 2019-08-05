@@ -16,7 +16,6 @@ import java.io.IOException;
 @Controller
 @RequestMapping(value = "/alipay")
 public class query implements AlipayInterfaec {
-
     @RequestMapping(value = "/query")
     public void query(HttpServletRequest httpRequest, HttpServletResponse httpResponse)
             throws ServletException, IOException {

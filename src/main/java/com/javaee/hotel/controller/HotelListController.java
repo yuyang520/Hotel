@@ -65,7 +65,6 @@ public class HotelListController {
         return "hotel-edit";
     }
 
-
     @PostMapping("/delete")
     @ResponseBody
     public boolean delete(@RequestParam("hotelId") String hotelId){
@@ -81,7 +80,4 @@ public class HotelListController {
         session.invalidate();
         return true;
     }
-
-
-
 }

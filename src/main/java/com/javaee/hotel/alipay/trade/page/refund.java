@@ -19,7 +19,6 @@ import java.io.IOException;
 @Controller
 @RequestMapping(value = "/alipay")
 public class refund implements AlipayInterfaec{
-
     @RequestMapping(value = "/refund", method = RequestMethod.GET)
     public void refund(HttpServletRequest httpRequest, HttpServletResponse httpResponse)
             throws ServletException, IOException{
