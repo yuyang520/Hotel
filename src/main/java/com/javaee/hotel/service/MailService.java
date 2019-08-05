@@ -11,8 +11,12 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 @Service("mailService")
 public class MailService {
@@ -47,5 +51,19 @@ public class MailService {
         }
         mailSender.send(message);
     }
+    public void sendEmail(String email, HttpSession session){
+        String checkCode = String.valueOf(new Random().nextInt(899999) + 100000);
+        String message = "您的注册验证码为："+checkCode;
+        try {
+            sendSimpleMail(email, "注册验证码", message);
+            HashMap hashMap = new HashMap();
+            Date date = new Date();
+            hashMap.put("time",date.getTime());
+            hashMap.put("checkCode",checkCode);
+            session.setAttribute("checkCode",hashMap);
+        }catch (Exception e){
+            e.toString();
+        }
 
+    }
 }

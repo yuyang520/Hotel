@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
@@ -8,7 +8,7 @@
     <script src="/public/js/layer.js"></script>
     <script src="/layui/layui.js"></script>
     <script src="/public/js/jquery-1.11.1.min.js"></script>
-    <title>绑定邮箱</title>
+    <title>解绑邮箱</title>
     <style>
         input::-webkit-input-placeholder{
             color: #cac6cd;
@@ -19,18 +19,18 @@
 
 <div align="center" class="col-md-8 safeOutDiv" >
     <div class="col-md-2" style="text-align: right;padding:0;">
-        <span >邮箱：</span><br/>
+        <span >绑定邮箱：</span><br/>
         <span >验证码：</span>
     </div>
     <div class="col-md-5" style="text-align: left" >
-        <form id="form" style="justify-content: left;" mothod="post">
-            <input id="email" autocomplete="off" placeholder="常用邮箱"  name="emailadd" class="form-control-x">
+        <form id="form" style="justify-content: left;" method="post">
+            <span th:if="${userInfo.email}!=null" th:text="${userInfo.email}"></span>
+            <span th:if="${userInfo.email}==null">未设置</span>
             <div>
-                <input autocomplete="off" id="checkCode" placeholder="6位数字" style="width: 246px;" name="emailverc" class="form-control-x">
-                <input id="sendCheckCode" name="checkCode" type="button" class="btn" style="margin-bottom: 4px;height:40px;background-color: orange;
-                color: white;" value="发送">
+                <input autocomplete="off" id="checkCode" placeholder="6位数字" style="width: 246px;" name="emailvc" class="form-control-x">
+                <input id="sendCheckCode" type="button" class="btn" style="margin-bottom: 4px;height:40px;background-color: orange;color: white;" value="发送">
             </div>
-            <input id="complite" class="form-control-s safeBtn" type="button" value="完成">
+            <input id="complete" class="form-control-s safeBtn" type="button" value="完成">
         </form>
     </div>
 </div>
@@ -39,32 +39,27 @@
     layui.use("form",function () {
         var form = layui.form;
         var $ = layui.$;
-        $("#complite").click( function () {
+        $("#complete").click( function () {
             var inputCheckCode = $("#checkCode").val();
-            var Url = "/safecenter/check?checkCode="+inputCheckCode+"&&email="+$("#email").val();
-                $.ajax({
-                    url: Url,
-                    type: "POST",
-                    async: false,
-                    success: function (text) {
-                        if ("ok" == text) {
-                            layer.alert("验证成功！");
-                            setTimeout(function (){window.location.href="/safecenter"},2000);
-                        } else {
-                            layer.alert("验证输入错误！");
-                        }
+            var Url = "/safecenter/check?checkCode="+inputCheckCode+"&&email="+"noemail";
+            $.ajax({
+                url: Url,
+                type: "POST",
+                async: false,
+                success: function (text) {
+                    if ("ok" == text) {
+                        layer.alert("验证成功！");
+                        setTimeout(function (){window.location.href="/safecenter"},2000);
+                    } else {
+                        layer.alert("验证输入错误！");
                     }
-                });
-    });
+                }
+            });
+        });
         var checkCode = "";
         $("#sendCheckCode").click(function () {
-            var email = $("#email").val();
-            if (email == null || email == "") {
-                layer.alert("请输入邮箱");
-                return;
-            }
             $.ajax({
-                url: "/safecenter/setemail?email=" + email,
+                url: "/safecenter/unsetemail",
                 type: "post",
                 success: function (text) {
                     if (text != null && text != "") {
@@ -79,10 +74,6 @@
         });
         var maxTime = 60;
         $("#sendCheckCode").click(function countDown() {
-            var email = $("#email").val();
-            if (email == null || email == "") {
-                return;
-            }
             if (maxTime == 0) {
                 checkCode = "";
                 $("#sendCheckCode").removeClass("layui-btn-disabled");

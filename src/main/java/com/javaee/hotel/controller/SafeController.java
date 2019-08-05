@@ -2,8 +2,7 @@ package com.javaee.hotel.controller;
 
 import com.javaee.hotel.domain.Customer;
 import com.javaee.hotel.domain.CustomerInfo;
-import com.javaee.hotel.domain.CustomerInfoExample;
-import com.javaee.hotel.mapper.CustomerInfoMapper;
+import com.javaee.hotel.mapper.CustomerMapper;
 import com.javaee.hotel.service.MailService;
 import com.javaee.hotel.service.RegisterService;
 import com.javaee.hotel.service.UserService;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Random;
 
 @Controller
 @RequestMapping("/safecenter")
@@ -30,7 +28,7 @@ public class SafeController {
     @Autowired
     private RegisterService registerService;
     @Autowired
-    private CustomerInfoMapper customerInfoMapper;
+    private CustomerMapper customerMapper;
 
     @GetMapping(value="")
     public String goSafePage(HttpSession session, Model model){
@@ -102,7 +100,11 @@ public class SafeController {
         }
         return "changeemail";
     }
-
+    @PostMapping(value = "/modifyemail")
+    public String checkPwdSendEmail(@RequestParam("email") String email,HttpSession session){
+        mailService.sendEmail(email,session);
+        return "changeemail";
+    }
     @GetMapping(value = "/settel")
     public String gosTelPage(HttpSession session){
         int id=userService.getUserId(session);
@@ -122,18 +124,7 @@ public class SafeController {
     }
     @PostMapping(value = "/setemail")
     public String enterEmail(@RequestParam("email") String email,HttpSession session){
-        String checkCode = String.valueOf(new Random().nextInt(899999) + 100000);
-        String message = "您的注册验证码为："+checkCode;
-        try {
-            mailService.sendSimpleMail(email, "注册验证码", message);
-            HashMap hashMap = new HashMap();
-            Date date = new Date();
-            hashMap.put("time",date.getTime());
-            hashMap.put("checkCode",checkCode);
-            session.setAttribute("checkCode",hashMap);
-        }catch (Exception e){
-            e.toString();
-        }
+        mailService.sendEmail(email,session);
         return "setemail";
     }
     @GetMapping(value = "/unsettel")
@@ -157,7 +148,12 @@ public class SafeController {
         model.addAttribute("userInfo",customerInfo);
         return "unsetemail";
     }
-
+    @PostMapping(value = "/unsetemail")
+    public String unsetEmail(HttpSession  session){
+        String email = userService.getNowUser(userService.getUserId(session)).get(0).getEmail();
+        mailService.sendEmail(email,session);
+        return "unsetemail";
+    }
     public String hidetel(String tel){
         char[] chartel = tel.toCharArray();
         chartel[3] = '*';
@@ -170,17 +166,57 @@ public class SafeController {
     @ResponseBody
     public String checkCode(@RequestParam("checkCode") String checkCode,@RequestParam("email") String email, HttpSession session) {
         HashMap hashMap = (HashMap) session.getAttribute("checkCode");
-        if(checkCode.equals(hashMap.get("checkCode"))) {
+        if(hashMap==null) {
+            return  "no";
+        }
+        if(hashMap.get("checkCode").equals(checkCode)) {
             Date date = new Date();
             long postDate =(long)hashMap.get("time");
             if((date.getTime() - postDate)<15*60*1000) {
                 int id=userService.getUserId(session);
                 CustomerInfo now = userService.getNowUser(id).get(0);
-                now.setEmail(email);
-                userService.updateByPK(now,id);
+                if(email.equals("noemail")){
+                    now.setEmail(null);
+                }else {
+                    now.setEmail(email);
+                }
+                userService.updateByPK(now, id);
+                session.removeAttribute("checkCode");
                 return "ok";
             }
         }
         return "no";
+    }
+    @PostMapping("/checkpwd")
+    @ResponseBody
+    public String checkCodePwd(@RequestParam("checkCode") String checkCode,@RequestParam("email") String email,
+                               @RequestParam("password") String password ,HttpSession session) {
+        int id=userService.getUserId(session);
+        Customer nowcustomer = customerMapper.selectByPrimaryKey(id);
+        if(nowcustomer.getPassword().equals(password)){
+            HashMap hashMap = (HashMap) session.getAttribute("checkCode");
+            if(hashMap==null) {
+                return  "nocheckcode";
+            }
+            System.out.println(checkCode);
+            if(hashMap.get("checkCode").equals(checkCode)) {
+                Date date = new Date();
+                long postDate = (long) hashMap.get("time");
+                if ((date.getTime() - postDate) < 15 * 60 * 1000) {
+                    CustomerInfo now = userService.getNowUser(id).get(0);
+                    now.setEmail(email);
+                    userService.updateByPK(now, id);
+                    session.removeAttribute("checkCode");
+                    return "ok";
+                }else{
+                    return "nocheckcode";
+                }
+            }else{
+                return "nocheckcode";
+            }
+        }else{
+            System.out.println("jkfjakl");
+            return "nopwd";
+        }
     }
 }
