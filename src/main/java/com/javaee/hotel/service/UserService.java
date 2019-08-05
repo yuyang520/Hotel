@@ -1,8 +1,10 @@
 package com.javaee.hotel.service;
 
+import com.javaee.hotel.domain.Customer;
 import com.javaee.hotel.domain.CustomerInfo;
 import com.javaee.hotel.domain.CustomerInfoExample;
 import com.javaee.hotel.mapper.CustomerInfoMapper;
+import com.javaee.hotel.mapper.CustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,8 @@ import java.util.List;
 public class UserService {
     @Autowired
     private CustomerInfoMapper customerInfoMapper;
-
+    @Autowired
+    private CustomerMapper customerMapper;
     public List<CustomerInfo> getNowUser(int id){
         if(id==0){
             return new ArrayList<CustomerInfo>();
@@ -35,5 +38,15 @@ public class UserService {
         CustomerInfoExample example = new CustomerInfoExample();
         example.createCriteria().andIdEqualTo(id);
         customerInfoMapper.updateByExample(customerInfo,example);
+    }
+    public boolean checkUser(int id,String oldpwd) {
+        return oldpwd.equals(customerMapper.selectByPrimaryKey(id).getPassword());
+    }
+
+    public boolean updatePwd(int id,String pwd) {
+        Customer customer = new Customer();
+        customer.setId(id);
+        customer.setPassword(pwd);
+        return customerMapper.updateByPrimaryKeySelective(customer)>0;
     }
 }

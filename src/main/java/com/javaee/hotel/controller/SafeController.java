@@ -1,15 +1,20 @@
 package com.javaee.hotel.controller;
 
+import com.javaee.hotel.domain.Customer;
 import com.javaee.hotel.domain.CustomerInfo;
 import com.javaee.hotel.domain.CustomerInfoExample;
 import com.javaee.hotel.mapper.CustomerInfoMapper;
 import com.javaee.hotel.service.MailService;
+import com.javaee.hotel.service.RegisterService;
 import com.javaee.hotel.service.UserService;
+import com.sun.deploy.net.HttpRequest;
+import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,6 +27,8 @@ public class SafeController {
     private UserService userService;
     @Autowired
     private MailService mailService;
+    @Autowired
+    private RegisterService registerService;
     @Autowired
     private CustomerInfoMapper customerInfoMapper;
 
@@ -41,12 +48,41 @@ public class SafeController {
     }
 
     @GetMapping(value = "/modifypwd")
-    public String gomPwdPage(HttpSession session){
+    public String gomPwdPage(HttpSession session,Model model){
         int id=userService.getUserId(session);
         if(id<0) {
             return "redirect:/welcome";
         }
+        model.addAttribute("callback",false);
         return "changepwd";
+    }
+    @PostMapping(value = "/modifypwd")
+    public String changepwd(HttpServletRequest request,HttpSession session,Model model) {
+        String oldpwd = request.getParameter("oldpwd");
+        String newpwd = request.getParameter("newpwd");
+        int id = userService.getUserId(session);
+        if(id<0) {
+            return "/welcome";
+        }
+        if(oldpwd.equals(newpwd)) {
+            model.addAttribute("callback",true);
+            return "changepwd";
+        }
+        if(userService.checkUser(id,oldpwd)){
+            if(registerService.checkStr(newpwd,8,16)==0){
+                userService.updatePwd(id,newpwd);
+                session.removeAttribute("id");
+                return "/login";
+            }
+            else {
+                model.addAttribute("callback",true);
+                return "changepwd";
+            }
+
+        }else {
+            model.addAttribute("callback",true);
+            return "changepwd";
+        }
     }
 
     @GetMapping(value = "/modifytel")
