@@ -40,7 +40,6 @@ function checkUsername() {
 function checkPassword() {
     var string = $("#password").val();
     var length = string.length;
-    console.info(string);
     if ( string != $("#confirmPassword").val() ) {
         tipPassword.text("密码输入不一致");
         checkPasswordFlag = false;

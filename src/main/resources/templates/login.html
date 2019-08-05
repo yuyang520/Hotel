@@ -39,7 +39,7 @@
         <div class="logo"></div>
         <form method="post" action="/login">
             <div class="form-item">
-                <input id="username" name="username" type="text" autocomplete="off" placeholder="用户名">
+                <input id="username" name="username" type="text" autocomplete="off" placeholder="用户名/邮箱">
             </div>
             <div class="form-item">
                 <input id="password" name="password" type="password" autocomplete="off" placeholder="密码">
@@ -49,7 +49,7 @@
         </form>
         <div class="reg-bar">
             <a class="reg" href="/register" style="color: #31708f">立即注册</a>
-            <a class="forget" href="javascript:" style="color: #a94442">忘记密码</a>
+            <a class="forget" href="/login/findback" style="color: #a94442">忘记密码</a>
         </div>
     </div>
     <script src="/public/js/jquery.min.js"></script>

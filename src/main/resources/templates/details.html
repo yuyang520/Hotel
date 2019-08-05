@@ -50,7 +50,6 @@
 						<li><a href="/searchmap/">地图查询</a></li>
 						<li><a href="/myorder/">订单查询</a></li>
 						<li><a href="shortcodes.html">待定</a></li>
-						<li><a href="/login/">登录</a></li>
 					</ul>
 				</div>
 				<!--/.navbar-collapse-->
@@ -82,13 +81,13 @@
 				<p style="margin-top: 10px;font-size: 16px;" th:text="${userInfo.get(0).nickName}"></p>
 			</div>
 			<div style="margin-top:20px;line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
-				<a href="/userinfo/">修改信息</a>
+				<a href="/userinfo/">个人中心</a>
 			</div>
 			<div style="line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
 				<a href="/myorder/">我的订单</a>
 			</div>
 			<div style="line-height: 40px;font-size: 16px;border-top: 2px solid #ccc;">
-				<a href="#">退出</a>
+				<a href="/login/logout">退出</a>
 			</div>
 		</div>
 	</div>
