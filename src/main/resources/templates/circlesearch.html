@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -75,11 +75,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </body>
 </html>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
     // 百度地图API功能
 
     var map = new BMap.Map("allmap");            // 创建Map实例
-    var mPoint = new BMap.Point(116.404, 39.915);
+    var mPoint = new BMap.Point([[${hotelLongitude}]],[[${hotelLatitude}]]);
 
     map.enableScrollWheelZoom();
     map.centerAndZoom(mPoint,15);               //修改参数

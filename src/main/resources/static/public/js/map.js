@@ -148,8 +148,10 @@ function showMarkers(map,markerHolder,data) {
             data[i].hotelLatitude);
         var marker = addIntoMap(map,new_point,i+1,"marker");
         markerHolder.push(marker);
-        var content = "酒店名："+ data[i].hotelChineseName + "<br>地址：" +data[i].hotelAddress
-            +"<br>描述:" +data[i].hotelProfile;
+        var content = "";
+        content = "酒店名："+ data[i].hotelChineseName + "<br>地址：" +data[i].hotelAddress
+            +"<br>描述:" +data[i].hotelProfile+"<br>"
+            +"<a  href=\"/circlesearch?hotelLatitude="+data[i].hotelLatitude+"&&hotelLongitude="+data[i].hotelLongitude +"\">周边搜索</a>" ;
         marker.addEventListener("click",
             function(e){
                 var p = e.target;
