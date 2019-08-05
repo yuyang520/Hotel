@@ -100,6 +100,7 @@ public class DetailsController {
         if( checkNumber == 0) {
             roomService.addOrderList(orderList);
             roomNoReceive[0] = "预定成功";
+            hashMap.put("orderId",orderList.getOrderId());
             hashMap.put("roomNoReceive",roomNoReceive[0]);
             return hashMap;
         }else {

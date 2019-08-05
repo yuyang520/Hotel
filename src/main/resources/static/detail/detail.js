@@ -74,9 +74,8 @@ function check() {
                     alert(data.error);
                 } else {
                     console.info(data);
-                    $('#order').modal('hide');
-                    var info = "预定成功，房间号为" + data.roomNoReceive;
-                    setTimeout("alert(\'"+info+"\')", 1000);
+                    var href = "/alipay/payout?orderId="+data.orderId;
+                    window.location.href = href;
                 }
             }
         })

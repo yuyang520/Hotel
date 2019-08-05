@@ -186,7 +186,7 @@ public class RoomService {
         OrderListExample example = new OrderListExample();
         OrderListExample.Criteria criteria = example.createCriteria();
         criteria.andRoomIdEqualTo(roomId);
-        criteria.andStatusLessThanOrEqualTo((byte) 1);
+        criteria.andStatusLessThanOrEqualTo((byte) 2);
         criteria.andCheckInLessThanOrEqualTo(checkOut);
         criteria.andCheckOutGreaterThanOrEqualTo(checkIn);
         List<OrderList> orderLists = orderListMapper.selectByExample(example);
