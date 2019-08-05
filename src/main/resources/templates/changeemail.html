@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <link href="/public/css/IndexStyle.css"  rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="/layui/css/layui.css" type='text/css'>
+    <script src="/public/js/layer.js"></script>
+    <script src="/layui/layui.js"></script>
+    <script src="/public/js/jquery-1.11.1.min.js"></script>
     <title>修改邮箱</title>
     <style>
         input::-webkit-input-placeholder{
@@ -20,16 +24,80 @@
         <span >验证码：</span>
     </div>
     <div class="col-md-5" style="text-align: left" >
-        <form style="justify-content: left;">
-            <input placeholder="用于验证身份"  name="emailpwd" class="form-control-x">
-            <input placeholder="有效邮箱地址" name="emailaddress" class="form-control-x">
+        <form id="form" style="justify-content: left;" method="post">
+            <input  id="password" type="password" placeholder="用于验证身份"  name="emailpwd" class="form-control-x">
+            <input id="email" placeholder="有效邮箱地址" name="emailaddress" class="form-control-x">
             <div>
-                <input placeholder="6位数字" style="width: 246px;" name="emailvc" class="form-control-x">
-                <input type="button" class="btn" style="margin-bottom: 4px;height:40px;background-color: orange;color: white;" value="发送">
+                <input autocomplete="off" id="checkCode" placeholder="6位数字" style="width: 246px;" name="emailvc" class="form-control-x">
+                <input id="sendCheckCode" type="button" class="btn" style="margin-bottom: 4px;height:40px;background-color: orange;color: white;" value="发送">
             </div>
-            <input class="form-control-s safeBtn" type="submit" value="完成">
+            <input id="complete" class="form-control-s safeBtn" type="button" value="完成">
         </form>
     </div>
 </div>
 </body>
+<script>
+    layui.use("form",function () {
+        var form = layui.form;
+        var $ = layui.$;
+        $("#complete").click( function () {
+            var email = $("#email").val();
+            var inputCheckCode = $("#checkCode").val();
+            var password = $("#password").val();
+            var Url = "/safecenter/checkpwd?checkCode="+inputCheckCode+"&&email="+email+"&&password="+password;
+            $.ajax({
+                url: Url,
+                type: "POST",
+                async: false,
+                success: function (text) {
+                    if ("ok" == text) {
+                        console.info(text)
+                        layer.alert("验证成功！");
+                        setTimeout(function (){window.location.href="/safecenter"},2000);
+                    } else if("nopwd" == text){
+                        layer.alert("密码输入错误！");
+                    } else {
+                        layer.alert("验证码输入错误！");
+                    }
+                }
+            });
+        });
+        var checkCode = "";
+        $("#sendCheckCode").click(function () {
+            var email = $("#email").val();
+            if (email == null || email == "") {
+                layer.alert("请输入邮箱");
+                return;
+            }
+            $.ajax({
+                url: "/safecenter/modifyemail?email=" + email,
+                type: "POST",
+                success: function (text) {
+
+                }
+            });
+        });
+        var maxTime = 60;
+        $("#sendCheckCode").click(function countDown() {
+            var email = $("#email").val();
+            if (email == null || email == "") {
+                return;
+            }
+            if (maxTime == 0) {
+                checkCode = "";
+                $("#sendCheckCode").removeClass("layui-btn-disabled");
+                $("#sendCheckCode").removeAttr("disabled")
+                $("#sendCheckCode").val("发送");
+                maxTime = 60;
+            } else {
+                $("#sendCheckCode").attr("disabled", "disabled");
+                $("#sendCheckCode").addClass("layui-btn-disabled");
+                form.render();
+                $("#sendCheckCode").val(maxTime + "秒后重新获取");
+                maxTime--;
+                setTimeout(countDown, 1000);
+            }
+        })
+    })
+</script>
 </html>

@@ -18,6 +18,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link rel="stylesheet" href="/public/css/jquery-ui.small.css" />
     <script src="/public/js/jquery-ui.js"></script>
     <script src="/public/js/jquery-1.11.1.min.js"></script>
+    <script src="/index/index.js"></script>
+    <script src="/public/js/map.js"></script>
     <style>
         .tab-chapter{
             width: 800px;
@@ -41,14 +43,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         .input-group {
             margin: 5px 0px;
         }
-        .tableItem {
+        .hotelItem {
             margin-bottom: 10px;
             padding-bottom: 10px;
             border-bottom: 1px solid #ccc;
         }
+        .marker {
+            background:url(/public/images/marker.png) no-repeat;
+            height:43px;
+            width:33px;
+            color:#fff;
+            font-size: 16px;
+            text-align: center;
+            line-height: 32px;
+            font-weight: bold;
+        }
+        .hotelMarker {
+            display: inline-block;
+            width: 20px;
+            height: 23px;
+            background: url(/public/images/marker.png) no-repeat 0 -363px;
+            font-family: tahoma;
+            font-weight: bold;
+            font-size: 12px;
+            color: #fff;
+            line-height: 20px;
+            text-align: center;
+            vertical-align: 2px;
+        }
+        .hotelMarker:hover {
+            display: inline-block;
+            width: 20px;
+            height: 23px;
+            background: url(/public/images/marker.png) no-repeat 0 -387px;
+            font-family: tahoma;
+            font-weight: bold;
+            font-size: 12px;
+            color: #fff;
+            line-height: 20px;
+            text-align: center;
+            vertical-align: 2px;
+        }
         .hotelName {
-            font-size: 18px;
-            font-weight:bold;
+            font-size: 20px;
+            font-weight: bold;
+            color: #6568ff;
         }
         a:hover {text-decoration:underline;}
 
@@ -126,22 +165,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </body>
 </html>
 <script type="text/javascript" >
-    // 百度地图API功能
+    var data = hotel;
     var MapData = null;
     var map = new BMap.Map("allmap");
     var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
     var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
-    var data = hotel;
     map.addControl(top_left_control);
     map.addControl(top_left_navigation);
-    if(data.length!=0) {
-        map.centerAndZoom(new BMap.Point(data[0].hotelLongitude,data[0].hotelLatitude),11);
-    }else{
-        map.centerAndZoom(new BMap.Point(116.331398,39.897445),11);
-    }
-
     map.enableScrollWheelZoom(true);
-
     map.clearOverlays();
     var opts = {
         width : 250,     // 信息窗口宽度
@@ -149,46 +180,46 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         title : "酒店信息" , // 信息窗口标题
         enableMessage:true,//设置允许信息窗发送短息
     }
-    for( let i = 0 ; i < data.length ; i ++ ) {
-        var new_point = new BMap.Point( data[i].hotelLongitude,
-            data[i].hotelLatitude);
-        var marker = new BMap.Marker(new_point,);  // 创建标注
-        var content = "酒店名："+ data[i].hotelChineseName + "<br>地址：" +data[i].hotelAddress
-            +"<br>描述:" +data[i].hotelProfile;
-        map.addOverlay(marker);              // 将标注添加到地图中
-
-        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-        marker.addEventListener("click",
-            function(e){
-                var p = e.target;
-                var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
-                var infoWindow = new BMap.InfoWindow(content, opts);  // 创建信息窗口对象
-                map.openInfoWindow(infoWindow,point); //开启信息窗口
-
-            });
-    }
     var hotelTab = $("#hotelTable");
     hotelTab.empty();
-    var htmlString = "";
-    for( let i = 0 ; i < data.length ; i ++ ) {
-        htmlString +=
-            "<tr>"
-            +"<td class='tab-chapter' style='padding-left: 10px;padding-right: 10px'>"
-            +"<div class='tableItem'>"
-            +"<a href=\'/welcome/details?hotelId="+data[i].hotelId+"\' class='hotelName' style='color: #6568ff;'>"+data[i].hotelChineseName+"</a><br/>"
-            +"<span class='hotelAttr'>地址：</span><span class='hotelAttr' "
-            +">"+data[i].hotelAddress+"</span><br/>"
-            +"<span class='hotelAttr'>星级：</span><span class='hotelAttr'>";
-        for( let j = 0 ; j < data[i].hotelStars ; j ++ ) {
-            htmlString+="<img src='/public/images/star.png' style='height: 20px; width: 20px;'>";
-        }
-        htmlString += "</span><br/>"
-            +"<span class='hotelAttr'>联系方式：</span><span class='hotelAttr' >"+data[i].hotelContact+"</span><br/>"
-            +"</div> </td> </tr>";
+    if(data.length!=0) {
+        var htmlString = "";
+        for( let i = 0 ; i < data.length ; i ++ ) {
+            htmlString +=
+                "<tr>"
+                +"<td class='tab-chapter' style='padding-left: 10px;padding-right: 10px'>"
+                +"<div class='hotelItem'>"
+                +"<a href='/welcome/details?hotelId="+data[i].hotelId+"' onmouseover='turnClickable("+i+")' onmouseout='turnUnClickable("+i+")' style='width: fit-content;display: block'>"
+                +"<span class='hotelMarker'>"+(i+1)+"</span>"
+                +"<span class='hotelName'>"+data[i].hotelChineseName+"</span>"
+                +"</a><br/>"
+                +"<span class='hotelAttr'>地址：</span><span class='hotelAttr' "
+                +">"+data[i].hotelAddress+"</span><br/>"
+                +"<span class='hotelAttr'>星级：</span><span class='hotelAttr'>";
+            for( let j = 0 ; j < data[i].hotelStars ; j ++ ) {
+                htmlString+="<img src='/public/images/star.png' style='height: 20px; width: 20px;'>";
+            }
+            htmlString += "</span><br/>"
+                +"<span class='hotelAttr'>联系方式：</span><span class='hotelAttr' >"+data[i].hotelContact+"</span><br/>"
+                +"</div> </td> </tr>";
 
+        }
+        hotelTab.append(htmlString);
+        $("#hotelNumber").html(data.length);
+
+        if(data.length!=0) {
+            map.centerAndZoom(new BMap.Point(data[0].hotelLongitude,data[0].hotelLatitude),14);
+        }else{
+            map.centerAndZoom(new BMap.Point(116.331398,39.897445),14);
+        }
+        var markerHolder=[];
+        var topIndex={topIndex:0};
+        var bottomIndex={bottomIndex:0};
+        showMarkers(map,markerHolder,data);
+        setBPoint(data,topIndex,bottomIndex,true);
+    }else{
+        $("#hotelNumber").html(0);
     }
-    hotelTab.append(htmlString);
-    $("#hotelNumber").html(data.length);
     function theLocation(){
         Url="/searchmap/map.json?"
             +"hotelname="+$("#hotelname").val()
@@ -199,56 +230,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             url:Url,
             type:"post",
             success:function(data) {
-                console.info(data);
-                MapData = data;
-                map.clearOverlays();
-                var opts = {
-                    width : 250,     // 信息窗口宽度
-                    height: 200,     // 信息窗口高度
-                    title : "酒店信息" , // 信息窗口标题
-                    enableMessage:true,//设置允许信息窗发送短息
-                }
-                for( let i = 0 ; i < data.length ; i ++ ) {
-                    var new_point = new BMap.Point( data[i].hotelLongitude,
-                        data[i].hotelLatitude);
-                    var marker = new BMap.Marker(new_point);  // 创建标注
-                    var content = "酒店名："+ data[i].hotelChineseName + "<br>地址：" +data[i].hotelAddress
-                        +"<br>描述:" +data[i].hotelProfile;
-                    map.addOverlay(marker);              // 将标注添加到地图中
-
-                    marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-                    marker.addEventListener("click",
-                        function(e){
-                            var p = e.target;
-                            var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
-                            var infoWindow = new BMap.InfoWindow(content, opts);  // 创建信息窗口对象
-                            map.openInfoWindow(infoWindow,point); //开启信息窗口
-
-                        });
-                }
-
                 var hotelTab = $("#hotelTable");
-                hotelTab.empty();
-                var htmlString = "";
-                for( let i = 0 ; i < data.length ; i ++ ) {
-                    htmlString +=
-                        "<tr>"
-                        +"<td class='tab-chapter' style='padding-left: 10px;padding-right: 10px'>"
-                        +"<div class='tableItem'>"
-                        +"<a href=\'/welcome/details?hotelId="+data[i].hotelId+"\' class='hotelName' style='color: #6568ff;'>"+data[i].hotelChineseName+"</a><br/>"
-                        +"<span class='hotelAttr'>地址：</span><span class='hotelAttr' "
-                        +">"+data[i].hotelAddress+"</span><br/>"
-                        +"<span class='hotelAttr'>星级：</span><span class='hotelAttr'>";
-                    for( let j = 0 ; j < data[i].hotelStars ; j ++ ) {
-                        htmlString+="<img src='/public/images/star.png' style='height: 20px; width: 20px;'>";
-                    }
-                    htmlString += "</span><br/>"
-                        +"<span class='hotelAttr'>联系方式：</span><span class='hotelAttr' >"+data[i].hotelContact+"</span><br/>"
-                        +"</div> </td> </tr>";
+                map.clearOverlays();
+                if(data.length!=0) {
+                    hotelTab.empty();
+                    var htmlString = "";
+                    for( let i = 0 ; i < data.length ; i ++ ) {
+                        htmlString +=
+                            "<tr>"
+                            +"<td class='tab-chapter' style='padding-left: 10px;padding-right: 10px'>"
+                            +"<div class='hotelItem'>"
+                            +"<a href='/welcome/details?hotelId="+data[i].hotelId+"' onmouseover='turnClickable("+i+")' onmouseout='turnUnClickable("+i+")' style='width: fit-content;display: block'>"
+                            +"<span class='hotelMarker'>"+(i+1)+"</span>"
+                            +"<span class='hotelName'>"+data[i].hotelChineseName+"</span>"
+                            +"</a><br/>"
+                            +"<span class='hotelAttr'>地址：</span><span class='hotelAttr' "
+                            +">"+data[i].hotelAddress+"</span><br/>"
+                            +"<span class='hotelAttr'>星级：</span><span class='hotelAttr'>";
+                        for( let j = 0 ; j < data[i].hotelStars ; j ++ ) {
+                            htmlString+="<img src='/public/images/star.png' style='height: 20px; width: 20px;'>";
+                        }
+                        htmlString += "</span><br/>"
+                            +"<span class='hotelAttr'>联系方式：</span><span class='hotelAttr' >"+data[i].hotelContact+"</span><br/>"
+                            +"</div> </td> </tr>";
 
+                    }
+                    hotelTab.append(htmlString);
+                    $("#hotelNumber").html(data.length);
+                    MapData = data;
+                    markerHolder=[];
+                    topIndex={topIndex:0};
+                    bottomIndex={bottomIndex:0};
+                    showMarkers(map,markerHolder,data);
+                    setBPoint(data,topIndex,bottomIndex,true);
+                }else {
+                    hotelTab.empty();
+                    $("#hotelNumber").html(0);
                 }
-                hotelTab.append(htmlString);
-                $("#hotelNumber").html(data.length);
             }
         })
     }

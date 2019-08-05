@@ -26,7 +26,6 @@ public class BigMapController {
         Integer starlevel = Integer.parseInt(request.getParameter("starlevel"));
         List<Hotel> hotelList=searchService.searchh(hotelname,minPrice,city,starlevel);
         model.addAttribute("hotels",hotelList);
-        System.out.println("gethere");
         return "/bigmap";
     }
     @PostMapping(value = "")

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <link href="/public/css/IndexStyle.css"  rel='stylesheet' type='text/css' />
+    <script src="/public/js/jquery-1.11.1.min.js"></script>
+    <script src="/public/js/layer.js"></script>
     <title>修改密码</title>
     <style>
         input::-webkit-input-placeholder{
@@ -12,21 +14,54 @@
     </style>
 </head>
 <body>
-
     <div align="center" class="col-md-8 safeOutDiv" >
         <div class="col-md-2" style="text-align: right;padding:0;">
             <span >当前密码：</span><br/>
             <span >新密码：</span><br/>
             <span >确认新密码：</span>
+            <input id="callback" type="hidden" th:value="${callback}">
         </div>
         <div class="col-md-4" style="text-align: left" >
-            <form style="justify-content: left;">
-                <input placeholder="当前登录密码"  name="oldpwd" class="form-control-x">
-                <input placeholder="8-16位字母、数字和符号" name="newpwd" class="form-control-x">
-                <input placeholder="再次输入密码" name="connewpwd" class="form-control-x">
+            <form style="justify-content: left;" method="post" action="/safecenter/modifypwd" onsubmit="return checkPassword()">
+                <input type="password" placeholder="当前登录密码"  name="oldpwd" class="form-control-x">
+                <input type="password" id="password" placeholder="8-16位字母、数字和符号" name="newpwd" class="form-control-x">
+                <input type="password" id="confirmPassword" placeholder="再次输入密码" name="connewpwd" class="form-control-x">
+                <span id="tip" style="display: none;color: red;font-size: 12px;height: 30px"></span>
                 <input class="form-control-s safeBtn" type="submit" value="完成">
             </form>
         </div>
     </div>
+    <script>
+        $(function () {
+            if($("#callback").val()=="true"){
+                layer.alert("修改失败");
+            }
+            console.info($("#callback").val())
+        })
+        function checkPassword() {
+            var string = $("#password").val();
+            var length = string.length;
+            if ( string != $("#confirmPassword").val() ) {
+                $("#tip").html("密码不一致");
+                $("#tip").css("display","block");
+                return false;
+            }else if( length < 8 ) {
+                $("#tip").html("密码应大于或等于8位");
+                $("#tip").css("display","block");
+                return false;
+            }else {
+                var i = 0;
+                for ( ; i < length ; i++ ) {
+                    var char = string.charCodeAt(i);
+                    if(char<33 || char>126) {
+                        $("#tip").html("密码含有非法字符");
+                        $("#tip").css("display","block");
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
