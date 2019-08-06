@@ -53,19 +53,11 @@ public class MyOrderController {
         orderListMapper.updateByPrimaryKey(orderList);
         return true;
     }
-    @PutMapping(value = "/unorder")
+    @GetMapping(value = "/disOrder")
     @ResponseBody
-    public boolean unOrder(@RequestParam("orderId") String orderId){
+    public boolean disOrder(@RequestParam("orderId") String orderId){
         OrderList orderList = orderListMapper.selectByPrimaryKey(orderId);
         orderList.setStatus((byte)4);
-        orderListMapper.updateByPrimaryKey(orderList);
-        return true;
-    }
-    @PutMapping(value = "/pay")
-    @ResponseBody
-    public boolean pay(@RequestParam("orderId") String orderId){
-        OrderList orderList = orderListMapper.selectByPrimaryKey(orderId);
-        orderList.setStatus((byte)2);
         orderListMapper.updateByPrimaryKey(orderList);
         return true;
     }

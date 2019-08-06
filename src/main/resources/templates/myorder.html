@@ -179,7 +179,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <td>
             <div th:if="${orderListInfo.orderList.status}==1">
                 <a class="btn" style="background-color: red;color:#fff;"
-                   data-th-attr="onclick='unOrder(this, \''+${orderListInfo.orderList.orderId}+'\')'">取消</a>
+                   data-th-attr="onclick='disOrder(this, \''+${orderListInfo.orderList.orderId}+'\')'">取消</a>
             </div>
         </td>
     </tr>
@@ -249,10 +249,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         })
     }
     function unOrder(elem,id) {
+        window.location.href = "/alipay/refund?orderId="+id;
+    }
+    function disOrder(elem,id) {
         $.ajax({
-            url: '/myorder/unorder?orderId=' + id,
-            type: 'put',
-            success: function (elem,data) {
+            url: '/myorder/disOrder?orderId=' + id,
+            type: 'get',
+            success: function (data) {
                 location.reload();
             },
             fail: function (data) {
@@ -262,17 +265,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
     function pay(elem,id) {
         window.location.href = "/alipay/payout?orderId="+id;
-
-        // $.ajax({
-        //     url: '/myorder/pay?orderId=' + id,
-        //     type: 'put',
-        //     success: function (elem,data) {
-        //         location.reload();
-        //     },
-        //     fail: function (data) {
-        //         console.log('fail')
-        //     }
-        // })
     }
     //点击头像或昵称弹出个人信息框
     function showInfoCard(){

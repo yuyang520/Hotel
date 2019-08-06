@@ -95,8 +95,6 @@ public class DetailsController {
         String[] erro = new String[1];
         erro[0] = "";
         int checkNumber = roomService.orderCheck(orderList,erro);
-        System.out.println("checkNumber:"+checkNumber);
-        System.out.println("roomNoReceive:"+roomNoReceive[0]);
         if( checkNumber == 0) {
             roomService.addOrderList(orderList);
             roomNoReceive[0] = "预定成功";
