@@ -1,6 +1,4 @@
 package com.javaee.hotel.controller;
-
-
 import com.javaee.hotel.domain.Hotel;
 import com.javaee.hotel.domain.OrderList;
 import com.javaee.hotel.mapper.HotelMapper;
@@ -12,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -37,8 +34,6 @@ public class HotelListController {
     @GetMapping(value = "/hotel.json",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<Hotel> getOrderListJson() {
-        //System.out.println(hotelListService.hotelListRespond());
-//        System.out.println(hotelListService.hotelListRespond());
         return hotelListService.hotelListRespond();
     }
 
@@ -50,9 +45,11 @@ public class HotelListController {
 
     @PostMapping("/add")
     public String saveHotel(Hotel hotel, HttpServletRequest request){
+
         String path = request.getParameter("picture");
         PictureTool pictureTool = new PictureTool();
         hotel.setPicture(pictureTool.getFilePath(path));
+
         hotelListService.saveHotel(hotel);
         return "redirect:/hotelList";
     }
@@ -60,7 +57,6 @@ public class HotelListController {
     @GetMapping("/edit")
     public String goorderEditPage(@RequestParam("hotelId") String hotelId, Model model){
         Hotel hotel = hotelListService.findHotelByPrimaryKey(hotelId);
-        System.out.println(hotelId);
         model.addAttribute("hotel",hotel);
         return "hotel-edit";
     }

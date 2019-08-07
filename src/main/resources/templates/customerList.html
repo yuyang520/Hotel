@@ -146,6 +146,19 @@
               <!--</span>-->
                     </a>
                 </li>
+
+                <li class="treeview active">
+                    <a href="#" ><i class="fa fa-link"></i> <span >改价列表</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="turnToPriceChange()"><i class = "fa fa-list"></i> 浏览改价信息</a></li>
+                        <li><a href="#" onclick="turnToPriceChangeAdd()"><i class = "fa fa-edit "></i> 添加改价信息</a></li>
+                    </ul>
+                </li>
+
                 <li class="treeview active">
                     <a href="#" ><i class="fa fa-link"></i> <span >酒店列表</span>
                         <span class="pull-right-container">
@@ -304,6 +317,14 @@
 
     function turnToManagerLogin() {
         window.location.href = "/ManagerLogin";
+    }
+
+    function turnToPriceChange() {
+        window.location.href = "/priceChange";
+    }
+
+    function turnToPriceChangeAdd() {
+        window.location.href = "/priceChange/add";
     }
 
     function turnToManager() {

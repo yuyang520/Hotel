@@ -57,6 +57,7 @@
         </table>
         <table tableName="price_change" domainObjectName="PriceChange" >
             <property name="useActualColumnNames" value="false" />
+            <generatedKey column="price_change_id" sqlStatement="select uuid()" identity="false"/>
         </table>
         <table tableName="icon_table" domainObjectName="Icon">
             <property name="useActualColumnNames" value="false" />

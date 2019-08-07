@@ -24,21 +24,27 @@ public class PriceChangeService {
 
 
     public Integer savePriceChange(PriceChange priceChange){
-        if(priceChange.getPriceChangeId() == null){
+
+        if(priceChange.getPriceChangeId()== null){
             return  priceChangeMapper.insert(priceChange);
         }else {
+            if(priceChangeMapper.selectByPrimaryKey(priceChange.getPriceChangeId()) == null ) {
+                return -1;
+            }
             return priceChangeMapper.updateByPrimaryKey(priceChange);
         }
 
+
     }
 
-    public PriceChange findPriceChangeByPrimaryKey(String id){
+    public PriceChange findPriceChangeByPrimaryKey(String PriceChangeId){
 
-        return priceChangeMapper.selectByPrimaryKey(id);
+        return priceChangeMapper.selectByPrimaryKey(PriceChangeId);
     }
 
 
     public void deletePriceChangeById(String PriceChangeId) {
+
         priceChangeMapper.deleteByPrimaryKey(PriceChangeId);
     }
 }

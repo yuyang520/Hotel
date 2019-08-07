@@ -4,11 +4,6 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
 
-
-
-
-
-
 <style type="text/css">
 
     .beInCenter{
@@ -50,9 +45,6 @@
         border-color: #a9c6c9;
     }
 </style>
-
-
-
 
 
 
@@ -146,6 +138,19 @@
               <!--</span>-->
                     </a>
                 </li>
+
+                <li class="treeview active">
+                    <a href="#" ><i class="fa fa-link"></i> <span >改价列表</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="turnToPriceChange()"><i class = "fa fa-list"></i> 浏览改价信息</a></li>
+                        <li><a href="#" onclick="turnToPriceChangeAdd()"><i class = "fa fa-edit "></i> 添加改价信息</a></li>
+                    </ul>
+                </li>
+
                 <li class="treeview active">
                     <a href="#" ><i class="fa fa-link"></i> <span >酒店列表</span>
                         <span class="pull-right-container">
@@ -190,7 +195,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="row">
-                <h3 style="display: flex; flex-direction: row;justify-content: center"><div>用户浏览</div></h3>
+                <h3 style="display: flex; flex-direction: row;justify-content: center"><div>改价信息浏览</div></h3>
                 <!--<div class="col-md-6">-->
                     <!--<ol class="breadcrumb">-->
                         <!--<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>-->
@@ -260,7 +265,7 @@
     function logOut(){
         layer.confirm('是否退出账号[[${session.username}]]',{icon: 3, title:'提示'},function(index){
             $.ajax({
-                url:'/customerList/exit',
+                url:'/priceChange/exit',
                 type:'Post',
                 success:function (data) {
                     window.location.href = "/ManagerLogin";
@@ -276,6 +281,14 @@
 
     function turnToMOrderList() {
         window.location.href = "/MOrderlist";
+    }
+
+    function turnToPriceChange() {
+        window.location.href = "/priceChange";
+    }
+
+    function turnToPriceChangeAdd() {
+        window.location.href = "/priceChange/add";
     }
     
     function turnToRoomList() {
@@ -370,14 +383,13 @@
                     },
 
                     ajax:{
-                        url:'/customerList/customerList.json',
+                        url:'/priceChange/priceChange.json',
                         type: "GET",
                         dataType: "JSON",
                         dataSrc: ""
                     },
                     columns:[
                         {data: 'priceChangeId'},
-                        // {data: 'username'},
                         {data: 'roomId'},
                         {data: 'price'},
                         {data: 'dateStart'},

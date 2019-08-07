@@ -86,12 +86,13 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>订单管理</title>
+    <title>改价管理</title>
 </head>
 <body>
-<form action="/manager/add" method="post" th:object="${priceChange}" class="smart-green">
+<form action="/priceChange/add" method="post" th:object="${priceChange}" class="smart-green">
 
     <h3 class="box-title center-block" style="display: flex; flex-direction: row;justify-content: center">更新改价信息</h3>
+    <input style="display: none" name="roomId" th:field="*{priceChangeId}"><br/>
     改价房间ID：<input type="text" name="roomId" th:field="*{roomId}"><br/>
     价格：<input type="text" name="price" th:field="*{price}"><br/>
     改价开始日期：<input type="text" name="dateStart" th:field="*{dateStart}"><br/>
