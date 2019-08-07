@@ -208,13 +208,12 @@
                     <table  id="tableList"  class="hovertable">
                         <thead>
                         <tr>
-                            <th>用户id</th>
+                            <th>改价id</th>
                             <!--<th>用户名</th>-->
-                            <th>联系电话</th>
-                            <th>用户邮箱</th>
-                            <th>用户昵称</th>
-                            <th>身份证号</th>
-                            <th>身份证姓名</th>
+                            <th>改价房间号</th>
+                            <th>价格</th>
+                            <th>开始日期</th>
+                            <th>结束日期</th>
                             <th>更改</th>
                             <th>删除</th>
 
@@ -310,8 +309,8 @@
         window.location.href = "/manager";
     }
 
-    function updateCustomer(id) {
-        window.location.href = "/customerList/edit?id="+id;
+    function updatePriceChange(priceChangeId) {
+        window.location.href = "/priceChange/edit?priceChangeId="+priceChangeId;
     }
 
 
@@ -319,11 +318,11 @@
         table.ajax.reload();
     }
 
-    function deleteCustomer(id) {
+    function deletePriceChange(priceChangeId) {
 
-        layer.confirm('是否删除用户ID为'+id+'的用户',{icon: 3, title:'提示'},function(index) {
+        layer.confirm('是否删除改价ID为'+priceChangeId+'的改价信息',{icon: 3, title:'提示'},function(index) {
         $.ajax({
-            url: '/customerList/deleteCustomer?id=' + id,
+            url: '/priceChange/deletePriceChange?priceChangeId=' + priceChangeId,
             type: 'Post',
             success: function (data) {
                 var length = $(".btn_delete_customer").length;
@@ -332,7 +331,7 @@
                     var st1 = $($($($($(".btn_delete_customer")[i]).parent()).parent()).children()[0]).html();
                     //console.info(st);
                     //console.info(st1);
-                    if (st1 == id) {
+                    if (st1 == priceChangeId) {
                         $($($($(".btn_delete_customer")[i]).parent()).parent()).remove();
                         freshTable();
                     }
@@ -377,19 +376,18 @@
                         dataSrc: ""
                     },
                     columns:[
-                        {data: 'id'},
+                        {data: 'priceChangeId'},
                         // {data: 'username'},
-                        {data: 'telephone'},
-                        {data: 'email'},
-                        {data: 'nickName'},
-                        {data: 'personId'},
-                        {data: 'name'},
+                        {data: 'roomId'},
+                        {data: 'price'},
+                        {data: 'dateStart'},
+                        {data: 'dateEnd'},
                         {data:null,"render":function (data) {
-                                var html= '<button class="btn_update_customer" onclick="updateCustomer(\''+data.id+'\')" >更新</button>'
+                                var html= '<button class="btn_update_customer" onclick="updatePriceChange(\''+data.priceChangeId+'\')" >更新</button>'
                                 return html;
                             }},
                         {data:null,"render":function (data) {
-                                var html= '<button class="btn_delete_customer" onclick="deleteCustomer(\''+data.id+'\')" >删除</button>'
+                                var html= '<button class="btn_delete_customer" onclick="deletePriceChange(\''+data.priceChangeId+'\')" >删除</button>'
                                 return html;
                             }}
 
