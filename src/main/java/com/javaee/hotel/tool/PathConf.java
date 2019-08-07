@@ -13,8 +13,23 @@ public class PathConf extends WebMvcConfigurerAdapter {
          * @Description: 对文件的路径进行配置,创建一个虚拟路径/Path/** ，即只要在<img src="/Path/picName.jpg" />便可以直接引用图片
          *这是图片的物理路径  "file:/+本地图片的地址"
          */
-        registry.addResourceHandler("/Path/**").addResourceLocations("file:/C:Users/王亦达/Desktop/");
+        registry.addResourceHandler("/Path/**").addResourceLocations("file:/C:Users/Dell/Desktop/");
+        super.addResourceHandlers(registry);
+        registry.addResourceHandler("/upload/**").addResourceLocations("file:/C:Users/Dell/Desktop/imageStore/");
         super.addResourceHandlers(registry);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 

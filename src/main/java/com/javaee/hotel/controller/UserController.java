@@ -11,9 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/userinfo")
@@ -36,23 +40,30 @@ public class UserController {
     }
 
     @PostMapping
-    public String returnPage(Model model, HttpSession session, HttpServletRequest request){
-        String icon = request.getParameter("icon");
+    public String returnPage(Model model, @RequestParam("icon") MultipartFile file, HttpSession session, HttpServletRequest request){
         String nickName = request.getParameter("nickName");
         String realName = request.getParameter("realName");
         String personId = request.getParameter("personId");
         int id = Integer.parseInt(session.getAttribute("id").toString());
         CustomerInfo customerInfo = userService.getNowUser(id).get(0);
-        if(icon!=""&&icon!=null){
-            customerInfo.setIcon(pictureTool.getFilePath(icon));
+        if(file!=null){
+            String fileName = file.getOriginalFilename();
+            String filePath = "C:\\Users\\Dell\\Desktop\\imageStore\\";
+            File dest = new File(filePath + fileName);
+            customerInfo.setIcon("/upload/"+fileName);
+            try {
+                file.transferTo(dest);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
-        if(nickName!=""&&nickName!=null){
+        if(!nickName.isEmpty()&&nickName!=null){
             customerInfo.setNickName(nickName);
         }
-        if(realName!=""&&realName!=null){
+        if(!realName.isEmpty()&&realName!=null){
             customerInfo.setName(realName);
         }
-        if(personId!=""&&personId!=null) {
+        if(!personId.isEmpty()&&personId!=null) {
             customerInfo.setPersonId(personId);
         }
         CustomerInfoExample example = new CustomerInfoExample();

@@ -61,6 +61,7 @@ public class RoomController {
         model.addAttribute("iconList",roomItemStaticData.getDatabaseRoomItemContent());
         return "room-add";
     }
+
     @PostMapping("/roomList/add")
     public String saveRoom(Room room,HttpServletRequest request){
         String path = request.getParameter("photo");

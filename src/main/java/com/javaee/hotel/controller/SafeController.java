@@ -41,7 +41,7 @@ public class SafeController {
         }
         CustomerInfo customerInfo = userService.getNowUser(id).get(0);
         String tel = customerInfo.getTelephone();
-        if(tel!=null&&tel!=""){
+        if(tel!=null&&!tel.equals("")){
             customerInfo.setTelephone(hidetel(tel));
         }
         model.addAttribute("userInfo",customerInfo);
@@ -229,7 +229,6 @@ public class SafeController {
                 return "nocheckcode";
             }
         }else{
-            System.out.println("jkfjakl");
             return "nopwd";
         }
     }
