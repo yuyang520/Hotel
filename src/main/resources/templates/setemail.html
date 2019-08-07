@@ -18,15 +18,14 @@
 <body>
 
 <div align="center" class="col-md-8 safeOutDiv" >
-    <div class="col-md-2" style="text-align: right;padding:0;white-space: nowrap;overflow: hidden;">
+    <div class="col-md-2" style="text-align: right;padding:0;">
         <span >邮箱：</span><br/>
         <span >验证码：</span>
     </div>
     <div class="col-md-5" style="text-align: left" >
         <form id="form" style="justify-content: left;" mothod="post">
-            <div>
-                <input id="email" autocomplete="off" placeholder="常用邮箱"  name="emailadd" class="form-control-x">
-            </div>
+            <input id="email" autocomplete="off" placeholder="常用邮箱"
+                   name="emailadd" class="form-control-x" lay-verify="required">
             <div>
                 <input autocomplete="off" id="checkCode" placeholder="6位数字" style="width: 246px;" name="emailverc" class="form-control-x">
                 <input id="sendCheckCode" name="checkCode" type="button" class="btn" style="margin-bottom: 4px;height:40px;background-color: orange;
