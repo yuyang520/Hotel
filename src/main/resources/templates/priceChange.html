@@ -4,11 +4,6 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
 
-
-
-
-
-
 <style type="text/css">
 
     .beInCenter{
@@ -50,9 +45,6 @@
         border-color: #a9c6c9;
     }
 </style>
-
-
-
 
 
 
@@ -203,7 +195,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="row">
-                <h3 style="display: flex; flex-direction: row;justify-content: center"><div>用户浏览</div></h3>
+                <h3 style="display: flex; flex-direction: row;justify-content: center"><div>改价信息浏览</div></h3>
                 <!--<div class="col-md-6">-->
                     <!--<ol class="breadcrumb">-->
                         <!--<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>-->
@@ -221,13 +213,12 @@
                     <table  id="tableList"  class="hovertable">
                         <thead>
                         <tr>
-                            <th>用户id</th>
+                            <th>改价id</th>
                             <!--<th>用户名</th>-->
-                            <th>联系电话</th>
-                            <th>用户邮箱</th>
-                            <th>用户昵称</th>
-                            <th>身份证号</th>
-                            <th>身份证姓名</th>
+                            <th>改价房间号</th>
+                            <th>价格</th>
+                            <th>开始日期</th>
+                            <th>结束日期</th>
                             <th>更改</th>
                             <th>删除</th>
 
@@ -274,7 +265,7 @@
     function logOut(){
         layer.confirm('是否退出账号[[${session.username}]]',{icon: 3, title:'提示'},function(index){
             $.ajax({
-                url:'/customerList/exit',
+                url:'/priceChange/exit',
                 type:'Post',
                 success:function (data) {
                     window.location.href = "/ManagerLogin";
@@ -290,6 +281,14 @@
 
     function turnToMOrderList() {
         window.location.href = "/MOrderlist";
+    }
+
+    function turnToPriceChange() {
+        window.location.href = "/priceChange";
+    }
+
+    function turnToPriceChangeAdd() {
+        window.location.href = "/priceChange/add";
     }
     
     function turnToRoomList() {
@@ -319,20 +318,12 @@
         window.location.href = "/ManagerLogin";
     }
 
-    function turnToPriceChange() {
-        window.location.href = "/priceChange";
-    }
-
-    function turnToPriceChangeAdd() {
-        window.location.href = "/priceChange/add";
-    }
-
     function turnToManager() {
         window.location.href = "/manager";
     }
 
-    function updateCustomer(id) {
-        window.location.href = "/customerList/edit?id="+id;
+    function updatePriceChange(priceChangeId) {
+        window.location.href = "/priceChange/edit?priceChangeId="+priceChangeId;
     }
 
 
@@ -340,11 +331,11 @@
         table.ajax.reload();
     }
 
-    function deleteCustomer(id) {
+    function deletePriceChange(priceChangeId) {
 
-        layer.confirm('是否删除用户ID为'+id+'的用户',{icon: 3, title:'提示'},function(index) {
+        layer.confirm('是否删除改价ID为'+priceChangeId+'的改价信息',{icon: 3, title:'提示'},function(index) {
         $.ajax({
-            url: '/customerList/deleteCustomer?id=' + id,
+            url: '/priceChange/deletePriceChange?priceChangeId=' + priceChangeId,
             type: 'Post',
             success: function (data) {
                 var length = $(".btn_delete_customer").length;
@@ -353,7 +344,7 @@
                     var st1 = $($($($($(".btn_delete_customer")[i]).parent()).parent()).children()[0]).html();
                     //console.info(st);
                     //console.info(st1);
-                    if (st1 == id) {
+                    if (st1 == priceChangeId) {
                         $($($($(".btn_delete_customer")[i]).parent()).parent()).remove();
                         freshTable();
                     }
@@ -392,25 +383,23 @@
                     },
 
                     ajax:{
-                        url:'/customerList/customerList.json',
+                        url:'/priceChange/priceChange.json',
                         type: "GET",
                         dataType: "JSON",
                         dataSrc: ""
                     },
                     columns:[
-                        {data: 'id'},
-                        // {data: 'username'},
-                        {data: 'telephone'},
-                        {data: 'email'},
-                        {data: 'nickName'},
-                        {data: 'personId'},
-                        {data: 'name'},
+                        {data: 'priceChangeId'},
+                        {data: 'roomId'},
+                        {data: 'price'},
+                        {data: 'dateStart'},
+                        {data: 'dateEnd'},
                         {data:null,"render":function (data) {
-                                var html= '<button class="btn_update_customer" onclick="updateCustomer(\''+data.id+'\')" >更新</button>'
+                                var html= '<button class="btn_update_customer" onclick="updatePriceChange(\''+data.priceChangeId+'\')" >更新</button>'
                                 return html;
                             }},
                         {data:null,"render":function (data) {
-                                var html= '<button class="btn_delete_customer" onclick="deleteCustomer(\''+data.id+'\')" >删除</button>'
+                                var html= '<button class="btn_delete_customer" onclick="deletePriceChange(\''+data.priceChangeId+'\')" >删除</button>'
                                 return html;
                             }}
 

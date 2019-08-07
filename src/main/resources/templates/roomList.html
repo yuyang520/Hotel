@@ -169,11 +169,22 @@
                 </li>
                 <li class="treeview active">
                     <a href="#" onclick="turnToCustomerList()"><i class="fa fa-link"></i> <span >客户列表</span>
-                        <span class="pull-right-container">
-                <!--<i class="fa fa-angle-left pull-right"></i>-->
-              </span>
+                        <span class="pull-right-container"></span>
                     </a>
                 </li>
+
+                <li class="treeview active">
+                    <a href="#" ><i class="fa fa-link"></i> <span >改价列表</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="turnToPriceChange()"><i class = "fa fa-list"></i> 浏览改价信息</a></li>
+                        <li><a href="#" onclick="turnToPriceChangeAdd()"><i class = "fa fa-edit "></i> 添加改价信息</a></li>
+                    </ul>
+                </li>
+
                 <li class="treeview active">
                     <a href="#" ><i class="fa fa-link"></i> <span >酒店列表</span>
                         <span class="pull-right-container">
@@ -219,13 +230,7 @@
     <section class="content-header">
         <div class="row">
             <h3 style="display: flex; flex-direction: row;justify-content: center"><div>房间浏览</div></h3>
-            <!--<div class="col-md-6">-->
-                <!--<ol class="breadcrumb">-->
-                    <!--<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>-->
-                    <!--<li class="active">酒店订购</li>-->
-                    <!--<li class="active">酒店列表</li>-->
-                  <!--</ol>-->
-            <!--</div>-->
+
           </div>
     </section>
 
@@ -258,14 +263,7 @@
 </div>
 </div>
 </section>
-<!-- /.content -->
-  <!-- /.content-wrapper -->
 
-  <!-- Main Footer -->
-  <!--<footer class="main-footer">-->
-    <!--&lt;!&ndash; Default to the left &ndash;&gt;-->
-    <!--<strong>酒店辅助订购系统</strong>-->
-  <!--</footer>-->
 
   
   </div>
@@ -319,6 +317,14 @@
     }
     function turnToHotelAdd() {
         window.location.href = "/hotelList/add";
+    }
+
+    function turnToPriceChange() {
+        window.location.href = "/priceChange";
+    }
+
+    function turnToPriceChangeAdd() {
+        window.location.href = "/priceChange/add";
     }
     function turnToManagerLogin() {
         window.location.href = "/ManagerLogin";

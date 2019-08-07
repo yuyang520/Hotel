@@ -47,8 +47,6 @@ public class MOrderController {
     @GetMapping(value = "/orderlist.json",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<OrderList> getOrderListJson() {
-//        System.out.println(mOrderService.orderlistRespond());
-//        System.out.println(mOrderService.orderlistRespond());
         return mOrderService.orderlistRespond();
     }
 

@@ -9,7 +9,7 @@ public class ManagerWebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry){
 //        registry.addInterceptor(new LoginInterceptor())
-//                .addPathPatterns("/MOrderlist/**","/roomList/**","/hotelList/**","/manager/**","/customerList/**");
+//                .addPathPatterns("/MOrderlist/**","/roomList/**","/hotelList/**","/manager/**","/customerList/**","/priceChange/**");
 
     }
 }
