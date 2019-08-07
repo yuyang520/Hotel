@@ -180,10 +180,26 @@
                         <li><a href="#" onclick="turnToRoomAdd()"><i class = "fa fa-edit "></i> 添加房间</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#"  onclick="turnToManager()"><i class="fa fa-link"></i> <span >管理员列表</span>
+                <li class="treeview active">
+                    <a href="#" ><i class="fa fa-link"></i> <span >管理员列表</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
                     </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="turnToManager()"><i class = "fa fa-list"></i> 浏览管理员</a></li>
+                        <li><a href="#" onclick="turnToManagerAdd()"><i class = "fa fa-edit "></i> 添加管理员</a></li>
+                    </ul>
                 </li>
+                <!--<li class="treeview">-->
+                    <!--&lt;!&ndash;<a href="#"  onclick="turnToManager()"><i class="fa fa-link"></i> <span >管理员列表</span>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&ndash;&gt;-->
+                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                    <!--<ul class="treeview-menu">-->
+                        <!--<li><a href="#" onclick="turnToManager()"><i class = "fa fa-list"></i> 浏览管理员</a></li>-->
+                        <!--<li><a href="#" onclick="turnToManagerAdd()"><i class = "fa fa-edit "></i> 添加管理员</a></li>-->
+                    <!--</ul>-->
+                <!--</li>-->
             </ul>
             <!-- /.sidebar-menu -->
         </section>
@@ -318,6 +334,7 @@
     function turnToMOrderList() {
         window.location.href = "/MOrderlist";
     }
+
     function turnToRoomList() {
         window.location.href = "/roomList";
     }
@@ -327,6 +344,10 @@
     function turnToCustomerList() {
         window.location.href = "/customerList";
     }
+    function turnToManagerAdd() {
+        window.location.href = "/manager/add";
+    }
+
     function  turnToRoomAdd(){
         window.location.href = "/roomList/add";
     }

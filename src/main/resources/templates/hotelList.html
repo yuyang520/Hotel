@@ -8,8 +8,10 @@
 <style type="text/css">
 
     #Img1{
-        width:80px;
-        height: 80px;
+        /*max-width: 960px;*/
+        /*max-height: 960px;*/
+        width: 90px;
+        height: 90px;
     }
 
     .beInCenter{
@@ -169,9 +171,16 @@
                         <li><a href="#" onclick="turnToRoomAdd()"><i class = "fa fa-edit "></i> 添加房间</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#"  onclick="turnToManager()"><i class="fa fa-link"></i> <span >管理员列表</span>
+                <li class="treeview active">
+                    <a href="#" ><i class="fa fa-link"></i> <span >管理员列表</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
                     </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="turnToManager()"><i class = "fa fa-list"></i> 浏览管理员</a></li>
+                        <li><a href="#" onclick="turnToManagerAdd()"><i class = "fa fa-edit "></i> 添加管理员</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.sidebar-menu -->
@@ -291,6 +300,9 @@
     function turnToCustomerList() {
         window.location.href = "/customerList";
     }
+    function turnToManagerAdd() {
+        window.location.href = "/manager/add";
+    }
     function  turnToRoomAdd(){
         window.location.href = "/roomList/add";
     }
@@ -339,7 +351,7 @@
                 shadeClose: true,
                 shade: 0.7,
                 closeBtn:1,
-                area:'auto',
+                area:['auto','auto'],
                 // content: photo,
                 content: html1,
             });
@@ -353,7 +365,7 @@
                 // maxWidth: '60%',
                 // maxHeight:'60%',
                 closeBtn:1,
-                area:'auto',
+                area:['auto','auto'],
                 // content: photo,
                 content: html,
 

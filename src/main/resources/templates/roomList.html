@@ -196,9 +196,16 @@
                         <li><a href="#" onclick="turnToRoomAdd()"><i class = "fa fa-edit "></i> 添加房间</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#"  onclick="turnToManager()"><i class="fa fa-link"></i> <span >管理员列表</span>
+                <li class="treeview active">
+                    <a href="#" ><i class="fa fa-link"></i> <span >管理员列表</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
                     </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="turnToManager()"><i class = "fa fa-list"></i> 浏览管理员</a></li>
+                        <li><a href="#" onclick="turnToManagerAdd()"><i class = "fa fa-edit "></i> 添加管理员</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- /.sidebar-menu -->
@@ -319,6 +326,9 @@
     function turnToManager() {
         window.location.href = "/manager";
     }
+    function turnToManagerAdd() {
+        window.location.href = "/manager/add";
+    }
     function freshTable() {
         table.ajax.reload();
     }
@@ -354,7 +364,7 @@
                 shadeClose: true,
                 shade: 0.7,
                 closeBtn:1,
-                area:'auto',
+                area:['auto','auto'],
                 // content: photo,
                 content: html1,
             });
@@ -365,7 +375,7 @@
                 shadeClose: true,
                 shade: 0.7,
                 closeBtn:1,
-                area:'auto',
+                area:['auto','auto'],
                 // content: photo,
                 content: html,
                 // layui:"layui-bg-blue",
