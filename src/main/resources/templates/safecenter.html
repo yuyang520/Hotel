@@ -15,18 +15,23 @@
             flex-direction: row;
             border:1px solid #ccc;
             margin: 30px;
+            height: 104px;
         }
         .safeitem1{
-            white-space: nowrap;
-            width: 18%;
+            white-space: normal;
             line-height: 104px;
+            width: 24%;
             font-size: 18px;
             padding-left:30px;
+            overflow: hidden;
+            margin-right: 10px;
         }
         .safeitem2{
-            white-space: nowrap;
+            white-space: normal;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             width: 18%;
-            line-height: 104px;
             font-size: 14px;
         }
         .safeitem3{
@@ -34,18 +39,20 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            width: 46%;
-            height: 104px;
+            width: 40%;
             font-size: 12px;
             vertical-align: middle;
             padding-left: 10px;
             padding-right: 10px;
+            overflow: hidden;
         }
         .safeitem4{
-            white-space: nowrap;
+            white-space: normal;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             padding-left:30px;
             width: 18%;
-            line-height: 104px;
             font-size: 14px;
         }
         .thisBtn{
@@ -161,8 +168,7 @@
                 <img src="/public/images/right.png" style="height: 20px;width: 20px;">
                 登录密码</div>
             <div class="safeitem2">建议定期更换</div>
-            <div class="safeitem3">安全性高的密码可以使账号更安全。建议您定期更换密码，且设
-                置一个包含数字和字母，并且长度超过8位以上的密码。</div>
+            <div class="safeitem3">安全性高的密码可以使账号更安全。建议您定期更换密码，且设置一个包含数字和字母，并且长度超过8位以上的密码。</div>
             <div class="safeitem4"><a href="/safecenter/modifypwd">修改</a></div>
         </div>
         <div class="safeTable">
@@ -171,8 +177,7 @@
                 <img th:if="${userInfo.telephone==null}" src="/public/images/warn.png" style="height: 20px;width: 20px;">
                 绑定手机</div>
             <div class="safeitem2"  th:text="${userInfo.telephone}"></div>
-            <div class="safeitem3">绑定手机后，您即可使用手机找回密码。
-                为了帐号安全，建议您在更换手机号后第一时间更换绑定手机。</div>
+            <div class="safeitem3">绑定手机后，您即可使用手机找回密码。为了帐号安全，建议您在更换手机号后第一时间更换绑定手机。</div>
             <div th:if="${userInfo.telephone!=null}" class="safeitem4"><a href="/safecenter/modifytel">修改</a>
                 <a href="/safecenter/unsettel">解除绑定</a></div>
             <div th:if="${userInfo.telephone==null}" class="safeitem4">
@@ -185,7 +190,7 @@
                 <img th:if="${userInfo.email==null}" src="/public/images/warn.png" style="height: 20px;width: 20px;">
                 绑定邮箱</div>
             <div class="safeitem2" th:text="${userInfo.email}"></div>
-            <div class="safeitem3">绑定E-mail后，您即可使用E-mail找回密码。</div>
+            <div class="safeitem3">绑定E-mail后，您即可使用E-mail登录和找回密码。</div>
             <div th:if="${userInfo.email!=null}" class="safeitem4"><a href="/safecenter/modifyemail">修改</a>
                 <a href="/safecenter/unsetemail">解除绑定</a></div>
             <div th:if="${userInfo.email==null}" class="safeitem4">
