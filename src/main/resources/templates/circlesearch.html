@@ -10,7 +10,7 @@
     </style>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=
                 PFgBspYSe1HEwdM7pd8z0jEA1gG1pYG5"></script>
-    <title>周边2Km</title>
+    <title>周边搜索</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Motel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
@@ -21,74 +21,47 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="/public/js/jquery-1.11.1.min.js"></script>
     <style>
         #allmap{
-            width:60%; height:320px;
+            width:100%;
+            height:600px;
         }
         .bot{
-            width:20%; height:30px;
+            position: fixed;
+            z-index: 99;
+            top: 0px;
+            right:10%;
+            display: flex;
+            flex-direction: row;
         }
     </style>
     <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div><div id="allmap"></div>
+    <div>
+        <div id="allmap"></div>
         <div id="r-result" class="bot">
-            查询内容: <input id="uservalue" type="text" style="width:100px; margin-right:10px;" />
+            <input id="uservalue" type="text" placeholder="周边搜索" style="background-color: lightblue"/>
             <input type="button" value="查询" onclick="thecircle()" />
         </div>
     </div>
-
-    <div class="footer">
-        <div class="container">
-            <div class="col-md-2 deco" style="width:20%;">
-                <h4>导航</h4>
-                <li><a href="w">首页</a></li>
-                <li><a href="/register/">注册</a></li>
-                <li><a href="/myorder/">订单查询</a></li>
-                <li><a href="contact.html">待定</a></li>
-            </div>
-            <div class="col-md-2 deco" style="width:20%;">
-                <h4>帮助</h4>
-                <li><a href="#">联系我们</a></li>
-                <li><a href="#">常见问题与解答</a></li>
-                <li><a href="#">隐私政策</a></li>
-                <li><a href="#">服务条款</a></li>
-            </div>
-            <div class="col-md-2 deco" style="width:20%;">
-                <h4>附近</h4>
-                <li><a href="#">附近酒店</a></li>
-                <li><a href="#">约车</a></li>
-                <li><a href="#">饮食服务</a></li>
-            </div>
-            <div class="col-md-2 deco" style="width:20%;">
-                <h4>目的地</h4>
-                <li><a href="#">国家/地区</a></li>
-                <li><a href="#">热门城市</a></li>
-            </div>
-            <div class="col-md-2 deco" style="width:20%;">
-                <h4>商业合作</h4>
-                <li><a href="#">酒店加盟</a></li>
-                <li><a href="#">联合营销</a></li>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-    </div>
-
 </body>
 </html>
 <script type="text/javascript" th:inline="javascript">
     // 百度地图API功能
 
     var map = new BMap.Map("allmap");            // 创建Map实例
-    var mPoint = new BMap.Point([[${hotelLongitude}]],[[${hotelLatitude}]]);
+    var Point = new BMap.Point([[${hotelLongitude}]],[[${hotelLatitude}]]);
 
     map.enableScrollWheelZoom();
-    map.centerAndZoom(mPoint,15);               //修改参数
-    var circle = new BMap.Circle(mPoint,2000,{fillColor:"blue",
+    map.centerAndZoom(Point,15);               //修改参数
+    var marker = new BMap.Marker(Point);  // 创建标注
+    map.addOverlay(marker);               // 将标注添加到地图中
+    marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+    var circle = new BMap.Circle(Point,2000,{fillColor:"blue",
         strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
     map.addOverlay(circle);
     function thecircle(){
         var local =  new BMap.LocalSearch(map, {renderOptions: {map: map, autoViewport: false}});
-        local.searchNearby(document.getElementById("uservalue").value, mPoint,2000);//参数为酒店，电影院，
+        local.searchNearby(document.getElementById("uservalue").value, Point,2000);//参数为酒店，电影院，
     }
 
 </script>
