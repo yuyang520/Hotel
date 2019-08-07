@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.javaee.hotel.domain.*;
 import com.javaee.hotel.mapper.HotelMapper;
 import com.javaee.hotel.mapper.OrderListMapper;
+import com.javaee.hotel.mapper.PriceChangeMapper;
 import com.javaee.hotel.mapper.RoomMapper;
 import com.javaee.hotel.tool.RoomLeftNumberDeliver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class RoomService {
 
     @Autowired
     private HotelMapper hotelMapper;
+    @Autowired
+    private PriceChangeMapper priceChangeMapper;
 
     public void addRoom(Room room) {
         roomMapper.insertSelective(room);
@@ -129,8 +132,32 @@ public class RoomService {
     public Date getOffsetDate(int offset) {
         return new Date(getToday().getTime() + offset*24*3600*1000);
     }
+    public Date getOffsetDate(Date date,int offset) {
+        return new Date(date.getTime() + offset*24*3600*1000);
+    }
     public float getPrice(Room room,OrderList orderList) {
-        return room.getPrice()*getOrderDay(orderList);
+        Float price =(float)0;
+        int day = getOrderDay(orderList);
+        PriceChangeExample example = new PriceChangeExample();
+        PriceChangeExample.Criteria criteria = example.createCriteria();
+        criteria.andRoomIdEqualTo(orderList.getRoomId());
+        List<PriceChange> priceChangeList = priceChangeMapper.selectByExample(example);
+        int length = priceChangeList.size();
+        for(int i = 0 ; i < day ; i ++) {
+            boolean target = false;
+            for( int j = 0 ; j < length ; j ++) {
+                if(getOffsetDate(orderList.getCheckIn(),i).compareTo(priceChangeList.get(j).getDateStart())>=0 &&
+                        getOffsetDate(orderList.getCheckIn(),i).compareTo(priceChangeList.get(j).getDateEnd())<0)
+                {
+                    price+=priceChangeList.get(j).getPrice();
+                    target = true;
+                }
+            }
+            if(target == false) {
+                price+=room.getPrice();
+            }
+        }
+        return price;
     }
     private boolean checkTimeCheck(OrderList orderList) {
         Date date = new Date();
