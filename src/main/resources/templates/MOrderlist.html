@@ -489,19 +489,19 @@ function initTable() {
             {data: 'roomId'},
             {data: 'identify'},
             {data: 'name'},
-            {data:null,"render":function(data){
-                var tdCheckIn = data.checkIn.substring(0,10);
-                var html ='<td>'+tdCheckIn+'</td>';
-                    return html;
-            }},
-            {data:null,"render":function(data){
-                    var tdCheckOut = data.checkOut.substring(0,10);
-                    var html ='<td>'+tdCheckOut+'</td>';
+            {data:null,"render":function (data) {
+                    var date = new Date(data.checkIn);
+                    var html='<text>'+date.toLocaleDateString()+'</text>'
                     return html;
                 }},
-            {data:null,"render":function(data){
-                    var tdRegisterTime = data.registerTime.substring(0,19);
-                    var html ='<td>'+tdRegisterTime+'</td>';
+            {data:null,"render":function (data) {
+                    var date = new Date(data.checkOut);
+                    var html='<text>'+date.toLocaleDateString()+'</text>'
+                    return html;
+                }},
+            {data:null,"render":function (data) {
+                    var date = new Date(data.registerTime);
+                    var html='<text>'+date.toLocaleDateString()+'</text>'
                     return html;
                 }},
             {data: 'price'},

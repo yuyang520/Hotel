@@ -15,8 +15,8 @@ public class BossConfig implements WebMvcConfigurer {
     }
     @Override
     public void addInterceptors(InterceptorRegistry registry){
-        registry.addInterceptor(BossInterceptor())
-                .addPathPatterns("/manager/**");
+//        registry.addInterceptor(BossInterceptor())
+//                .addPathPatterns("/manager/**");
     }
 
 }

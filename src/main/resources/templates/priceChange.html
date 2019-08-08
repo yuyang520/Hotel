@@ -386,8 +386,17 @@
                         {data: 'priceChangeId'},
                         {data: 'roomId'},
                         {data: 'price'},
-                        {data: 'dateStart'},
-                        {data: 'dateEnd'},
+                        {data:null,"render":function (data) {
+                            var date = new Date(data.dateStart);
+                               var html='<text>'+date.toLocaleDateString()+'</text>'
+                                return html;
+                            }},
+
+                        {data:null,"render":function (data) {
+                                var date = new Date(data.dateEnd);
+                                var html='<text>'+date.toLocaleDateString()+'</text>'
+                                return html;
+                            }},
                         {data:null,"render":function (data) {
                                 var html= '<button class="btn_update_customer" onclick="updatePriceChange(\''+data.priceChangeId+'\')" >更新</button>'
                                 return html;
