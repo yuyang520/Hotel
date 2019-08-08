@@ -10,9 +10,14 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 @Controller
 @RequestMapping("/hotelList")
@@ -44,11 +49,23 @@ public class HotelListController {
     }
 
     @PostMapping("/add")
-    public String saveHotel(Hotel hotel, HttpServletRequest request){
-
-        String path = request.getParameter("picture");
-        PictureTool pictureTool = new PictureTool();
-        hotel.setPicture(pictureTool.getFilePath(path));
+    public String saveHotel(@RequestParam("picture") MultipartFile file, Hotel hotel, HttpServletRequest request){
+        if(file!=null){
+            String fileName = file.getOriginalFilename();
+            String filePath = "C:\\Users\\Dell\\Desktop\\imageStore\\";
+            Date date = new Date();
+            fileName = date.getTime()+fileName;
+            File dest = new File(filePath + fileName);
+            hotel.setPicture("/upload/"+fileName);
+            try {
+                file.transferTo(dest);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+//        String path = request.getParameter("picture");
+//        PictureTool pictureTool = new PictureTool();
+//        hotel.setPicture(pictureTool.getFilePath(path));
 
         hotelListService.saveHotel(hotel);
         return "redirect:/hotelList";

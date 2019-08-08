@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -50,8 +54,6 @@ public class RoomController {
     @GetMapping(value = "/roomList/roomList.json",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<Room> getRoomJson() {
-//        System.out.println(mOrderService.orderlistRespond());
-//        System.out.println(mOrderService.orderlistRespond());
         return roomService.roomRespond();
     }
     @GetMapping("/roomList/add")
@@ -63,12 +65,30 @@ public class RoomController {
     }
 
     @PostMapping("/roomList/add")
-    public String saveRoom(Room room,HttpServletRequest request){
-        String path = request.getParameter("photo");
-        if(path!=null) {
-            PictureTool pictureTool = new PictureTool();
-            room.setPhoto(pictureTool.getFilePath(path));
+    public String saveRoom(@RequestParam("photo") MultipartFile file , Room room, HttpServletRequest request){
+
+        if(file!=null){
+            String fileName = file.getOriginalFilename();
+            String filePath = "C:\\Users\\Dell\\Desktop\\imageStore\\";
+            Date date = new Date();
+            fileName=date.getTime()+fileName;
+            File dest = new File(filePath +fileName);
+            room.setPhoto("/upload"+fileName);
+//            customerInfo.setIcon("/upload/"+fileName);
+            try {
+                file.transferTo(dest);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
+
+//        String path = request.getParameter("photo");
+//        if(path!=null) {
+//            PictureTool pictureTool = new PictureTool();
+//            room.setPhoto(pictureTool.getFilePath(path));
+//        }
+
+
         roomService.saveRoom(room);
         return "redirect:/roomList";
     }

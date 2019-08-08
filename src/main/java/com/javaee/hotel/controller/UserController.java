@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/userinfo")
@@ -49,6 +50,8 @@ public class UserController {
         if(file!=null){
             String fileName = file.getOriginalFilename();
             String filePath = "C:\\Users\\Dell\\Desktop\\imageStore\\";
+            Date date = new Date();
+            fileName = date.getTime()+fileName;
             File dest = new File(filePath + fileName);
             customerInfo.setIcon("/upload/"+fileName);
             try {

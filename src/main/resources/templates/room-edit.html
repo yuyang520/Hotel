@@ -147,7 +147,7 @@
         }
     })
 </script>
-<form name="editRoom" action="/roomList/add" method="post" th:object="${room}" class="smart-green">
+<form name="editRoom" action="/roomList/add" method="post" th:object="${room}" class="smart-green" enctype="multipart/form-data">
 
     <!--<input type="tel" name="orderId" th:field="*{roomId}"><br/>-->
     <h3 class="box-title center-block"  style="display: flex; flex-direction: row;justify-content: center">房间信息采集</h3>
