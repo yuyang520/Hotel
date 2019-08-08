@@ -1,3 +1,8 @@
+var leftNumber=[];
+var leftLength = leftNumberDeliver.length;
+for(let idx = 0 ; idx < leftLength; idx ++) {
+    leftNumber.push(leftNumberDeliver[idx].roomLeftNumberByDate[0]);
+}
 function typeSelecterInit() {
     for (let i = 0 ; i < roomDetailList.length ; i ++) {
         if ( roomDetailList[i].room.roomNumber > 0) {
@@ -10,13 +15,13 @@ function typeSelecterInit() {
 }
 
 function typeChange() {
-    numberSelecterInit( $("#selecter-type").val());
+    numberSelecterInit($("#selecter-type").val());
 
 }
 
 function numberSelecterInit(index) {
     $("#selecter-number").empty();
-    var length = roomDetailList[index].room.roomNumber > 5 ? 5 : roomDetailList[index].room.roomNumber;
+    var length = leftNumber[index] > 5 ? 5 : leftNumber[index];
     for (let i = 1 ; i <= length ; i ++) {
         var option = $("<option>");
         option.html(i);
@@ -102,7 +107,7 @@ function dataChanged() {
     if( numberSelect == null) {
         numberSelect = 1;
     }
-    var leftNumber=[];
+    leftNumber = [];
     for( let i = 0 ; i < leftNumberDeliver.length ; i ++ ) {
         var length = daysFormNow+dayslast;
         var lest = leftNumberDeliver[i].roomLeftNumberByDate[daysFormNow];
@@ -113,9 +118,9 @@ function dataChanged() {
         }
         leftNumber.push(lest);
     }
-
+    console.info(leftNumber);
+    $("#selecter-type").empty();
     for (let i = 0 ; i < leftNumber.length ; i ++) {
-        $("#selecter-type").empty();
         if ( leftNumber[i] > 0) {
             var option = $("<option>");
             option.html(roomDetailList[i].room.chineseName);

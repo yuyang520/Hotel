@@ -101,10 +101,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>酒店管理</title>
+    <script src="/public/js/jquery.min.js"></script>
+    <script src="/public/js/layer.js"></script>
 </head>
 <body>
 
-<form action="/hotelList/add" method="post"  class="smart-green" enctype="multipart/form-data">
+<form action="/hotelList/add" name="addHotelForm" method="post"  class="smart-green" enctype="multipart/form-data">
     <h3 class="box-title center-block" style="display: flex; flex-direction: row;justify-content: center">酒店信息采集</h3>
     <!--酒店id: <input type="text" name="hotelId"  ><br/>-->
     酒店名称：<input type="text" name="hotelChineseName" ><br/>
@@ -126,7 +128,7 @@
 
 
     <div class="box-footer ">
-        <input type="submit" value="提交" class="pull-left col-sm-6">
+        <input type="button" value="提交" onclick="submitForm()" class="pull-left col-sm-6">
         <button type="button"   onclick="cancel()"  class="pull-right col-sm-6">取消</button>
     </div>
 </form>
@@ -136,5 +138,14 @@
 <script>
     function cancel(){
         window.location.href = "/hotelList";
+    }
+    function submitForm() {
+        if($("input[name='hotelLongitude']").val()!=''&&$("input[name='hotelLatitude']").val()!=''&&$("input[name='hotelChineseName']").val()!='') {
+            $("form[name='addHotelForm']").submit();
+        }
+        else{
+            layer.alert("请填写完整信息");
+        }
+
     }
 </script>

@@ -157,7 +157,7 @@ public class RoomService {
                 price+=room.getPrice();
             }
         }
-        return price;
+        return price*orderList.getRoomNumber();
     }
     private boolean checkTimeCheck(OrderList orderList) {
         Date date = new Date();
@@ -195,7 +195,7 @@ public class RoomService {
         if(room.getRoomId() == null){
             return  roomMapper.insert(room);
         }else {
-            return roomMapper.updateByPrimaryKey(room);
+            return roomMapper.updateByPrimaryKeySelective(room);
         }
     }
 

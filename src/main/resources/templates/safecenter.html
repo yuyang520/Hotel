@@ -85,7 +85,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color: #6568ff;">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="/welcome/">首页</a></li>
-                        <li><a href="/searchmap/">地图查询</a></li>
+                        <li><a href="/searchmap/">待定</a></li>
                         <li><a href="/myorder/">订单查询</a></li>
                         <li><a href="shortcodes.html">待定</a></li>
                     </ul>
@@ -181,7 +181,7 @@
             <div th:if="${userInfo.telephone!=null}" class="safeitem4"><a href="/safecenter/modifytel">修改</a>
                 <a href="/safecenter/unsettel">解除绑定</a></div>
             <div th:if="${userInfo.telephone==null}" class="safeitem4">
-                <a class="btn thisBtn" href="/safecenter/settel">设置绑定手机</a>
+                <a class="btn thisBtn" style="width: 80%;" href="/safecenter/settel">设置绑定手机</a>
             </div>
         </div>
         <div class="safeTable">
@@ -194,7 +194,7 @@
             <div th:if="${userInfo.email!=null}" class="safeitem4"><a href="/safecenter/modifyemail">修改</a>
                 <a href="/safecenter/unsetemail">解除绑定</a></div>
             <div th:if="${userInfo.email==null}" class="safeitem4">
-                <a class="btn thisBtn" href="/safecenter/setemail">设置绑定邮箱</a>
+                <a class="btn thisBtn" style="width: 80%;" href="/safecenter/setemail">设置绑定邮箱</a>
             </div>
         </div>
     </div>

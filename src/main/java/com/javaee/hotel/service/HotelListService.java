@@ -35,7 +35,7 @@ public class HotelListService {
             if(hotelMapper.selectByPrimaryKey(hotel.getHotelId()) == null ) {
                 return -1;
             }
-            return hotelMapper.updateByPrimaryKey(hotel);
+            return hotelMapper.updateByPrimaryKeySelective(hotel);
         }
     }
 

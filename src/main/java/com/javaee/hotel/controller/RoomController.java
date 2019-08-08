@@ -66,8 +66,7 @@ public class RoomController {
 
     @PostMapping("/roomList/add")
     public String saveRoom(@RequestParam("icon") MultipartFile file , Room room, HttpServletRequest request){
-
-        if(file!=null){
+        if(file!=null&&!file.getOriginalFilename().isEmpty()){
             String fileName = file.getOriginalFilename();
             String filePath = "C:\\Users\\Dell\\Desktop\\imageStore\\";
             Date date = new Date();
@@ -80,6 +79,8 @@ public class RoomController {
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
+        }else{
+            room.setPhoto(null);
         }
 
 //        String path = request.getParameter("photo");

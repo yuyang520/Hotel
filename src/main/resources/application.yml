@@ -7,8 +7,8 @@ mybatis:
 spring:
   servlet:
     multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
+      max-file-size: 15MB
+      max-request-size: 15MB
   datasource:
     url: jdbc:mysql://localhost:3306/hotel?useUnicode=yes&characterEncoding=UTF-8&useSSL=false
     username: root

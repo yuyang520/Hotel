@@ -50,7 +50,7 @@ public class HotelListController {
 
     @PostMapping("/add")
     public String saveHotel(@RequestParam("icon") MultipartFile file,Hotel hotel,HttpServletRequest request){
-        if(file!=null){
+        if(file!=null&&!file.getOriginalFilename().isEmpty()){
             String fileName = file.getOriginalFilename();
             String filePath = "C:\\Users\\Dell\\Desktop\\imageStore\\";
             Date date = new Date();
@@ -62,6 +62,8 @@ public class HotelListController {
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
+        }else{
+            hotel.setPicture(null);
         }
 //        String path = request.getParameter("picture");
 //        PictureTool pictureTool = new PictureTool();

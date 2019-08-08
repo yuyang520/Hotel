@@ -19,6 +19,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         .orderListItem {
             border-top: 1px solid #ccc;
         }
+        li{list-style: none;}
     </style>
 </head>
 <body style="height: 100%">
@@ -51,7 +52,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="/welcome/">首页</a></li>
-                        <li><a href="/searchmap/">地图查询</a></li>
+                        <li><a href="/searchmap/">待定</a></li>
                         <li  class="active" style="background-color: #6568ff;"><a href="/myorder/">订单查询</a></li>
                         <li><a href="shortcodes.html">待定</a></li>
                     </ul>
@@ -253,6 +254,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
     function unOrder(elem,id) {
         layer.confirm('确定要退订吗？',function () {
+            layer.alert("退订成功，退款将会在24效时内完成");
             window.location.href = "/alipay/refund?orderId="+id;
         })
     }

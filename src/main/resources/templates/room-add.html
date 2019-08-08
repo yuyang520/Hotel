@@ -107,6 +107,7 @@
     <link href="/public/font/iconfont.css" rel='stylesheet' type='text/css'/>
     <title>订单管理</title>
     <script src="/public/js/jquery.min.js"></script>
+    <script src="/public/js/layer.js"></script>
 </head>
 <body>
 <script th:inline="javascript">
@@ -132,7 +133,13 @@
         }
         var str = "";
         $("#detail").val(JSON.stringify(detail));
-        $("form[name='addRoom']").submit();
+        if($("input[name='hotelId']").val()!=''&&$("input[name='chineseName']").val()!='') {
+            $("form[name='addRoom']").submit();
+        }
+        else{
+            layer.alert("请填完整信息");
+        }
+
 
     }
 </script>
