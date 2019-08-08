@@ -13,6 +13,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="/public/css/IndexStyle.css"  rel='stylesheet' type='text/css' />
     <script src="/public/js/jquery-1.11.1.min.js"></script>
     <script src="/public/js/bootstrap-datepicker.js"></script>
+    <script src="/public/js/layer.js"></script>
     <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
     <style>
         .orderListItem {
@@ -236,31 +237,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </body>
 <script>
     function deleteOrder(elem, id) {
-        $.ajax({
-            url: '/myorder/delete?orderId=' + id,
-            type: 'get',
-            success: function (data) {
-                $(elem).parent().parent().parent().remove();
-                location.reload();
-            },
-            fail: function (data) {
-                console.log('fail')
-            }
+        layer.confirm('确定删除该订单？',function () {
+            $.ajax({
+                url: '/myorder/delete?orderId=' + id,
+                type: 'get',
+                success: function (data) {
+                    $(elem).parent().parent().parent().remove();
+                    location.reload();
+                },
+                fail: function (data) {
+                    console.log('fail')
+                }
+            })
         })
     }
     function unOrder(elem,id) {
-        window.location.href = "/alipay/refund?orderId="+id;
+        layer.confirm('确定要退订吗？',function () {
+            window.location.href = "/alipay/refund?orderId="+id;
+        })
     }
     function disOrder(elem,id) {
-        $.ajax({
-            url: '/myorder/disOrder?orderId=' + id,
-            type: 'get',
-            success: function (data) {
-                location.reload();
-            },
-            fail: function (data) {
-                console.log('fail')
-            }
+        layer.confirm('确定要取消吗？',function () {
+            $.ajax({
+                url: '/myorder/disOrder?orderId=' + id,
+                type: 'get',
+                success: function (data) {
+                    location.reload();
+                },
+                fail: function (data) {
+                    console.log('fail')
+                }
+            })
         })
     }
     function pay(elem,id) {
