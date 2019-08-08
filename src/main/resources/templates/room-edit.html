@@ -161,7 +161,8 @@
     房间名称：<input type="text" name="checkIn" th:field="*{chineseName}"><br/>
     房间英文名：<input type="text" name="checkOut" th:field="*{englishName}"><br/>
     <!--房间号：<input type="text" name="roomNo" th:field="*{roomNo}"><br/>-->
-    房间图片：<input type="file" name="photo" th:field="*{photo}"> <br/>
+    房间图片：<input type="file" name="icon"> <br/>
+    <input type="hidden" name="photo" >
     房间描述：
     <div style="border-top:1px solid gray;border-bottom: 1px solid gray;margin:5px">
         <div class="font-group" th:each="roomItemGroup:${iconList.roomItemGroupList}">

@@ -65,7 +65,7 @@ public class RoomController {
     }
 
     @PostMapping("/roomList/add")
-    public String saveRoom(@RequestParam("photo") MultipartFile file , Room room, HttpServletRequest request){
+    public String saveRoom(@RequestParam("icon") MultipartFile file , Room room, HttpServletRequest request){
 
         if(file!=null){
             String fileName = file.getOriginalFilename();
@@ -73,7 +73,7 @@ public class RoomController {
             Date date = new Date();
             fileName=date.getTime()+fileName;
             File dest = new File(filePath +fileName);
-            room.setPhoto("/upload"+fileName);
+            room.setPhoto("/upload/"+fileName);
 //            customerInfo.setIcon("/upload/"+fileName);
             try {
                 file.transferTo(dest);

@@ -49,7 +49,7 @@ public class HotelListController {
     }
 
     @PostMapping("/add")
-    public String saveHotel(@RequestParam("picture") MultipartFile file, Hotel hotel, HttpServletRequest request){
+    public String saveHotel(@RequestParam("icon") MultipartFile file,Hotel hotel,HttpServletRequest request){
         if(file!=null){
             String fileName = file.getOriginalFilename();
             String filePath = "C:\\Users\\Dell\\Desktop\\imageStore\\";
