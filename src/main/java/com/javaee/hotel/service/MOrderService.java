@@ -21,7 +21,7 @@ public class MOrderService {
         if(orderList.getOrderId() == null){
             return  orderListMapper.insert(orderList);
         }else {
-            return orderListMapper.updateByPrimaryKey(orderList);
+            return orderListMapper.updateByPrimaryKeySelective(orderList);
         }
     }
 

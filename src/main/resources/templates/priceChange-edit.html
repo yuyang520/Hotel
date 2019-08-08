@@ -68,6 +68,15 @@
          color: #FFF;
          text-shadow: 1px 1px 1px #949494;
      }
+     .form-input-datepicker {
+         width: 131px;
+         height:34px;
+         padding: 6px 12px;
+         font-size: 14px;
+         color: black;
+         border: 1px solid #ccc;
+         border-left: 0px;
+     }
      .smart-green .button:hover {
          background-color: #80A24A;
      }
@@ -86,21 +95,23 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/public/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <script src="/public/js/jquery.min.js"></script>
     <script src="/public/js/layer.js"></script>
+    <script src="/public/js/bootstrap-datepicker.js"></script>
     <title>改价管理</title>
 </head>
 <body>
-<form name="dateChangeForm" action="/priceChange/add" method="post" th:object="${priceChange}" class="smart-green">
+<form action="/priceChange/add" method="post" th:object="${priceChange}" class="smart-green">
 
     <h3 class="box-title center-block" style="display: flex; flex-direction: row;justify-content: center">更新改价信息</h3>
     <input style="display: none" name="roomId" th:field="*{priceChangeId}"><br/>
     改价房间ID：<input type="text" name="roomId" th:field="*{roomId}"><br/>
     价格：<input type="text" name="price" th:field="*{price}"><br/>
-    改价开始日期：<input type="text" name="dateStart" th:field="*{dateStart}"><br/>
-    改价结束日期：<input type="text" name="dateEnd" th:field="*{dateEnd}"><br/>
+    改价开始日期：<input class="form-input-datepicker" id="dateStart" type="text" name="dateStart" th:field="*{dateStart}"><br/>
+    改价结束日期：<input class="form-input-datepicker" id="dateEnd" type="text" name="dateEnd" th:field="*{dateEnd}"><br/>
     <div class="box-footer">
-        <input type="button" value="提交" onclick="submitForm()" class="pull-left">
+        <input type="submit" value="提交" class="pull-left">
         <button type="button"   onclick="cancel()">取消</button>
     </div>
 </form>
@@ -108,17 +119,22 @@
 </html>
 
  <script>
+     $(function() {
+         $("#dateStart").datepicker({
+             autoclose: true,
+             orientation: "bottom",
+             todayHighlight: "true",
+             format: "yyyy-mm-dd"
+         })
+         $("#dateEnd").datepicker({
+             autoclose: true,
+             orientation: "bottom",
+             todayHighlight: "true",
+             format: "yyyy-mm-dd"
+         })
+         }
+     )
      function cancel(){
          window.location.href = "/priceChange";
-     }
-     function submitForm() {
-         var dateStartStr = $("input[name='dateStart']").val();
-         var dateEndStr = $("input[name='dateEnd']").val();
-         if(!isNaN(Date.parse(dateStartStr))&&!isNaN(Date.parse(dateEndStr))){
-             $("form[name='priceChangeForm']").submit();
-         }
-         else {
-             layer.alert("请填写正确的日期格式");
-         }
      }
  </script>
